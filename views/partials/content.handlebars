@@ -1,0 +1,19 @@
+<div class="well lecture-section-well">
+
+    <div class="btn-group">
+        {{#each content.sections}}
+            <a href="#section{{@index}}" class="btn btn-default" role = "button">{{ this.title }}</a>
+        {{/each}}
+    </div>
+
+    <div id="section0"></div>
+</div>
+
+
+{{#each content.sections}}
+    <div id="section{{@index}}"></div>
+    <div class="well lecture-section-well">
+        <h3>{{ this.title }}</h3>
+        {{{this.content}}}
+    </div>
+{{/each}}

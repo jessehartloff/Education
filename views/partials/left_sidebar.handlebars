@@ -1,0 +1,39 @@
+<div class="left-side-bar">
+    <div class="well sidebar-well">
+
+        <h4>&nbsp;{{ course.number_upper }}</h4>
+
+        {{#each course.extra}}
+            &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/{{this.page_type}}">{{this.title}}</a>
+            <br/>
+        {{/each}}
+
+
+        {{#if course.assignments}}
+
+            <h4>&nbsp;Proving Grounds</h4>
+            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">Autolab</a>
+            <br/>
+
+            {{#each course.assignments}}
+                &nbsp;<a class="menu_link"
+                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
+                <br/>
+            {{/each}}
+        {{/if}}
+
+
+        {{#if course.lectures}}
+            <h4>&nbsp;Training Area</h4>
+            &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
+                     target="_blank">Questions</a>
+            <br/>
+
+            {{#each course.lectures}}
+                &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
+                {{@index}}. {{this.title}}</a>
+                <br/>
+            {{/each}}
+        {{/if}}
+    </div>
+</div>

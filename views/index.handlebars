@@ -1,0 +1,10 @@
+<div class="well lecture-section-well">
+
+    <h3>Courses</h3>
+    <br/>
+
+    {{#each course_list}}
+        <a href="/courses/{{this.course}}/syllabus">{{this.course}}</a><br/>
+    {{/each}}
+
+</div>

@@ -1,0 +1,13 @@
+<br/>
+{{#if message}}
+    <div class="alert alert-warning">{{message}}</div>
+{{/if}}
+
+<form action="advising" method="post">
+    <div class="form-group">
+        scan card or enter person number to start session<br/>
+        <input type="text" id="scan" name="scan" autofocus>
+        <br/><br/>
+        <input type="submit" value="submit">
+    </div>
+</form>

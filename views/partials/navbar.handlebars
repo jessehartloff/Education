@@ -1,0 +1,80 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#theNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">
+                        {{#if course}}{{course.number_upper}}{{else}}Courses{{/if}}</a>
+                    <ul class="dropdown-menu">
+                        {{#each course_list}}
+                            {{#unless this.archived}}
+                                <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}</a></li>
+                            {{/unless}}
+                        {{/each}}
+                        <li><a href="/courses/">Archive</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="collapse navbar-collapse" id="theNavbar">
+
+            <ul class="nav navbar-nav">
+                {{#each course.extra}}
+                    <li><a href="/courses/{{../course.course}}/{{this.page_type}}">{{this.title}}</a></li>
+                {{/each}}
+
+
+                {{#if course.assignments}}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
+                            Assignments<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">
+                                Autolab</a></li>
+                            {{#each course.assignments}}
+                                <li>
+                                    <a href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                {{/if}}
+
+                {{#if course.lectures}}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
+                            Concepts<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
+                                Questions</a></li>
+                            {{#each course.lectures}}
+                                <li>
+                                    <a href="/courses/{{../course.course}}/lesson/{{this.short_title}}">{{this.title}}</a>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                {{/if}}
+                <!--<li><a href="https://autograder.cse.buffalo.edu/" target="_blank">Autolab</a></li>-->
+                <!--<li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">Questions</a></li>-->
+
+
+                <!--{% if course.course_project == True %}-->
+                <!--<li><a href="{% url 'courses:projects' course.course_number %}">Projects</a></li>-->
+                <!--{% endif %}-->
+            </ul>
+
+
+        </div>
+    </div>
+</nav>

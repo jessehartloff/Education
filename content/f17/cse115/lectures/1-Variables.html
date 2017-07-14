@@ -1,0 +1,304 @@
+---
+title: Variables
+short_title: variables
+next_content_short: if
+previous_content_short: none
+---
+
+
+[Monday - Intro to the course]
+[Wednesday - Variables]
+[Friday - Expressions]
+
+== Classes
+
+<ul>
+    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html">String</a></li>
+    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>
+</ul>
+
+
+== Variables
+
+
+<a href="/static/115Slides/1-Variables.pptx">Variables Concept Slides</a>
+<br/><br/>
+
+Syntax:
+<pre><code class="java">
+    int myFirstVariable;
+    myFirstVariable = 7;
+</code></pre>
+<pre><code class="java">
+    int myFirstVariable = 7;
+</code></pre>
+
+<p>
+Both examples have the same result and follow these two steps:
+</p>
+<ol>
+    <li><b>int myFirstVariable</b> - Create a variable named myFirstVariable of type int</li>
+    <li><b>myFirstVariable = 7</b> - Assign the value 7 to the variable named myFirstVariable</li>
+</ol>
+In the first example the creation of the variable and the assignment of a value to the variable are done in two separate instructions.
+In the second example the two steps are combined into one line.
+
+<br/>
+General structure:
+<pre><code class="java">
+    [type] [name];
+    [name] = [value];
+</code></pre>
+<pre><code class="java">
+    [type] [name] = [value];
+</code></pre>
+<br/>
+
+<ul>
+    <li>A program can have many variables</li>
+    <li>Only 1 variable per name <b>(this is actually not true)</b></li>
+    <li>Names cannot contain spaces. Use camelCase</li>
+    <li>Start names with a lowercase letter</li>
+    <li>Variables can be reassigned different values</li>
+</ul>
+
+<hr/>
+
+<p>Supplementary source:</p>
+<ul>
+    <li><a href="https://en.wikipedia.org/wiki/Variable_(computer_science)">Wikipedia: Variables</a></li>
+</ul>
+
+<hr/>
+
+<h4>Variable Types</h4>
+
+<p>
+    Every variable in java must have a type. A variable can only stores values matching its type.
+</p>
+
+<dl>
+    <dt>int</dt>
+    <dd>Stores integer values (whole numbers). Can store values that are negative, positive, or 0.</dd>
+    <dt>double</dt>
+    <dd>Stores numbers with decimals (ex. 3.1415). Can store values that are negative, positive, or 0.0. Some precision
+        is lost so int is used if only whole numbers are needed.
+    </dd>
+    <dt>String</dt>
+    <dd>Stores text values. Text values must be provided in "double quotes" to be a string(ex. "115" is a String, 115
+        is an int).
+    </dd>
+    <dt>boolean</dt>
+    <dd>Can only be true or false. Will be used extensively for control flow.</dd>
+</dl>
+
+
+<p>There are many more variable types in java. We will stick with these 4 for now.</p>
+
+<pre><code class="java">
+    int items = 3;
+    double price = 19.95;
+    String salesPitch = "Buy one get two free! *additional charges may apply";
+    boolean goodDeal = false;
+</code></pre>
+
+
+== Printing
+
+<ul>
+    <li>When you want to communicate with the human user</li>
+    <li>Can print any String to the console</li>
+    <li>Printing a variable will automatically convert a copy of its value to a String</li>
+</ul>
+
+Syntax:
+<pre><code class="java">
+    System.out.println("Hello World!");
+</code></pre>
+
+<p>
+    Will print <kbd>Hello World!</kbd> to the console.
+</p>
+
+<p>
+    Printing the value of a variable:
+</p>
+
+<pre><code class="java">
+    String hello;
+    hello = "Hello World!";
+    System.out.println(hello);
+</code></pre>
+
+<p>
+    Same output as the previous example.
+</p>
+
+
+
+== Comments
+
+
+<pre><code class="java">
+    //
+</code></pre>
+<pre><code class="java">
+    /**/
+</code></pre>
+
+<pre><code class="java">
+    int age;
+
+    // This line will be ignored the computer (everything to the right of '//' on this line)
+    /*
+      Comments allow us to leave notes for each other in our code.
+      The computer will ignore all this text
+    */
+
+    age = 18;
+
+    // Comments are used to describe the code
+    // The following line displays the value of age to the user
+    System.out.println(age);
+</code></pre>
+
+
+== Expressions
+
+<p>
+    An expressions is a portion of code that evaluates to a single value.
+</p>
+
+<pre><code class="java">
+    int x = 7;    // 7 is an expression
+    int y = 5;    // 5 is an expression
+    int z = x + y;  // x is an expression, y is an expression, x + y is an expression
+    System.out.println(z);  // z is an expression (as are System.out (!))
+</code></pre>
+
+<p>
+    Output: <kbd>12</kbd>
+</p>
+
+<p>
+    In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is stored in the int variable named z.
+</p>
+
+<hr/>
+
+<pre><code class="java">
+    int x = 9;
+    int z;
+    z = (x - 3) * 7;
+    System.out.println(z);
+</code></pre>
+
+<p>
+    Output: <kbd>42</kbd>
+</p>
+
+<p>
+    Here <code>(x - 3) * 7</code> is also an expression since it evaluates to a single value. Expressions can be use to
+    combine any number of values into a single value. When using int or double we can perform arithmetic operations in
+    the expressions (+, -, *, /).
+</p>
+<br/>
+
+<p>
+    To evaluate <code>z = (x - 3) * 7;</code> the following steps are executed by the computer.
+</p>
+<ol>
+    <li><code>z = (x - 3) * 7;</code> Replace all variable names with their stored values</li>
+    <li><code>z = (9 - 3) * 7;</code> Evaluate the sub-expression inside the parenthesis first</li>
+    <li><code>z = 6 * 7;</code> Finish evaluating the expression on the right side of the equal sign</li>
+    <li><code>z = 42;</code> Store the single resulting value in the variable named z</li>
+    <li><code>42;</code> The assignment of z is also an expression as it returns the value being stored</li>
+    <li>Execution is complete and the program moves to the next line of code</li>
+</ol>
+
+<ul>
+    <li>Expressions evaluate to a single value</li>
+    <li>Since expressions evaluate to a single value, they can be used wherever a value can be used</li>
+</ul>
+
+
+<hr/>
+
+<p>Supplementary sources:</p>
+<ul>
+    <li><a href="https://en.wikipedia.org/wiki/Expression_(computer_science)">Wikipedia: Expression</a></li>
+    <li><a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html">Javadocs: Expressions,
+        Statements, and Blocks</a></li>
+</ul>
+
+== String Concatenation
+
+<p>
+    String Concatenation (combination) is an expression that combines multiple String values using the + operator.
+</p>
+
+<pre><code class="java">
+    System.out.println("hello " + "world");
+</code></pre>
+
+<p>
+    Output: <kbd>hello world</kbd>
+</p>
+
+<hr/>
+
+<pre><code class="java">
+    String example = "hello";
+    String result;
+    result = example + " " + "world";
+    System.out.println(result);
+</code></pre>
+
+<p>
+    Output: <kbd>hello world</kbd>
+</p>
+
+<p>
+    We combined 3 separate String values into a single String value and stored it in a variable called result. The value
+    "hello" was recovered from the variable named example and concatenated with the values " " and "world" to create the
+    String value "hello world" which is the value stored in result.
+</p>
+
+<ol>
+    <li><code>result = example + " " + "world";</code> Replace all variable names with their stored values</li>
+    <li><code>result = "hello" + " " + "world";</code> Evaluate each concatenation from left to right</li>
+    <li><code>result = "hello " + "world";</code></li>
+    <li><code>result = "hello world";</code> Store the single resulting value in the variable named result</li>
+    <li><code>"hello world";</code> The assignment of result is also an expression as it returns the value being stored</li>
+    <li>Execution is complete and the program moves to the next line of code</li>
+</ol>
+
+== Program Structure
+
+
+<pre><code class="java">
+    public class LectureExample{
+
+        public static void Q1(){
+            String message = "I was called from main";
+            System.out.println("Message from Q1: " + message);
+        }
+
+        public static void main(String[] args){
+            Q1();
+        }
+
+    }
+</code></pre>
+
+<p>
+    Output: <kbd>Message from Q1: I was called from main</kbd>
+</p>
+
+<p>
+    When the above program is ran execution starts with the code inside main. There is only one line of code in main
+    which tells the computer to run the code in Q1 which print a message to the screen. Once the code is Q1 is
+    executed, the computer returned to main to look for more code to run. It instead finds the end of main and
+    program stops.
+</p>
+
