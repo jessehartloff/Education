@@ -2,6 +2,9 @@ function after_load() {
 	//prepare_all_deeper_dives();
 	//prepare_all_references();
 	prepare_all_collapsed_content(document);
+
+	var objDiv = document.getElementById("right-bar");
+	objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function prepare_all_collapsed_content(element) {

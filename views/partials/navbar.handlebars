@@ -14,7 +14,7 @@
                     <ul class="dropdown-menu">
                         {{#each course_list}}
                             {{#unless this.archived}}
-                                <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}</a></li>
+                                <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}: {{this.title}}</a></li>
                             {{/unless}}
                         {{/each}}
                         <li><a href="/courses/">Archive</a></li>

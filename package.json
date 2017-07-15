@@ -1,9 +1,9 @@
 {
-  "name": "CardScanning",
+  "name": "Education",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./scanning-www"
+    "start": "node ./education-www"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

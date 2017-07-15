@@ -76,12 +76,13 @@ div.left-side-bar {
     position: fixed;
     height: calc(100% - 32px);
     overflow: auto;
+    /*background-color: #156ad2;*/
 }
 
 div.lecture-section-well {
     border-radius: 0;
     /*padding: 10px;*/
-    margin: 10px 5px;
+    margin: 5px 5px;
 }
 
 div.deeper-dive-well {
@@ -187,8 +188,9 @@ div.header {
 }
 
 body.outer {
+    background-color: #f7fbff;
     /*background-color: #1591ff;*/
-    background-color: #f4f7f7;
+    /*background-color: #f4f7f7;*/
     /*background-color: #252525;*/
     /*background-color: #000000;*/
 }

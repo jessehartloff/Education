@@ -5,7 +5,6 @@ var db = monk('localhost:27017/education');
 
 var collection = db.get('course_content');
 var collection_list = db.get('course_list');
-//var collection_deep_dives = db.get('deep_dives');
 
 
 var current_semester = 'f17';
