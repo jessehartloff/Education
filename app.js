@@ -17,7 +17,6 @@ var db = monk('localhost:27017/education');
 var course_routes = require('./routes/course');
 var index_routes = require('./routes/index');
 var preprocessor = require('./util/preprocessor');
-var data = require('./util/data');
 var handlebar_helpers = require('./util/handlebars_helpers');
 
 var app = express();

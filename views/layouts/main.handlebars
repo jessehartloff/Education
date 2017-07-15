@@ -10,12 +10,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/vs.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+    <!--<script src="https://unpkg.com/vue"></script>-->
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="/static/functions.js"></script>
+    {{#if course}}
+        <script>
+                var course="{{course.course}}";
+        </script>
+    {{/if}}
 </head>
 
 
-<body class="outer">
+<body class="outer" onload="after_load()">
 
 
 {{> navbar}}

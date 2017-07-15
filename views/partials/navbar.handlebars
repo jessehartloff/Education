@@ -10,7 +10,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#">
-                        {{#if course}}{{course.number_upper}}{{else}}Courses{{/if}}</a>
+                        {{#if course}}{{course.number_upper}}{{else}}<img class="img-responsive" src="/static/CSE50.png"> {{/if}}</a>
                     <ul class="dropdown-menu">
                         {{#each course_list}}
                             {{#unless this.archived}}
@@ -68,10 +68,6 @@
                 <!--<li><a href="https://autograder.cse.buffalo.edu/" target="_blank">Autolab</a></li>-->
                 <!--<li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">Questions</a></li>-->
 
-
-                <!--{% if course.course_project == True %}-->
-                <!--<li><a href="{% url 'courses:projects' course.course_number %}">Projects</a></li>-->
-                <!--{% endif %}-->
             </ul>
 
 

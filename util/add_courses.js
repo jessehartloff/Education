@@ -5,6 +5,7 @@ var db = monk('localhost:27017/education');
 
 var collection = db.get('course_content');
 var collection_list = db.get('course_list');
+//var collection_deep_dives = db.get('deep_dives');
 
 
 var current_semester = 'f17';
@@ -71,35 +72,38 @@ collection.remove({}, function (err, content) {
 					var sub_directory = list[j];
 					switch (sub_directory) {
 						case "assignments":
-							read_ordered_directory(course, course.directory + "/assignments/", "assignments");
+							read_directory(course, course.directory + "/assignments/", "assignments", true);
 							break;
 						case "lectures":
-							read_ordered_directory(course, course.directory + "/lectures/", "lectures");
+							read_directory(course, course.directory + "/lectures/", "lectures", true);
 							break;
 						case "media":
 							fs.copySync(course.directory + "/media/", media_destination);
 							break;
 						case "extra":
-							read_ordered_directory(course, course.directory + "/extra/", "extra");
+							read_directory(course, course.directory + "/extra/", "extra", true);
 							break;
 						case "groups":
-							// TODO
 							if (course.project === "old") {
 								parse_old_project(course, course.directory + "/groups/")
 							}
+							break;
+						case "deep-dives":
+							read_directory(course, course.directory + "/deep-dives/", "deep_dives", false);
 							break;
 					}
 
 				}
 				collection.insert(course);
 				console.log('added: ' + course.course);
+				console.log(course);
 			}
 		}
 	});
 });
 
 
-function read_ordered_directory(course, directory, type) {
+function read_directory(course, directory, type, ordered) {
 
 	var all_content = [];
 	var list = fs.readdirSync(directory);
@@ -123,7 +127,11 @@ function read_ordered_directory(course, directory, type) {
 				}
 				else if (line.startsWith('==')) {
 					if (section_title !== "") {
-						sections.push({'title': section_title, 'content': section_content});
+						sections.push({
+							'title': section_title,
+							'title_lookup': section_title.toLowerCase().replace(/\s+/g, '-'),
+							'content': section_content
+						});
 						section_content = "";
 					}
 					section_title = line.slice(2).trim();
@@ -147,9 +155,25 @@ function read_ordered_directory(course, directory, type) {
 		all_content.push(Object.assign(variables, {'sections': sections}));
 	}
 
-	var result = [];
-	order_list(all_content, 'none', result);
-	course[type] = result;
+	if (ordered) {
+		var result = [];
+		order_list(all_content, 'none', result);
+		course[type] = result;
+	} else {
+		result = {};
+		for (var i in all_content) {
+			var topic = all_content[i];
+			result[topic.short_title] = {};
+			for (var j in topic.sections) {
+				var section = topic.sections[j];
+				result[topic.short_title][section.title.toLowerCase().trim().replace(/\s+/g, '-')] = {
+					'title': section.title,
+					'content': section.content
+				}
+			}
+		}
+		course[type] = result;
+	}
 }
 
 function order_list(content, previous, result) {
@@ -218,7 +242,7 @@ function parse_old_project(course, directory) {
 			'extras': [], 'developers': [], 'private': false, 'repositories': []
 		};
 		var ubits = splits[1].split(',');
-		for(var j in ubits){
+		for (var j in ubits) {
 			var ubit = ubits[j].trim();
 			groups[group_name].developers.push(ubit);
 		}
@@ -245,12 +269,12 @@ function parse_old_project(course, directory) {
 	for (var i in lines_AllRepos) {
 		var line = lines_AllRepos[i];
 		var splits = line.split('\t');
-		if(splits.length < 2){
+		if (splits.length < 2) {
 			continue;
 		}
 		var group_name = splits[0].trim();
 		var group_repos = splits[1].trim().split(';');
-		for(var j in group_repos){
+		for (var j in group_repos) {
 			var repo = group_repos[j].trim();
 			groups[group_name].repositories.push(repo.trim());
 		}
@@ -266,16 +290,15 @@ function parse_old_project(course, directory) {
 	}
 
 	for (var i in lines_AllVideos) {
-		//9/17/2016 18:35:38	haoyuguo@buffalo.edu	Schedule-web	Sprint 1	https://youtu.be/CMrfmx0dysQ
 		var line = lines_AllVideos[i];
 		var splits = line.split('\t');
 		var group_name = splits[2].trim();
 		var video_occasion = splits[3].trim();
 		var video_link = youtube_parser(splits[4].trim());
-		groups[group_name].videos.push({'occasion':video_occasion, 'link': video_link});
+		groups[group_name].videos.push({'occasion': video_occasion, 'link': video_link});
 	}
 
-	for(var i in groups){
+	for (var i in groups) {
 		var group = groups[i];
 		group.videos.reverse();
 	}
@@ -286,7 +309,7 @@ function parse_old_project(course, directory) {
 		var group_name = splits[0].trim();
 		var group_beta_link = splits[1].trim();
 		groups[group_name].has_extras = true;
-		groups[group_name].extras.push({'link':group_beta_link, 'type':'Beta Testing'});
+		groups[group_name].extras.push({'link': group_beta_link, 'type': 'Beta Testing'});
 	}
 
 
@@ -296,7 +319,7 @@ function parse_old_project(course, directory) {
 		var group_name = splits[0].trim();
 		var group_cc_link = splits[1].trim();
 		groups[group_name].has_extras = true;
-		groups[group_name].extras.push({'link':group_cc_link, 'type':'Content Creation'});
+		groups[group_name].extras.push({'link': group_cc_link, 'type': 'Content Creation'});
 	}
 
 	var group_names = Object.keys(groups);
@@ -304,7 +327,7 @@ function parse_old_project(course, directory) {
 		return s1.toLowerCase().localeCompare(s2.toLowerCase())
 	});
 	var groups_list = [];
-	for(var i in group_names){
+	for (var i in group_names) {
 		groups_list.push(groups[group_names[i]]);
 	}
 	//console.log(groups_list);
@@ -313,10 +336,10 @@ function parse_old_project(course, directory) {
 
 
 // https://stackoverflow.com/questions/3452546/javascript-regex-how-do-i-get-the-youtube-video-id-from-a-url
-function youtube_parser(url){
+function youtube_parser(url) {
 	var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
 	var match = url.match(regExp);
-	return (match&&match[7].length==11)? match[7] : false;
+	return (match && match[7].length == 11) ? match[7] : false;
 }
 
 
