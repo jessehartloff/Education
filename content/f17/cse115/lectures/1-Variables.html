@@ -41,30 +41,27 @@ variable says what kind of value will be stored in the variable.</p>
 </code></pre>
 
 declares a variable with
-name <pre><code class="java">myFirstVariable</code></pre> and
-type <code class="java">int</code>.  '<code class="java">int</code>' denotes whole numbers, like 17, -3, and 0 (and many more!)</p>
+name <span><code class="java">myFirstVariable</code></span> and
+type <span><code class="java">int</code></span>.
+<span><code class="java">int</code></span> denotes whole numbers, like 17, -3, and 0 (and many more!)</p>
 
 <p>The order is important: the type comes first, followed by the name of the variable.  The semicolon ';' at the end of the line marks the end if the declaration.</p>
 
-<p>An assignment is used to store a value in a variable.  For example, to store the value 7 in the variable <code class="java">myFirstVariable</code> we write:
-<pre><code class="java">    myFirstVariable = 7;
-</code></pre>
+<p>An assignment is used to store a value in a variable.  For example, to store the value 7 in the variable <span><code class="java">myFirstVariable</code></span> we write:
+<pre><code class="java">    myFirstVariable = 7;</code></pre>
 </p>
 
 <p>The order is again important: we first write the name of the variable, then the assignment operator ('='), followed by the value to be stored in the variable.  The semicolon marks the end of the assignment.</p>
 
-
 <pre><code class="java">    int myFirstVariable = 7;
 </code></pre>
-<p>
-    We see the <span><code class="java">int myFirstVariable = 7;</code></span> is cool.
-</p>
+
 <p>
 Both examples have the same result and follow these two steps:
 </p>
 <ol>
-    <li><b>int myFirstVariable</b> - Declare a variable named myFirstVariable of type int</li>
-    <li><b>myFirstVariable = 7</b> - Assign the value 7 to the variable named myFirstVariable</li>
+    <li><span><code class="java">int myFirstVariable</code></span> - Declare a variable named myFirstVariable of type int</li>
+    <li><span><code class="java">myFirstVariable = 7</code></span> - Assign the value 7 to the variable named myFirstVariable</li>
 </ol>
 In the first example the declaration of the variable and the assignment of a value to the variable are done in two separate instructions.  In the second example the two steps are combined into one line.
 
@@ -81,10 +78,13 @@ General structure:
 
 <ul>
     <li>A program can have many variables</li>
-    <li>Only 1 variable per name <b>(this is actually not true)</b></li>
-    <li>Names cannot contain spaces. Use camelCase</li>
-    <li>Start names with a lowercase letter</li>
     <li>Variables can be reassigned different values</li>
+</ul>
+<ul>
+    <li>Names can contain UPPERCASE and lowercase letter, digits and the underscore '_' character</li>
+    <li>Names cannot contain spaces</li>
+    <li>Names of variables start with a lowercase letter</li>
+    <li>Names of variables follow <span class="deeper-dive" data-concept="names" data-topic="camelCase"></span></li>
 </ul>
 
 <hr/>
