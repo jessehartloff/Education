@@ -17,6 +17,10 @@ previous_content_short: none
 </ul>
 
 
+== Supplements
+
+<a href="/static/115Slides/1-Variables.pptx">Variables Concept Slides</a>
+
 == Variables
 
 Introduction:
@@ -24,51 +28,43 @@ Introduction:
 memory.  A <span class="vocabulary">variable</span> is a location in
 the computer's memory that has a name.</p>
 
-<div class="deeper-dive" data-concept="variables" data-topic="type"></div>
-<div class="deeper-dive" data-concept="variables" data-topic="name"></div>
-
-<a href="/static/115Slides/1-Variables.pptx">Variables Concept Slides</a>
-<br/><br/>
-
 <p>
 In Java variables must be declared before they can be used.
 A <span class="vocabulary">declaration</span> gives a variable both a
-name and a type.  The <span class="vocabulary">type</span> of a
+<span class="deeper-dive" data-concept="variables" data-topic="name"></span> and a <span class="deeper-dive" data-concept="variables" data-topic="type"></span>.
+The <span class="vocabulary">type</span> of a
 variable says what kind of value will be stored in the variable.</p>
 
+
 <p>For example,
-<pre><code class="java">
-    int myFirstVariable;
+<pre><code class="java">    int myFirstVariable;
 </code></pre>
 
 declares a variable with
-name <code class="java">myFirstVariable</code> and
+name <pre><code class="java">myFirstVariable</code></pre> and
 type <code class="java">int</code>.  '<code class="java">int</code>' denotes whole numbers, like 17, -3, and 0 (and many more!)</p>
 
-<p>In a Java declaration the type comes first, followed by the name of the variable.</p>
+<p>The order is important: the type comes first, followed by the name of the variable.  The semicolon ';' at the end of the line marks the end if the declaration.</p>
 
-<p>An assignment is used to store a variable in a variable.  For example, to store the value 7 in the variable <code class="java">myFirstVariable</code> we write:
-<pre><code class="java">
-    myFirstVariable = 7;
+<p>An assignment is used to store a value in a variable.  For example, to store the value 7 in the variable <code class="java">myFirstVariable</code> we write:
+<pre><code class="java">    myFirstVariable = 7;
 </code></pre>
 </p>
 
-<p>In an assignment we first write the name of the variable, the assignment operator ('='), followed by the value to be stored in the variable.</p>
+<p>The order is again important: we first write the name of the variable, then the assignment operator ('='), followed by the value to be stored in the variable.  The semicolon marks the end of the assignment.</p>
 
 
-<pre><code class="java">
-    int myFirstVariable = 7;
+<pre><code class="java">    int myFirstVariable = 7;
 </code></pre>
 
 <p>
 Both examples have the same result and follow these two steps:
 </p>
 <ol>
-    <li><b>int myFirstVariable</b> - Create a variable named myFirstVariable of type int</li>
+    <li><b>int myFirstVariable</b> - Declare a variable named myFirstVariable of type int</li>
     <li><b>myFirstVariable = 7</b> - Assign the value 7 to the variable named myFirstVariable</li>
 </ol>
-In the first example the creation of the variable and the assignment of a value to the variable are done in two separate instructions.
-In the second example the two steps are combined into one line.
+In the first example the declaration of the variable and the assignment of a value to the variable are done in two separate instructions.  In the second example the two steps are combined into one line.
 
 <br/>
 General structure:
@@ -120,7 +116,7 @@ General structure:
 </dl>
 
 
-<p>There are many more variable types in java. We will stick with these 4 for now.</p>
+<p>There are many more types in java. We will stick with these 4 for now.</p>
 
 
 <pre><code class="java">
@@ -159,7 +155,7 @@ Syntax:
 </code></pre>
 
 <p>
-    Same output as the previous example.
+    Same output as the previous example.  However, the value being printed is retrieved from the variable named <code class="java">hello</code>.
 </p>
 
 
@@ -198,10 +194,12 @@ Syntax:
 </p>
 
 <pre><code class="java">
-    int x = 7;    // 7 is an expression
-    int y = 5;    // 5 is an expression
-    int z = x + y;  // x is an expression, y is an expression, x + y is an expression
-    System.out.println(z);  // z is an expression (as are System.out (!))
+    int x = 7;    // 7 is an expression, whose value is 7 (makes sense!)
+    int y = 5;    // 5 is an expression, whose value is 5
+    int z = x + y;  // x is an expression, whose value is whatever is stored in x (7 in this case)
+                    // y is an expression, whose value is whatever is stored in y (5 in this case)
+                    // x + y is an expression, whose value is the sum of the values of x and y
+    System.out.println(z);  // z is an expression
 </code></pre>
 
 <p>
@@ -209,7 +207,7 @@ Syntax:
 </p>
 
 <p>
-    In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is stored in the int variable named z.
+In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is stored in the int variable named z.
 </p>
 
 <hr/>
@@ -226,10 +224,43 @@ Syntax:
 </p>
 
 <p>
-    Here <code>(x - 3) * 7</code> is also an expression since it evaluates to a single value. Expressions can be use to
-    combine any number of values into a single value. When using int or double we can perform arithmetic operations in
-    the expressions (+, -, *, /).
+    Here <code>(x - 3) * 7</code> is also an expression since it
+    evaluates to a single value. Expressions can be use to combine any
+    number of values into a single value. When using int or double we
+    can perform arithmetic operations in the expressions, using
+    operators like + (addition), - (subtraction), and * (multiplication).
 </p>
+
+<p> The operator / denotes division, but division works a little
+differently for int values than it does for double values.  For int
+values / computes the integer quotient.  The corresponding remainder
+can be computed using the % operator.
+<pre><code class="java">
+    int a = 15;
+    int b = 6;
+    System.out.println(a / b);
+    System.out.println(a % b);
+</code></pre>
+This will print the following:
+<pre>
+    2
+    3
+</pre>
+This is correct because 2 * 6 + 3 is 15.</p>
+
+<p>For double values / computes the quotient (which may not be a whole number).  For example,
+<pre><code class="java">
+    double c = 15.0;
+    double d = 6.0;
+    System.out.println(c / d);
+</code></pre>
+This will print:
+<pre>
+    2.5
+</pre>
+This is correct because 2.0 * 6.0 is 15.0
+</p>
+
 <br/>
 
 <p>
