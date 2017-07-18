@@ -95,7 +95,7 @@ collection.remove({}, function (err, content) {
 				}
 				collection.insert(course);
 				console.log('added: ' + course.course);
-				console.log(course);
+				//console.log(course);
 			}
 		}
 	});
