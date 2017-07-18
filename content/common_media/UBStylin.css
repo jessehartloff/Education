@@ -374,3 +374,9 @@ with modifications */
         background-color: #156ad2;
     }
 }
+
+.vocabulary {
+    font-style: italic;
+    font-weight: bold;
+    color: #44AA44;
+}
