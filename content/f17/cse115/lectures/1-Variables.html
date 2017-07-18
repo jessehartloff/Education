@@ -19,20 +19,43 @@ previous_content_short: none
 
 == Variables
 
+Introduction:
+<p>Computer programs manipulate data.  Data is stored in a computer's
+memory.  A <span class="vocabulary">variable</span> is a location in
+the computer's memory that has a name.</p>
+
 <div class="deeper-dive" data-concept="variables" data-topic="type"></div>
 <div class="deeper-dive" data-concept="variables" data-topic="name"></div>
-
-<div class="reference" data-concept="oo" data-topic="abstract-classes"></div>
-
 
 <a href="/static/115Slides/1-Variables.pptx">Variables Concept Slides</a>
 <br/><br/>
 
-Syntax:
+<p>
+In Java variables must be declared before they can be used.
+A <span class="vocabulary">declaration</span> gives a variable both a
+name and a type.  The <span class="vocabulary">type</span> of a
+variable says what kind of value will be stored in the variable.</p>
+
+<p>For example,
 <pre><code class="java">
     int myFirstVariable;
+</code></pre>
+
+declares a variable with
+name <code class="java">myFirstVariable</code> and
+type <code class="java">int</code>.  '<code class="java">int</code>' denotes whole numbers, like 17, -3, and 0 (and many more!)</p>
+
+<p>In a Java declaration the type comes first, followed by the name of the variable.</p>
+
+<p>An assignment is used to store a variable in a variable.  For example, to store the value 7 in the variable <code class="java">myFirstVariable</code> we write:
+<pre><code class="java">
     myFirstVariable = 7;
 </code></pre>
+</p>
+
+<p>In an assignment we first write the name of the variable, the assignment operator ('='), followed by the value to be stored in the variable.</p>
+
+
 <pre><code class="java">
     int myFirstVariable = 7;
 </code></pre>
