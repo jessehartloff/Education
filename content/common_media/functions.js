@@ -5,6 +5,11 @@ function after_load() {
 
 	var objDiv = document.getElementById("right-bar");
 	objDiv.scrollTop = objDiv.scrollHeight;
+
+	$('span code').each(function(i, block) {
+		hljs.highlightBlock(block);
+	});
+
 }
 
 function prepare_all_collapsed_content(element) {
@@ -64,6 +69,9 @@ function toggle_content(element, concept, topic, content_class) {
 				prepare_all_collapsed_content(element);
 				hljs.initHighlighting.called = false;
 				hljs.initHighlighting();
+				$('span code').each(function(i, block) {
+					hljs.highlightBlock(block);
+				});
 			}
 		};
 		xhttp.open("GET", "/courses/" + course + "/" + content_class + "/" + concept + "/" + topic, true);
