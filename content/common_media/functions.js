@@ -28,7 +28,7 @@ function prepare_collapsed_content(content_element, content_class) {
 	content_element.innerHTML = content_link(content_element, content_class);
 }
 
-function content_link(content_element, content_class) {
+function content_link(content_element, content_class, link_text) {
 	var concept = content_element.getAttribute('data-concept');
 	var topic = content_element.getAttribute('data-topic');
 
@@ -36,14 +36,19 @@ function content_link(content_element, content_class) {
 	var link = "";
 	link += "<span class=\"" + content_class + "-link\" ";
 	link += "onclick=\"toggle_content(this.parentElement, '" + concept + "', '" + topic + "', '" + content_class + "')\">";
-	link += "<span class=\"glyphicon glyphicon-";
-	link += content_element.getAttribute('data-activated') !== 'true' ? "plus-sign" : "minus-sign";
-	link += "\" aria-hidden=\"true\"></span> ";
 
 	// Capitalization: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
-	link += topic.replace(/-/g, " ").replace(/\w\S*/g, function (txt) {
-		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-	});
+	if(link_text){
+		link += link_text;
+	}else {
+		link += topic.replace(/-/g, " ").replace(/\w\S*/g, function (txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	}
+
+	link += "<sup><span class=\"glyphicon glyphicon-";
+	link += content_element.getAttribute('data-activated') !== 'true' ? "plus-sign" : "minus-sign";
+	link += "\" aria-hidden=\"true\"></span></sup>";
 	link += "</span>";
 
 	return link;
