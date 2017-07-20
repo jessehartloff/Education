@@ -1,4 +1,5 @@
 var fs = require('fs-extra');
+var path = require('path');
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
@@ -8,9 +9,9 @@ var collection_list = db.get('course_list');
 
 
 var current_semester = 'f17';
-var content_directory = '../content/';
-var media_destination = '../public/static/';
-fs.copySync(content_directory + "/common_media/", media_destination);
+var content_directory = path.join(__dirname, 'content/');
+var media_destination = path.join(__dirname, 'public/static/');
+fs.copySync(content_directory + "common_media/", media_destination);
 
 var to_process = [
 	{'directory': content_directory + 's18/cse312', 'semester': 's18', 'number': 'cse312', 'title': 'Web Applications'},
@@ -58,8 +59,9 @@ collection.remove({}, function (err, content) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log("all courses removed");
-			console.log("adding all courses");
+			//console.log("all courses removed");
+			//console.log("adding all courses");
+			var courses_processed = 0;
 			for (var index in to_process) {
 				var course = to_process[index];
 				course['archived'] = course.semester !== current_semester;
@@ -93,8 +95,15 @@ collection.remove({}, function (err, content) {
 					}
 
 				}
-				collection.insert(course);
-				console.log('added: ' + course.course);
+				console.log('adding: ' + course.course);
+				collection.insert(course, function(){
+					courses_processed++;
+					//console.log(courses_processed + ' courses processed');
+					if(courses_processed === to_process.length){
+						console.log('all courses processed');
+						shut_it_down();
+					}
+				});
 				//console.log(course);
 			}
 		}

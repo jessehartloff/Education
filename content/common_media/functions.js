@@ -3,13 +3,18 @@ function after_load() {
 	//prepare_all_references();
 	prepare_all_collapsed_content(document);
 
-	var objDiv = document.getElementById("right-bar");
-	objDiv.scrollTop = objDiv.scrollHeight;
+	//var objDiv = document.getElementById("right-bar");
+	//objDiv.scrollTop = objDiv.scrollHeight;
 
+	highlight_code();
+}
+
+function highlight_code(){
+	hljs.initHighlighting.called = false;
+	hljs.initHighlighting();
 	$('span code').each(function(i, block) {
 		hljs.highlightBlock(block);
 	});
-
 }
 
 function prepare_all_collapsed_content(element) {
@@ -37,10 +42,10 @@ function content_link(content_element, content_class, link_text) {
 	link += "<span class=\"" + content_class + "-link\" ";
 	link += "onclick=\"toggle_content(this.parentElement, '" + concept + "', '" + topic + "', '" + content_class + "')\">";
 
-	// Capitalization: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
 	if(link_text){
 		link += link_text;
 	}else {
+		// Capitalization: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
 		link += topic.replace(/-/g, " ").replace(/\w\S*/g, function (txt) {
 			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		});
@@ -52,7 +57,6 @@ function content_link(content_element, content_class, link_text) {
 	link += "</span>";
 
 	return link;
-	// Capitalization: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
 }
 
 
@@ -72,11 +76,7 @@ function toggle_content(element, concept, topic, content_class) {
 					'<h4>' + response.title + '</h4>' +
 					response.content + '</div>';
 				prepare_all_collapsed_content(element);
-				hljs.initHighlighting.called = false;
-				hljs.initHighlighting();
-				$('span code').each(function(i, block) {
-					hljs.highlightBlock(block);
-				});
+				highlight_code();
 			}
 		};
 		xhttp.open("GET", "/courses/" + course + "/" + content_class + "/" + concept + "/" + topic, true);

@@ -5,6 +5,7 @@
  */
 
 var app = require('./app');
+require('./add_courses');
 var debug = require('debug')('CardScanning:server');
 var http = require('http');
 
@@ -86,5 +87,6 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
+  console.log('Listening on ' + bind);
   debug('Listening on ' + bind);
 }

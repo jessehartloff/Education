@@ -153,6 +153,12 @@ span code.hljs {
     display: inline;
 }
 
+span code.java {
+    /*color: #f5f5f5;*/
+    background-color: #f0f8ff;
+    /*display: inline;*/
+}
+
 .well > .code-well {
     font-weight: bold;
     background: #155db9;
