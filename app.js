@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
+var flash = require('express-flash');
+
 
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
@@ -22,6 +24,8 @@ var handlebar_helpers = require('./util/handlebars_helpers');
 
 var app = express();
 
+app.use(flash());
+
 // view engine setup
 var hbs = exphbs.create({defaultLayout: 'main',
 	helpers : handlebar_helpers});
@@ -37,41 +41,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//app.use(session({
-//	secret: 'keyboard cat',
-//	resave: false,
-//	saveUninitialized: true
-//}));
-//
-//app.use(passport.initialize());
-//app.use(passport.session());
-//
-//passport.serializeUser(function(user, done) {
-//	done(null, user);
-//});
-//
-//passport.deserializeUser(function(user, done) {
-//	done(null, user);
-//});
-//
-//passport.use(new LocalStrategy(
-//	function(username, password, done) {
-//		data.users.findOne({ username: username }, function (err, user) {
-//			if (err) { return done(err); }
-//			if (!user) {
-//				console.log('bad username');
-//				return done(null, false, { message: 'Incorrect username.' });
-//			}
-//			if (user.password !== password) {
-//				console.log('bad password');
-//				return done(null, false, { message: 'Incorrect password.' });
-//			}
-//			console.log('logged in!');
-//			return done(null, user);
-//		});
-//	}
-//));
 
 
 app.use(function (req, res, next) {

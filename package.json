@@ -11,6 +11,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.8",
     "express": "~4.15.3",
+    "express-flash": "0.0.2",
     "express-handlebars": "~3.0.0",
     "express-session": "^1.15.3",
     "fs-extra": "^3.0.1",

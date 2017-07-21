@@ -13,7 +13,7 @@
     <script src="/static/functions.js"></script>
     {{#if course}}
         <script>
-                var course="{{course.course}}";
+            var course = "{{course.course}}";
         </script>
     {{/if}}
 </head>
@@ -23,7 +23,7 @@
 
 
 <div class="container-fluid">
-{{> navbar}}
+    {{> navbar}}
 
 
 
@@ -36,20 +36,45 @@
 
         <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
             <div class="content-area">
-                {{#if message}}
-                    <div class="alert alert-info">
-                        {{message}}
-                    </div>
-                {{/if}}
+                <div class="messages">
+                    {{#if messages.error}}
+                        <div class="alert alert-danger">
+                            {{#each messages.error}}
+                                <b>{{this}}</b><br/>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    {{#if messages.info}}
+                        <div class="alert alert-info">
+                            {{#each messages.info}}
+                                <b>{{this}}</b><br/>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    {{#if messages.success}}
+                        <div class="alert alert-success">
+                            {{#each messages.success}}
+                                <b>{{this}}</b><br/>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+
+                    {{#if message}}
+                        <div class="alert alert-warning">
+                            {{message}}
+                        </div>
+                    {{/if}}
+                </div>
+
 
                 {{{body}}}
             </div>
         </div>
 
         <!--<div id="right-sidebar" class="hidden-xs col-sm-2 less-padding">-->
-            <!--<div class="content-area">-->
-                {{!> chat}}
-            <!--</div>-->
+        <!--<div class="content-area">-->
+        {{!> chat}}
+        <!--</div>-->
         <!--</div>-->
 
     </div>

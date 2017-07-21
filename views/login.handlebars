@@ -1,6 +1,5 @@
 {{#if user}}
     <div class="well lecture-section-well">
-
         <h4>Already logged in as {{user.username}}</h4>
     </div>
 {{else}}
@@ -14,7 +13,7 @@
             <div>
                 <label>Password:</label><br/>
                 <input type="password" name="password"/>
-            </div><br/>
+            </div><a href="/user/forgot-password">forgot password</a><br/><br/>
             <div>
                 <input type="submit" value="Log In"/>
             </div>
