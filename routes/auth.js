@@ -198,7 +198,6 @@ function add_user(username) {
 }
 
 function random_temp_password(password_length) {
-	return 'pass';
 	// FWIW, not cryptographically secure
 	var length = password_length || 10;
 	var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
