@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 
 
 // Check if a user is logged in
@@ -14,10 +14,16 @@ var nodemailer = require('nodemailer');
 //	}
 //});
 
+router.use(function (req, res, next) {
+	next();
+});
+
 router.get('/', function (req, res) {
-	res.render('index', {
-		'course_list': res.course_list
-	});
+	//res.render('index', {
+	//	'course_list': res.course_list,
+	//	'user': req.user
+	//});
+	res.render('index', res.to_template);
 });
 
 
@@ -30,6 +36,7 @@ router.get('/:course/assignments/:assignment', function (req, res) {
 });
 
 
+// deeper dives API
 router.get('/:course/deeper-dive/:concept/:topic', function (req, res) {
 	var db = req.db;
 	var collection = db.get('course_content');
@@ -46,7 +53,7 @@ router.get('/:course/deeper-dive/:concept/:topic', function (req, res) {
 	;
 });
 
-
+// references API
 router.get('/:course/reference/:lecture/:section', function (req, res) {
 	var db = req.db;
 	var collection = db.get('course_content');
@@ -81,11 +88,14 @@ router.get('/:course/projects', function (req, res) {
 			console.log(err);
 			res.render('error');
 		}
-		res.render('projects', {
-			'course': record,
-			'course_list': res.course_list,
-			'projects': record.projects
-		});
+		res.to_template.course = record;
+		res.to_template.projects = record.projects;
+		res.render(type, res.to_template);
+		//res.render('projects', {
+		//	'course': record,
+		//	'course_list': res.course_list,
+		//	'projects': record.projects
+		//});
 	});
 });
 
@@ -110,11 +120,9 @@ function render_content(req, res, type, param) {
 				break;
 			}
 		}
-		res.render(type, {
-			'course': record,
-			'course_list': res.course_list,
-			'content': content
-		});
+		res.to_template.course = record;
+		res.to_template.content = content;
+		res.render(type, res.to_template);
 	});
 }
 

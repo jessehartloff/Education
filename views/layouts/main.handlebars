@@ -36,6 +36,12 @@
 
         <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
             <div class="content-area">
+                {{#if message}}
+                    <div class="alert alert-info">
+                        {{message}}
+                    </div>
+                {{/if}}
+
                 {{{body}}}
             </div>
         </div>
