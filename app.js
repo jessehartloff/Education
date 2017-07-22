@@ -1,4 +1,5 @@
 var express = require('express');
+var helmet = require('helmet');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -24,6 +25,7 @@ var handlebar_helpers = require('./util/handlebars_helpers');
 
 var app = express();
 
+app.use(helmet());
 app.use(flash());
 
 // view engine setup

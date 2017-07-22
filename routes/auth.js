@@ -121,7 +121,7 @@ router.post('/forgot-password', function (req, res, next) {
 			change_password(username, temp_password);
 			email_temp_password(username + "@buffalo.edu", temp_password);
 			res.to_template.message = "A temporary password has been sent to your email";
-			// TODO: some sort of auth to prevent pranks. person number perhaps?
+			// TODO: some sort of auth to prevent pranks. person number perhaps? (email a link with token)
 			res.render('login', res.to_template);
 			return;
 		}
@@ -149,7 +149,8 @@ router.get('/logout', function (req, res) {
 router.post('/change-password', function (req, res) {
 	if (req.user && req.body.old_password && req.body.new_password_1 && req.body.new_password_2) {
 		local_strategy_function(req.user.username, req.body.old_password, function (err, user, options) {
-			// TODO: check for password strength and add error messages
+			// TODO: check for password strength
+			// TODO: Check for weird chars
 			if(options && options.message){
 				req.flash('error', options.message);
 			}
@@ -162,8 +163,13 @@ router.post('/change-password', function (req, res) {
 				if (req.body.new_password_1 !== req.body.new_password_2) {
 					req.flash('error', 'new passwords do not match');
 				} else {
-					change_password(user.username, req.body.new_password_1);
-					req.flash('success', 'password updated');
+					var magic_eight_ball = 8;
+					if(req.body.new_password_1.length < magic_eight_ball){
+						req.flash('info', 'password must contain at least 8 characters');
+					}else {
+						change_password(user.username, req.body.new_password_1);
+						req.flash('success', 'password updated');
+					}
 				}
 			}
 			//res.render('user', res.to_template);

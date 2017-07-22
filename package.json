@@ -16,6 +16,7 @@
     "express-session": "^1.15.3",
     "fs-extra": "^3.0.1",
     "handlebars": "~4.0.10",
+    "helmet": "^3.8.0",
     "mongodb": "~2.2.29",
     "monk": "~6.0.0",
     "morgan": "~1.8.2",
