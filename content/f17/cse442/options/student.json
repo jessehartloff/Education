@@ -1,0 +1,20 @@
+[
+  {
+    "key_name": "github_username",
+    "display_name": "Github Username",
+    "is_required": true,
+    "default_value": ""
+  },
+  {
+    "key_name": "home_page",
+    "display_name": "Home Page",
+    "is_required": false,
+    "default_value": ""
+  },
+  {
+    "key_name": "group",
+    "display_name": "Group",
+    "is_required": false,
+    "default_value": "default"
+  }
+]

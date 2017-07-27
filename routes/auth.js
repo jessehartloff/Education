@@ -10,10 +10,10 @@ var nodemailer = require('nodemailer');
 
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
-
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
+
 
 var collection = db.get('users');
 
@@ -61,14 +61,16 @@ passport.use(new LocalStrategy(local_strategy_function));
 
 // Check if a user is logged in
 app.use(function (req, res, next) {
-	console.log(req.user);
+	//console.log(req.user);
 	if (req.user) {
-		res.to_template.user = {'username': req.user.username};
+		//res.to_template.user = {'username': req.user.username};
+		res.to_template.user = req.user;
 	}
 	next();
 });
 
 router.get('/profile', function (req, res, next) {
+	//console.log(res.to_template);
 	res.render('user', res.to_template);
 });
 
@@ -149,9 +151,9 @@ router.get('/logout', function (req, res) {
 router.post('/change-password', function (req, res) {
 	if (req.user && req.body.old_password && req.body.new_password_1 && req.body.new_password_2) {
 		local_strategy_function(req.user.username, req.body.old_password, function (err, user, options) {
-			// TODO: check for password strength
+			// TODO: Check for password strength
 			// TODO: Check for weird chars
-			if(options && options.message){
+			if (options && options.message) {
 				req.flash('error', options.message);
 			}
 			if (err) {
@@ -164,9 +166,9 @@ router.post('/change-password', function (req, res) {
 					req.flash('error', 'new passwords do not match');
 				} else {
 					var magic_eight_ball = 8;
-					if(req.body.new_password_1.length < magic_eight_ball){
-						req.flash('info', 'password must contain at least 8 characters');
-					}else {
+					if (req.body.new_password_1.length < magic_eight_ball) {
+						req.flash('info', 'password must contain at least ' + magic_eight_ball + ' characters');
+					} else {
 						change_password(user.username, req.body.new_password_1);
 						req.flash('success', 'password updated');
 					}
@@ -181,6 +183,57 @@ router.post('/change-password', function (req, res) {
 		res.redirect('/user/profile');
 	}
 });
+
+
+router.post('/update-course-options/:course', function (req, res) {
+	var course_collection = req.db.get("course_content");
+	var course = req.params.course;
+	//if(course req.user.courses_enrolled;
+	for (var i in req.user.courses_enrolled) {
+		var this_course = req.user.courses_enrolled[i];
+		if (this_course.course_key === course) {
+			//course_collection.find({'course': course}, function(err, record){
+			// TODO: If err; if not record
+			for (var option_key in this_course.options) {
+				console.log('updating ' + option_key);
+				//var this_option = this_course.options[option_key];
+				var new_value = req.body[option_key]; // TODO: Error check
+				req.user.courses_enrolled[course].options[option_key].value = new_value;
+
+				var set_string = 'courses_enrolled.' + course + '.options.' + option_key + '.value';
+				var to_set = {$set: {}};
+				to_set.$set[set_string] = new_value;
+
+				collection.update({'username': req.user.username}, to_set);
+			}
+			//});
+
+		}
+	}
+
+	res.redirect('/user/profile');
+});
+
+
+app.use('/user', router);
+module.exports = app;
+
+
+///// Utils
+
+
+//function enroll_in_course(username, course) {
+//	// TODO: Add course
+//	// TODO: Add different options based on course
+//
+//	// pull course from database
+//	// iterate over student options and add them to the student under the course name
+//}
+//
+//function change_data(username, course, data_name, new_value) {
+//	//collection.updateOne({'username': username}, {$set: {data_name: new_value}});
+//}
+
 
 function add_user(username) {
 	collection.findOne({'username': username}, function (err, found_user) {
@@ -218,7 +271,7 @@ function change_password(username, new_password) {
 	// assumes the update is authenticated
 	console.log('changing password for ' + username);
 	var hash = secure_password(new_password);
-	collection.update({'username': username}, {$set: {'password': hash}});
+	collection.updateOne({'username': username}, {$set: {'password': hash}});
 }
 
 function secure_password(password) {
@@ -236,7 +289,7 @@ function email_temp_password(email, temp_password) {
 		}
 	});
 
-	// TODO: send a link to change password with a token (verify account on first use), instead of email a plaintext password that they won't change
+	// TODO: Send a link to change password with a token (verify account on first use), instead of email a plaintext password that they won't change
 
 	transporter.sendMail({
 		from: 'courses@cse.buffalo.edu',
@@ -255,5 +308,4 @@ function email_to_ubit(email) {
 	return email.trim().toLowerCase().split('@')[0];
 }
 
-app.use('/user', router);
-module.exports = app;
+////

@@ -7,26 +7,50 @@
     <div class="well lecture-section-well">
         <h4>Profile for {{user.username}}</h4>
     </div>
-        <div class="well lecture-section-well">
 
-            <h3>Change Password</h3><br/>
-            <form action="/user/change-password" method="post">
+    <div class="well lecture-section-well">
+
+        <h3>Change Password</h3><br/>
+        <form action="/user/change-password" method="post">
+            <div>
+                <label>Current Password</label><br/>
+                <input type="password" name="old_password"/>
+            </div>
+            <br/>
+            <div>
+                <label>New Password</label><br/>
+                <input type="password" name="new_password_1"/>
+            </div>
+            <br/>
+            <div>
+                <label>Verify New Password</label><br/>
+                <input type="password" name="new_password_2"/>
+            </div>
+            <br/>
+            <div>
+                <input type="submit" value="Change Password"/>
+            </div>
+        </form>
+    </div>
+
+
+    {{#each user.courses_enrolled}}
+        <div class="well lecture-section-well">
+            <h3>{{this.course_name}}</h3><br/>
+            <form action="/user/update-course-options/{{this.course_key}}" method="post">
+                {{#each this.options}}
+                    <div>
+                        <label>{{this.display_name}}</label><br/>
+                        <input type="text" name="{{@key}}" value="{{this.value}}"/>
+                    </div>
+                    <br/>
+                {{/each}}
                 <div>
-                    <label>Current Password</label><br/>
-                    <input type="password" name="old_password"/>
-                </div><br/>
-                <div>
-                    <label>New Password</label><br/>
-                    <input type="password" name="new_password_1"/>
-                </div><br/>
-                <div>
-                    <label>Verify New Password</label><br/>
-                    <input type="password" name="new_password_2"/>
-                </div><br/>
-                <div>
-                    <input type="submit" value="Change Password"/>
+                    <input type="submit" value="Update Settings"/>
                 </div>
             </form>
         </div>
+    {{/each}}
+
 
 {{/unless}}

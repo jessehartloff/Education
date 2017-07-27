@@ -14,7 +14,12 @@ var media_destination = path.join(__dirname, 'public/static/');
 fs.copySync(content_directory + "common_media/", media_destination);
 
 var to_process = [
-	{'directory': content_directory + 's18/cse312', 'semester': 's18', 'number': 'cse312', 'title': 'Web Applications'},
+	{
+		'directory': content_directory + 's18/cse312',
+		'semester': 's18',
+		'number': 'cse312',
+		'title': 'Web Applications'
+	},
 
 	{
 		'directory': content_directory + 'f17/cse115',
@@ -92,14 +97,36 @@ collection.remove({}, function (err, content) {
 						case "deep-dives":
 							read_directory(course, course.directory + "/deep-dives/", "deep_dives", false);
 							break;
+						case "options":
+							var course_content = fs.readFileSync(course.directory + "/options/course.json");
+							var course_settings = JSON.parse(course_content);
+							course.course_options  = course_settings;
+							if(course_settings.student_account && course_settings.student_options){
+								var student_content = fs.readFileSync(course.directory + "/options/student.json");
+								var student_options = JSON.parse(student_content);
+								course.student_options = student_options;
+							}
+							if(course_settings.has_project){
+								var project_content = fs.readFileSync(course.directory + "/options/project.json");
+								var project_options = JSON.parse(project_content);
+								course.project_options = project_options;
+							}
+							//{
+							//	"student_account": true,
+							//	"student_options": true,
+							//	"has_project": true
+							//}
+
+
+							break;
 					}
 
 				}
 				console.log('adding: ' + course.course);
-				collection.insert(course, function(){
+				collection.insert(course, function () {
 					courses_processed++;
 					//console.log(courses_processed + ' courses processed');
-					if(courses_processed === to_process.length){
+					if (courses_processed === to_process.length) {
 						console.log('all courses processed');
 						shut_it_down();
 					}

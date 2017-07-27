@@ -1,0 +1,9 @@
+<div class="well lecture-section-well">
+    <h1>{{project.project_name}}</h1>
+</div>
+
+<div class="well lecture-section-well">
+    {{#each project}}
+        <h3>{{@key}}: {{this}}</h3>
+    {{/each}}
+</div>
