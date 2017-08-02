@@ -1,0 +1,17 @@
+<div class="well lecture-section-well">
+    {{#if course}}
+        <form action="/courses/{{course.course}}/update-project-options/{{project.team_id}}" method="post">
+
+            {{#each course.project_options}}
+                <div>
+                    <label>{{this.display_name}}</label><br/>
+                    <input type="text" name="{{this.key_name}}" value="{{!this.value}}"/>
+                </div>
+                <br/>
+            {{/each}}
+            <div>
+                <input type="submit" value="Update Project"/>
+            </div>
+        </form>
+    {{/if}}
+</div>

@@ -1,13 +1,14 @@
 ---
 title: Syllabus
 short_title: syllabus
-next_content_short: schedule
+next_content_short: resources
 previous_content_short: none
 page_type: syllabus
 ---
 
 TODO:
 -Rocket Chat (or alternative)
+--Ryver
 
 Notes:
 -Day 1 fizz-buzz
@@ -18,37 +19,55 @@ Notes:
 
 Sprints/Stages (Each statement is a minimum. All/most sprints can be completed earlier):
 1-Form group, choose project, and organize. Choose the target deployment platform (no multi-OS requirement for desktop apps)
- --Decide on difficulty points
+--Decide on difficulty points
 2-Prototype
- --With video
- --Possible deployment requirement
- --All code contributed ever needs to be reviewed by 2 group members
- ---Can't review your own code
- ---Only for pull requests to develop
+--With video
+--Possible deployment requirement
+--All code contributed ever needs to be reviewed by 2 group members
+---Can't review your own code
+---Only for pull requests to develop
+---Maybe prohibit them from adding collaborators. This will get them used to the work flow in sprint 5
 3-MVP Deployed (can be on dev server [if server required])
- --With video
-4-Prepare for Beta Testing + ??
+--With video
+4-Prepare for Beta Testing + ?? (Alpha testing)
 5-Cross-project Work to implement secondary feature + Beta Testing
- --Must on-board outside help
- --Clone, pull request, code reviews for outside help
- --Might be some arguing here. "I completed the task but they won't accept my PR!"
- --Outside help can be for very small tasks
- --Somehow avoid the trading code problem. (write code for your project, trade it with someone else and they submit it to your project as the help)
- ---How about, you cannot contribute to a group who is helping your group. It takes 3 to tango
- ---Or, each group member must contribute to a different group?
- ---How much do I even care about this? They still have to have some communication. They still have to submit a pull request and go through that process.. I think I still care
- ---Quiz?.. show them 5 snippets of code. Which one did you write for the group you helped?
+--Must on-board outside help
+--Clone, pull request, code reviews for outside help
+--Might be some arguing here. "I completed the task but they won't accept my PR!"
+--Outside help can be for very small tasks
+--Somehow avoid the trading code problem. (write code for your project, trade it with someone else and they submit it to your project as the help)
+---How about, you cannot contribute to a group who is helping your group. It takes 3 to tango
+---Or, each group member must contribute to a different group?
+---How much do I even care about this? They still have to have some communication. They still have to submit a pull request and go through that process.. I think I still care
+---Quiz?.. show them 5 snippets of code. Which one did you write for the group you helped?
 6-Production deployment + Documentation + Beta testing continues
 7-Production testing, bug fixes, and presentation
- --We all look for and report bugs (this could happen earlier including during beta testing)
- --A bug found at this stage is bad news bears
- --Everyone must test other groups deployments. Bounty on bugs (must be verified). Security bugs are very bad. Display bug not so bad
- --People can't get the project to run? Fail!.. or at least close to it. Like minus 2 full letter grades
- --Bugs found are "put on trial" during lecture?
- --Respond quickly to bug report to potentially avoid a grade reduction
- --Find a way to not discourage ambition for this stage. Difficulty points might come into play. It's easy to write a bug free desktop app. More difficult for an online app with authentication
- --Bugs missed by beta testers are not punished as harsh. Revert back to beta release to verify that it's the same bug. Burden of proof is on the group
+--We all look for and report bugs (this could happen earlier including during beta testing)
+--A bug found at this stage is bad news bears
+--Everyone must test other groups deployments. Bounty on bugs (must be verified). Security bugs are very bad. Display bug not so bad
+--People can't get the project to run? Fail!.. or at least close to it. Like minus 2 full letter grades
+--Bugs found are "put on trial" during lecture?
+--Respond quickly to bug report to potentially avoid a grade reduction
+--Find a way to not discourage ambition for this stage. Difficulty points might come into play. It's easy to write a bug free desktop app. More difficult for an online app with authentication
+--Bugs missed by beta testers are not punished as harsh. Revert back to beta release to verify that it's the same bug. Burden of proof is on the group
 
+115/442
+-How to assign students to groups
+—Do we assign them? Free-for-all? No. No one will take the tougher ones
+—Submit preferences lists?
+—More credit for projects with few reviews?
+-Only credit for valid bug reports (don’t reward them just for making one because they’ll all be crap)
+-Use github issues
+-442 creates feedback forms. Suggest google form, but leave it open. I have to have direct access though.. no, I should standardize
+-Cap the time for 115 to get the app running. Is it taking more than 30 minutes? That's 442 fault
+-Require that 442 apps can run on Baldy 19 machines?..
+
+Bug Reporting
+-Distinguish between minor/major bug
+-Security bugs are always major
+-Can also submit feature requests
+-Let 442 know that bad bug reports are part of the job. Even your bosses might not know what they're doing. YOU are the domain expert and you cannot expect others to have any competency in your area. Would you want HR expecting you to know all about HR?
+-Graded on how they handle the bug report whether it's valid or not. Be professional
 
 Grading
 -Mostly Project
@@ -60,6 +79,54 @@ Grading
 --Maybe, but integrated into the project and significantly fewer choices
 --Emphasis on collaboration within the class instead of interacting with anyone ever (which most student did not do)
 --Might cut the career development entirely.. It's a nice to have, but is it worth the logistics?
+
+Grading 2
+-Punishment/Reward based
+-Start at 0
+-4 demerits = Full disajulation
+
+-Demerits:
+--General Policy
+---You should never have to ask why you earned a demerit. No surprises here and everything is spelled out clearly.
+--Anything late/no submission
+--Not completing the project (auto-fail?)
+--Repeat bug reports in late sprint (case-by-case)
+--Being a slacker! Not completing your task for a sprint. Merging or reviewing/approving broken code
+--Not being in a team with >=3 members at the end of sprint 1 (Difficult to do with the default group
+--Not following the branching model, PRs, and code reviews (Checks done at the end of each sprint so they can blast the repo and learn from mistakes)
+--Not using github issues properly
+--Not delivering the requirements for a sprint (MVP, additional feature, contributing to another group, presenting, etc)
+--Unprofessional/unethical behavior (Has to be very bad)
+--Security bugs (Can be auto-fail if it's blatant and in a late sprint with live users)
+--Bugging me too often about gold stars
+--Poor on-boarding for outside help
+--Poor or unusable beta release
+
+-Gold Stars:
+--General Policies
+---If you have to ask if it's worth a gold star, it's probably not.
+---Should [almost] always be related to the project. Possibly 1 point for philosophy stuff
+--Above and beyond throughout any sprint, except sprint 1. These projects can be featured on the projects page
+--Completing a project with high difficulty points
+--Do extra things (Can bring back some of the community point ideas, but they should be related to the project in some way)
+--Knocking a recitation(s) out of the park. Maybe give each TA a fixed amount of gold stars they can give out
+--Great project organization
+--Exceptional individual effort. Like completing a high difficulty task
+--Taking a leadership role in the group? Maybe on case-by-case, but should the group leader get a point by default? Would they fight over this position?
+
+-Should Categories be capped?.. probably not. Enforce that it's ok to specialize
+
+
+4 A
+3 A-
+2 B+
+1 B
+0 B-
+-1 C+
+-2 C
+-3 C-
+-4 F
+
 
 == Academic Integrity
 
@@ -253,7 +320,8 @@ Examples of <b>un</b>acceptable behavior:
 <br/>
 <p>
     <b>Presentation:</b> Near the end of the semester all groups will present their software to the class. The last 2
-    weeks of scheduled lecture time and the final exam time will be used for these presentations. Presentations should be
+    weeks of scheduled lecture time and the final exam time will be used for these presentations. Presentations should
+    be
     appropriate for a technical audience.
 </p>
 <br/>

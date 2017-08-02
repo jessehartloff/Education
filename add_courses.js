@@ -100,13 +100,13 @@ collection.remove({}, function (err, content) {
 						case "options":
 							var course_content = fs.readFileSync(course.directory + "/options/course.json");
 							var course_settings = JSON.parse(course_content);
-							course.course_options  = course_settings;
-							if(course_settings.student_account && course_settings.student_options){
+							course.course_options = course_settings;
+							if (course_settings.student_account && course_settings.student_options) {
 								var student_content = fs.readFileSync(course.directory + "/options/student.json");
 								var student_options = JSON.parse(student_content);
 								course.student_options = student_options;
 							}
-							if(course_settings.has_project){
+							if (course_settings.has_project) {
 								var project_content = fs.readFileSync(course.directory + "/options/project.json");
 								var project_options = JSON.parse(project_content);
 								course.project_options = project_options;
@@ -131,7 +131,7 @@ collection.remove({}, function (err, content) {
 						shut_it_down();
 					}
 				});
-				//console.log(course);
+				//console.log(JSON.stringify(course, null, 4));
 			}
 		}
 	});

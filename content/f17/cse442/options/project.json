@@ -1,7 +1,7 @@
 [
   {
-    "key_name": "group_name",
-    "display_name": "Group Name",
+    "key_name": "team_name",
+    "display_name": "Team Name",
     "is_required": true,
     "default_value": ""
   },

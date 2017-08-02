@@ -6,3 +6,11 @@ exports.ifOdd = function(number, options){
 exports.ifEven = function(number, options){
 	return number%2 === 0 && number !==0 ? options.fn(this) : options.inverse(this);
 };
+
+exports.ifExists = function(object, key, options){
+	return object && object[key] ? options.fn(this) : options.inverse(this);
+};
+
+exports.ifNotExists = function(object, key, options){
+	return object && (object[key] === undefined) ? options.fn(this) : options.inverse(this);
+};

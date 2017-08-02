@@ -7,7 +7,7 @@ var course_collection = db.get('course_content');
 var bcrypt = require('bcryptjs');
 
 
-function enroll_in_course(username, course) {
+exports.enroll = function enroll_in_course(username, course) {
 	course_collection.findOne({'course': course}, {}, function (err, record) {
 		if (err) {
 			console.log(err);
@@ -22,10 +22,12 @@ function enroll_in_course(username, course) {
 					console.log('user not found');
 				} else {
 					console.log(JSON.stringify(user_record, null, 2));
-					user_collection.findOne({
-						'username': username,
-						'courses_enrolled.course_key': course
-					}, function (err, already_enrolled) {
+					var course_string = 'courses_enrolled.' + course + '.course_key';
+					var query = {
+						'username': username
+					};
+					query[course_string] = course;
+					user_collection.findOne(query, function (err, already_enrolled) {
 						if (err) {
 							console.log(err);
 						} else if (already_enrolled) {
@@ -116,6 +118,6 @@ function enroll_in_course(username, course) {
 //	return email.trim().toLowerCase().split('@')[0];
 //}
 
-var username = 'sophie';
+//var username = 'sophie';
 //user_collection.update({'username':username}, {$unset:{'courses_enrolled':"", 'options':""}});
-enroll_in_course(username, 'cse442-f17');
+//exports.enroll(username, 'cse442-f17');

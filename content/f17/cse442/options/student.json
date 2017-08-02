@@ -12,8 +12,8 @@
     "default_value": ""
   },
   {
-    "key_name": "group",
-    "display_name": "Group",
+    "key_name": "team_id",
+    "display_name": "Team ID",
     "is_required": false,
     "default_value": "default"
   }

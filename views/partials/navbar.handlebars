@@ -71,10 +71,14 @@
             </ul>
 
 
-
             <ul class="nav navbar-nav navbar-right">
                 <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
                 {{#if user}}
+                    {{#if course}}
+                        {{#ifNotExists user.courses_enrolled course.course}}
+                            <li><a href="/courses/{{course.course}}/enroll">Enroll</a></li>
+                        {{/ifNotExists}}
+                    {{/if}}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/user/profile">
                             {{user.username}}<span class="caret"></span>

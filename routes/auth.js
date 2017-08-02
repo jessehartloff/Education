@@ -61,7 +61,7 @@ passport.use(new LocalStrategy(local_strategy_function));
 
 // Check if a user is logged in
 app.use(function (req, res, next) {
-	//console.log(req.user);
+	console.log(req.user);
 	if (req.user) {
 		//res.to_template.user = {'username': req.user.username};
 		res.to_template.user = req.user;
