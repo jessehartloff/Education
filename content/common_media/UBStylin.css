@@ -11,6 +11,31 @@ div.hidden {
     width: 0;
 }
 
+div.gold-star{
+    padding: 15px;
+    background-color: #ffff00;
+    color: #dc8600;
+    border: 1px solid #dc8600;
+    border-radius: 4px;
+    margin: 10px;
+}
+div.decent{
+    padding: 15px;
+    background-color: #00ff07;
+    color: #0b4d10;
+    border: 1px solid #0b4d10;
+    border-radius: 4px;
+    margin: 10px;
+}
+div.demerit{
+    padding: 15px;
+    background-color: #ff4949;
+    color: #850900;
+    border: 1px solid #850900;
+    border-radius: 4px;
+    margin: 10px;
+}
+
 /*div.comment_time{*/
 /*font-size: 3px;*/
 /*color: #777777;*/

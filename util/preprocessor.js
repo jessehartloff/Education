@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+
 app.use(function (req, res, next) {
 
 	var collection = req.db.get('course_list');

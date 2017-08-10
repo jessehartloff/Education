@@ -1,5 +1,7 @@
 {
   "student_account": true,
   "student_options": true,
-  "has_project": true
+  "has_project": true,
+  "autolab": false,
+  "question_site": false
 }

@@ -2,10 +2,18 @@ var express = require('express');
 var router = express.Router();
 var users_util = require('../util/users');
 
+// TODO: Office hours
+// TODO: Meeting scheduling
+// TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
+// TODO: Public reviews? At least private messages to the team (email lists? Ryver? Github? my site?)
+// Ambitious: Chat on each project page. Team mates display differently
 
+// TODO: Ratings are hidden until the end of a round (or hidden forever). Reviews can be displayed
 // TODO: Projects page with voting and all that
 // TODO: Students can join groups and edit their group's content
 // TODO: User roles and different views for Student/TA/Instructor (For office hours)
+
+// TODO: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
 
 // TODO: Q&A tied to lecture sections
 
@@ -360,6 +368,30 @@ router.get('/:course/:extra', function (req, res) {
 
 
 function render_content(req, res, type, param) {
+	preprocess_course(req, res, function (course) {
+		var content = {};
+		for (var i in course[type]) {
+			var this_thing = course[type][i];
+			if (this_thing.short_title === param) {
+				content = this_thing;
+				break;
+			}
+		}
+		res.to_template.course = course;
+		res.to_template.content = content;
+		res.render(type, res.to_template);
+	});
+}
+
+
+router.get('/:course/*', function (req, res) {
+	render_content(req, res, 'extra', 'syllabus');
+});
+
+
+function preprocess_course(req, res, next) {
+	req.flash('info', 'Upcoming deadline');
+
 	var db = req.db;
 	var collection = db.get('course_content');
 	collection.findOne({'course': req.params.course}, {}, function (err, record) {
@@ -369,25 +401,9 @@ function render_content(req, res, type, param) {
 		} else if (!record) {
 			// TODO: course not found
 		} else {
-
-			var content = {};
-			for (var i in record[type]) {
-				var this_thing = record[type][i];
-				if (this_thing.short_title === param) {
-					content = this_thing;
-					break;
-				}
-			}
-			res.to_template.course = record;
-			res.to_template.content = content;
-			res.render(type, res.to_template);
+			next(record);
 		}
 	});
 }
-
-
-router.get('/:course/*', function (req, res) {
-	render_content(req, res, 'extra', 'syllabus');
-});
 
 module.exports = router;
