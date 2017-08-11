@@ -6,7 +6,7 @@ var users_util = require('../util/users');
 // TODO: Meeting scheduling
 // TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
 // TODO: Public reviews? At least private messages to the team (email lists? Ryver? Github? my site?)
-// Ambitious: Chat on each project page. Team mates display differently
+// Ambitious: Chat on each project page. Team mates messages display differently
 
 // TODO: Ratings are hidden until the end of a round (or hidden forever). Reviews can be displayed
 // TODO: Projects page with voting and all that
@@ -14,6 +14,8 @@ var users_util = require('../util/users');
 // TODO: User roles and different views for Student/TA/Instructor (For office hours)
 
 // TODO: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
+
+// TODO: Add student videos (advice to future students) to resources
 
 // TODO: Q&A tied to lecture sections
 
