@@ -16,8 +16,9 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 	console.log(req.body);
-	console.log(req.body.payload.repository);
-	console.log(req.body.payload.repository.html_url);
+	console.log(req.headers['X-GitHub-Event']);
+	//console.log(req.body.payload.repository);
+	//console.log(req.body.payload.repository.html_url);
 	res.send('ACK');
 });
 
