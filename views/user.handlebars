@@ -39,11 +39,13 @@
             <h3>{{this.course_name}}</h3><br/>
             <form action="/user/update-course-options/{{this.course_key}}" method="post">
                 {{#each this.options}}
+                    {{#if this.display_name}}
                     <div>
                         <label>{{this.display_name}}</label><br/>
                         <input type="text" name="{{@key}}" value="{{this.value}}"/>
                     </div>
                     <br/>
+                    {{/if}}
                 {{/each}}
                 <div>
                     <input type="submit" value="Update Settings"/>

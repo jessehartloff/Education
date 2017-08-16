@@ -37,26 +37,33 @@
         <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
             <div class="content-area">
                 <div class="messages">
-                    {{#if messages.error}}
-                        <div class="alert alert-danger">
-                            {{#each messages.error}}
+                    {{#if messages.course_info}}
+                        {{#each messages.course_info}}
+                            <div class="alert alert-info">
                                 <b>{{this}}</b><br/>
-                            {{/each}}
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    {{#if messages.error}}
+                        {{#each messages.error}}
+                        <div class="alert alert-danger">
+                                <b>{{this}}</b><br/>
                         </div>
+                        {{/each}}
                     {{/if}}
                     {{#if messages.info}}
+                        {{#each messages.info}}
                         <div class="alert alert-info">
-                            {{#each messages.info}}
                                 <b>{{this}}</b><br/>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     {{/if}}
                     {{#if messages.success}}
+                        {{#each messages.success}}
                         <div class="alert alert-success">
-                            {{#each messages.success}}
                                 <b>{{this}}</b><br/>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     {{/if}}
 
                     {{#if message}}

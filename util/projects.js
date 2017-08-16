@@ -1,40 +1,7 @@
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
-
-//var course_util = require('course');
-
-var project_schema = {
-	'course': '',
-	'team_name': '',
-	'members': [],
-	'project_name': '',
-	'project_description': '',
-	'landing_page_link': '',
-	'repository_link_primary': '',
-	'additional_repository_links': [],
-	'communication_channel': '',
-	'video_submissions': {},
-	'beta_testing': {},
-	'ratings': {}
-};
-
-//-+Group name
-//-+Project name
-//-+Project description
-//-+Group members
-//-+Repo link(s)
-//—+Primary repo link (where the issues are tracked)
-//-[+might just use github?.. or rocket chat] How to communicate (formerly slack channel)
-//-+Video links
-//-+Beta testing stuff
-//-+*Rating and reviews
-//-[Might just be github]Landing page link
-//-How to contribute (Content creation)
-//-TA(s)?
-//	-Documentation?
-//	-Grades (not in database)
-//	-Issues (Could stay in the repo. Maybe mark certain status like unassigned bounty task)
+var users = require('./users');
 
 
 exports.youtube_parser = youtube_parser = function youtube_parser(url) {
@@ -43,34 +10,34 @@ exports.youtube_parser = youtube_parser = function youtube_parser(url) {
 	return (match && match[7].length == 11) ? match[7] : false;
 };
 
+
+function team_name_to_id(team_name) {
+	return team_name.toLowerCase().trim().replace(/\s+/g, '_').replace(/\W/g, '').replace(/_/g, '-');
+}
+
 exports.create_project = create_project = function create_project(project_name, team_name, course_id, founding_member) {
 	// Convert project name to url param (remove all non-safe chars, toLower, dashes for spaces) [check for name conflicts]
 	var projects_collection = db.get('projects');
-	var team_id = team_name.toLowerCase().trim().replace(/\s+/g, '-');
+	var team_id = team_name_to_id(team_name);
 	// TODO: check if ID exists
 	projects_collection.insert({
 		'team_id': team_id,
 		'course': course_id,
 		'team_name': team_name,
-		'members': [founding_member],
+		'founder': founding_member,
+		'member2': '',
+		'member3': '',
+		'member4': '',
+		'member5': '',
+		//'members': [founding_member],
 		'project_name': project_name,
 		'project_description': '',
 		'landing_page_link': '',
 		'repository_link_primary': '',
-		//'additional_repository_links': [],
 		'communication_channel': '',
 		'video_submissions': {},
-		'beta_testing': {},
 		'ratings': {}
 	})
-};
-
-
-// dumbest thing I've ever done
-var router = {
-	'get': function (a, b, c) {
-	}, 'post': function (a, b, c) {
-	}
 };
 
 
@@ -80,118 +47,199 @@ function get_project(req, res, course_id, team_id, next) {
 		'team_id': team_id
 	}, {}, function (err, project) {
 		if (err) {
-			req.flash('error', 'Invalid project ID');
+			req.flash('error', 'Invalid project ID ' + err);
+			console.log(err);
 			res.redirect('/courses/' + course_id + '/projects');
 		} else if (!project) {
 			req.flash('error', 'Invalid project ID');
 			res.redirect('/courses/' + course_id + '/projects');
 		} else {
 			res.to_template.project = project;
-			next(project);
+			if (users.user_enrolled(req) && req.user.courses_enrolled[course_id].options.team_id &&
+				req.user.courses_enrolled[course_id].options.team_id.value == team_id) {
+				res.to_template.user.on_this_team = true;
+				if (project.founder && project.founder === req.user.username) {
+					res.to_template.user.team_founder = true;
+				}
+			}
+			//console.log(JSON.stringify(project, null, 4));
+			next(req, res, project);
+		}
+	});
+}
+
+function get_members(req, res, course_id, this_project, next) {
+	var find_me = {};
+	find_me['courses_enrolled.' + course_id + '.options.team_id.value'] = this_project.team_id;
+	db.get('users').find(find_me, {_id: 0, password: 0}, function (err, members) {
+		if (err) {
+			req.flash('error', 'Error finding team members - ' + err);
+			res.redirect('/courses/' + course_id + '/projects');
+		} else {
+
+			console.log('first');
+			console.log(members);
+			var members_simple = [];
+			for (var i in members) {
+				members_simple.push(members[i].username);
+				members[i].options = members[i].courses_enrolled[course_id].options;
+			}
+
+			// I hate this..
+			var team_members = [];
+			if(this_project.founder){
+				team_members.push(this_project.founder);
+			}
+			if(this_project.member2){
+				team_members.push(this_project.member2);
+			}
+			if(this_project.member3){
+				team_members.push(this_project.member3);
+			}
+			if(this_project.member4){
+				team_members.push(this_project.member4);
+			}
+			if(this_project.member5){
+				team_members.push(this_project.member5);
+			}
+
+			if (users.user_enrolled(req)) {
+				for (var i in members_simple) {
+					if (team_members.indexOf(members_simple[i]) == -1) {
+						req.flash('error', members_simple[i] + ' is not listed properly! They must find a new team or be added to this one')
+					}
+				}
+
+				for (var i in team_members) {
+					if (members_simple.indexOf(team_members[i]) == -1) {
+						req.flash('error', team_members[i] + ' is not listed properly! They are not a member of this team')
+					}
+				}
+			}
+			console.log(members_simple);
+			console.log(team_members);
+
+			res.to_template.members = members;
+			next();
 		}
 	});
 }
 
 exports.project_page = function project_page(req, res, course) {
-	get_project(req, res, course.course, req.params.project, function (this_project) {
-		res.render('projects/single_project', res.to_template);
+	get_project(req, res, course.course, req.params.project, function (req, res, this_project) {
+		get_members(req, res, course.course, this_project, function () {
+			res.render('projects/single_project', res.to_template);
+		});
 	});
 };
 
 
-exports.update_project = function update_project(req, res, course) {
-	get_project(req, res, course.course, req.params.project, function (this_project) {
-		// TODO: populate text fields in view with current settings (currently getting settings list from course)
-		res.render('projects/project_options', res.to_template);
+exports.update_project_get = function update_project_get(req, res, course) {
+	get_project(req, res, course.course, req.params.project, function (req, res, this_project) {
+		if (res.to_template.user.team_founder) {
+			res.render('projects/edit_project', res.to_template);
+		} else {
+			req.flash('error', 'Only the team founder can edit the project');
+			res.render('projects/single_project', res.to_template);
+		}
 	});
 };
 
-router.post('/:course/update-project-options/:project', function (req, res) {
-	// TODO
-});
+exports.update_project_post = function update_project_post(req, res, course) {
+	get_project(req, res, course.course, req.params.project, function (req, res, this_project) {
+		if (res.to_template.user.team_founder) {
 
-//router.get('/:course/update-project-options/:project', function (req, res) {
-//	var db = req.db;
-//	var collection = db.get('course_content');
-//	var course = req.params.course;
-//	collection.findOne({'course': course}, {}, function (err, record) {
-//		if (err) {
-//			console.log(err);
-//			res.render('error');
-//		} else if (!record) {
-//			console.log('course not found');
-//		} else {
-//			res.to_template.course = record;
-//			db.get('projects').findOne({
-//				'course': req.params.course,
-//				'team_id': req.params.project
-//			}, {}, function (err, this_project) {
-//				if (err) {
-//					//
-//				} else if (!this_project) {
-//					req.flash('error', 'Invalid project ID');
-//					res.redirect('/courses/' + req.params.course + '/projects');
-//				} else {
-//					res.to_template.project = this_project;
-//					res.render('projects/project_options', res.to_template);
-//				}
-//			});
-//		}
-//	});
-//});
+			//console.log(req.body.team_name);
+			//console.log(req.body.project_name);
+			//console.log(req.body.project_description);
+			//console.log(req.body.repository_link_primary);
+			//console.log(req.body.communication_channel);
+			//console.log(req.body.landing_page_link);
+			//console.log(req.body.member2);
+			//console.log(req.body.member3);
+			//console.log(req.body.member4);
+			//console.log(req.body.member5);
 
+
+			// Updating members does not remove them from their current team. Students need to be responsible..
+			var new_values = {
+				'team_name': req.body.team_name,
+				'project_name': req.body.project_name,
+				'project_description': req.body.project_description,
+				'project_description_short': truncate_description(req.body.project_description),
+				'repository_link_primary': req.body.repository_link_primary,
+				'communication_channel': req.body.communication_channel,
+				'landing_page_link': req.body.landing_page_link,
+				'member2': req.body.member2,
+				'member3': req.body.member3,
+				'member4': req.body.member4,
+				'member5': req.body.member5
+			};
+
+
+			var to_set = {$set: new_values};
+
+			// Currently does not need acceptance from members
+			set_user_team(course.course, this_project.team_id, req.body.member2);
+			set_user_team(course.course, this_project.team_id, req.body.member3);
+			set_user_team(course.course, this_project.team_id, req.body.member4);
+			set_user_team(course.course, this_project.team_id, req.body.member5);
+
+
+			db.get('projects').update({
+				'course': course.course,
+				'team_id': this_project.team_id
+			}, to_set, function (err) {
+				if (err) {
+					req.flash('error', 'Error updating project');
+				} else {
+					req.flash('success', 'Updated ' + this_project.team_name);
+				}
+				res.redirect('/courses/' + course.course + '/project/' + this_project.team_id);
+			});
+
+		} else {
+			req.flash('error', 'Only the team founder can edit the project');
+			res.redirect('/courses/' + course.course + '/project/' + this_project.team_id);
+		}
+	});
+
+};
+
+function truncate_description(description){
+	var description_cutoff = 200;
+	if(description.length > description_cutoff){
+		return description.substring(0, description_cutoff) + '...';
+	}else{
+		return description;
+	}
+}
 
 function rate_project(project, rater, rating) {
+	// TODO
 	// Check if rater has rated this project before
 	// add rating if they haven't
 }
 
 exports.projects_page = function projects_page(req, res, course) {
-	//var db = req.db;
-	//var collection = db.get('course_content');
-	//var course = req.params.course;
-	//collection.findOne({'course': course}, {}, function (err, record) {
-	//	if (err) {
-	//		console.log(err);
-	//		res.render('error');
-	//	} else if (!record) {
-	//		console.log('course not found');
-	//	} else
 	if (course.project && course.project === 'old') {
-		//res.to_template.course = course;
 		res.to_template.projects = course.projects;
 		res.render('projects/projects_archived', res.to_template);
 	} else {
-		if (res.to_template.user && res.to_template.user.courses_enrolled[course]) {
-			res.to_template.user.course_options = res.to_template.user.courses_enrolled[course].options;
+		if (users.user_enrolled(req)) {
+			res.to_template.user.course_options = res.to_template.user.courses_enrolled[course.course].options;
 		}
-		//res.to_template.course = course;
 		var projects_collection = db.get('projects');
 		projects_collection.find({'course': course.course}, {sort: {team_id: 1}}, function (err, all_projects) {
 			res.to_template.projects = all_projects;
-			console.log(all_projects);
 			res.render('projects/projects', res.to_template);
 		});
 	}
-	//});
 };
 
-//router.get('/:course/create-project', function (req, res) {
-//	var db = req.db;
-//	var collection = db.get('course_content');
-//	var course = req.params.course;
-//	collection.findOne({'course': course}, {}, function (err, record) {
-//		if (err) {
-//			console.log(err);
-//			res.render('error');
-//		} else if (!record) {
-//			console.log('course not found');
-//		} else {
-//			res.to_template.course = record;
-//
 
 exports.get_create_project = function get_create_project(req, res, course) {
-	if (res.to_template.user && res.to_template.user.courses_enrolled[course.course]) {
+	if (users.user_enrolled(req)) {
 		res.render('projects/create_project', res.to_template);
 	} else {
 		req.flash('error', 'You are not enrolled in this course');
@@ -200,29 +248,12 @@ exports.get_create_project = function get_create_project(req, res, course) {
 };
 
 exports.post_create_project = function post_create_project(req, res, course) {
-	//var db = req.db;
-	//var collection = db.get('course_content');
-	//var course = req.params.course;
-	//	collection.findOne({'course': course}, {}, function (err, record) {
-	//		if (err) {
-	//			console.log(err);
-	//			res.render('error');
-	//		} else if (!record) {
-	//			console.log('course not found');
-	//		} else {
-	//			res.to_template.course = record;
-
-
 	if (req.body.project_name && req.body.team_name) {
-		if (res.to_template.user && res.to_template.user.courses_enrolled[course.course]) {
+		if (users.user_enrolled(req)) {
 			create_project(req.body.project_name, req.body.team_name, course.course, res.to_template.user.username);
 
-			var team_id = req.body.team_name.toLowerCase().trim().replace(/\s+/g, '-');
-			var set_string = 'courses_enrolled.' + course.course + '.options.team_id.value';
-			var to_set = {$set: {}};
-			to_set.$set[set_string] = team_id;
-
-			db.get('users').update({'username': req.user.username}, to_set);
+			var team_id = team_name_to_id(req.body.team_name);
+			set_user_team(course.course, team_id, req.user.username);
 
 			req.flash('success', req.body.project_name + ' by ' + req.body.team_name + ' has been created');
 			res.redirect('/courses/' + course.course + '/projects');
@@ -231,52 +262,14 @@ exports.post_create_project = function post_create_project(req, res, course) {
 			res.redirect('/courses/' + course.course + '/projects');
 		}
 	}
-	//	});
-	//}
-
 };
 
 
 exports.submit_video = function submit_video(req, res, course) {
-	//var db = req.db;
-	//var collection = db.get('course_content');
-	//var course = req.params.course;
-	//collection.findOne({'course': course}, {}, function (err, record) {
-	//	if (err) {
-	//		console.log(err);
-	//		res.render('error finding course');
-	//	} else if (!record) {
-	//		console.log('course not found');
-	//	} else {
-
 	if (req.body.link) {
-		//res.to_template.course = record;
-		if (res.to_template.user && res.to_template.user.courses_enrolled[course.course]) {
-
+		if (users.user_enrolled(req)) {
 			var user_team = res.to_template.user.courses_enrolled[course.course].options.team_id.value;
-
-			console.log('hey');
-			console.log(user_team);
-			//console.log(user_team);
-			//var projects_collection = db.get('projects');
-			//projects_collection.findOne({
-			//	'course': course,
-			//	'team_id': user_team
-			//}, function (err, this_project) {
-			//	if (err) {
-			//		console.log('error finding project');
-			//		console.log(err);
-			//		//
-			//	} else if (!this_project) {
-			//		console.log('no project');
-			//		console.log(JSON.stringify(res.to_template.user, null, 4));
-			//		//
-			//	} else {
-			//		console.log(this_project);
-			get_project(req, res, course.course, user_team, function (this_project) {
-				// TODO: populate text fields in view with current settings (currently getting settings list from course)
-				//	res.render('projects/project_options', res.to_template);
-				//});
+			get_project(req, res, course.course, user_team, function (req, res, this_project) {
 				var set_string = 'video_submissions.' + req.params.submission;
 				var to_set = {$set: {}};
 				to_set.$set[set_string] = {
@@ -284,15 +277,15 @@ exports.submit_video = function submit_video(req, res, course) {
 					'occasion': req.params.submission
 				};
 
-				//.
-				//	link = youtube_parser(req.body.link);
-				//	to_set.$set[set_string].occasion = req.params.submission;
-
 				db.get('projects').update({
 					'course': course.course,
 					'team_id': user_team
 				}, to_set, function (err) {
-					req.flash('success', 'Submitted ' + req.body.link + ' for ' + this_project.team_name);
+					if (err) {
+						req.flash('error', 'Error uploading video');
+					} else {
+						req.flash('success', 'Submitted ' + req.body.link + ' for ' + this_project.team_name);
+					}
 					res.redirect('/courses/' + course.course + '/project/' + user_team);
 				});
 			});
@@ -304,39 +297,15 @@ exports.submit_video = function submit_video(req, res, course) {
 		req.flash('error', 'No link found');
 		res.redirect('/courses/' + course.course + '/syllabus');
 	}
-
-//		}
-//		);
-//}
 };
 
 
-exports.join_team = function join_team(req, res, course) {
-	// TODO: Remove user from previous group (It's redundant for a project to track members. Maybe just remove this?)
-	//req.db.get('course_content').findOne({'course': req.params.course}, {}, function (err, record) {
-	//	if (err) {
-	//		console.log(err);
-	//		res.render('error');
-	//	} else if (!record) {
-	//		// TODO: course not found
-	//	} else {
-	//		res.to_template.course = record;
+function set_user_team(course_id, team_id, user_id) {
+	//if (res.to_template.user && res.to_template.user.courses_enrolled[req.params.course]) {
+	var set_string = 'courses_enrolled.' + course_id + '.options.team_id.value';
+	var to_set = {$set: {}};
+	to_set.$set[set_string] = team_id;
 
-	if (res.to_template.user && res.to_template.user.courses_enrolled[req.params.course]) {
-		var set_string = 'courses_enrolled.' + req.params.course + '.options.team_id.value';
-		var to_set = {$set: {}};
-		to_set.$set[set_string] = req.params.team_id;
-
-		req.db.get('users').update({'username': res.to_template.user.username}, to_set);
-		req.flash('success', 'You joined ' + req.params.team_id); // TODO: make sure this is true
-	} else {
-		req.flash('error', 'Not enrolled in this course');
-	}
-	res.redirect('/courses/' + req.params.course + '/project/' + req.params.team_id);
-
+	db.get('users').update({'username': user_id}, to_set);
 	//}
-	//});
-};
-// end project routes
-
-
+}

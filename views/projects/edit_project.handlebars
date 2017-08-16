@@ -1,0 +1,71 @@
+<div class="well lecture-section-well">
+    {{#if course}}
+        <form action="/courses/{{course.course}}/update-project/{{project.team_id}}" method="post">
+
+            {{!#each course.project_options}}
+                <!--<div>-->
+                    <!--<label>{{!this.display_name}}</label><br/>-->
+                    <!--<input type="text" name="{{!this.key_name}}" value="{{!this.value}}"/>-->
+                <!--</div>-->
+                <!--<br/>-->
+            {{!/each}}
+
+            <div>
+                <label>Team Name</label><br/>
+                <input type="text" name="team_name" value="{{project.team_name}}"/>
+            </div>
+            <br/>
+
+            <div>
+                <label>Team Members (ubit)</label><br/>
+                <input type="text" name="na" value="{{project.founder}}" disabled/>
+                <br/>
+                <input type="text" name="member2" value="{{project.member2}}"/>
+                <br/>
+                <input type="text" name="member3" value="{{project.member3}}"/>
+                <br/>
+                <input type="text" name="member4" value="{{project.member4}}"/>
+                <br/>
+                <input type="text" name="member5" value="{{project.member5}}"/>
+            </div>
+            <br/>
+            <div>
+                <label>Project Name</label><br/>
+                <input type="text" name="project_name" value="{{project.project_name}}"/>
+            </div>
+            <br/>
+
+            <div>
+                <label>Project Description</label><br/>
+                <textarea name="project_description">{{project.project_description}}</textarea>
+            </div>
+            <br/>
+
+            <div>
+                <label>Repository Link</label><br/>
+                <input type="text" name="repository_link_primary" value="{{project.repository_link_primary}}"/>
+            </div>
+            <br/>
+
+            <div>
+                <label>Ryver Forum (ex: https://cseub.ryver.com/index.html#forums/1147222)</label><br/>
+                <input type="text" name="communication_channel" value="{{project.communication_channel}}"/>
+            </div>
+            <br/>
+
+            <div>
+                <label>Landing Page Link</label><br/>
+                <input type="text" name="landing_page_link" value="{{project.landing_page_link}}"/>
+            </div>
+            <br/>
+
+
+
+
+
+            <div>
+                <input type="submit" value="Update Project"/>
+            </div>
+        </form>
+    {{/if}}
+</div>

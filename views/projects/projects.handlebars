@@ -46,42 +46,12 @@
                     {{/each}}
 
 
-                    <!--{{#if this.has_extras}}-->
-                        <!--<hr/>-->
-                        <!--{{#each this.extras as |extra|}}-->
-                            <!--<h4><a href="{{ extra.link }}" style="color:#bb0000;">-->
-                                <!--<span class="glyphicon glyphicon-star" style="color:#bb0000;"></span> {{ extra.type }}-->
-                            <!--</a></h4>-->
-                        <!--{{/each}}-->
-                        <!--<hr/>-->
-                    <!--{{/if}}-->
-
-                    <p>{{ this.description }}</p>
-
-
-                    <!--<p>-->
-                        <!--Devs:<br/>-->
-                        <!--{{#each this.developers as |member|}}-->
-                            <!--<a href="http://www.acsu.buffalo.edu/~{{ member }}"><span-->
-                                    <!--class="label label-primary">{{ member }}</span></a>-->
-                        <!--{{/each}}&nbsp;-->
-                    <!--</p>-->
-                    <!--<p>-->
-                        <!--TA:<br/>-->
-
-                        <!--<a href="http://www.acsu.buffalo.edu/~{{ this.ta }}"><span-->
-                                <!--class="label label-info">{{ this.ta }}</span></a> &nbsp;-->
-                    <!--</p>-->
-
-                    <!--{{#unless this.private}}-->
-                        <!--<hr/>-->
-                        <!--{{#each this.repositories as |repo|}}-->
-                            <!--<h4><a href="{{ repo }}">Source{{@index}}</a></h4>-->
-                        <!--{{/each}}-->
-                    <!--{{/unless}}-->
-
-
-
+                    <p>{{ this.project_description_short }}</p>
+                    <p>
+                        <a href="/courses/{{../course.course}}/project/{{this.team_id}}">
+                            more
+                        </a>
+                    </p>
                 </div>
             </div>
     {{/each}}
