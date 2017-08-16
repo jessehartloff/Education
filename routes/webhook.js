@@ -11,7 +11,12 @@ var api_util = require('../util/api');
 
 router.get('/', function (req, res) {
 	console.log(req.body);
-	res.end('ACK');
+	res.send('ACK');
+});
+
+router.post('/', function (req, res) {
+	console.log(req.body);
+	res.send('ACK');
 });
 
 

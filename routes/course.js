@@ -18,6 +18,8 @@ var api_util = require('../util/api');
 
 // TODO: Web hook!
 
+// TODO: Bugfix. No enroll button
+
 // TODO: Office hours App
 // TODO: Meeting scheduling
 // TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
