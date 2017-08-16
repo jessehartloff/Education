@@ -65,19 +65,21 @@
     </p>
 
 
-    <h4>Issues</h4>
-    {{#each project.issues}}
-        {{this.title}}
-        {{#if this.open}}OPEN{{else}}CLOSED{{/if}}
-        {{#if this.help_wanted}}HELP US!{{else}}WE GOT THIS!{{/if}}
-    {{/each}}
-
     <h4>Release</h4>
-    {{#each project.releases}}
-        {{this.link}}
-        {{this.tag_name}}
-        {{this.name}}
-    {{/each}}
+
+    {{#if project.releases}}
+        {{#each project.releases}}
+            {{this.link}}
+            {{this.tag_name}}
+            {{this.name}}
+
+        {{/each}}
+
+    {{else}}
+        <p>
+            No releases.
+        </p>
+    {{/if}}
 
     {{#each project.video_submissions as |video|}}
         {{#if @first}}
@@ -96,11 +98,20 @@
         {{/if}}
     {{/each}}
 
-    {{#each members}}
-        {{this.preferred_name}}
-        {{this.home_page}}
-        {{this.github_username}}
-    {{/each}}
+
+    <h4>Issues</h4>
+    {{#if project.issues}}
+        {{#each project.issues}}
+            {{this.title}}
+            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}
+            {{#if this.help_wanted}}HELP US!{{else}}WE GOT THIS!{{/if}}
+        {{/each}}
+    {{else}}
+        <p>
+            No issues found. Create issues and verify that the course webhook is setup properly.
+        </p>
+    {{/if}}
+
 </div>
 
 

@@ -3,9 +3,11 @@ var monk = require('monk');
 var db = monk('localhost:27017/education');
 var users = require('./users');
 
+function team_formation_checks(){
+
+}
 
 function generate_messages(req, res) {
-
 
 	if (users.user_enrolled(req)) {
 		if (req.params.course === 'cse442-f17') {

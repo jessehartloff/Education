@@ -18,6 +18,8 @@ var api_util = require('../util/api');
 
 // TODO: Web hook!
 
+// TODO: Show videos with corresponding release on single project page
+
 // TODO: Bugfix. No enroll button
 
 // TODO: Office hours App
