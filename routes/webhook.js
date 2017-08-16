@@ -14,3 +14,5 @@ router.get('/', function (req, res) {
 	res.end('ACK');
 });
 
+
+module.exports = router;
