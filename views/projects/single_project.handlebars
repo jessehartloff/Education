@@ -16,9 +16,6 @@
 
 
     <h3>
-
-
-
         {{#if project.landing_page_link}}
             <a href="{{project.landing_page_link}}">
                 {{project.project_name}}
@@ -44,7 +41,7 @@
         <p>
             {{#if this.options.github_username.value}}
                 &nbsp;<a href="https://github.com/{{this.options.github_username.value}}"><img style="max-height:16px"
-                    src="/static/GitHub-Mark-32px.png"/></a>
+                                                                                               src="/static/GitHub-Mark-32px.png"/></a>
             {{/if}}
             {{#if this.options.home_page.value}}
             <a href="{{this.options.home_page.value}}">
@@ -68,6 +65,19 @@
     </p>
 
 
+    <h4>Issues</h4>
+    {{#each project.issues}}
+        {{this.title}}
+        {{#if this.open}}OPEN{{else}}CLOSED{{/if}}
+        {{#if this.help_wanted}}HELP US!{{else}}WE GOT THIS!{{/if}}
+    {{/each}}
+
+    <h4>Release</h4>
+    {{#each project.releases}}
+        {{this.link}}
+        {{this.tag_name}}
+        {{this.name}}
+    {{/each}}
 
     {{#each project.video_submissions as |video|}}
         {{#if @first}}

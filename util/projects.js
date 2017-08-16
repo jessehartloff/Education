@@ -309,3 +309,5 @@ function set_user_team(course_id, team_id, user_id) {
 	db.get('users').update({'username': user_id}, to_set);
 	//}
 }
+
+
