@@ -5,24 +5,10 @@ var course_util = require('../util/course');
 var projects_util = require('../util/projects');
 var api_util = require('../util/api');
 
-// TODO: !! Grading Scheme !!
-//  Make all requirements for a sprint clear
-//  Group:
-//   +1 Clearly meets the spirit of all requirements with high quality work (Difficult to achieve)
-//    0 Technically meets all requirements
-//   -1 Did not meet all requirements for the submission. Missing 1 is the same as missing all
-//  Individual:
-//   +1 ?? Above and beyond the call of duty? what does this mean?
-//    0 Fulfilled all tasks and followed processes properly
-//   -1 Did not complete assigned work or did not properly follow processes
-
-// TODO: Are they presenting if they meet the practical objective? How does this work logistically
 
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
-// TODO: Web hook!
-
-// TODO: Show videos with corresponding release on single project page
+// TODO: Show videos with corresponding release on single project page. Finish formatting the single project page
 
 // TODO: Bugfix. No enroll button
 
