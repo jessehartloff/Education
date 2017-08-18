@@ -7,9 +7,6 @@ var router = express.Router();
 
 var request = require('request');
 
-// TODO: Update project data on repo events. Confirm on their project page when the first ping is received
-
-
 router.post('/', function (req, res) {
 	console.log(req.body);
 	console.log(req.headers);
