@@ -16,6 +16,10 @@ var api_util = require('../util/api');
 //    0 Fulfilled all tasks and followed processes properly
 //   -1 Did not complete assigned work or did not properly follow processes
 
+// TODO: Are they presenting if they meet the practical objective? How does this work logistically
+
+// TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
+
 // TODO: Web hook!
 
 // TODO: Show videos with corresponding release on single project page

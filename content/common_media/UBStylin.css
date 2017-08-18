@@ -52,6 +52,10 @@ div.demerit{
     width: auto;
 }
 
+.table-padded {
+    width: 90%;
+}
+
 iframe.primary {
     height: 100%;
     width: 100%;
