@@ -12,5 +12,5 @@ exports.ifExists = function(object, key, options){
 };
 
 exports.ifNotExists = function(object, key, options){
-	return object && (object[key] === undefined) ? options.fn(this) : options.inverse(this);
+	return !object || !object[key] ? options.fn(this) : options.inverse(this);
 };
