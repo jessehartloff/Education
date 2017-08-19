@@ -51,6 +51,7 @@ router.post('/', function (req, res) {
 			});
 
 			request(clean_url(req.body.repository.releases_url), function(error, response, body){
+				console.log(body);
 				var json_releases = JSON.parse(body);
 				var releases = [];
 				for(var i in json_releases){
