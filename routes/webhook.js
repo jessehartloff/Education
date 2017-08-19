@@ -51,7 +51,6 @@ router.post('/', function (req, res) {
 				var to_set = {$set: {'issues': issues}};
 				req.db.get('projects').update({'repository_link_primary': repo_url}, to_set);
 
-				res.send('ACK');
 			});
 
 			request({url:clean_url(req.body.repository.releases_url),headers: {'User-Agent': 'cse442'}}, function(error, response, body){
@@ -70,8 +69,8 @@ router.post('/', function (req, res) {
 				var to_set = {$set: {'releases': releases}};
 				req.db.get('projects').update({'repository_link_primary': repo_url}, to_set);
 
-				res.send('ACK');
 			});
+			res.send('ACK');
 		}
 	});
 
