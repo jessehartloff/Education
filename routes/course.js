@@ -5,6 +5,8 @@ var course_util = require('../util/course');
 var projects_util = require('../util/projects');
 var api_util = require('../util/api');
 
+// Feedback
+// "The prototype must run, but doesn't have to be functional" Need to be more clear
 
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
@@ -23,8 +25,6 @@ var api_util = require('../util/api');
 // ~TODO: User roles and different views for Student/TA/Instructor (For office hours)
 
 // TODO: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
-
-// TODO: Add student videos (advice to future students) to resources
 
 // ~TODO: Q&A tied to lecture sections
 

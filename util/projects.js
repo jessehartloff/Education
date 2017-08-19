@@ -242,7 +242,7 @@ exports.get_create_project = function get_create_project(req, res, course) {
 	if (users.user_enrolled(req)) {
 		res.render('projects/create_project', res.to_template);
 	} else {
-		req.flash('error', 'You are not enrolled in this course');
+		req.flash('error', 'You are not enrolled in this course. Login and click the enroll button in the upper right corner of the site to enroll');
 		res.redirect('/courses/' + course.course + '/projects');
 	}
 };
@@ -258,7 +258,7 @@ exports.post_create_project = function post_create_project(req, res, course) {
 			req.flash('success', req.body.project_name + ' by ' + req.body.team_name + ' has been created');
 			res.redirect('/courses/' + course.course + '/projects');
 		} else {
-			req.flash('error', 'You are not enrolled in this course');
+			req.flash('error', 'You are not enrolled in this course. Login and click the enroll button in the upper right corner of the site to enroll');
 			res.redirect('/courses/' + course.course + '/projects');
 		}
 	}
@@ -290,7 +290,7 @@ exports.submit_video = function submit_video(req, res, course) {
 				});
 			});
 		} else {
-			req.flash('error', 'You are not enrolled in this course');
+			req.flash('error', 'You are not enrolled in this course. Login and click the enroll button in the upper right corner of the site to enroll');
 			res.redirect('/courses/' + course.course + '/syllabus');
 		}
 	} else {
