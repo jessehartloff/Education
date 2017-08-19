@@ -19,12 +19,14 @@ router.post('/', function (req, res) {
 	}, {}, function (err, project) {
 		if (err) {
 			console.log(err);
+			res.send('ACK');
 		} else if (!project) {
 			console.log('Project not found: ' + repo_url);
+			res.send('ACK');
 		} else {
 
 			request({url:clean_url(req.body.repository.issues_url),headers: {'User-Agent': 'cse442'}}, function(error, response, body){
-				console.log(body);
+				//console.log(body);
 				var json_issues = JSON.parse(body);
 				var issues = [];
 				for(var i in json_issues){
@@ -48,10 +50,12 @@ router.post('/', function (req, res) {
 
 				var to_set = {$set: {'issues': issues}};
 				req.db.get('projects').update({'repository_link_primary': repo_url}, to_set);
+
+				res.send('ACK');
 			});
 
 			request({url:clean_url(req.body.repository.releases_url),headers: {'User-Agent': 'cse442'}}, function(error, response, body){
-				console.log(body);
+				//console.log(body);
 				var json_releases = JSON.parse(body);
 				var releases = [];
 				for(var i in json_releases){
@@ -65,11 +69,12 @@ router.post('/', function (req, res) {
 
 				var to_set = {$set: {'releases': releases}};
 				req.db.get('projects').update({'repository_link_primary': repo_url}, to_set);
+
+				res.send('ACK');
 			});
 		}
 	});
 
-	res.send('ACK');
 });
 
 
