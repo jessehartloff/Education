@@ -23,7 +23,7 @@ router.post('/', function (req, res) {
 			console.log('Project not found: ' + repo_url);
 		} else {
 
-			request(clean_url(req.body.repository.issues_url), function(error, response, body){
+			request({url:clean_url(req.body.repository.issues_url),headers: {'User-Agent': 'cse442'}}, function(error, response, body){
 				console.log(body);
 				var json_issues = JSON.parse(body);
 				var issues = [];
@@ -50,7 +50,7 @@ router.post('/', function (req, res) {
 				req.db.get('projects').update({'repository_link_primary': repo_url}, to_set);
 			});
 
-			request(clean_url(req.body.repository.releases_url), function(error, response, body){
+			request({url:clean_url(req.body.repository.releases_url),headers: {'User-Agent': 'cse442'}}, function(error, response, body){
 				console.log(body);
 				var json_releases = JSON.parse(body);
 				var releases = [];
