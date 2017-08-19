@@ -24,6 +24,7 @@ router.post('/', function (req, res) {
 		} else {
 
 			request(clean_url(req.body.repository.issues_url), function(error, response, body){
+				console.log(body);
 				var json_issues = JSON.parse(body);
 				var issues = [];
 				for(var i in json_issues){
