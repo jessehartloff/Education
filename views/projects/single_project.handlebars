@@ -102,8 +102,8 @@
     <h4>Issues</h4>
     {{#if project.issues}}
         {{#each project.issues}}
-
-            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}<strong>{{this.title}}</strong><br/>
+            <strong>{{this.title}}</strong><br/>
+            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}<br/>
             {{#if this.assigned_to}}
                 Assigned: {{this.assigned_to}}<br/>
             {{/if}}
