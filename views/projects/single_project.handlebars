@@ -99,7 +99,7 @@
     <h4>Issues</h4>
     {{#if project.issues}}
         {{#each project.issues}}
-            <strong>{{this.title}}</strong><br/>
+            <a href="{{this.link}}">{{this.title}}</a><br/>
             {{#if this.open}}OPEN{{else}}CLOSED{{/if}}<br/>
             {{#if this.assigned_to}}
                 Assigned: {{this.assigned_to}}<br/>
