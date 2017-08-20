@@ -102,9 +102,14 @@
     <h4>Issues</h4>
     {{#if project.issues}}
         {{#each project.issues}}
-            {{this.title}}
-            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}
-            {{#if this.help_wanted}}HELP US!{{else}}WE GOT THIS!{{/if}}
+
+            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}<strong>{{this.title}}</strong><br/>
+            {{#if this.assigned_to}}
+                Assigned: {{this.assigned_to}}<br/>
+            {{/if}}
+            {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
+                                          style="color:gold"></span> Help Wanted{{/if}}
+            <br/><br/>
         {{/each}}
     {{else}}
         <p>
