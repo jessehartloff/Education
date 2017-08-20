@@ -69,10 +69,7 @@
 
     {{#if project.releases}}
         {{#each project.releases}}
-            {{this.link}}
-            {{this.tag_name}}
-            {{this.name}}
-
+            <a href="{{this.link}}">{{this.tag_name}}</a> - {{this.name}}
         {{/each}}
 
     {{else}}
@@ -109,7 +106,7 @@
             {{/if}}
             {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
                                           style="color:gold"></span> Help Wanted{{/if}}
-            <br/><br/>
+            <br/>
         {{/each}}
     {{else}}
         <p>
