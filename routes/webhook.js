@@ -35,7 +35,9 @@ router.post('/', function (req, res) {
 					issue['link'] = this_issue['html_url'];
 					issue['title'] = this_issue['title'];
 					issue['open'] = this_issue['state'] === 'open';
-					issue['assigned_to'] = this_issue['assignee']['login'];
+					if(this_issue['assignee']) {
+						issue['assigned_to'] = this_issue['assignee']['login'];
+					}
 					issue['labels'] = [];
 					issue['help_wanted'] = false;
 					for(var j in this_issue['labels']){
