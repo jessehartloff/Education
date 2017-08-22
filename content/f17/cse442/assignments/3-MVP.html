@@ -14,34 +14,70 @@ due_date: Week 6
 
 == Minimum Viable Product (MVP)
 
+<div class="requirement alert alert-success">
+    <b>Practical Objective</b>: The MVP is bug-free and intuitively delivers the MVP functionality to a non-technical
+    user.
+    <hr/>
+    <b>Verify</b>: After following the readme instructions (see below), if the software is running it will be tested for
+    this objective. The running software then must be intuitive to use for a non-technical user. Such a user must be
+    able to use the software for its intended MVP purpose without any instruction or documentation outside of the
+    software itself (intuitive to use). Then, the course staff will search for bugs in the software and try to break
+    this release. If any bugs are found (excluding extremely trivial or obscure bugs) then this objective has not been met.
+</div>
+
+
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Develop functional software that is ready for use.
+    <hr/>
+    <b>Verify</b>: The course staff will verify that your software delivers the MVP functionality stated in the team
+    contract.
+</div>
+
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Create a release from the develop branch of your MVP on GitHub as "v0.2.0"
+    <hr/>
+    <b>Verify</b>: This release will appear on your project page
+</div>
+
 <p>
-    <em>
-        Goal: Develop functional software that is ready for use.
-    </em>
+    For this submission you implement the MVP functionality for your project. At this point the project does not have to
+    be aesthetically pleasing, but it MUST be functional and usable. A user must be able to use your software for the
+    purpose
+    stated in the design document. No add-on features are required.
 </p>
 
 <p>
-    Nothing has to be polished in the MVP, but it MUST work. A user must be able to use your software for the purpose
-    stated in the design document. No add-on features are required. The interface doesn't have to be clean, but again it
-    needs to be functional.
-</p>
-
-<p>
-    To finalize your MVP it must be merged into your master branch and be tagged as release "v0.2.0" on GitHub.
+    To finalize your MVP it must be merged into your develop branch and be tagged as release "v0.2.0" on GitHub.
 </p>
 
 == Readme
 
+<div class="requirement alert alert-danger">
+    <b>Requirement</b>: Write a readme for your project.
+    <hr/>
+    <b>Verify</b>: The course staff will follow the readme <b>exactly</b> and check if your software runs after the
+    instructions have been followed.
+</div>
+
 <p>
-    Add a readme to your project describing how to install your software from source. You can assume these
-    readers have coding experience. You should include any relevant
-    instructions such as installing dependencies and how compile/run the code. Do not skip any details needed for a
-    programmer to get from cloning your repo to running your software. Once it's running you can assume the user can
-    follow your video to learn to how to use the software so usage instructions are not necessary.
+    Write a readme for your project describing how to run your software from source. You can assume your
+    readers have technical experience. You should include any relevant
+    instructions such as installing dependencies, how compile/run the code, and any platform on which the software and
+    readme will or will
+    not work (ex. Don't assume Windows users can run apt-get. However, it's ok to specify that the instructions are only
+    for *nix systems). Do not skip any details needed for a
+    programmer to get from cloning your repo to running your software
+    <!--(don't forget the basics like installing Node or a JVM)-->
+    . You do not need to include instructions about
+    using your software.
 </p>
 
 == YouTube Video
-
+<div class="requirement alert alert-danger">
+    <b>Requirement</b>: Upload a video demo of your MVP to YouTube.
+    <hr/>
+    <b>Verify</b>: This video will appear on your project page. Course staff will verify that it meets the requirements
+</div>
 <p>
     As with the prototype, you must also complete a video demo of your MVP and upload it to YouTube. This video must
     show a working demo of all features in your MVP as described in your team contract. This video will be directed
@@ -74,35 +110,49 @@ due_date: Week 6
 </form>
 
 
-== Pitfalls
+== Grading
 
-<!--<div class="gold-star">-->
-<!--Group: MVP is amazing! Must present the project in class.-->
-<!--</div>-->
-<!--<div class="gold-star">-->
-<!--Individual: MVP is amazing AND a substantial amount of the work was completed by an individual(s).-->
-<!--</div>-->
+<table class="table table-bordered table-padded text-center">
+    <tr class="active">
+        <td colspan="2">
+            <b>Team</b>
+        </td>
+    </tr>
+    <tr>
+        <td>Completed all technical requirements and achieved the practical objective</td>
+        <td>+1</td>
+    </tr>
+    <tr>
+        <td>Completed all technical requirements</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>One technical requirement was not satisfied</td>
+        <td>-1</td>
+    </tr>
+    <tr>
+        <td>More than one technical requirement was not satisfied</td>
+        <td>-2</td>
+    </tr>
+    <tr class="active">
+        <td colspan="2">
+            <b>Individual</b>
+        </td>
+    </tr>
+    <tr>
+        <td>Completed all assigned tasks and followed proper processes</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>Did not complete all assigned tasks, did not follow proper procedures, violated the team contract, or
+            unexcused
+            absence in a team meeting.
+        </td>
+        <td>-1</td>
+    </tr>
+    <tr>
+        <td>More than one of the above</td>
+        <td>-2</td>
+    </tr>
+</table>
 
-<div class="demerit">
-    <strong>-1</strong> | Did not complete MVP and release as "v0.2.0" on GitHub
-</div>
-
-<div class="demerit">
-    <strong>-1</strong> | Readme instructions are not clear or steps are missing
-</div>
-
-<div class="demerit">
-    <strong>-1</strong> | No video submission, video does not show all the functionality in the team contract, or video
-    is longer than 2 minutes
-</div>
-
-
-<div class="demerit">
-    <strong>-1</strong> | Individual: Not following the proper processes including the branching model, pull requests,
-    code reviews, etc.
-</div>
-<div class="demerit">
-    <strong>-1</strong> | Individual: Failure to complete an assigned task. To be considered complete the code for a
-    task must be reviewed,
-    accepted, and merged into develop. If the code is part of the current release it must also be merged into master.
-</div>

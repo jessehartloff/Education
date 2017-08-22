@@ -20,6 +20,7 @@ var db = monk('localhost:27017/education');
 var course_routes = require('./routes/course');
 var index_routes = require('./routes/index');
 var auth_app = require('./routes/auth');
+var webhook = require('./routes/webhook');
 var preprocessor = require('./util/preprocessor');
 var handlebar_helpers = require('./util/handlebars_helpers');
 
@@ -56,6 +57,7 @@ app.use(auth_app);
 
 app.use('/', index_routes);
 app.use('/courses', course_routes);
+app.use('/webhook', webhook);
 //app.use('/', attendance_routes);
 //app.use('/', office_hours_routes);
 

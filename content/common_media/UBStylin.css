@@ -41,6 +41,7 @@ div.demerit{
 /*color: #777777;*/
 /*}*/
 
+
 .ta-image {
     display: block;
     margin-left: auto;
@@ -49,6 +50,10 @@ div.demerit{
 
 .table-skinny {
     width: auto;
+}
+
+.table-padded {
+    width: 90%;
 }
 
 iframe.primary {

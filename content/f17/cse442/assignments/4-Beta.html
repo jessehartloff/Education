@@ -18,60 +18,102 @@ due_date: Week 8
 
 == Beta Release
 
-<p>
-    <em>
-        Release your software for beta testers.
-    </em>
-</p>
-
-<div class="alert alert-info">
-    Someone with no programming experience must be able to access and use your software for
-    its intended purpose and provide feedback to your team.
+<div class="requirement alert alert-success">
+    <b>Practical Objective</b>: Deploy intuitive software with a professional landing page.
+    <hr/>
+    <b>Verify</b>: The landing page and software are designed for a non-technical audience. A non-technical user can be
+    given a link to the landing page with no additional information and successfully use your software for its intended
+    purpose and report testing feedback. This implies that the landing page and software are intuitive to navigate and
+    use. There cannot be issues with the beta testing and no unnecessary confusion among the beta testers.
+    <hr/>
+    <b>Note</b>: This objective will be assessed throughout beta testing and grading decisions will be made at the end
+    of the collaboration phase. There may be a large number of beta testers using your software throughout this phase.
+    Feedback from beta testers may be used as evidence for grading decisions, but will not directly
+    determine any grades.
 </div>
-<!--<p>-->
-<!--The beta version of your project must be available to the public (At least to UB students).-->
-<!--</p>-->
 
-<!--<p>-->
-<!--If special hardware is required, setup times when you can demo your project.-->
-<!--</p>-->
+
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Deploy your software for beta testers.
+    <hr/>
+    <b>Verify</b>: A non-technical user must be able to access and use your software for
+    its intended purpose and provide feedback to your team. These users will not follow your readme or install your
+    project from the source code. You must provide a deployment appropriate for your project (ex. Downloadable
+    executables, deployed on a web server, available in an app store, etc).
+</div>
+
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Create a release from the master branch of your Beta version on GitHub as "v0.3.0"
+    <hr/>
+    <b>Verify</b>: This release will appear on your project page.
+</div>
+
 <p>
-    Features should freeze for this sprint, unless the team is behind. You are still delivering the MVP feature set, and
-    you are deploying it to be used by a non-technical user base. You cannot expect your users to clone your repo or
-    compile any code from source. For example, if you are deploying a desktop or mobile app you can offer a downloadable
-    executable
-    in some form (this can be hosted in an app store). If you
-    deploy a web app you can provide a link to your deployed app. The specifics may vary depending on your project, but
-    you must fit the criteria of making your software available for use to a non-technical audience. If you have any
-    questions about deploying your software please contact the course staff immediately.
-    <!--Apply polish, test, test, fix bugs, more-->
-    <!--testing, write documentation. Procedure for bug fixes will be enforced. All bug must be tracked.-->
+    In this phase you will prepare a release of your software for non-technical beta testers. For this release you
+    cannot assume your users can follow the technical readme and will not install your project from the source code.
+    This means your project must be deployed in a manner appropriate for your project. Examples of a deployment include:
+</p>
+
+<ul>
+    <li>Host your software as a web app</li>
+    <li>Host binaries or installers available for download for a major platform (ex. Windows, OSX, Ubuntu, android,
+        iOS).
+    </li>
+    <li>Submit your software for free on a publicly available platform (ex. Play store, Steam, Kongregate). Note that
+        this is very risky since your submission must be available by the end of this phase so you must submit early and
+        hope for quick approval.
+    </li>
+</ul>
+
+<p>
+    If you are not sure what is considered a deployment for your specific project please contact the course staff
+    immediately to avoid confusion near the deadline.
 </p>
 
 <p>
-    The beta version of your project must be merged into your master branch and be tagged as release "v0.3.0" on GitHub.
+    In addition the beta version of your project must be merged into your <b>master branch</b> and be tagged as release
+    "v0.3.0" on GitHub.
 </p>
+
 
 == Landing Page
 
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Create a landing page for your project designed for non-technical users.
+    <hr/>
+    <b>Verify</b>: On your project page, your project name will become a link to this landing page. Course staff will
+    verify that this page contains the required content.
+</div>
+
+<!--<div class="requirement alert alert-danger">-->
+<!--<b>Technical Requirement</b>: Create a Google form where beta testers will submit feedback to you.-->
+<!--<hr/>-->
+<!--<b>Verify</b>:-->
+<!--</div>-->
+
 <p>
     Your beta release must be accompanied by a landing page for your project that includes instructions relevant to beta
-    testers. This is the site you would/will share with
-    anyone interested in the project and can be thought of as a poster advertising the project. You can include any
-    additional information you'd like to this page (more information will be required for your final release), but for
-    the beta release you are only required to have the following:
-    <!--It is up to your team-->
-    <!--what to put on this site (suggestions include listing team-->
-    <!--members, link to the repository, description of the project, etc).-->
+    testers. This site is separate from anything on the course website and you cannot assume visitors to this site know
+    anything about your project. This implies that you cannot assume the users have seen any of your videos, though you
+    can add any videos to your landing page.
+</p>
+<p>
+    This is the site you should/will share with
+    anyone interested in the project and it can be thought of as a poster advertising the project. You can include any
+    additional information you'd like to this page, but for
+    the beta release you are required to have at least the following:
 </p>
 
 <ul>
     <li>
-        Describe how a non-technical user can access your deployment
+        A self-contained description of your project
     </li>
     <li>
-        How beta testers send feedback (not bugs) to the team
+        Describe how a non-technical user can access your deployed software
     </li>
+    <!--<li>-->
+    <!--A clearly indicated link to a Google form where beta testers will submit feedback.-->
+    <!--</li>-->
     <li>
         The method for reporting bugs to the team. Bugs must be reported through GitHub issues on your project's
         repository. Your team can add any additional steps you'd like your beta testers to follow.
@@ -85,60 +127,47 @@ due_date: Week 8
     you ask them, the more likely you are to receive meaningful feedback.
 </p>
 
-<div class="alert alert-info">
-    <strong>Recommended</strong>: Create a Google form with specific questions for testers to answer after testing.
-</div>
-
 <p>
-    Add the link to your project details on the
-    course website and verify that it appears on your project page.
+    Add the link to your project details on the course website and verify that it appears on your project page.
 </p>
 
-<!--== Beta Tester Documentation-->
+<p>*If your project is a web app the landing page can be the deployed app itself as long as it meets all the criteria of
+    the landing page.</p>
 
-<!--<p>-->
-<!--Provide documentation to beta testers about how to test your software. Where the readme is intended for technical-->
-<!--users working with your source code, this documentation need to describe how non-technical users can access your-->
-<!--deployment.-->
-
-<!--Test doc describes additional info needed for-->
-<!--testers (how to provide feedback, how to report a bug in github issues and which tags to use, specific bugs to look-->
-<!--for, special login credentials that open up debug options, etc). It's up to your team to decide how to setup this-->
-<!--documentation so long as it provides clear instructions and direction for beta testers.-->
-<!--</p>-->
 
 == Testing
 
 <p>
     There are no new features added for your beta release so you have 2 weeks to test you code an ensure proper
-    functionality. Although your testing, or lack thereof, will not affect your grade directly you will be held
-    accountable for any major bugs or errors that appear in your released code. For your beta release there may be many
-    minor bug reports (this is the purpose of beta testing), but you should not release your beta version with any known
+    functionality (Alpha testing). Although your testing will not affect your grade directly, you will be held
+    accountable for any major bugs or errors that appear in your released software. For your beta release there may be
+    many
+    minor bug reports (this is the purpose of beta testing), but you should not release your beta version with any major
     bugs or broken features. The bugs reported should be such that they would have been very difficult to find in
     development.
-    <!--It is highly recommended that your team agrees on a robust testing-->
-    <!--methodology so you can release your software with confidence. In addition, robust testing will also make code-->
-    <!--reviews much simpler for the team.-->
 </p>
-
-== Bug Fix
-
 <p>
-    If and when a bug is found it must be tracked using GitHub issues. When a pull request is submitted you must
-    reference the issue for the bug and close the issue once the request is approved. Be sure to use labels to mark this
-    as a bug fix.
+    It is highly recommended that your team agrees on a robust testing
+    methodology so you can release your software with confidence. In addition, robust testing will also make code
+    reviews much simpler for the team.
 </p>
+
 
 == YouTube Video
-
+<div class="requirement alert alert-danger">
+    <b>Requirement</b>: Upload a video demo of your Beta release to YouTube.
+    <hr/>
+    <b>Verify</b>: This video will appear on your project page. Course staff will verify that it meets the requirements
+</div>
 <p>
     Complete a video demo of your beta release and upload it to YouTube. This video must
     show a working demo of all features in your MVP as described in your team contract, but updated with any changes
     made since the previous release.
     As with the previous 2 videos, this video will be directed
     towards a non-technical audience and you should not show any code or use any technical
-    language in this video. However, this video will likely be used as reference for your beta testers so you should
-    be sure to explain anything that will relevant specifically to them. You are not only showing your functionality in
+    language in this video. However, this video can be used as reference for your beta testers if you post it on your
+    landing page so it can be helpful to explain anything that will relevant specifically to them. You are not only
+    showing your functionality in
     this video, you are preparing users to use your deployed beta release.
 </p>
 <p>
@@ -153,7 +182,7 @@ due_date: Week 8
 
 <p>
     Once complete, submit the link to your beta release video here. After submitting, check your project page to verify
-    that the video is displayed properly.
+    that the video is displayed properly. Again, it is recommended that you also post this video on your landing page.
 </p>
 
 <form action="/courses/cse442-f17/submit-video/beta" method="post">
@@ -167,27 +196,27 @@ due_date: Week 8
 </form>
 
 
-<!--== Deployment-->
+== On-Boarding Preparation
 
-<!--<p>-->
-<!--The beta version of your project must be available to the public (At least to UB students).-->
-<!--</p>-->
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Develop on-boarding documentation in your GitHub wiki.
+    <hr/>
+    <b>Verify</b>: Course staff will verify that there is some documentation. The quality of this documentation will be
+    assessed throughout the collaboration phase of the project.
+</div>
 
-<!--<p>-->
-<!--If special hardware is required, setup times when you can demo your project.-->
-<!--</p>-->
-
-<!--<p>-->
-<!--Recommended (If deploying networked app): Digital Ocean.. is it fair to recommend a paid product? Heroku (free). AWS-->
-<!--</p>-->
-
-
-== On-Boarding
+<div class="requirement alert alert-danger">
+    <b>Technical Requirement</b>: Setup tasks for outside developers.
+    <hr/>
+    <b>Verify</b>: These tasks will be displayed on your project page and will be marked for outside help. Course staff
+    will verify that each team member has created and tagged at least 1 issue for outside help. Use the "help wanted"
+    tag.
+</div>
 
 <p>
     During the next phase of the project you will be completing a task for another team in the course, and your class
     mates will completing tasks for your team. To facilitate this you must prepare your project for the on-boarding
-    process and make it possible, or even simple, for a developer to visit your project and contribute code. At the end
+    process and make it possible, or simple, for a developer to visit your project and contribute code. At the end
     of the next phase you will be assessed based on how difficult or easy it was for someone to contribute to your
     project. As with many aspects of this course, submitting quality work in this section will save you time, and
     possibly your grade, later in the course.
@@ -199,9 +228,9 @@ due_date: Week 8
     Use your GitHub wiki to outline your project and provide everything needed for a new developer to join the team. An
     outside developer who is unfamiliar with the project should be able to contribute code to your project after reading
     the wiki without
-    having to contact the team (Though they can, and should, contact the team via your Ryver channel, having a
+    having to contact the team (Though they can, and should, contact the team via your Ryver forum, having a
     face-to-face meeting with them might be too
-    difficult to schedule so the wiki should leave them with only quick questions, if any). The wiki should also include
+    difficult to schedule so the wiki should leave them with only quick questions). The wiki should also include
     contribution instructions (how to create a pull request, which branches to use, which tags to use in issues, who to
     assign as a code reviewer, etc).
 </p>
@@ -219,12 +248,12 @@ due_date: Week 8
 <p>
     Prepare your outside tasks to be completed by students outside your group during the next submission cycle. These
     tasks do not have to substantial, but they must have an impact on your final product (ie. adding comments is not
-    acceptable). These tasks must be tagged with "outside-help" in GitHub issues.
+    acceptable). These tasks must be tagged with "help wanted" in GitHub issues.
 </p>
 
 <p>
-    Each team member must create at least 2 tasks for outside that fall under their area of the project as defined by
-    the team contract.
+    Each team member must create at least 1 task for outside help that falls under their area of the project as defined
+    by the team contract.
 </p>
 
 <div class="alert alert-info">
@@ -237,24 +266,71 @@ due_date: Week 8
 </div>
 
 
-== Pitfalls
+== Grading
+
+<table class="table table-bordered table-padded text-center">
+    <tr class="active">
+        <td colspan="2">
+            <b>Team</b>
+        </td>
+    </tr>
+    <tr>
+        <td>Completed all technical requirements and achieved the practical objective</td>
+        <td>+1</td>
+    </tr>
+    <tr>
+        <td>Completed all technical requirements</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>One technical requirement was not satisfied</td>
+        <td>-1</td>
+    </tr>
+    <tr>
+        <td>More than one technical requirement was not satisfied</td>
+        <td>-2</td>
+    </tr>
+    <tr class="active">
+        <td colspan="2">
+            <b>Individual</b>
+        </td>
+    </tr>
+    <tr>
+        <td>Completed all assigned tasks and followed proper processes</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>Did not complete all assigned tasks, did not follow proper procedures, violated the team contract, or
+            unexcused
+            absence in a team meeting.
+        </td>
+        <td>-1</td>
+    </tr>
+    <tr>
+        <td>More than one of the above</td>
+        <td>-2</td>
+    </tr>
+</table>
 
 
-<div class="demerit">
-    <strong>-1</strong> | Did not complete the beta version and release as "v0.3.0" on GitHub
-</div>
+<!--== Pitfalls-->
 
-<div class="demerit">
-    <strong>-1</strong> | Did not deploy a beta release to the end users
-</div>
 
-<div class="demerit">
-    <strong>-1</strong> | No landing page
-</div>
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | Did not complete the beta version and release as "v0.3.0" on GitHub-->
+<!--</div>-->
 
-<div class="demerit">
-    <strong>-1</strong> | Individual: Less than 2 tasks were prepared for outside developers
-</div>
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | Did not deploy a beta release to the end users-->
+<!--</div>-->
+
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | No landing page-->
+<!--</div>-->
+
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | Individual: Less than 2 tasks were prepared for outside developers-->
+<!--</div>-->
 <!--<div class="demerit">-->
 <!--<strong>-1</strong> | Beta testers were unable to test or instructions were unclear (will be assessed throughout-->
 <!--beta testing)-->
@@ -267,21 +343,21 @@ due_date: Week 8
 <!--collaboration)-->
 <!--</div>-->
 
-<div class="demerit">
-    <strong>-1</strong> | No video submission, video does not show all the functionality in the team contract, or video
-    is longer than 2 minutes
-</div>
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | No video submission, video does not show all the functionality in the team contract, or video-->
+<!--is longer than 2 minutes-->
+<!--</div>-->
 
 
-<div class="demerit">
-    <strong>-1</strong> | Individual: Not following the proper processes including the branching model, pull requests,
-    code reviews, etc.
-</div>
-<div class="demerit">
-    <strong>-1</strong> | Individual: Failure to complete an assigned task. To be considered complete the code for a
-    task must be reviewed,
-    accepted, and merged into develop. If the code is part of the current release it must also be merged into master.
-</div>
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | Individual: Not following the proper processes including the branching model, pull requests,-->
+<!--code reviews, etc.-->
+<!--</div>-->
+<!--<div class="demerit">-->
+<!--<strong>-1</strong> | Individual: Failure to complete an assigned task. To be considered complete the code for a-->
+<!--task must be reviewed,-->
+<!--accepted, and merged into develop. If the code is part of the current release it must also be merged into master.-->
+<!--</div>-->
 
 <!--== Assessment-->
 

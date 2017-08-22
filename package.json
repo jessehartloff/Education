@@ -24,6 +24,7 @@
     "package.json": "^2.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "request": "^2.81.0",
     "serve-favicon": "~2.4.3"
   }
 }
