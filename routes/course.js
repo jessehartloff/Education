@@ -10,6 +10,10 @@ var api_util = require('../util/api');
 
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
+// TODO: Mobile friendly menu
+
+// TODO: Course list is random
+
 // TODO: They must list what they will learn from the project (new skills/tech) In the team contract for each member
 
 // TODO: Show videos with corresponding release on single project page. Finish formatting the single project page
