@@ -8,7 +8,14 @@ var api_util = require('../util/api');
 // Feedback
 // "The prototype must run, but doesn't have to be functional" Need to be more clear
 
+// TODO: Check AutoLAb multiple sections
+// TODO: 199 activities
+// TODO: Disable lecture links
+// TODO: Update university links
+
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
+
+// TODO: Sit down with Dave S for lab sections
 
 // TODO: Mobile friendly menu
 
