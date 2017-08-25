@@ -2,6 +2,6 @@
   "student_account": true,
   "student_options": true,
   "has_project": true,
-  "autolab": false,
-  "question_site": false
+  "no_autolab": true,
+  "no_question_site": true
 }

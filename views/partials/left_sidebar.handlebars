@@ -14,13 +14,20 @@
             <!--<hr/>-->
 
             <h4>&nbsp;Assessment</h4>
+        {{#unless course.course_options.no_autolab}}
             &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
             <br/>
-
+        {{/unless}}
             {{#each course.assignments}}
+                {{#ifIndexLimited ../course.course @index -1}}
                 &nbsp;<a class="menu_link"
                          href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
                 <br/>
+                {{else}}
+                &nbsp;<a class="menu_link"
+                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}"></a>{{this.title}}
+                <br/>
+                {{/ifIndexLimited}}
             {{/each}}
         {{/if}}
 
@@ -30,14 +37,22 @@
             <!--<hr/>-->
 
             <h4>&nbsp;Training</h4>
+            {{#unless course.course_options.no_question_site}}
             &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
                      target="_blank">-Questions</a>
             <br/>
+            {{/unless}}
 
             {{#each course.lectures}}
+                {{#ifIndexLimited ../course.course @index 0}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
                 {{@index}}. {{this.title}}</a>
                 <br/>
+                {{else}}
+                    &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}"></a>
+                    {{@index}}. {{this.title}}
+                    <br/>
+                {{/ifIndexLimited}}
             {{/each}}
         {{/if}}
 

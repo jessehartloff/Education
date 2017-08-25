@@ -37,15 +37,21 @@
                 {{#if course.assignments}}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
-                            Assignments<span class="caret"></span>
+                            Assessment<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">
-                                Autolab</a></li>
+
+                            {{#unless course.course_options.no_autolab}}
+                                <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">
+                                    Autolab</a></li>
+                            {{/unless}}
                             {{#each course.assignments}}
+
+                                {{#ifIndexLimited ../course.course @index -1}}
                                 <li>
                                     <a href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
                                 </li>
+                                {{/ifIndexLimited}}
                             {{/each}}
                         </ul>
                     </li>
@@ -54,15 +60,20 @@
                 {{#if course.lectures}}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
-                            Concepts<span class="caret"></span>
+                            Training<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
-                                Questions</a></li>
+                            {{#unless course.course_options.no_question_site}}
+                                <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
+                                    Questions</a></li>
+                            {{/unless}}
                             {{#each course.lectures}}
+
+                                {{#ifIndexLimited ../course.course @index 0}}
                                 <li>
                                     <a href="/courses/{{../course.course}}/lesson/{{this.short_title}}">{{this.title}}</a>
                                 </li>
+                                {{/ifIndexLimited}}
                             {{/each}}
                         </ul>
                     </li>

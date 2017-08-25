@@ -14,12 +14,12 @@ var media_destination = path.join(__dirname, 'public/static/');
 fs.copySync(content_directory + "common_media/", media_destination);
 
 var to_process = [
-	{
-		'directory': content_directory + 's18/cse312',
-		'semester': 's18',
-		'number': 'cse312',
-		'title': 'Web Applications'
-	},
+	//{
+	//	'directory': content_directory + 's18/cse312',
+	//	'semester': 's18',
+	//	'number': 'cse312',
+	//	'title': 'Web Applications'
+	//},
 
 	{
 		'directory': content_directory + 'f17/cse115',
@@ -57,7 +57,7 @@ var to_process = [
 	}
 ];
 
-//var semesters = ['u16', 'f16', 's17', 'f17', 's18'];
+var semesters = ['u16', 'f16', 's17', 'f17', 's18'];
 
 collection.remove({}, function (err, content) {
 	collection_list.remove({}, function (err, content2) {
@@ -72,6 +72,7 @@ collection.remove({}, function (err, content) {
 				course['archived'] = course.semester !== current_semester;
 				course['course'] = course.number + '-' + course.semester;
 				course['number_upper'] = course.number.toUpperCase();
+				course['semester_index'] = semesters.indexOf(course.semester);
 				collection_list.insert(course);
 				var list = fs.readdirSync(course.directory);
 				for (var j in list) {

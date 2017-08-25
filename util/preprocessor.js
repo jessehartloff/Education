@@ -5,8 +5,8 @@ var app = express();
 app.use(function (req, res, next) {
 
 	var collection = req.db.get('course_list');
-	collection.find({},{}, function(err, data){
-		if(!res.to_template) {
+	collection.find({}, {sort: {semester_index:-1, number: 1}}, function (err, data) {
+		if (!res.to_template) {
 			res.to_template = {};
 		}
 		res.to_template.course_list = data;
