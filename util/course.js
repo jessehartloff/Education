@@ -3,18 +3,21 @@ var monk = require('monk');
 var db = monk('localhost:27017/education');
 var users = require('./users');
 
-function team_formation_checks(){
+function team_formation_checks() {
 
 }
 
-function generate_messages(req, res) {
+function generate_messages(req, res, course) {
 
+	console.log(course.course_options);
 	if (users.user_enrolled(req)) {
-		if (req.params.course === 'cse442-f17') {
-			req.flash('course_info', 'Form your team');
-		} else if (req.params.course === 'cse115-f17') {
-			req.flash('course_info', 'Upcoming deadline');
-		}
+		if (course.course_options && course.course_options.message)
+			req.flash('course_info', course.course_options.message);
+		//if (req.params.course === 'cse442-f17') {
+		//	req.flash('course_info', 'Form your team');
+		//} else if (req.params.course === 'cse115-f17') {
+		//	req.flash('course_info', 'Upcoming deadline');
+		//}
 	}
 
 
@@ -38,11 +41,6 @@ exports.render_content = render_content = function render_content(req, res, type
 
 exports.preprocess_course = preprocess_course = function preprocess_course(req, res, next) {
 
-	// Messages to students
-	if (!req.session.flash || !req.session.flash.course_info) {
-		generate_messages(req, res);
-	}
-
 	db.get('course_content').findOne({'course': req.params.course}, {}, function (err, record) {
 		if (err) {
 			console.log(err);
@@ -52,6 +50,11 @@ exports.preprocess_course = preprocess_course = function preprocess_course(req, 
 			req.flash('error', 'Course not found');
 			res.redirect('/courses/');
 		} else {
+			// Messages to students
+			if (!req.session.flash || !req.session.flash.course_info) {
+				generate_messages(req, res, record);
+			}
+
 			res.to_template.course = record;
 			next(req, res, record);
 		}

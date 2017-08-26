@@ -3,5 +3,6 @@
   "student_options": true,
   "has_project": true,
   "no_autolab": true,
-  "no_question_site": true
+  "no_question_site": true,
+  "message": "Form your team"
 }
