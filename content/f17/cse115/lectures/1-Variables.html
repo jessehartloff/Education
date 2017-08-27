@@ -51,7 +51,16 @@ type <span><code class="java">int</code></span>.
 <pre><code class="java">    myFirstVariable = 7;</code></pre>
 </p>
 
-<p>The order is again important: we first write the name of the variable, then the assignment operator ('='), followed by the value to be stored in the variable.  The semicolon marks the end of the assignment.</p>
+<p>The order is again important: we first write the name of the
+variable, then the assignment operator ('='), followed by the value to
+be stored in the variable.  The semicolon marks the end of the
+assignment.  In the example above the declaration of the variable and
+the assignment of a value to the variable are done in two separate
+instructions.
+</p>
+
+<p>We can combine these two steps into one, which is sometimes a convenience:
+</p>
 
 <pre><code class="java">    int myFirstVariable = 7;
 </code></pre>
@@ -63,7 +72,6 @@ Both examples have the same result and follow these two steps:
     <li><span><code class="java">int myFirstVariable</code></span> - Declare a variable named myFirstVariable of type int</li>
     <li><span><code class="java">myFirstVariable = 7</code></span> - Assign the value 7 to the variable named myFirstVariable</li>
 </ol>
-In the first example the declaration of the variable and the assignment of a value to the variable are done in two separate instructions.  In the second example the two steps are combined into one line.
 
 <br/>
 General structure:
@@ -110,7 +118,7 @@ General structure:
         is lost so int is used if only whole numbers are needed.
     </dd>
     <dt>String</dt>
-    <dd>Stores text values. Text values must be provided in "double quotes" to be a string(ex. "115" is a String, 115
+    <dd>Stores text values. Text values must be provided in "double quotes" to be a string. For example, "115" is a String, but 115
         is an int).
     </dd>
     <dt>boolean</dt>
@@ -139,12 +147,15 @@ General structure:
 
 Syntax:
 <pre><code class="java">
-    System.out.println("Hello World!");
+    System.out.print("Hello World!");
 </code></pre>
 
 <p>
-    Will print <kbd>Hello World!</kbd> to the console.
+    Will print <kbd>Hello World!</kbd> to the console:
 </p>
+<pre><code class="java">
+Hello World!
+</code></pre>
 
 <p>
     Printing the value of a variable:
@@ -153,12 +164,52 @@ Syntax:
 <pre><code class="java">
     String hello;
     hello = "Hello World!";
-    System.out.println(hello);
+    System.out.print(hello);
 </code></pre>
 
 <p>
     Same output as the previous example.  However, the value being printed is retrieved from the variable named <code class="java">hello</code>.
 </p>
+
+<ul>
+    <li><code class="java">System.out.print</code></li>
+    <li><code class="java">System.out.println</code></li>
+</ul>
+
+<p>
+<code class="java">System.out.print</code></li> prints its argument to the console exactly as its written.  The following two examples produce exactly the same output:
+</p>
+
+<p>Using one <code class="java">System.out.print</code> statement:
+</p>
+<pre><code class="java">
+    System.out.print("Hello World!");
+</code></pre>
+
+<p>Using two <code class="java">System.out.print</code> statements:
+</p>
+<pre><code class="java">
+    System.out.print("Hello Wo");
+    System.out.print("rld!");
+</code></pre>
+
+<p>
+<code class="java">System.out.println</code></li> prints its argument to the console just like <code class="java">System.out.print</code>, but it also prints a newline character to the console.  This means that the next thing to be printed will appear at the start of the next line.
+</p>
+
+<p>Using two <code class="java">System.out.println</code> statements:
+</p>
+<pre><code class="java">
+    System.out.print("Hello Wo");
+    System.out.print("rld!");
+</code></pre>
+<p>
+produces two lines of output:
+</p>
+<pre><code class="java">
+Hello Wo
+rld!
+</code></pre>
 
 
 
