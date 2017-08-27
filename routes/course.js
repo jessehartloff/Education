@@ -8,36 +8,35 @@ var api_util = require('../util/api');
 
 // D: Check AutoLab multiple sections
 // TODO: 199 activities
-// TODO: Disable lecture links
-// TODO: Update university links
+// D: Disable lecture links
+// D: Update university links
 
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
 // TODO: Mobile friendly menu
 
-// TODO: Course list is random
+// D: Course list is random
 
-// TODO: They must list what they will learn from the project (new skills/tech) In the team contract for each member
+// TOD/: They must list what they will learn from the project (new skills/tech) In the team contract for each member
 
 // TODO: Show videos with corresponding release on single project page. Finish formatting the single project page
 
-// TODO: Bugfix. No enroll button
+// D: Bugfix. No enroll button
 
 // TODO: Office hours App
+
 // TODO: Meeting scheduling
+
 // TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
 // TODO: Ratings are hidden until the end of a round (or hidden forever). Reviews can be displayed
 // ~TODO: Public reviews? At least private messages to the team (email lists? Ryver? Github? my site?)
 // Ambitious: Chat on each project page. Team mates messages display differently
 
-// ~TODO: Students can join groups and edit their group's content
-// ~TODO: User roles and different views for Student/TA/Instructor (For office hours)
-
-// TODO: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
+// D: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
 
 // ~TODO: Q&A tied to lecture sections
-
-// ~TODO: Change deadline on a per lab basis (Autolab)
+// ~TODO: Students can join groups and edit their group's content
+// ~TODO: User roles and different views for Student/TA/Instructor (For office hours)
 
 
 router.get('/', function (req, res) {

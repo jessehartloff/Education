@@ -39,35 +39,40 @@
                 <div class="messages">
                     {{#if messages.course_info}}
                         {{#each messages.course_info}}
-                            <div class="alert alert-info">
+                            <div class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <b>{{this}}</b><br/>
                             </div>
                         {{/each}}
                     {{/if}}
                     {{#if messages.error}}
                         {{#each messages.error}}
-                        <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <b>{{this}}</b><br/>
-                        </div>
+                            </div>
                         {{/each}}
                     {{/if}}
                     {{#if messages.info}}
                         {{#each messages.info}}
-                        <div class="alert alert-info">
+                            <div class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <b>{{this}}</b><br/>
-                        </div>
+                            </div>
                         {{/each}}
                     {{/if}}
                     {{#if messages.success}}
                         {{#each messages.success}}
-                        <div class="alert alert-success">
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <b>{{this}}</b><br/>
-                        </div>
+                            </div>
                         {{/each}}
                     {{/if}}
 
                     {{#if message}}
-                        <div class="alert alert-warning">
+                        <div class="alert alert-warning alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             {{message}}
                         </div>
                     {{/if}}
