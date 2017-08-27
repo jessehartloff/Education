@@ -7,7 +7,7 @@ var api_util = require('../util/api');
 
 
 // D: Check AutoLab multiple sections
-// TODO: 199 activities
+// D: 199 activities
 // D: Disable lecture links
 // D: Update university links
 

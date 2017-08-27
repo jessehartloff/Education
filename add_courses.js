@@ -25,12 +25,14 @@ var to_process = [
 		'directory': content_directory + 'f17/cse115',
 		'semester': 'f17',
 		'number': 'cse115',
+		'number_only': '115',
 		'title': 'Computer Science 1'
 	},
 	{
 		'directory': content_directory + 'f17/cse442',
 		'semester': 'f17',
 		'number': 'cse442',
+		'number_only': '442',
 		'title': 'Software Engineering'
 	},
 
@@ -38,6 +40,7 @@ var to_process = [
 		'directory': content_directory + 's17/cse115',
 		'semester': 's17',
 		'number': 'cse115',
+		'number_only': '115',
 		'title': 'Computer Science 1'
 	},
 
@@ -45,6 +48,7 @@ var to_process = [
 		'directory': content_directory + 'f16/cse442',
 		'semester': 'f16',
 		'number': 'cse442',
+		'number_only': '442',
 		'title': 'Software Engineering',
 		'project': 'old'
 	},
@@ -53,6 +57,7 @@ var to_process = [
 		'directory': content_directory + 'u16/cse442',
 		'semester': 'u16',
 		'number': 'cse442',
+		'number_only': '442',
 		'title': 'Software Engineering'
 	}
 ];
