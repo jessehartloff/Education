@@ -13,7 +13,7 @@ var api_util = require('../util/api');
 
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
-// TODO: Mobile friendly menu
+// D: Mobile friendly menu
 
 // D: Course list is random
 
