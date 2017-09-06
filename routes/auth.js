@@ -132,7 +132,7 @@ router.post('/forgot-password', function (req, res, next) {
 					db.get('password_tokens').insert({
 						'token': token,
 						'username': username,
-						'expires': Date.now() + 180000
+						'expires': Date.now() + 1800000
 					});
 
 					//change_password(username, temp_password);

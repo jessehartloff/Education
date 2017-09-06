@@ -2,85 +2,87 @@
     <div class="navbar-inner">
         <div class="container-fluid">
             <!--<div class="navbar-header">-->
-                <!--<div class="navbar-header">-->
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <!--<div class="navbar-header">-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-                <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle navbar-brand" data-toggle="dropdown" href="#">
+                        {{#if course}}
+                            <div class="display-text" style="font-size: larger">{{course.number_upper}}</div>
+                            <div class="tiny-text">{{course.number_only}}</div>
+                        {{else}}
+                            <img class="img-responsive" src="/static/CSE50.png">
+                        {{/if}}
+                    </a>
+                    <ul class="dropdown-menu">
+                        {{#each course_list}}
+                            {{#unless this.archived}}
+                                <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}
+                                    : {{this.title}}</a></li>
+                            {{/unless}}
+                        {{/each}}
+                        <li><a href="/courses/">Archive</a></li>
+                    </ul>
+                </li>
+
+                {{#if course.assignments}}
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            {{#if course}}
-                                <div class="display-text" style="font-size: larger">{{course.number_upper}}</div>
-                                <div class="tiny-text">{{course.number_only}}</div>
-                            {{else}}
-                                <div class="navbar-brand"><img
-                                        class="img-responsive"
-                                        src="/static/CSE50.png"></div> {{/if}}</a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
+                            <div class="display-text">Assessment<span class="caret"></span></div>
+                            <div class="tiny-text"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </div>
+
+                        </a>
                         <ul class="dropdown-menu">
-                            {{#each course_list}}
-                                {{#unless this.archived}}
-                                    <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}
-                                        : {{this.title}}</a></li>
-                                {{/unless}}
+
+                            {{#unless course.course_options.no_autolab}}
+                                <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">
+                                    Autolab</a></li>
+                            {{/unless}}
+                            {{#each course.assignments}}
+
+                                {{#ifIndexLimited ../course.course @index -1}}
+                                    <li>
+                                        <a href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
+                                    </li>
+                                {{/ifIndexLimited}}
                             {{/each}}
-                            <li><a href="/courses/">Archive</a></li>
                         </ul>
                     </li>
+                {{/if}}
 
-                    {{#if course.assignments}}
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
-                                <div class="display-text">Assessment<span class="caret"></span></div>
-                                <div class="tiny-text"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></div>
+                {{#if course.lectures}}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
+                            <div class="display-text">Training<span class="caret"></span></div>
+                            <div class="tiny-text"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                            </div>
 
-                            </a>
-                            <ul class="dropdown-menu">
+                        </a>
+                        <ul class="dropdown-menu">
+                            {{#unless course.course_options.no_question_site}}
+                                <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
+                                    Questions</a></li>
+                            {{/unless}}
+                            {{#each course.lectures}}
 
-                                {{#unless course.course_options.no_autolab}}
-                                    <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">
-                                        Autolab</a></li>
-                                {{/unless}}
-                                {{#each course.assignments}}
+                                {{#ifIndexLimited ../course.course @index 0}}
+                                    <li>
+                                        <a href="/courses/{{../course.course}}/lesson/{{this.short_title}}">{{this.title}}</a>
+                                    </li>
+                                {{/ifIndexLimited}}
+                            {{/each}}
+                        </ul>
+                    </li>
+                {{/if}}
 
-                                    {{#ifIndexLimited ../course.course @index -1}}
-                                        <li>
-                                            <a href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
-                                        </li>
-                                    {{/ifIndexLimited}}
-                                {{/each}}
-                            </ul>
-                        </li>
-                    {{/if}}
-
-                    {{#if course.lectures}}
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
-                                <div class="display-text">Training<span class="caret"></span></div>
-                                <div class="tiny-text"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></div>
-
-                            </a>
-                            <ul class="dropdown-menu">
-                                {{#unless course.course_options.no_question_site}}
-                                    <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
-                                        Questions</a></li>
-                                {{/unless}}
-                                {{#each course.lectures}}
-
-                                    {{#ifIndexLimited ../course.course @index 0}}
-                                        <li>
-                                            <a href="/courses/{{../course.course}}/lesson/{{this.short_title}}">{{this.title}}</a>
-                                        </li>
-                                    {{/ifIndexLimited}}
-                                {{/each}}
-                            </ul>
-                        </li>
-                    {{/if}}
-
-                </ul>
+            </ul>
 
             <!--</div>-->
             <div class="navbar-collapse collapse">
@@ -112,8 +114,9 @@
                         </li>
                     {{else}}
 
-                        <!--TODO: Remove if course doesn't have student accounts-->
-                        <!--<li><a href="/user/login">Login</a></li>-->
+                        {{#if course.course_options.student_account}}
+                            <li><a href="/user/login">Login</a></li>
+                        {{/if}}
                     {{/if}}
                 </ul>
 

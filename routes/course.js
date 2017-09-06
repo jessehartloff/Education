@@ -20,12 +20,11 @@ var api_util = require('../util/api');
 // TOD/: They must list what they will learn from the project (new skills/tech) In the team contract for each member
 
 // TODO: Show videos with corresponding release on single project page. Finish formatting the single project page
-
 // D: Bugfix. No enroll button
 
-// TODO: Office hours App
+// ~TODO: Office hours App
 
-// TODO: Meeting scheduling
+// ~TODO: Meeting scheduling
 
 // TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
 // TODO: Ratings are hidden until the end of a round (or hidden forever). Reviews can be displayed
