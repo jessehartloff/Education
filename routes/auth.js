@@ -41,6 +41,7 @@ passport.deserializeUser(function (user, done) {
 });
 
 function local_strategy_function(username, password, done) {
+	username = username.replace("@buffalo.edu", "");
 	collection.findOne({username: username}, {_id: 0}, function (err, user) {
 		if (err) {
 			return done(err);
@@ -128,11 +129,11 @@ router.post('/forgot-password', function (req, res, next) {
 			db.get('users').findOne({'username': username}, {}, function (err, record) {
 				if (record) {
 					var token = random_token();
-					// expires in 1/2 hour
+					// expires in 24 hours
 					db.get('password_tokens').insert({
 						'token': token,
 						'username': username,
-						'expires': Date.now() + 1800000
+						'expires': Date.now() + 86400000
 					});
 
 					//change_password(username, temp_password);
@@ -282,11 +283,12 @@ function add_user(username) {
 			});
 
 			var token = random_token();
-			db.get('password_tokens').insert({'token': token, 'username': username, 'expires': Date.now() + 180000});
+			db.get('password_tokens').insert({'token': token, 'username': username, 'expires': Date.now() + 86400000});
 			email_password_reset_link(username + "@buffalo.edu", token);
 		}
 	});
 }
+
 
 function random_temp_password(password_length) {
 	// FWIW, not cryptographically secure
