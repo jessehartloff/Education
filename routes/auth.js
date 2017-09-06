@@ -41,7 +41,7 @@ passport.deserializeUser(function (user, done) {
 });
 
 function local_strategy_function(username, password, done) {
-	username = username.replace("@buffalo.edu", "");
+
 	collection.findOne({username: username}, {_id: 0}, function (err, user) {
 		if (err) {
 			return done(err);
@@ -288,7 +288,6 @@ function add_user(username) {
 		}
 	});
 }
-
 
 function random_temp_password(password_length) {
 	// FWIW, not cryptographically secure

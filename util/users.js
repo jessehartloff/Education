@@ -15,7 +15,7 @@ exports.enroll = function enroll_in_course(username, course) {
 		if (err) {
 			console.log(err);
 		} else if (!record) {
-			console.log('course not found');
+			console.log('course not found: ' + course);
 		} else {
 			// iterate over student options and add them to the student under the course name
 			user_collection.findOne({'username': username}, function (err, user_record) {
