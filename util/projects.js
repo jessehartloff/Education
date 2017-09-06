@@ -12,32 +12,54 @@ exports.youtube_parser = youtube_parser = function youtube_parser(url) {
 
 
 function team_name_to_id(team_name) {
-	return team_name.toLowerCase().trim().replace(/\s+/g, '_').replace(/\W/g, '').replace(/_/g, '-');
+	var team_id = team_name.toLowerCase().trim().replace(/\s+/g, '_').replace(/\W/g, '').replace(/_/g, '-');
+	if (team_id.length < 2) {
+		team_id += "-" + random_id(5);
+	}
+	return team_id;
+}
+
+
+function random_id(token_length) {
+	var length = token_length || 5;
+	var alphabet = '0123456789';
+	var token = '';
+	for (var i = 0; i < length; i++) {
+		token += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+	}
+	return token;
 }
 
 exports.create_project = create_project = function create_project(project_name, team_name, course_id, founding_member) {
 	// Convert project name to url param (remove all non-safe chars, toLower, dashes for spaces) [check for name conflicts]
 	var projects_collection = db.get('projects');
 	var team_id = team_name_to_id(team_name);
-	// TODO: check if ID exists
-	projects_collection.insert({
-		'team_id': team_id,
+	db.get('projects').findOne({
 		'course': course_id,
-		'team_name': team_name,
-		'founder': founding_member,
-		'member2': '',
-		'member3': '',
-		'member4': '',
-		'member5': '',
-		//'members': [founding_member],
-		'project_name': project_name,
-		'project_description': '',
-		'landing_page_link': '',
-		'repository_link_primary': '',
-		'communication_channel': '',
-		'video_submissions': {},
-		'ratings': {}
-	})
+		'team_id': team_id
+	}, {}, function (err, project) {
+		if (project) {
+			team_id += "-" + random_id(5);
+		}
+		projects_collection.insert({
+			'team_id': team_id,
+			'course': course_id,
+			'team_name': team_name,
+			'founder': founding_member,
+			'member2': '',
+			'member3': '',
+			'member4': '',
+			'member5': '',
+			//'members': [founding_member],
+			'project_name': project_name,
+			'project_description': '',
+			'landing_page_link': '',
+			'repository_link_primary': '',
+			'communication_channel': '',
+			'video_submissions': {},
+			'ratings': {}
+		})
+	});
 };
 
 
@@ -87,19 +109,19 @@ function get_members(req, res, course_id, this_project, next) {
 
 			// I hate this..
 			var team_members = [];
-			if(this_project.founder){
+			if (this_project.founder) {
 				team_members.push(this_project.founder);
 			}
-			if(this_project.member2){
+			if (this_project.member2) {
 				team_members.push(this_project.member2);
 			}
-			if(this_project.member3){
+			if (this_project.member3) {
 				team_members.push(this_project.member3);
 			}
-			if(this_project.member4){
+			if (this_project.member4) {
 				team_members.push(this_project.member4);
 			}
-			if(this_project.member5){
+			if (this_project.member5) {
 				team_members.push(this_project.member5);
 			}
 
@@ -206,11 +228,11 @@ exports.update_project_post = function update_project_post(req, res, course) {
 
 };
 
-function truncate_description(description){
+function truncate_description(description) {
 	var description_cutoff = 200;
-	if(description.length > description_cutoff){
+	if (description.length > description_cutoff) {
 		return description.substring(0, description_cutoff) + '...';
-	}else{
+	} else {
 		return description;
 	}
 }
