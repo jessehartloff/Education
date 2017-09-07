@@ -14,6 +14,9 @@ router.post('/', function (req, res) {
 
 	var repo_url = req.body.repository.html_url;
 
+	// in case they submit the url to clone
+	repo_url = repo_url.replace(".git", "");
+
 	req.db.get('projects').findOne({
 		'repository_link_primary': repo_url
 	}, {}, function (err, project) {
