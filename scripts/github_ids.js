@@ -15,6 +15,6 @@ collection.find({"courses_enrolled.cse442-f17.course_key": "cse442-f17"}, {}, fu
 			ids.push(id);
 		}
 	}
-	console.log(ids);
+	process.stdout.write(ids.toString());
 	console.log(ids.length);
 });
