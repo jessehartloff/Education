@@ -44,7 +44,7 @@
             {{/unless}}
 
             {{#each course.lectures}}
-                {{#ifIndexLimited ../course.course @index 0}}
+                {{#ifIndexLimited ../course.course @index 2}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
                 {{@index}}. {{this.title}}</a>
                 <br/>
