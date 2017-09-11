@@ -19,7 +19,7 @@ previous_content_short: functions
 </p>
 
 <p>
-    Common boolean comparisons:
+    Common relational operators:
 </p>
 <ul>
     <li>Greater than: ></li>
@@ -43,12 +43,12 @@ previous_content_short: functions
 
 <hr/>
 
-<h4>Boolean operators</h4>
+<h4>boolean operators</h4>
 
 <p>
-    More boolean operators:
+    boolean operators:
 </p>
-<dl>
+				 <dl>
     <dt>and: &&</dt>
     <dd>Returns true only if both sides are true</dd>
     <dt>or: ||</dt>
@@ -72,36 +72,13 @@ previous_content_short: functions
 
 <hr/>
 
-<pre><code class="java">
-    int number = 8;
-    if(5 < number && number < 10){
-        System.out.println("number is between 5 and 10");
-    }
-</code></pre>
-
-<p>
-    Output:
-    <kbd>number is between 5 and 10</kbd>
-</p>
-
-<br/><br/>
-<p>Breakdown:</p>
-<ol>
-    <li><code>if(5 < number && number < 10)</code> Replace all variable names with their stored values</li>
-    <li><code>if(5 < 8 && 8 < 10)</code> Evaluate comparisons before boolean operators from left to right</li>
-    <li><code>if(true && 8 < 10)</code></li>
-    <li><code>if(true && true)</code> Evaluate the boolean operator (and)</li>
-    <li><code>if(true)</code> The boolean expression results in true making the conditional for the if statement true
-    </li>
-    <li><code>{...}</code> Execute the following code block</li>
-</ol>
-
 == If/else
 
 <a href="/static/115Slides/2-ifElse.pptx">If/Else Concept Slides</a>
 <br/><br/>
 
 
+One-armed conditional:
 <p>
     Check a boolean value. If true, run optional code. If false, skip the optional code.
 </p>
@@ -141,6 +118,30 @@ Syntax:
     Since the boolean value in the if statement is false, the code in the {}'s will not be executed.
 </p>
 
+
+<pre><code class="java">
+    int number = 8;
+    if(5 < number && number < 10){
+        System.out.println("number is between 5 and 10");
+    }
+</code></pre>
+
+<p>
+    Output:
+    <kbd>number is between 5 and 10</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>if(5 < number && number < 10)</code> Replace all variable names with their stored values</li>
+    <li><code>if(5 < 8 && 8 < 10)</code> Evaluate comparisons before boolean operators from left to right</li>
+    <li><code>if(true && 8 < 10)</code></li>
+    <li><code>if(true && true)</code> Evaluate the boolean operator (and)</li>
+    <li><code>if(true)</code> The boolean expression results in true making the conditional for the if statement true
+    </li>
+    <li><code>{...}</code> Execute the following code block</li>
+</ol>
 
 <hr/>
 
