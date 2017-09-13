@@ -10,6 +10,10 @@ collection.find({"courses_enrolled.cse442-f17.course_key": "cse442-f17"}, {}, fu
 	for (var i in records) {
 		var id = records[i]["courses_enrolled"]["cse442-f17"]["options"]["github_username"]["value"];
 		var ubit = records[i]["username"];
+		var team_id = "";
+		if(records[i]["courses_enrolled"]["cse442-f17"]["options"]["team_id"]) {
+			team_id = records[i]["courses_enrolled"]["cse442-f17"]["options"]["team_id"]["value"];
+		}
 		if (id === "") {
 			continue;
 		}
@@ -18,7 +22,7 @@ collection.find({"courses_enrolled.cse442-f17.course_key": "cse442-f17"}, {}, fu
 		}
 		if (ids.indexOf(id) === -1) {
 			ids.push(id);
-			console.log(ubit + "," + id);
+			console.log(ubit + "," + id + "," + team_id);
 		}
 	}
 	console.log(ids);
