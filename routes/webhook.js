@@ -13,6 +13,7 @@ router.post('/', function (req, res) {
 	console.log(req.headers['x-github-event']);
 
 	var repo_url = req.body.repository.html_url;
+	req.db.get("github_activity").insert(req.body);
 
 	// in case they submit the url to clone
 	repo_url = repo_url.replace(".git", "");
