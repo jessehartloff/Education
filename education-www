@@ -6,7 +6,7 @@
 
 var app = require('./app');
 require('./add_courses');
-var debug = require('debug')('CardScanning:server');
+var debug = require('debug')('Education:server');
 var http = require('http');
 
 /**
