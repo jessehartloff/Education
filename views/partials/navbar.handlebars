@@ -47,7 +47,7 @@
                             {{/unless}}
                             {{#each course.assignments}}
 
-                                {{#ifIndexLimited ../course.course @index -1}}
+                                {{#ifIndexLimited ../course.course @index 0}}
                                     <li>
                                         <a href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
                                     </li>
