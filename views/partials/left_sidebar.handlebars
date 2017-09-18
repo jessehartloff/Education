@@ -19,7 +19,7 @@
             <br/>
         {{/unless}}
             {{#each course.assignments}}
-                {{#ifIndexLimited ../course.course @index -1}}
+                {{#ifIndexLimited ../course.course @index 0}}
                 &nbsp;<a class="menu_link"
                          href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
                 <br/>
@@ -44,7 +44,7 @@
             {{/unless}}
 
             {{#each course.lectures}}
-                {{#ifIndexLimited ../course.course @index 0}}
+                {{#ifIndexLimited ../course.course @index 2}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
                 {{@index}}. {{this.title}}</a>
                 <br/>

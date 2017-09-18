@@ -2,7 +2,7 @@
   "student_account": true,
   "student_options": true,
   "has_project": true,
-  "no_autolab": true,
+  "no_autolab": false,
   "no_question_site": true,
-  "message": "Form your team"
+  "message": "Complete a Prototype"
 }

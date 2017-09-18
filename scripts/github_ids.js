@@ -5,16 +5,27 @@ var collection = db.get('users');
 
 
 collection.find({"courses_enrolled.cse442-f17.course_key": "cse442-f17"}, {}, function (err, records) {
+	var did_their_shit = [];
 	var ids = [];
 	for (var i in records) {
 		var id = records[i]["courses_enrolled"]["cse442-f17"]["options"]["github_username"]["value"];
-		if(id === ""){
+		var ubit = records[i]["username"];
+		var team_id = "";
+		if(records[i]["courses_enrolled"]["cse442-f17"]["options"]["team_id"]) {
+			team_id = records[i]["courses_enrolled"]["cse442-f17"]["options"]["team_id"]["value"];
+		}
+		if (id === "") {
+			continue;
+		}
+		if (did_their_shit.indexOf(id) !== -1) {
 			continue;
 		}
 		if (ids.indexOf(id) === -1) {
 			ids.push(id);
+			console.log(ubit + "," + id + "," + team_id);
 		}
 	}
-	process.stdout.write(ids.toString());
+	//console.log(ids);
 	console.log(ids.length);
 });
+
