@@ -231,6 +231,51 @@ previous_content_short: ds
     (ex. the data structure was empty).
 </p>
 
+<br/>
+<hr/>
+<!---->
+
+
+<p>
+    We can also find the max value in HashMap by following a similar procedure. Now, instead of storing the index which
+    held the max value we will store the key where the max value is stored. This allows us to find the max value and
+    its location in the map.
+</p>
+<pre><code class="java">
+    HashMap&lt;Character, Integer&gt; charMap = new HashMap&lt;&gt;();
+    charMap.put('k', 107);
+    charMap.put('J', 74);
+    charMap.put('6', 54);
+    charMap.put('*', 42);
+    charMap.put('|', 124);
+    charMap.put('W', 87);
+    charMap.put(' ', 32);
+
+    int max = Integer.MIN_VALUE;
+    char index = 0;
+    for(char key : charMap.keySet()){
+        int value = charMap.get(key);
+        if(value &gt; max){
+            max = value;
+            index = key;
+        }
+    }
+    System.out.println("The max value of " + max + " was found at key " + index);
+</code></pre>
+<p>
+    Output: <kbd>The max value of 124 was found at key |</kbd>
+</p>
+
+<p>
+    Following the same concept as for max and min value, we initialize the index to impossible value (-1). This is not a
+    proper index and will be overwritten once the first value is read. By using -1 we can also check for this value
+    elsewhere in the code if we have concerns that there might be an error. For example, if you initialize the index to
+    -1 in a method that returns an index we can check if it returns -1 when it's called and know if something went wrong
+    (ex. the data structure was empty).
+</p>
+
+<!---->
+
 
 == Linear Search
 
@@ -246,23 +291,23 @@ previous_content_short: ds
 </p>
 
 <pre><code class="java">
-public static boolean linearSearch(ArrayList&lt;Integer&gt; numbers, int toFind){
-    for(int value : numbers){
-        if(value == toFind){
-            return true;
+    public static boolean linearSearch(ArrayList&lt;Integer&gt; numbers, int toFind){
+        for(int value : numbers){
+            if(value == toFind){
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
-public static void main(String[] args){
-    ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
-    for(int i=1; i<100; i++){
-        squares.add(i*i);
+    public static void main(String[] args){
+        ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
+        for(int i=1; i<100; i++){
+            squares.add(i*i);
+        }
+        System.out.println(linearSearch(squares, 9));
+        System.out.println(linearSearch(squares, 23));
     }
-    System.out.println(linearSearch(squares, 9));
-    System.out.println(linearSearch(squares, 23));
-}
 </code></pre>
 
 <p>
@@ -341,36 +386,36 @@ public static void main(String[] args){
 
 
 <pre><code class="java">
-public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind){
-    if(numbers.size() == 0){
+    public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind){
+        if(numbers.size() == 0){
+            return false;
+        }
+
+        int lowerBound = 0;
+        int upperBound = numbers.size() - 1;
+
+        // check the end points first
+        if(numbers.get(lowerBound) == toFind || numbers.get(upperBound) == toFind){
+            return true;
+        }
+
+        while(upperBound - lowerBound > 1){
+            // Dividing 2 ints so this is integer division and returns the floor of the result
+            int midPoint = (upperBound + lowerBound) / 2;
+            int midValue = numbers.get(midPoint);
+
+            if(midValue == toFind){
+                return true;
+            }else if(toFind < midValue){
+                upperBound = midPoint;
+            }else{
+                // It's not equal to or less than so it must be greater than
+                lowerBound = midPoint;
+            }
+        }
+
         return false;
     }
-
-    int lowerBound = 0;
-    int upperBound = numbers.size() - 1;
-
-    // check the end points first
-    if(numbers.get(lowerBound) == toFind || numbers.get(upperBound) == toFind){
-        return true;
-    }
-
-    while(upperBound - lowerBound > 1){
-        // Dividing 2 ints so this is integer division and returns the floor of the result
-        int midPoint = (upperBound + lowerBound) / 2;
-        int midValue = numbers.get(midPoint);
-
-        if(midValue == toFind){
-            return true;
-        }else if(toFind < midValue){
-            upperBound = midPoint;
-        }else{
-            // It's not equal to or less than so it must be greater than
-            lowerBound = midPoint;
-        }
-    }
-
-    return false;
-}
 </code></pre>
 
 <p>
@@ -379,14 +424,14 @@ public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind)
 </p>
 
 <pre><code class="java">
-public static void main(String[] args){
-    ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
-    for(int i=1; i<100; i++){
-        squares.add(i*i);
+    public static void main(String[] args){
+        ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
+        for(int i=1; i<100; i++){
+            squares.add(i*i);
+        }
+        System.out.println(binarySearch(squares, 9));
+        System.out.println(binarySearch(squares, 23));
     }
-    System.out.println(binarySearch(squares, 9));
-    System.out.println(binarySearch(squares, 23));
-}
 </code></pre>
 <p>
     Output:
@@ -506,10 +551,12 @@ public static void main(String[] args){
     System.out.println(words);
 
     Collections.sort(words, new Comparator&lt;String&gt;(){
+
         @Override
         public int compare(String o1, String o2){
             return o1.compareToIgnoreCase(o2);
         }
+
     });
 
     System.out.println(words);
@@ -541,25 +588,25 @@ public static void main(String[] args){
 
 
 <pre><code class="java">
-public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
-    for(int i = 0; i < numbers.size(); i++){
+    public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
+        for(int i = 0; i < numbers.size(); i++){
 
-        // Find the min value from index i to numbers.size()-1
-        int minValue = Integer.MAX_VALUE;
-        int minIndex = -1;
-        for(int j = i; j < numbers.size(); j++){
-            int currentValue = numbers.get(j);
-            if(currentValue < minValue){
-                minValue = currentValue;
-                minIndex = j;
+            // Find the min value from index i to numbers.size()-1
+            int minValue = Integer.MAX_VALUE;
+            int minIndex = -1;
+            for(int j = i; j < numbers.size(); j++){
+                int currentValue = numbers.get(j);
+                if(currentValue < minValue){
+                    minValue = currentValue;
+                    minIndex = j;
             }
         }
 
         // swap the values in i and minIndex
         numbers.set(minIndex, numbers.get(i));
         numbers.set(i, minValue);
+        }
     }
-}
 </code></pre>
 
 <p>
