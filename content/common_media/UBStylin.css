@@ -11,6 +11,10 @@ div.hidden {
     width: 0;
 }
 
+a.hw1{
+    color: #dac800;
+}
+
 div.gold-star {
     padding: 15px;
     background-color: #ffff00;
@@ -77,7 +81,7 @@ div.question-well {
 
 /*.glyphicon {*/
 /*font-size: 10px;*/
-/*!*vertical-align: 0;*!*/
+/*/*vertical-align: 0;*/
 /*}*/
 
 div.padded {
