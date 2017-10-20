@@ -1,0 +1,41 @@
+{{#if user}}
+    <div class="well lecture-section-well">
+        <h4>Already logged in as {{user.username}}</h4>
+    </div>
+{{else}}
+    <div class="well lecture-section-well">
+
+        <h3>Login</h3><br/>
+        <form action="/user/login" method="post">
+            <div>
+                <label>Username:</label><br/>
+                <input type="text" name="username"/>
+            </div><br/>
+            <div>
+                <label>Password:</label><br/>
+                <input type="password" name="password"/>
+            </div><a href="/user/forgot-password">forgot password</a><br/><br/>
+            <div>
+                <input type="submit" value="Log In"/>
+            </div>
+        </form>
+
+    </div>
+
+
+    <div class="well lecture-section-well">
+
+        <h3>Register</h3><br/>
+        <p>Enter your @buffalo.edu email address to register</p>
+        <form action="/user/register" method="post">
+            <div>
+                <label>Email:</label><br/>
+                <input type="text" name="email"/>
+            </div><br/>
+            <div>
+                <input type="submit" value="Register"/>
+            </div>
+        </form>
+
+    </div>
+{{/if}}

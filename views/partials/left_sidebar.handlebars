@@ -11,29 +11,52 @@
 
         {{#if course.assignments}}
 
-            <h4>&nbsp;Proving Grounds</h4>
-            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">Autolab</a>
-            <br/>
+            <!--<hr/>-->
 
+            <h4>&nbsp;Assessment</h4>
+        {{#unless course.course_options.no_autolab}}
+            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
+            <br/>
+        {{/unless}}
             {{#each course.assignments}}
-                &nbsp;<a class="menu_link"
+                {{#ifIndexLimited ../course.course @index 2}}
+                &nbsp;<a class="menu_link {{this.short_title}}"
                          href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
                 <br/>
+                {{else}}
+                &nbsp;<a class="menu_link"
+                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}"></a>{{this.title}}
+                <br/>
+                {{/ifIndexLimited}}
             {{/each}}
         {{/if}}
 
 
         {{#if course.lectures}}
-            <h4>&nbsp;Training Area</h4>
+
+            <!--<hr/>-->
+
+            <h4>&nbsp;Training</h4>
+            {{#unless course.course_options.no_question_site}}
             &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
-                     target="_blank">Questions</a>
+                     target="_blank">-Questions</a>
             <br/>
+            {{/unless}}
 
             {{#each course.lectures}}
+                {{#ifIndexLimited ../course.course @index 12}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
                 {{@index}}. {{this.title}}</a>
                 <br/>
+                {{else}}
+                    &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}"></a>
+                    {{@index}}. {{this.title}}
+                    <br/>
+                {{/ifIndexLimited}}
             {{/each}}
         {{/if}}
+
+        <br/>
+
     </div>
 </div>

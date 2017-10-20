@@ -1,0 +1,24 @@
+{{#unless user}}
+    <div class="well lecture-section-well">
+        <h4>You are not logged in</h4>
+    </div>
+{{else}}
+    <div class="well lecture-section-well">
+
+        <h3>Create Project</h3><br/>
+        <form action="/courses/{{course.course}}/create-project" method="post">
+            <div>
+                <label>Project Name:</label><br/>
+                <input type="text" name="project_name"/>
+            </div><br/>
+            <div>
+                <label>Team Name:</label><br/>
+                <input type="text" name="team_name"/>
+            </div><br/>
+            <div>
+                <input type="submit" value="Create Project"/>
+            </div>
+        </form>
+
+    </div>
+{{/unless}}

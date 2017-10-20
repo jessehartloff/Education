@@ -1,27 +1,34 @@
 <html>
 <head>
     <title>{{#if course}}{{course.number_upper}}: {{course.title}}{{else}}CSE{{/if}}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/UBStylin.css"/>
     <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/vs.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+
     <script src="/static/functions.js"></script>
+    {{#if course}}
+        <script>
+            var course = "{{course.course}}";
+        </script>
+    {{/if}}
 </head>
 
 
-<body class="outer">
-
-
-{{> navbar}}
+<body class="outer" onload="after_load()">
 
 
 <div class="container-fluid">
+    {{> navbar}}
+
+
 
 
     <div class="row">
@@ -32,9 +39,58 @@
 
         <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
             <div class="content-area">
+                <div class="messages">
+                    {{#if messages.course_info}}
+                        {{#each messages.course_info}}
+                            <div class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <b>{{this}}</b><br/>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    {{#if messages.error}}
+                        {{#each messages.error}}
+                            <div class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <b>{{this}}</b><br/>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    {{#if messages.info}}
+                        {{#each messages.info}}
+                            <div class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <b>{{this}}</b><br/>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                    {{#if messages.success}}
+                        {{#each messages.success}}
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <b>{{this}}</b><br/>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+
+                    {{#if message}}
+                        <div class="alert alert-warning alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{message}}
+                        </div>
+                    {{/if}}
+                </div>
+
+
                 {{{body}}}
             </div>
         </div>
+
+        <!--<div id="right-sidebar" class="hidden-xs col-sm-2 less-padding">-->
+        <!--<div class="content-area">-->
+        {{!> chat}}
+        <!--</div>-->
+        <!--</div>-->
 
     </div>
 </div>

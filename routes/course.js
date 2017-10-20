@@ -1,82 +1,119 @@
 var express = require('express');
 var router = express.Router();
+var users_util = require('../util/users');
+var course_util = require('../util/course');
+var projects_util = require('../util/projects');
+var api_util = require('../util/api');
 
-var nodemailer = require('nodemailer');
 
+// D: Check AutoLab multiple sections
+// D: 199 activities
+// D: Disable lecture links
+// D: Update university links
 
-// Check if a user is logged in
-//router.use(function (req, res, next) {
-//	console.log(req.user);
-//	if (req.user) {
-//		next();
-//	} else {
-//		res.redirect('/');
-//	}
-//});
+// TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
+
+// D: Mobile friendly menu
+
+// D: Course list is random
+
+// TOD/: They must list what they will learn from the project (new skills/tech) In the team contract for each member
+
+// TODO: Show videos with corresponding release on single project page. Finish formatting the single project page
+// D: Bugfix. No enroll button
+
+// ~TODO: Office hours App
+
+// ~TODO: Meeting scheduling
+
+// TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
+// TODO: Ratings are hidden until the end of a round (or hidden forever). Reviews can be displayed
+// ~TODO: Public reviews? At least private messages to the team (email lists? Ryver? Github? my site?)
+// Ambitious: Chat on each project page. Team mates messages display differently
+
+// D: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
+
+// ~TODO: Q&A tied to lecture sections
+// ~TODO: Students can join groups and edit their group's content
+// ~TODO: User roles and different views for Student/TA/Instructor (For office hours)
+
 
 router.get('/', function (req, res) {
-	res.render('index', {
-		'course_list': res.course_list
-	});
+	res.render('index', res.to_template);
 });
 
 
 router.get('/:course/lectures/:lecture', function (req, res) {
-	render_content(req, res, 'lectures', req.params.lecture);
+	course_util.render_content(req, res, 'lectures', req.params.lecture);
 });
 
 router.get('/:course/assignments/:assignment', function (req, res) {
-	render_content(req, res, 'assignments', req.params.assignment);
+	course_util.render_content(req, res, 'assignments', req.params.assignment);
+});
+
+router.get('/:course/enroll', function (req, res) {
+	if (res.to_template.user) {
+		users_util.enroll(res.to_template.user.username, req.params.course);
+		req.flash('success', 'Enrolled in ' + req.params.course);
+		res.redirect('/courses/' + req.params.course + '/syllabus');
+	} else {
+		req.flash('error', 'not logged in');
+		res.redirect('/courses/' + req.params.course + '/syllabus');
+	}
+});
+
+
+router.get('/:course/deeper-dive/:concept/:topic', function (req, res) {
+	api_util.deeper_dive(req, res);
+});
+
+router.get('/:course/reference/:lecture/:section', function (req, res) {
+	api_util.reference(req, res);
+});
+
+
+// Project routes
+router.get('/:course/project/:project', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.project_page);
+});
+
+router.get('/:course/update-project/:project', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.update_project_get);
+});
+
+router.post('/:course/update-project/:project', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.update_project_post);
 });
 
 router.get('/:course/projects', function (req, res) {
-	var db = req.db;
-	var collection = db.get('course_content');
-	collection.findOne({'course': req.params.course}, {}, function (err, record) {
-		if (err) {
-			console.log(err);
-			res.render('error');
-		}
-		res.render('projects', {
-			'course': record,
-			'course_list': res.course_list,
-			'projects': record.projects
-		});
-	});
+	course_util.preprocess_course(req, res, projects_util.projects_page);
 });
+
+router.get('/:course/create-project', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.get_create_project);
+});
+
+router.post('/:course/create-project', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.post_create_project);
+});
+
+router.post('/:course/submit-video/:submission', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.submit_video);
+});
+
+
+router.post('/:course/join-team/:team_id', function (req, res) {
+	course_util.preprocess_course(req, res, projects_util.join_team);
+});
+// end project routes
+
 
 router.get('/:course/:extra', function (req, res) {
-	render_content(req, res, 'extra', req.params.extra);
+	course_util.render_content(req, res, 'extra', req.params.extra);
 });
 
-
-function render_content(req, res, type, param) {
-	var db = req.db;
-	var collection = db.get('course_content');
-	collection.findOne({'course': req.params.course}, {}, function (err, record) {
-		if (err) {
-			console.log(err);
-			res.render('error');
-		}
-		var content = {};
-		for(var i in record[type]){
-			var this_thing = record[type][i];
-			if(this_thing.short_title === param){
-				content = this_thing;
-				break;
-			}
-		}
-		res.render(type, {
-			'course': record,
-			'course_list': res.course_list,
-			'content': content
-		});
-	});
-}
-
-
 router.get('/:course/*', function (req, res) {
-	render_content(req, res, 'extra', 'syllabus');
+	course_util.render_content(req, res, 'extra', 'syllabus');
 });
 
 module.exports = router;
