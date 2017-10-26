@@ -175,6 +175,12 @@ div.less-padding {
     /*margin: 0;*/
 }
 
+.thumbnail {
+    cursor: pointer;
+    background: no-repeat center;
+    background-size: cover;
+}
+
 .panel-default > .panel-heading-project-card {
     /*background-image: none;*/
     /*background-color: #f0fcff;*/
@@ -224,9 +230,9 @@ span code.java {
 }
 
 /*.panel > .panel-heading {*/
-    /*background-color: #0300b9;*/
-    /*background-color: #156ad2;*/
-    /*color: #ffffff;*/
+/*background-color: #0300b9;*/
+/*background-color: #156ad2;*/
+/*color: #ffffff;*/
 /*}*/
 
 div.header {
