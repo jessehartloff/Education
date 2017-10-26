@@ -79,32 +79,40 @@
     {{/if}}
 
     {{#each project.video_submissions as |video|}}
-        {{#if @first}}
+        {{#if @last}}
             <div class="embed-responsive embed-responsive-4by3"
                  onclick="loadVideo(this, '{{ video.link }}')">
                 <img class="img-responsive" style="cursor: pointer;"
-                     src="http://img.youtube.com/vi/{{ video.link }}/0.jpg"/>
+                     src="http://img.youtube.com/vi/{{ video.link }}/maxresdefault.jpg"/>
             </div>
         {{else}}
+
+        {{/if}}
+    {{/each}}
+
+    {{#each project.video_submissions as |video|}}
+        {{#unless @first}}
+            {{#unless @last}}
+                -
+            {{/unless}}
+        {{/unless}}
+        {{#unless @last}}
             <h5 style="display: inline-block;"><a
                     href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
-                {{#unless @last}}
-                    -
-                {{/unless}}
             </h5>
-        {{/if}}
+        {{/unless}}
     {{/each}}
 
 
     <h4>Issues</h4>
     {{#if project.issues}}
         {{#each project.issues}}
-            <a href="{{this.link}}">{{this.title}}</a><br/>
-            {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
-                                          style="color:gold"></span> Help Wanted{{/if}}<br/>
-            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}<br/>
-            {{#if this.assigned_to}}
-                Assigned: {{this.assigned_to}}<br/>
+            {{#if this.help_wanted}}
+                {{#if this.open}}
+                    <a href="{{this.link}}">{{this.title}}</a><br/>
+                    {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
+                                                  style="color:gold"></span> Help Wanted{{/if}}<br/>
+                {{/if}}
             {{/if}}
             <br/>
         {{/each}}

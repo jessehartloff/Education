@@ -15,49 +15,88 @@
             <div class="row group-card">
         {{/ifEven}}
 
-            <div class="col-md-6">
-                <div class="well">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-project-card">
 
 
-                    <h3>
-                        <a href="{{this.landing_page_link}}">
-                            {{this.project_name}}
-                        </a>
-                    </h3>
+                        <div class="row" style="display: flex; align-items: center;margin-top: 1px;">
 
-                    <h4>{{this.team_name}}</h4>
 
-                    {{#each this.video_submissions as |video|}}
-                        {{#if @last}}
-                            <div class="embed-responsive embed-responsive-4by3"
-                                 onclick="loadVideo(this, '{{ video.link }}')">
-                                <img class="img-responsive" style="cursor: pointer;"
-                                     src="http://img.youtube.com/vi/{{ video.link }}/0.jpg"/>
+                            <div class="col-xs-6">
+
+                                <h3>
+                                    {{#if this.landing_page_link}}
+                                        <a href="{{this.landing_page_link}}">
+                                            {{this.project_name}}
+                                        </a>
+                                    {{else}}
+                                        {{this.project_name}}
+                                    {{/if}}
+                                </h3>
+
+                                <h4>{{this.team_name}}</h4>
+
                             </div>
-                        {{/if}}
-                    {{/each}}
+                            <div class="col-xs-6 text-right">
+                                {{#if this.repository_link_primary}}
+                                    <a href="{{this.repository_link_primary}}"><img src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                                {{/if}}
 
-                    {{#each this.video_submissions as |video|}}
-                        {{#unless @first}}
-                            {{#unless @last}}
-                                -
+                                {{#if this.communication_channel}}
+                                    <a href="{{this.communication_channel}}"><img style="max-height:32px"
+                                                                                  src="/static/logo-dark.png"/></a>&nbsp;
+                                {{/if}}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="panel-body">
+
+
+                        <br/>
+
+                        {{#each this.video_submissions as |video|}}
+                            {{#if @last}}
+                                <div class="embed-responsive embed-responsive-4by3"
+                                     onclick="loadVideo(this, '{{ video.link }}')">
+                                    <!--<div class="row">-->
+                                    <!--<div class="container-fluid">-->
+                                    <img class="img-responsive" style="cursor: pointer;"
+                                         src="https://img.youtube.com/vi/{{ video.link }}/maxresdefault.jpg"/>
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+                            {{/if}}
+                        {{/each}}
+
+
+                        {{!--
+                        {{#each this.video_submissions as |video|}}
+                            {{#unless @first}}
+                                {{#unless @last}}
+                                    -
+                                {{/unless}}
                             {{/unless}}
-                        {{/unless}}
-                        {{#unless @last}}
-                            <h5 style="display: inline-block;"><a
-                                    href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
+                            {{#unless @last}}
+                                <h5 style="display: inline-block;"><a
+                                        href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
 
-                            </h5>
-                        {{/unless}}
-                    {{/each}}
+                                </h5>
+                            {{/unless}}
+                        {{/each}}
+                        --}}
 
-
-                    <p>{{ this.project_description_short }}</p>
-                    <p>
-                        <a href="/courses/{{../course.course}}/project/{{this.team_id}}">
-                            more
-                        </a>
-                    </p>
+                        <p>{{ this.project_description_short }}</p>
+                        <p>
+                            <a href="/courses/{{../course.course}}/project/{{this.team_id}}">
+                                more
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
     {{/each}}
