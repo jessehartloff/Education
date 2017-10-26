@@ -20,10 +20,10 @@
                     <div class="panel-heading panel-heading-project-card">
 
 
-                        <div class="row" style="display: flex; align-items: center;margin-top: 1px;">
+                        <div class="row" style="display: flex; align-items: center;">
 
 
-                            <div class="col-xs-6">
+                            <div class="col-xs-8">
 
                                 <h3>
                                     {{#if this.landing_page_link}}
@@ -38,7 +38,7 @@
                                 <h4>{{this.team_name}}</h4>
 
                             </div>
-                            <div class="col-xs-6 text-right">
+                            <div class="col-xs-4 text-right">
                                 {{#if this.repository_link_primary}}
                                     <a href="{{this.repository_link_primary}}"><img src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
                                 {{/if}}
@@ -64,10 +64,8 @@
                                 <div class="embed-responsive embed-responsive-4by3"
                                      onclick="loadVideo(this, '{{ video.link }}')">
                                     <!--<div class="row">-->
-                                    <!--<div class="container-fluid">-->
-                                    <img class="img-responsive" style="cursor: pointer;"
-                                         src="https://img.youtube.com/vi/{{ video.link }}/maxresdefault.jpg"/>
-                                    <!--</div>-->
+                                    <img class="img-responsive" style="cursor: pointer; width: 100%;"
+                                         src="https://img.youtube.com/vi/{{ video.link }}/hqdefault.jpg"/>
                                     <!--</div>-->
                                 </div>
                             {{/if}}
@@ -89,6 +87,8 @@
                             {{/unless}}
                         {{/each}}
                         --}}
+
+                        <br/>
 
                         <p>{{ this.project_description_short }}</p>
                         <p>
