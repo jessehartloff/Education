@@ -6,9 +6,12 @@ var fs = require('fs');
 
 
 collection.find({}, {}, function (err, records) {
-	fs.writeFile('./logs.json', JSON.stringify(records, null, 2), function(err){
+	if(err){console.log(err);}
+	console.log(records.length);
+	var all_records;
+	fs.writeFile('./logs.json', JSON.stringify(records.slice(0, 10000), null, 2), function(err2){
+		if(err2){console.log(err2);}
 		console.log("done");
 	});
 	//console.log(records);
 });
-
