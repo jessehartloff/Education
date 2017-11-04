@@ -15,3 +15,18 @@ collection.find({}, {}, function (err, records) {
 	});
 	//console.log(records);
 });
+
+
+
+
+//collection.find({}, {}, function (err, records) {
+//	if(err){console.log(err);}
+//	console.log(records.length);
+//	var all_records;
+//	fs.writeFile('./logs3.json', JSON.stringify(records.slice(20000, records.length), null, 2), function(err2){
+//		if(err2){console.log(err2);}
+//		console.log("done");
+//	});
+//	//console.log(records);
+//});
+
