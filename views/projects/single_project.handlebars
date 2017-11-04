@@ -78,35 +78,47 @@
         </p>
     {{/if}}
 
+    <br/>
+
     {{#each project.video_submissions as |video|}}
-        {{#if @first}}
-            <div class="embed-responsive embed-responsive-4by3"
+        {{#if @last}}
+            <div class="embed-responsive embed-responsive-16by9 thumbnail"
+                 style="background-image: url('https://img.youtube.com/vi/{{ video.link }}/sddefault.jpg');"
                  onclick="loadVideo(this, '{{ video.link }}')">
-                <img class="img-responsive" style="cursor: pointer;"
-                     src="http://img.youtube.com/vi/{{ video.link }}/0.jpg"/>
+                <!--<div class="row">-->
+                <!--<img class="img-responsive" style="cursor: pointer; width: 100%;"-->
+                <!--src="https://img.youtube.com/vi/{{ video.link }}/sddefault.jpg"/>-->
+                <!--</div>-->
             </div>
         {{else}}
-            <h5 style="display: inline-block;"><a
-                    href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
-                {{#unless @last}}
-                    -
-                {{/unless}}
-            </h5>
+
         {{/if}}
     {{/each}}
 
+    {{#each project.video_submissions as |video|}}
+        {{#unless @first}}
+            {{#unless @last}}
+                -
+            {{/unless}}
+        {{/unless}}
+        {{#unless @last}}
+            <h5 style="display: inline-block;"><a
+                    href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
+            </h5>
+        {{/unless}}
+    {{/each}}
 
-    <h4>Issues</h4>
+
+    <h4>Collaboration Issues</h4>
     {{#if project.issues}}
         {{#each project.issues}}
-            <a href="{{this.link}}">{{this.title}}</a><br/>
-            {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
-                                          style="color:gold"></span> Help Wanted{{/if}}<br/>
-            {{#if this.open}}OPEN{{else}}CLOSED{{/if}}<br/>
-            {{#if this.assigned_to}}
-                Assigned: {{this.assigned_to}}<br/>
+            {{#if this.help_wanted}}
+                {{#if this.open}}
+                    <a href="{{this.link}}">{{this.title}}</a><br/>
+                    {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
+                                                  style="color:gold"></span> Help Wanted{{/if}}<br/>
+                {{/if}}
             {{/if}}
-            <br/>
         {{/each}}
     {{else}}
         <p>
