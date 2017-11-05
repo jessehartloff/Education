@@ -1,0 +1,49 @@
+<!--<div class="well lecture-section-well">-->
+<!--<h1>Projects</h1>-->
+<!--</div>-->
+
+{{#unless question}}
+    <div class="well lecture-section-well">
+        <p>Error: No question to display</p>
+    </div>
+{{else}}
+
+
+
+    {{#if feedback}}
+
+        <div class="well lecture-section-well">
+
+            <h3>Feedback</h3><br/>
+            {{#if feedback.correct}}
+                <div class="alert alert-success">Correct</div>
+            {{else}}
+                <div class="alert alert-danger">You suck!</div>
+            {{/if}}
+            <p>
+                {{feedback.text}}
+            </p>
+        </div>
+
+    {{/if}}
+
+    <div class="well lecture-section-well">
+
+        <h3>Question</h3><br/>
+        <form action="/courses/{{course.course}}/questions" method="post" autocomplete="off">
+            <input type="text" name="question_id" value="{{question.question_id}}" hidden/>
+            <div>
+                <label>{{question.question_text}}</label><br/>
+                <input type="text" name="answer" autocomplete="off" autofocus/>
+            </div>
+            <br/>
+            <div>
+                <input type="submit" value="Submit"/>
+            </div>
+        </form>
+    </div>
+
+
+
+
+{{/unless}}

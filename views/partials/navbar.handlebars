@@ -17,13 +17,15 @@
                             <div class="display-text" style="font-size: larger">{{course.number_upper}}</div>
                             <div class="tiny-text">{{course.number_only}}</div>
                         {{else}}
-                            <img class="img-responsive" src="/static/CSE50.png">
+                            <div class="display-text" style="font-size: larger">CSE</div>
+                            <!--<img class="img-responsive" src="/static/CSE50.png">-->
                         {{/if}}
                     </a>
                     <ul class="dropdown-menu">
                         {{#each course_list}}
                             {{#unless this.archived}}
-                                <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}: {{this.title}}</a></li>
+                                <li><a href="/courses/{{this.course}}/syllabus">{{this.number_upper}}
+                                    : {{this.title}}</a></li>
                             {{/unless}}
                         {{/each}}
                         <li><a href="/courses/">Archive</a></li>
@@ -90,6 +92,10 @@
                     {{#each course.extra}}
                         <li><a href="/courses/{{../course.course}}/{{this.page_type}}">{{this.title}}</a></li>
                     {{/each}}
+                    {{#if course}}
+                        <li><a href="/courses/{{course.course}}/questions" style="background-color: red">Practice</a>
+                        </li>
+                    {{/if}}
                 </ul>
 
 

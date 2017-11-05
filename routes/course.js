@@ -4,6 +4,7 @@ var users_util = require('../util/users');
 var course_util = require('../util/course');
 var projects_util = require('../util/projects');
 var api_util = require('../util/api');
+var questions_util = require('../questions/questions');
 
 
 // D: Check AutoLab multiple sections
@@ -107,6 +108,16 @@ router.post('/:course/join-team/:team_id', function (req, res) {
 });
 // end project routes
 
+
+// Questions
+router.get('/:course/questions', function (req, res) {
+	course_util.preprocess_course(req, res, questions_util.get_question);
+});
+
+router.post('/:course/questions', function (req, res) {
+	course_util.preprocess_course(req, res, questions_util.post_question);
+});
+// ens Questions
 
 router.get('/:course/:extra', function (req, res) {
 	course_util.render_content(req, res, 'extra', req.params.extra);
