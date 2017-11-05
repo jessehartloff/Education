@@ -6,14 +6,14 @@
 
 var app = require('./app');
 require('./add_courses');
-var debug = require('debug')('Dev_Education:server');
+var debug = require('debug')('Education:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3055');
+var port = normalizePort(process.env.PORT || '3070');
 app.set('port', port);
 
 /**
