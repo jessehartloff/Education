@@ -55,9 +55,9 @@ app.use(preprocessor);
 
 app.use(auth_app);
 
-app.use('/dev/', index_routes);
-app.use('/dev/courses', course_routes);
-app.use('/dev/webhook', webhook);
+app.use('/', index_routes);
+app.use('/courses', course_routes);
+app.use('/webhook', webhook);
 //app.use('/', attendance_routes);
 //app.use('/', office_hours_routes);
 
