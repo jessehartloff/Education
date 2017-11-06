@@ -72,35 +72,6 @@ previous_content_short: gui
 </p>
 
 
-== Web API's
-
-<p>
-    We typically interact with the internet by making HTTP GET
-    requests
-    through a web browser. The response of these GET requests is a mix of HTML, CSS, and JavaScript that tells
-    the browser how to display the requested web page. These pages can contain links that we click to make a GET request
-    for another page, or forms with buttons that make POST requests containing the data we enter. But what if want to
-    interact with the Internet through the software we've written? What if we want to write a bot to automate posts on
-    social
-    media, an
-    app to get the current weather and notify us if it's going to rain soon, display only text from blog posts without
-    all the clutter, or watch the current bid on an online auction. All of these are possible with a little work, but it
-    can be tedious to write code that reads pages made for humans. If you are interested in these applications search
-    for tutorials about web crawlers and explore what you can do with you new programming skills.
-</p>
-
-<p>
-    We won't explore web crawlers in this course, but there is another way to write software for the Internet by using
-    Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
-    software instead of
-    viewed in a browser. To this end, when a web API receives an HTTP request the response will only contain the
-    requested data without complex formatting. This raw data will be in a standardized format that is easily parsed with
-    software (ex. CSV, JSON). A web API will not return HTML, CSS, or Javascript. If it did, it would be a
-    web site intended to be viewed through a browser. We will connect to web APIs via java programs to communicate over
-    the Internet.
-</p>
-
-
 == Java Libraries
 
 <p>
@@ -256,6 +227,12 @@ public class WithImport{
     a multitude of classes to explore, though we will only need to use a few of these for our purposes in this course.
 </p>
 
+<p>
+    An Eclipse project with this library setup has been provided at:
+</p>
+<p>
+    ssh://ubit@timberlake.cse.buffalo.edu/projects/CSE115/Repositories/Fall2017/Networking
+</p>
 
 == HTTP GET
 
@@ -339,6 +316,35 @@ public static String postRequest(String url, String params, boolean json){
 <p>
     More details on the origin of these two methods can be found here: <a
         href="https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html">https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html</a>
+</p>
+
+
+== Web API's
+
+<p>
+    We typically interact with the internet by making HTTP GET
+    requests
+    through a web browser. The response of these GET requests is a mix of HTML, CSS, and JavaScript that tells
+    the browser how to display the requested web page. These pages can contain links that we click to make a GET request
+    for another page, or forms with buttons that make POST requests containing the data we enter. But what if want to
+    interact with the Internet through the software we've written? What if we want to write a bot to automate posts on
+    social
+    media, an
+    app to get the current weather and notify us if it's going to rain soon, display only text from blog posts without
+    all the clutter, or watch the current bid on an online auction. All of these are possible with a little work, but it
+    can be tedious to write code that reads pages made for humans. If you are interested in these applications search
+    for tutorials about web crawlers and explore what you can do with you new programming skills.
+</p>
+
+<p>
+    We won't explore web crawlers in this course, but there is another way to write software for the Internet by using
+    Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
+    software instead of
+    viewed in a browser. To this end, when a web API receives an HTTP request the response will only contain the
+    requested data without complex formatting. This raw data will be in a standardized format that is easily parsed with
+    software (ex. CSV, JSON). A web API will not return HTML, CSS, or Javascript. If it did, it would be a
+    web site intended to be viewed through a browser. We will connect to web APIs via java programs to communicate over
+    the Internet.
 </p>
 
 
