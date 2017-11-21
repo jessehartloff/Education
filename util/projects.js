@@ -142,21 +142,21 @@ function get_members(req, res, course_id, this_project, next) {
 				team_members.push(this_project.member5);
 			}
 
-			if (users.user_enrolled(req)) {
-				for (var i in members_simple) {
-					if (team_members.indexOf(members_simple[i]) == -1) {
-						req.flash('error', members_simple[i] + ' is not listed properly! They must find a new team or be added to this one')
-					}
-				}
-
-				for (var i in team_members) {
-					if (members_simple.indexOf(team_members[i]) == -1) {
-						req.flash('error', team_members[i] + ' is not listed properly! They are not a member of this team')
-					}
-				}
-			}
-			console.log(members_simple);
-			console.log(team_members);
+			//if (users.user_enrolled(req)) {
+			//	for (var i in members_simple) {
+			//		if (team_members.indexOf(members_simple[i]) == -1) {
+			//			req.flash('error', members_simple[i] + ' is not listed properly! They must find a new team or be added to this one')
+			//		}
+			//	}
+			//
+			//	for (var i in team_members) {
+			//		if (members_simple.indexOf(team_members[i]) == -1) {
+			//			req.flash('error', team_members[i] + ' is not listed properly! They are not a member of this team')
+			//		}
+			//	}
+			//}
+			//console.log(members_simple);
+			//console.log(team_members);
 
 			res.to_template.members = members;
 			next();
