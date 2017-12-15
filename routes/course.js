@@ -117,7 +117,7 @@ router.get('/:course/questions', function (req, res) {
 router.post('/:course/questions', function (req, res) {
 	course_util.preprocess_course(req, res, questions_util.post_question);
 });
-// ens Questions
+// end Questions
 
 router.get('/:course/:extra', function (req, res) {
 	course_util.render_content(req, res, 'extra', req.params.extra);
