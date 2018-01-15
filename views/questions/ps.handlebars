@@ -1,0 +1,63 @@
+{{!#unless user}}
+    <div class="well lecture-section-well">
+        <h4>You must be logged in to use this feature. If you are taking this class you should create an account and log in.</h4>
+    </div>
+{{!else}}
+
+
+    <!-- Priority 1! -->
+<!-- Get new PS (Warn them that it will replace an un-submitted PS if they have one out) -->
+<!-- AutoLab link for submissions -->
+<!-- Log EVERYTHING! -->
+
+
+
+    <div class="well lecture-section-well">
+
+        <a href="/courses/{{course.course}}/ps-download" class="btn btn-primary">Download new PS</a>
+        <p><strong>*Warning: This will replace your current problem set</strong></p>
+
+        <!--<h3>Question</h3><br/>-->
+        <!--<form action="/courses/{{course.course}}/ps-download">-->
+            <!--<div>-->
+                <!--<input type="submit" value="Generate New Problem Set"/></br>-->
+                <!--<label><strong>*Warning: This will replace your current problem set</strong></label>-->
+            <!--</div>-->
+        <!--</form>-->
+    </div>
+
+
+
+    <!-- Priority 2 -->
+    <!-- Progress towards next goal -->
+    <!-- Feedback on most recent PS -->
+
+    <!-- Priority 3 -->
+    <!-- Re-download current PS is it's checked out and not submitted -->
+    <!-- Feedback for all previous PSs -->
+    <!-- Remind them of office hours after poor performance -->
+
+
+
+    {{#if feedback}}
+
+        <div class="well lecture-section-well">
+
+            <h3>Feedback</h3><br/>
+            {{#if feedback.correct}}
+                <div class="alert alert-success">Correct</div>
+            {{else}}
+                <div class="alert alert-danger">You suck!</div>
+            {{/if}}
+            <p>
+                {{feedback.text}}
+            </p>
+        </div>
+
+    {{/if}}
+
+
+
+
+
+{{!/unless}}

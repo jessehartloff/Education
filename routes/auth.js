@@ -70,7 +70,7 @@ app.use(function (req, res, next) {
 });
 
 router.get('/profile', function (req, res) {
-	//console.log(res.to_template);
+	console.log(res.to_template);
 	res.render('user', res.to_template);
 });
 

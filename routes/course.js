@@ -5,6 +5,7 @@ var course_util = require('../util/course');
 var projects_util = require('../util/projects');
 var api_util = require('../util/api');
 var questions_util = require('../questions/questions');
+var ps_util = require('../problemsets/problemSets');
 
 
 // D: Check AutoLab multiple sections
@@ -117,7 +118,24 @@ router.get('/:course/questions', function (req, res) {
 router.post('/:course/questions', function (req, res) {
 	course_util.preprocess_course(req, res, questions_util.post_question);
 });
-// end Questions
+
+
+// Problem Sets
+router.get('/:course/ps', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.get_ps);
+});
+
+router.get('/:course/ps-download', function (req, res) {
+	res.setHeader('Content-disposition', 'attachment; filename=ProblemSet_hartloff_0001.java');
+	console.log(__dirname);
+	res.send("\npublic class ProblemSet_hartloff_0001{\n\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello world!\");\n\t}\n}\n\n");
+});
+
+router.post('/:course/ps', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.post_ps);
+});
+// end Problem Sets
+
 
 router.get('/:course/:extra', function (req, res) {
 	course_util.render_content(req, res, 'extra', req.params.extra);

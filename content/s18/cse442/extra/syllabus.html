@@ -1,0 +1,589 @@
+---
+title: Syllabus
+short_title: syllabus
+next_content_short: resources
+previous_content_short: none
+page_type: syllabus
+---
+
+TODO:
+-Rocket Chat (or alternative)
+--Ryver
+
+Notes:
+-Day 1 fizz-buzz
+-Groups sign a charter/contract when they form (dispute resolution, division of responsibilities,  etc)
+-2 week sprints (6 lectures, 2 recitations). Sprints are all themed
+-Must have stories? At least one which is a description of the MVP. More stories for more features. Why not just call them features?
+-TA's have to come to lecture? Then do activities and stuff in lecture
+
+Sprints/Stages (Each statement is a minimum. All/most sprints can be completed earlier):
+1-Form group, choose project, and organize. Choose the target deployment platform (no multi-OS requirement for desktop apps)
+--Decide on difficulty points
+2-Prototype
+--With video
+--Possible deployment requirement
+--All code contributed ever needs to be reviewed by 2 group members
+---Can't review your own code
+---Only for pull requests to develop
+---Maybe prohibit them from adding collaborators. This will get them used to the work flow in sprint 5
+3-MVP Deployed (can be on dev server [if server required])
+--With video
+4-Prepare for Beta Testing + ?? (Alpha testing) (Beta release)
+5-Cross-project Work to implement secondary feature + Beta Testing
+--Must on-board outside help
+--Clone, pull request, code reviews for outside help
+--Might be some arguing here. "I completed the task but they won't accept my PR!"
+--Outside help can be for very small tasks
+--Somehow avoid the trading code problem. (write code for your project, trade it with someone else and they submit it to your project as the help)
+---How about, you cannot contribute to a group who is helping your group. It takes 3 to tango
+---Or, each group member must contribute to a different group?
+---How much do I even care about this? They still have to have some communication. They still have to submit a pull request and go through that process.. I think I still care
+---Quiz?.. show them 5 snippets of code. Which one did you write for the group you helped?
+6-Production deployment + Documentation + Beta testing continues
+7-Production testing, bug fixes, and presentation
+--We all look for and report bugs (this could happen earlier including during beta testing)
+--A bug found at this stage is bad news bears
+--Everyone must test other groups deployments. Bounty on bugs (must be verified). Security bugs are very bad. Display bug not so bad
+--People can't get the project to run? Fail!.. or at least close to it. Like minus 2 full letter grades
+--Bugs found are "put on trial" during lecture?
+--Respond quickly to bug report to potentially avoid a grade reduction
+--Find a way to not discourage ambition for this stage. Difficulty points might come into play. It's easy to write a bug free desktop app. More difficult for an online app with authentication
+--Bugs missed by beta testers are not punished as harsh. Revert back to beta release to verify that it's the same bug. Burden of proof is on the group
+
+115/442
+-How to assign students to groups
+—Do we assign them? Free-for-all? No. No one will take the tougher ones
+—Submit preferences lists?
+—More credit for projects with few reviews?
+-Only credit for valid bug reports (don’t reward them just for making one because they’ll all be crap)
+-Use GitHub issues
+-442 creates feedback forms. Suggest google form, but leave it open. I have to have direct access though.. no, I should standardize
+-Cap the time for 115 to get the app running. Is it taking more than 30 minutes? That's 442 fault
+-Require that 442 apps can run on Baldy 19/21 machines?..
+
+Bug Reporting
+-Distinguish between minor/major bug
+-Security bugs are always major
+-Can also submit feature requests
+-Let 442 know that bad bug reports are part of the job. Even your bosses might not know what they're doing. YOU are the domain expert and you cannot expect others to have any competency in your area. Would you want HR expecting you to know all about HR?
+-Graded on how they handle the bug report whether it's valid or not. Be professional
+
+Grading
+-Mostly Project
+-Philosophy?
+--Maybe, but related to their project
+--I have to cover ABET still..
+--Maybe some of the sprint submissions require an {ethics, legal, societal, security, career} analysis
+-Community?
+--Maybe, but integrated into the project and significantly fewer choices
+--Emphasis on collaboration within the class instead of interacting with anyone ever (which most student did not do)
+--Might cut the career development entirely.. It's a nice to have, but is it worth the logistics?
+
+Grading 2
+-Punishment/Reward based
+-Start at 0
+-4 demerits = Full disajulation
+
+-Demerits:
+--General Policy
+---You should never have to ask why you earned a demerit. No surprises here and everything is spelled out clearly.
+--Anything late/no submission
+--Not completing the project (auto-fail?)
+--Repeat bug reports in late sprint (case-by-case)
+--Being a slacker! Not completing your task for a sprint. Merging or reviewing/approving broken code
+--Not being in a team with >=3 members at the end of sprint 1 (Difficult to do with the default group)
+--Not following the branching model, PRs, and code reviews (Checks done at the end of each sprint so they can blast the repo and learn from mistakes)
+--Not using GitHub issues properly
+--Not delivering the requirements for a sprint (MVP, additional feature, contributing to another group, presenting, etc)
+--Unprofessional/unethical behavior (Has to be very bad)
+--Security bugs (Can be auto-fail if it's blatant and in a late sprint with live users)
+--Bugging me too often about gold stars
+--Poor on-boarding for outside help
+--Poor or unusable beta release
+
+-Gold Stars:
+--General Policies
+---If you have to ask if it's worth a gold star, it's probably not.
+---Should [almost] always be related to the project. Possibly 1 point for philosophy stuff
+--Above and beyond throughout any sprint, except sprint 1. These projects can be featured on the projects page
+--Completing a project with high difficulty points (Networked app with login and profiles)
+--Do extra things (Can bring back some of the community point ideas, but they should be related to the project in some way)
+--Knocking a recitation(s) out of the park. Maybe give each TA a fixed amount of gold stars they can give out
+--Great project organization
+--Exceptional individual effort. Like completing a high difficulty task
+--Taking a leadership role in the group? Maybe on case-by-case, but should the group leader get a point by default? Would they fight over this position?
+
+-Should Categories be capped?.. probably not. Enforce that it's ok to specialize
+
+-Provide a path for "whistle blowers" as well as "nominations of greatness". Can self-nominate for greatness, but it's treated differently (A group full of slackers might not nominate the one worker)
+
+-Always a chance to makeup lecture point if you were there. Come to lab with a TA and get an extra lesson
+
+4 A
+3 A-
+2 B+
+1 B
+0 B-
+-1 C+
+-2 C
+-3 C-
+-4 F
+
+-or-
+
+3 A
+2 A-
+1 B+
+0 B
+-1 B-
+-2 C+
+-3 C
+-4 C-
+-5 F
+
+
+== Academic Integrity
+
+
+<p>
+    CSE Department Academic Integrity Policy: <br/><a
+        href="https://engineering.buffalo.edu/computer-science-engineering/undergraduate/resources-for-current-students/academic-integrity-students.html">
+    https://engineering.buffalo.edu/computer-science-engineering/undergraduate/resources-for-current-students/academic-integrity-students.html</a>
+</p>
+<p>
+    UB Academic Integrity Policy:<br/> <a
+        href="https://catalog.buffalo.edu/policies/integrity.html">
+    https://catalog.buffalo.edu/policies/integrity.html</a>
+</p>
+<p>
+Course Academic Integrity Policy: Do not represent work as your own if you did not create it.
+</p>
+<p>
+All violations will be result in:
+</p>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="text-center alert alert-danger">
+            <h3 style="color:red">An F in CSE442.</h3>
+        </div>
+    </div>
+    <div class="col-sm-8"></div>
+</div>
+<p>
+It is your responsibility to understand what constitutes an academic integrity violation. If you have
+any question whether something you are doing is a violation or not, ask for
+clarification <b>before receiving an F in the course</b>. I will not entertain excuses after you
+have been caught.
+</p>
+<p>
+Examples of acceptable behavior:
+</p>
+<ul>
+    <li>Searching the Internet for coding help and examples.</li>
+    <li>Using libraries in your project.</li>
+    <li>Expanding an existing project as your course project.</li>
+    <li>Having people outside the group contribute to your project.</li>
+</ul>
+
+
+Examples of <b>un</b>acceptable behavior:
+<ul>
+    <li>Copying a large amount of code into your project without crediting the source.</li>
+    <li>Allowing someone outside your group to write code for your project and representing it as the groups
+        work.
+    </li>
+    <li>Violating the licensing agreement of publicly available code.</li>
+    <li>Attempting to earn credit for a lecture activity without attending that lecture</li>
+    <li>Breaking laws.</li>
+</ul>
+
+
+== Course Description
+
+<p>
+    This course will help bridge the gap between academia and industry through the experience of a semester
+    long group software project. Students will learn a variety of software engineering concepts and
+    realities while functioning as a software development team. Students will also learn the importance of
+    continual career development through self-learning.
+</p>
+<br/>
+<a href="http://undergrad-catalog.buffalo.edu/coursedescriptions/index.php?frm_abbr=CSE&frm_num=442">Catalog
+    Description</a>
+<br/>
+
+
+== Ryver
+
+<p>
+    We will use the following Ryver team extensively throughout this course. Please sign up with you UB email address:
+</p>
+<h4>
+    <a href="https://cseub.ryver.com/application/signup/members/47gXKrwAnj6NHat">https://cseub.ryver.com/application/signup/members/47gXKrwAnj6NHat</a>
+</h4>
+<p>
+    It is highly recommended that you install a Ryver app and turn on notifications. You are responsible for the
+    messages posted on Ryver. This will be the primary method used by course staff to communicate to you, your group,
+    and the class as a whole.
+</p>
+
+
+== Course Structure
+
+
+<div class="alert alert-info">
+    The value of this course largely depends on your choices. Make the most of it.
+</div>
+
+<p>
+    The intent of this course is to help bridge the gap between academia and industry by giving students experience
+    working as groups of software engineers while they develop and deploy working software. The course is open-ended as
+    students are free to choose their own groups and projects.
+</p>
+
+<p>
+    The open-ended structure of this course allows students to create their own experience. It is assumed that all
+    students
+    entering this course are competent programmers and are ready to apply and combine their skills to produce a quality
+    software product. The role of the course and course staff is to assist the students while they navigate a large
+    software engineering project and learn how to collaborate
+    effectively. Course staff can be viewed as consultants and will tend to give advice rather than instruction.
+</p>
+
+
+== Project Structure
+
+<p>
+    Specific breakdowns for each phase of the project can be found in the description for each phase. A brief overview
+    is provided here.
+</p>
+
+<p>
+    The project will be completed in the following 7 phases:
+</p>
+<ol>
+
+    <li>
+        Team Formation
+    </li>
+    <ul>
+        <li>
+            Due: Week 2
+        </li>
+        <li>
+            Form teams, choose project, and write a team contract outlining the structure of your team and project.
+        </li>
+    </ul>
+
+    <li>
+        Prototype
+    </li>
+    <ul>
+        <li>
+            Due: Week 4
+        </li>
+        <li>
+            Develop a working prototype of your project. The prototype must run, but doesn't have to be functional.
+        </li>
+    </ul>
+
+    <li>
+        Minimum Viable Product (MVP)
+    </li>
+    <ul>
+        <li>
+            Due: Week 6
+        </li>
+        <li>
+            Develop functioning software with at least the minimal amount of functionality needed to be usable.
+        </li>
+    </ul>
+
+    <li>
+        Beta Release
+    </li>
+    <ul>
+        <li>
+            Due: Week 8
+        </li>
+        <li>
+            Release your software for beta testing.
+        </li>
+    </ul>
+
+    <li>
+        Collaboration
+    </li>
+    <ul>
+        <li>
+            Due: Week 10
+        </li>
+        <li>
+            Work with beta testers and other developers to expand the feature set of your project.
+        </li>
+    </ul>
+
+    <li>
+        Official Release
+    </li>
+    <ul>
+        <li>
+            Due: Week 12
+        </li>
+        <li>
+            Release your software.
+        </li>
+    </ul>
+
+    <li>
+        Presentation
+    </li>
+    <ul>
+        <li>
+            Due: Week 15
+        </li>
+        <li>
+            Present your project to the class while maintaining your official release.
+        </li>
+    </ul>
+</ol>
+
+<p>
+    In addition to fulfilling the requirements for each of the 7 phases, the following will be required throughout the
+    semester during all phases:
+</p>
+
+<p>
+    <b>Meetings:</b> Groups will have required meetings throughout the semester and will keep track of the minutes for
+    each meeting. The required meetings include:
+</p>
+<ul>
+    <li>Weekly team meetings</li>
+    <li>Weekly team meetings with the team's TA</li>
+</ul>
+
+<p>
+    At least one member of your team will schedule these meetings through the course website..
+</p>
+<p>
+    <b>Procedures:</b> We will learn a variety of procedures in lecture that must be followed while working on the
+    project. The procedures apply to all phases after they are covered in lecture. These procedures include methods
+    for branching, creating pull requests, reviewing code, forking a repo, etc.
+</p>
+<!--<p>-->
+<!--<b>Videos:</b> Each sprint will end with a short video demo of your software posted to YouTube. These videos-->
+<!--should be made to appeal to a wide audience and should not be technical nor should they show any-->
+<!--code. The specific nature of-->
+<!--these videos are largely dependent on the specific project and should be appropriate for your-->
+<!--software. Examples of videos can be found on the project page from a previous version of this course-->
+<!--<a href="http://ub-cse.github.io/CSE442-Fall2015-Projects.html">-->
+<!--http://ub-cse.github.io/CSE442-Fall2015-Projects.html</a>. (Note: Not all videos fit the criteria given-->
+<!--as the requirements were different in Fall 2015 than they are in Fall 2016)-->
+<!--</p>-->
+
+
+== Grading
+
+<p>
+    The grading in this course is designed to simulate (in part) the way employees are assessed on the job. That is, in
+    most cases your are not explicitly graded, but your co-workers and supervisors <em>will</em> notice if you do
+    something
+    exceptional, or if you neglect your responsibilities. Likewise, in this course you are given an initial grade and
+    this grade can
+    improve or decline based on your performance throughout the semester, but in most cases it will not change.
+</p>
+
+<p>
+    Your initial course grade: <b>B</b>
+</p>
+
+<hr/>
+<h4>Grade Decreases</h4>
+
+<p>
+    Your grade can decrease if you neglect your responsibilities in the course. Reasons for a grade decrease include,
+    but not limited to:
+</p>
+
+<ul>
+    <li>Making a late submission or not submitting at all</li>
+    <li>Not meeting a technical requirement for a project submission</li>
+    <li>Not completing a task assigned to you</li>
+    <li>Not following proper procedures</li>
+    <li>Releasing buggy or broken code</li>
+    <li>Violating your team contract</li>
+    <li>Missing lectures</li>
+</ul>
+
+<p>
+    There should be very little ambiguity for grade reductions. Any student who is paying attention to their
+    responsibilities should understand what actions need to be taken to avoid a grade decrease. Any shortcoming will
+    result in a grade decrease.
+</p>
+
+<p>
+    <b>Preventing a Grade Decrease</b>: In certain borderline cases a team or individual may be asked to present their
+    work in order to prevent a grade decrease. Do not ask for these. These offers will be made at the discretion of the
+    course instructor and only when the decision is very close.
+</p>
+
+<hr/>
+<h4>Grade Increases</h4>
+
+<p>
+    On the positive end, your grade can increase if you or your team demonstrates exceptional understanding and
+    implementation of software engineering concepts. These increases will be reserved for truly exceptional work going
+    above and beyond the stated requirements of course.
+</p>
+
+<p>
+    <b>Practical Objectives</b>: One way to earn grade increases is to complete practical objectives. With the exception
+    of team formation, each project submission (6 in total) will contain one or more practical objective. If
+    these objectives are met for a particular submission, the team will receive a grade increase. The intent of these
+    objectives is to determine if the project delivers on a practical scale as opposed to a technical scale. For
+    example, it might be possible for a team to meet all the technical requirements for the project without delivering
+    value to the end user (ex. the interface is confusing and instructions are unclear, but technically it meets the
+    requirements for the course). However, to meet the practical objects the project must fulfill the practical,
+    real-world objective for the submission (Engineering usable software). Whether or not an objective has
+    been met will be decided by the course instructor with strict judgement.
+</p>
+
+<p>
+    <b>Individual Grade Increases</b>: The course instructor reserves the right to award additional grade increases to
+    any individual demonstrating
+    exceptional understanding and implementation of software
+    engineering concepts or completing exceptional work going
+    above and beyond the stated requirements of course. When possible, opportunities to earn these increases will be
+    announced.
+</p>
+
+<p>
+    <b>Claiming a Grade Increase</b>: If a team or individual qualifies for a grade increase they may be asked to
+    present their work in order to claim the increase.
+</p>
+
+<hr/>
+
+<p>
+    If your grade increases or decreases you will be notified with a message describing the affect on your grade and the
+    reason for the change. All grade change decisions will be made by the course instructor.
+</p>
+
+<p>
+    Your final course grade is then based on the sum of these grade changes:
+</p><br/>
+
+<table class="table table-bordered table-skinny text-center">
+    <tr>
+        <td>Total Grade Changes</td>
+        <td>Final Grade</td>
+    </tr>
+    <tr>
+        <td>+3</td>
+        <td>A</td>
+    </tr>
+    <tr>
+        <td>+2</td>
+        <td>A-</td>
+    </tr>
+    <tr>
+        <td>+1</td>
+        <td>B+</td>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>B</td>
+    </tr>
+    <tr>
+        <td>-1</td>
+        <td>B-</td>
+    </tr>
+    <tr>
+        <td>-2</td>
+        <td>C+</td>
+    </tr>
+    <tr>
+        <td>-3</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>-4</td>
+        <td>C-</td>
+    </tr>
+    <tr>
+        <td><= -5</td>
+        <td>F</td>
+    </tr>
+</table>
+
+<br/>
+
+<p>
+    For any grading decisions related to the team project the scope of the project may be taken into consideration,
+    especially when assessing the practical objectives. In general, an effort will be made to grade each team and
+    individual based on the magnitude of their accomplishments throughout the semester.
+</p>
+
+<!--== Group Project-->
+
+<!--<p>-->
+<!--The course will primarily consist of a semester-long group project.-->
+<!--</p>-->
+
+<!--<p>-->
+<!--Specific breakdowns for each point can be found in the description for each component.-->
+<!--</p>-->
+
+
+<!--<p>-->
+<!--<b>Meetings:</b> Groups will have required meetings throughout the semester and will keep track of the minutes for-->
+<!--each meeting. The-->
+<!--required meetings include:-->
+<!--</p>-->
+<!--<ul>-->
+<!--<li>Weekly group meetings</li>-->
+<!--<li>Weekly group meetings with the groups TA</li>-->
+<!--<li>Meeting with the course instructor at least once</li>-->
+<!--</ul>-->
+
+
+<!--<p>-->
+<!--<b>Videos:</b> Each sprint will end with a short video demo of your software posted to YouTube. These videos-->
+<!--should be made to appeal to a wide audience and should not be technical nor should they show any-->
+<!--code. The specific nature of-->
+<!--these videos are largely dependent on the specific project and should be appropriate for your-->
+<!--software. Examples of videos can be found on the project page from a previous version of this course-->
+<!--<a href="http://ub-cse.github.io/CSE442-Fall2015-Projects.html">-->
+<!--http://ub-cse.github.io/CSE442-Fall2015-Projects.html</a>. (Note: Not all videos fit the criteria given-->
+<!--as the requirements were different in Fall 2015 than they are in Fall 2016)-->
+<!--</p>-->
+
+
+== Contact Information
+<br/>
+
+<p>
+    Instructor: Jesse Hartloff<br/>
+    Office: Davis 344<br/>
+    Lab: Baldy 19<br/>
+    Email: hartloff@buffalo.edu
+</p>
+
+<p>
+    Though you may use the contact information above, most of the communication about the course will occur
+    on <a href="https://cseub.ryver.com/application/signup/members/47gXKrwAnj6NHat">Ryver</a>.
+</p>
+
+
+== University/Department Policies and Services
+
+<ul>
+    <li>Counseling: <a href="http://www.buffalo.edu/studentlife/who-we-are/departments/counseling.html">http://www.buffalo.edu/studentlife/who-we-are/departments/counseling.html</a>
+    </li>
+    <li>Accessibility: <a
+            href="http://www.buffalo.edu/studentlife/who-we-are/departments/accessibility.html">http://www.buffalo.edu/studentlife/who-we-are/departments/accessibility.html</a>
+    </li>
+    <li>Grading: <a href="https://catalog.buffalo.edu/policies/explanation.html">https://catalog.buffalo.edu/policies/explanation.html</a>
+    </li>
+</ul>

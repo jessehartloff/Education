@@ -35,23 +35,23 @@
 
 
     {{#each user.courses_enrolled}}
-        <div class="well lecture-section-well">
-            <h3>{{this.course_name}}</h3><br/>
-            <form action="/user/update-course-options/{{this.course_key}}" method="post">
-                {{#each this.options}}
-                    {{#if this.display_name}}
+            <div class="well lecture-section-well">
+                <h3>{{this.course_name}}</h3><br/>
+                <form action="/user/update-course-options/{{this.course_key}}" method="post">
+                    {{#each this.options}}
+                        {{#if this.display_name}}
+                            <div>
+                                <label>{{this.display_name}}</label><br/>
+                                <input type="text" name="{{@key}}" value="{{this.value}}"/>
+                            </div>
+                            <br/>
+                        {{/if}}
+                    {{/each}}
                     <div>
-                        <label>{{this.display_name}}</label><br/>
-                        <input type="text" name="{{@key}}" value="{{this.value}}"/>
+                        <input type="submit" value="Update Settings"/>
                     </div>
-                    <br/>
-                    {{/if}}
-                {{/each}}
-                <div>
-                    <input type="submit" value="Update Settings"/>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
     {{/each}}
 
 
