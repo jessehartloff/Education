@@ -1,31 +1,39 @@
-{{!#unless user}}
+{{#unless user}}
     <div class="well lecture-section-well">
-        <h4>You must be logged in to use this feature. If you are taking this class you should create an account and log in.</h4>
+        <h4>You must be logged in to use this feature. If you are taking this class you should create an account and log
+            in.
+        </h4>
     </div>
-{{!else}}
+{{else}}
 
 
     <!-- Priority 1! -->
-<!-- Get new PS (Warn them that it will replace an un-submitted PS if they have one out) -->
-<!-- AutoLab link for submissions -->
-<!-- Log EVERYTHING! -->
-
+    <!-- Get new PS (Warn them that it will replace an un-submitted PS if they have one out) -->
+    <!-- AutoLab link for submissions -->
+    <!-- Log EVERYTHING! -->
 
 
     <div class="well lecture-section-well">
 
-        <a href="/courses/{{course.course}}/ps-download" class="btn btn-primary">Download new PS</a>
-        <p><strong>*Warning: This will replace your current problem set</strong></p>
+        {{#if current_problem_set_number}}
+            <p>Current Problem Set: {{current_problem_set_number}}</p>
+        {{/if}}
 
-        <!--<h3>Question</h3><br/>-->
-        <!--<form action="/courses/{{course.course}}/ps-download">-->
-            <!--<div>-->
-                <!--<input type="submit" value="Generate New Problem Set"/></br>-->
-                <!--<label><strong>*Warning: This will replace your current problem set</strong></label>-->
-            <!--</div>-->
-        <!--</form>-->
+        <a href="/courses/{{course.course}}/ps-download" class="btn btn-primary">Download Problem Set</a>
+<br/><br/>
+        <p>
+            Submit here, then come back for a new problem set: <a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
+                                                                  target="_blank">Autolab</a>
+        </p>
+        <!--<a href="/courses/{{course.course}}/ps-download-new" class="btn btn-primary">Download new PS</a>-->
+        <!--<p><strong>*Warning: This will replace your current problem set</strong></p>-->
+
+        <!--<br/><br/>-->
+
+        <!--<a href="/courses/{{course.course}}/ps-download-current" class="btn btn-primary">Download current PS</a>-->
+        <!--<p>Use this if you lost your current problem set and need to re-download</p>-->
+
     </div>
-
 
 
     <!-- Priority 2 -->
@@ -39,25 +47,21 @@
 
 
 
-    {{#if feedback}}
+    {{!#if feedback}}
 
-        <div class="well lecture-section-well">
+    <div class="well lecture-section-well">
 
-            <h3>Feedback</h3><br/>
-            {{#if feedback.correct}}
-                <div class="alert alert-success">Correct</div>
-            {{else}}
-                <div class="alert alert-danger">You suck!</div>
-            {{/if}}
-            <p>
-                {{feedback.text}}
-            </p>
-        </div>
+        <h3>Feedback</h3><br/>
 
-    {{/if}}
+        <p>
+            Your performance is: Adequate
+        </p>
+    </div>
+
+{{!/if}}
 
 
 
 
 
-{{!/unless}}
+{{/unless}}

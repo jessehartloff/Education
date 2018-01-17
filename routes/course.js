@@ -126,13 +126,19 @@ router.get('/:course/ps', function (req, res) {
 });
 
 router.get('/:course/ps-download', function (req, res) {
-	res.setHeader('Content-disposition', 'attachment; filename=ProblemSet_hartloff_0001.java');
-	console.log(__dirname);
-	res.send("\npublic class ProblemSet_hartloff_0001{\n\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello world!\");\n\t}\n}\n\n");
+	course_util.preprocess_course(req, res, ps_util.ps_download);
 });
 
-router.post('/:course/ps', function (req, res) {
-	course_util.preprocess_course(req, res, ps_util.post_ps);
+//router.get('/:course/ps-download-new', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_new);
+//});
+//
+//router.get('/:course/ps-download-current', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_current);
+//});
+
+router.post('/:course/ps-api', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.ps_api);
 });
 // end Problem Sets
 
