@@ -16,42 +16,56 @@ var collection_entry_example =
 	'current_ps': {},
 	'current_ps_finished': false,
 	'all_ps_assigned': {}, // keyed by ps_number
-	'all_ps_results': {}, // keyed by ps_number
+	//'all_ps_results': {}, // keyed by ps_number
 
 	'levels': {},
 	'xp': {},
 	'lab_stuff': "? we'll get there. Worst case, manually checked/verified. Maybe only checked on card swipe.."
 };
 
+var xp_example = {
+	"variables": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0},
+	"functions": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+	"data_structures": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+	"algorithms": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0}
+	// ...
+};
+
 var ps_example =
 {
 	'assigned_username': 'hartloff',
 	'ps_number': 4,
-	'concept': 'algos2',
+	'class_name': 'ProblemSet_hartloff_0004',
+	//'concept': 'algos2',
 	//'submitted': true,
 	'questions': [
 		{}, {}, {}, {}, {}
 	],
-	'bonus_multiplier': 2,
+	'multiplier': 2,
 	'time_generated': 2,
-	'time_completed': 3
+	'time_completed': 3,
+	'results': [
+		{}, {}, {}, {}, {}
+	]
 };
 
 var ps_results_example =
-{
+//{
 	//'assigned_username': 'hartloff',
 	//'ps_number': 4,
 	//'concept': 'algos2',
 	//'submitted': true,
-	'questions': [
-		{'number': "q1", 'correct': true, 'feedback': "good job"}
+	//'questions':
+	[
+		{'correct': true, 'feedback': "good job"}
+		//{'number': "q1", 'correct': true, 'feedback': "good job"}
 		//{'type': 4, 'variant': 521, 'correct': true, "feedback": "good job"},
 		//{'type': 2, 'variant': 19, 'correct': true, "feedback": "good job"},
 		//{'type': 1, 'variant': 823, 'correct': true, "feedback": "good job"},
 		//{'type': 5, 'variant': 79, 'correct': true, "feedback": "good job"},
 		//{'type': 3, 'variant': 372, 'correct': true, "feedback": "good job"}
-	]
-}; // -or- {'submitted': false}
+	];
+//}; // -or- {'submitted': false}
 
 var question_example =
 {
@@ -60,8 +74,98 @@ var question_example =
 	"variant": 42,
 	"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
 	"average of all the values as a double",
+	"options": {}, // for grading
 	"cards": []
 };
+
+
+var all_questions = [
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 1,
+		"instruction_text": "Print \"hello world\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 2,
+		"instruction_text": "Print \"hi world\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 3,
+		"instruction_text": "Print \"sup world\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 4,
+		"instruction_text": "Print \"hey world\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 5,
+		"instruction_text": "Print \"greetings world\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 6,
+		"instruction_text": "Print \"howdy world\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 7,
+		"instruction_text": "Print \"hey planet\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 8,
+		"instruction_text": "Print \"hi planet\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 9,
+		"instruction_text": "Print \"sup planet\" to the screen",
+		"cards": []
+	},
+	{
+		"concept": "variables",
+		"type": 1,
+		"variant": 10,
+		"instruction_text": "Print \"hello planet\" to the screen",
+		"cards": []
+	}
+];
+
+function populate_questions() {
+	var promises = [];
+	for (var i in all_questions) {
+		promises.push(collection_questions.insert(all_questions[i], function (err, stuff) {
+			console.log("added " + stuff);
+		}));
+		console.log("adding " + i);
+	}
+	Promise.all(promises).then(function () {
+		console.log("all done");
+	})
+}
+
+//populate_questions();
 
 
 var card_example = "Link to lecture content and videos";
@@ -83,13 +187,14 @@ function instructions_to_javadoc(instructions, width, indent) {
 	// when char+max hits, add a "\n     * " after last seen space
 	// reset counter and add "     * " at \n in instructions
 
+	docs += indent + "\n";
 	docs += indent + " */\n";
 	return docs;
 }
 
 function java_class_name(problem_set) {
 	var number = problem_set.ps_number.toString();
-	for (var i = 0; i < 4 - number.length; i++) {
+	while (number.length < 4) {
 		number = '0' + number;
 	}
 	return "ProblemSet_" + problem_set.assigned_username + "_" + number;
@@ -143,7 +248,7 @@ exports.get_ps = function get_ps(req, res, course) {
 				req.flash("error", "User " + req.user.username + " is not registered for this feature. If you are enrolled in CSE115 send and email to hartloff@buffalo.edu with the subject \"CSE115 Problem Set Registration\" immediately to unlock problem sets");
 				res.render('questions/ps', res.to_template);
 			} else {
-				res.to_template.current_problem_set_number = 3;
+				res.to_template.current_problem_set_number = user_ps.current_ps.ps_number;
 				// TODO: get proper ps number
 				// TODO: grab feedback, result, XP, level, progress to next lab/homework
 				res.render('questions/ps', res.to_template);
@@ -163,21 +268,25 @@ question_example =
 	"cards": []
 };
 
-function get_random_question(concept, type) {
-	return {
-		"concept": "algos1",
-		"type": 2,
-		"variant": 42,
-		"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
-		"average of all the values as a double: " + random_section_id(),
-		"cards": []
-	};
+function get_random_question(concept, type, questions_list) {
+	return collection_questions.find({"concept": concept, "type": type}, function (err, questions) {
+		var question = questions[Math.floor(Math.random() * questions.length)];
+		questions_list.push(question);
+	});
+	//return {
+	//	"concept": "algos1",
+	//	"type": 2,
+	//	"variant": 42,
+	//	"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
+	//	"average of all the values as a double: " + random_section_id(),
+	//	"cards": []
+	//};
 }
+
 
 function generate_new_ps(req, res, user_ps, next) {
 
 	console.log(user_ps);
-	// TODO: get random questions based on XP/Level/Lab/HW
 	var new_ps_number = user_ps.current_ps.ps_number + 1;
 	var current_concept = "algos2";
 	var question_types_remaining = [2, 3, 4, 5];
@@ -186,41 +295,57 @@ function generate_new_ps(req, res, user_ps, next) {
 	{
 		'assigned_username': req.user.username,
 		'ps_number': new_ps_number,
-		'concept': current_concept,
-		'submitted': false,
+		//'concept': current_concept,
+		//'submitted': false,
 		'bonus_multiplier': bonus_multiplier,
-		'time_generated': Date.now()
+		'time_generated': Date.now(),
+		'time_completed': 0
 	};
 
+	ps['class_name'] = java_class_name(ps);
+
+	// TODO: get random questions based on XP/Level/Lab/HW
+
+	var number_of_questions = 5;
 	var questions = [];
-	questions.push(get_random_question());
-	questions.push(get_random_question());
-	questions.push(get_random_question());
-	questions.push(get_random_question());
-	questions.push(get_random_question());
+	var promises = [];
+	for (var i = 0; i < number_of_questions; i++) {
+		promises.push(get_random_question("variables", 1, questions));
+	}
 
-	ps['questions'] = questions;
-	// TODO: set the new ps as the current_ps
-	// TODO: add new ps to all_ps
-	// TODO: Increment ps number
 
-	var toSet = {
-		current_ps_finished: false,
-		current_ps: ps,
-		all_ps_assigned: {}
-	};
+	Promise.all(promises).then(function () {
 
-	toSet['all_ps_assigned'][new_ps_number] = ps;
-	user_ps.current_ps = ps;
+		//questions.shuffle
+		for (var i = questions.length; i > 0; i--) {
+			var random_index = Math.floor(Math.random() * i);
+			var temp = questions[i - 1];
+			questions[i - 1] = questions[random_index];
+			questions[random_index] = temp;
+		}
 
-	console.log("toSet");
-	console.log(toSet);
+		ps['questions'] = questions;
 
-	collection_ps.update({username: req.user.username}, {
-		$set: toSet
-	}, function (err) {
-		next(req, res, user_ps);
+		var toSet = {
+			current_ps_finished: false,
+			current_ps: ps
+			//all_ps_assigned: {}
+		};
+
+		toSet['all_ps_assigned.' + new_ps_number] = ps;
+		user_ps.current_ps = ps;
+
+		console.log("toSet");
+		console.log(toSet);
+
+		collection_ps.update({username: req.user.username}, {
+			$set: toSet
+		}, function (err) {
+			next(req, res, user_ps);
+		});
+
 	});
+
 }
 
 
@@ -279,7 +404,7 @@ exports.ps_api = function ps_api(req, res, course) {
 	if (req.body.key !== "super_secret_key") {
 		// TODO: better keys
 		res.send("nope");
-	} else if (!req.userAgent) {
+	} else if (!req.get('User-Agent')) {
 		// TODO
 		res.send("nah");
 	} else if (req.body.request_type === "get_current_ps") {
@@ -317,31 +442,37 @@ function api_send_ps_results(req, res, course) {
 		} else if (!record) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
-			console.log("Resubmission for no credit. section_id= " + section_id + " problem set=" + record.ps_current.ps_number);
+			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
 			// TODO: Mark some feedback to show this no credit submission to the user with a note
 			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress.");
 		} else {
 
+			var xp = record.xp;
+
+			for (var i in results) {
+				//var question_number = i + 1;
+				var result = results[i];
+				var question = record.current_ps.questions[i];
+				if (result.correct) {
+					xp[question.concept][question.type.toString()] += record.current_ps.multiplier;
+				}
+			}
+
 			var toSet = {};
 			toSet["current_ps_finished"] = true;
-			toSet["ps_results"][record.current_ps.ps_number] = results;
-			// TODO: 'time_completed': Date.now()
+			toSet["all_ps_assigned." + record.current_ps.ps_number + ".results"] = results;
+			toSet["all_ps_assigned." + record.current_ps.ps_number + ".time_completed"] = Date.now();
+			toSet["xp"] = xp;
 
-			collection_ps.update(
-				{"section_id": section_id},
-				{
-					$set: toSet
-				}, function (err) {
-					if (err) {
-						console.log("database error in api_get_current_ps update: " + err);
-						res.send("database error");
-					} else {
-						// TODO process the results and add up XP, prepare for next PS
-						res.send("success");
-					}
-				});
+			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
+				if (err) {
+					console.log("database error in api_get_current_ps update: " + err);
+					res.send("database error");
+				} else {
+					res.send("Results send to course site");
+				}
+			});
 
-			res.send("success");
 		}
 	});
 
@@ -408,3 +539,48 @@ function random_section_id(token_length) {
 //add_ps_user("sophie", "A1", "11111111", "1234567890", function(){console.log("user added");});
 
 //console.log(Date.now());
+var f = {
+	"assigned_username": "sophie",
+	"ps_number": 6,
+	"bonus_multiplier": 1,
+	"time_generated": 1516251363210,
+	"time_completed": 0,
+	"class_name": "ProblemSet_sophie_0006",
+	"questions": [{
+		"_id": "5a5fc896241e006889983c25",
+		"concept": "variables",
+		"type": 1,
+		"variant": 7,
+		"instruction_text": "Print \"hey planet\" to the screen",
+		"cards": []
+	}, {
+		"_id": "5a5fc896241e006889983c28",
+		"concept": "variables",
+		"type": 1,
+		"variant": 10,
+		"instruction_text": "Print \"hello planet\" to the screen",
+		"cards": []
+	}, {
+		"_id": "5a5fc896241e006889983c1f",
+		"concept": "variables",
+		"type": 1,
+		"variant": 1,
+		"instruction_text": "Print \"hello world\" to the screen",
+		"cards": []
+	}, {
+		"_id": "5a5fc896241e006889983c1f",
+		"concept": "variables",
+		"type": 1,
+		"variant": 1,
+		"instruction_text": "Print \"hello world\" to the screen",
+		"cards": []
+	}, {
+		"_id": "5a5fc896241e006889983c27",
+		"concept": "variables",
+		"type": 1,
+		"variant": 9,
+		"instruction_text": "Print \"sup planet\" to the screen",
+		"cards": []
+	}]
+}
+
