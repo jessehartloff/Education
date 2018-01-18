@@ -297,7 +297,7 @@ function generate_new_ps(req, res, user_ps, next) {
 		'ps_number': new_ps_number,
 		//'concept': current_concept,
 		//'submitted': false,
-		'bonus_multiplier': bonus_multiplier,
+		'multiplier': bonus_multiplier,
 		'time_generated': Date.now(),
 		'time_completed': 0
 	};
