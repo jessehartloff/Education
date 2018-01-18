@@ -454,9 +454,18 @@ function api_send_ps_results(req, res, course) {
 				var result = results[i];
 				var question = record.current_ps.questions[i];
 				if (result.correct) {
+					if(!xp[question.concept]){
+						xp[question.concept] = {};
+					}
+					if(!xp[question.concept][question.type.toString()]){
+						xp[question.concept][question.type.toString()] = 0;
+					}
 					xp[question.concept][question.type.toString()] += record.current_ps.multiplier;
 				}
 			}
+
+			// TODO
+			// database error in api_send_ps_results: TypeError: Cannot read property '1' of undefined
 
 			var toSet = {};
 			toSet["current_ps_finished"] = true;
@@ -469,7 +478,7 @@ function api_send_ps_results(req, res, course) {
 					console.log("database error in api_get_current_ps update: " + err);
 					res.send("database error");
 				} else {
-					res.send("Results send to course site");
+					res.send("Results sent to course site");
 				}
 			});
 
@@ -582,5 +591,5 @@ var f = {
 		"instruction_text": "Print \"sup planet\" to the screen",
 		"cards": []
 	}]
-}
+};
 
