@@ -1,10 +1,12 @@
-<div class="well lecture-section-well">
+<div class="card border-dark mb-3">
+    <div class="card-body">
 
-    <h3>Courses</h3>
-    <br/>
+        <h3>Courses</h3>
+        <br/>
 
-    {{#each course_list}}
-        <a href="/courses/{{this.course}}/syllabus">{{this.course}}</a><br/>
-    {{/each}}
+        {{#each course_list}}
+            <a href="/courses/{{this.course}}/syllabus">{{this.course}}</a><br/>
+        {{/each}}
 
+    </div>
 </div>

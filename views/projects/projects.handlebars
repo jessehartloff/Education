@@ -3,8 +3,10 @@
 <!--</div>-->
 
 {{#unless course.course_options.has_project}}
-    <div class="well lecture-section-well">
-        <p>There are no projects for this course</p>
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <p>There are no projects for this course</p>
+        </div>
     </div>
 {{else}}
 
@@ -16,8 +18,12 @@
         {{/ifEven}}
 
             <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading panel-heading-project-card">
+
+                <div class="card border-dark mb-3">
+                    <div class="card-body">
+
+                        <!--<div class="panel panel-default">-->
+                        <!--<div class="panel-heading panel-heading-project-card">-->
 
 
                         <div class="row" style="display: flex; align-items: center;">
@@ -39,25 +45,25 @@
 
                             </div>
                             <div class="col-xs-4 text-right">
-                                {{#if this.repository_link_primary}}
-                                    <a href="{{this.repository_link_primary}}"><img src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
-                                {{/if}}
+                                    {{#if this.repository_link_primary}}
+                                        <a href="{{this.repository_link_primary}}"><img
+                                                src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                                    {{/if}}
 
-                                {{#if this.communication_channel}}
-                                    <a href="{{this.communication_channel}}"><img style="max-height:32px"
-                                                                                  src="/static/logo-dark.png"/></a>&nbsp;
-                                {{/if}}
-
+                                    {{#if this.communication_channel}}
+                                        <a href="{{this.communication_channel}}"><img style="max-height:32px"
+                                                                                      src="/static/logo-dark.png"/></a>&nbsp;
+                                    {{/if}}
                             </div>
 
                         </div>
 
+                        <hr/>
 
-                    </div>
-                    <div class="panel-body">
+                    <!--</div>-->
+                    <!--<div class="card-body">-->
 
 
-                        <br/>
 
                         {{#each this.video_submissions as |video|}}
                             {{#if @last}}

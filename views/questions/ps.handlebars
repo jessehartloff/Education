@@ -1,8 +1,11 @@
 {{#unless user}}
-    <div class="well lecture-section-well">
-        <h4>You must be logged in to use this feature. If you are taking this class you should create an account and log
-            in.
-        </h4>
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <h4>You must be logged in to use this feature. If you are taking this class you should create an account and
+                log
+                in.
+            </h4>
+        </div>
     </div>
 {{else}}
 
@@ -13,27 +16,30 @@
     <!-- Log EVERYTHING! -->
 
 
-    <div class="well lecture-section-well">
+    <div class="card border-dark mb-3">
+        <div class="card-body">
 
-        {{#if current_problem_set_number}}
-            <p>Current Problem Set: {{current_problem_set_number}}</p>
-        {{/if}}
+            {{#if current_problem_set_number}}
+                <p>Current Problem Set: {{current_problem_set_number}}</p>
+            {{/if}}
 
-        <a href="/courses/{{course.course}}/ps-download" class="btn btn-primary">Download Problem Set</a>
-        <!-- TODO: Indicator for if the PS has been submitted or not -->
-<br/><br/>
-        <p>
-            Submit here, then come back for a new problem set: <a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
-                                                                  target="_blank">Autolab</a>
-        </p>
-        <!--<a href="/courses/{{course.course}}/ps-download-new" class="btn btn-primary">Download new PS</a>-->
-        <!--<p><strong>*Warning: This will replace your current problem set</strong></p>-->
+            <a href="/courses/{{course.course}}/ps-download" class="btn btn-primary">Download Problem Set</a>
+            <!-- TODO: Indicator for if the PS has been submitted or not -->
+            <br/><br/>
+            <p>
+                Submit here, then come back for a new problem set: <a
+                    href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
+                    target="_blank">Autolab</a>
+            </p>
+            <!--<a href="/courses/{{course.course}}/ps-download-new" class="btn btn-primary">Download new PS</a>-->
+            <!--<p><strong>*Warning: This will replace your current problem set</strong></p>-->
 
-        <!--<br/><br/>-->
+            <!--<br/><br/>-->
 
-        <!--<a href="/courses/{{course.course}}/ps-download-current" class="btn btn-primary">Download current PS</a>-->
-        <!--<p>Use this if you lost your current problem set and need to re-download</p>-->
+            <!--<a href="/courses/{{course.course}}/ps-download-current" class="btn btn-primary">Download current PS</a>-->
+            <!--<p>Use this if you lost your current problem set and need to re-download</p>-->
 
+        </div>
     </div>
 
 
@@ -45,24 +51,80 @@
     <!-- Re-download current PS is it's checked out and not submitted -->
     <!-- Feedback for all previous PSs -->
     <!-- Remind them of office hours after poor performance -->
+    <!-- Report an issue button -->
 
+    <!-- Priority 4 -->
+    <!-- Tie into office hours tracking/queueing -->
 
 
     {{!#if feedback}}
 
-    <div class="well lecture-section-well">
+    <div class="card border-dark mb-3">
+        <div class="card-body">
 
-        <h3>Feedback</h3><br/>
+            <h3>Feedback</h3><br/>
 
-        <p>
-            Your performance is: Adequate
-        </p>
+            <p>
+                Your performance is: Adequate
+            </p>
+        </div>
     </div>
 
-{{!/if}}
+    {{!/if}}
 
 
 
+    <div class="card border-dark mb-3">
+        <div class="card-body">
 
+        </div>
+    </div>
+
+    <div class="card-deck">
+        <div class="card  border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Variables: Expressions</div>
+            <div class="card-body">
+                <h5 class="card-title">Expressions</h5>
+                <p class="card-text">A section of code that evaluates to a single value</p>
+                <ul>
+                    <li>Can include function calls</li>
+                    <li>The resulting value can be used anywhere a value can be used</li>
+                    <li>An expression can be a single variable</li>
+                </ul>
+            </div>
+            <div class="card-footer"><a href="#">More</a></div>
+        </div>
+
+
+
+        <div class="card  border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Data Structures: ArrayList</div>
+            <div class="card-body">
+                <h5 class="card-title">ArrayList</h5>
+                <p class="card-text">A data structure that can store multiple values of a single type</p>
+                <ul>
+                    <li>Values are indexed from 0 to size-1</li>
+                    <li>The type that can be stored must be declared with a type parameter. Ex. ArrayList&lt;Integer&gt;</li>
+                    <li>Type parameter must be a class, not a primitive (Starts with capital letter)</li>
+                </ul>
+            </div>
+            <div class="card-footer"><a href="#">More</a></div>
+        </div>
+
+
+
+        <div class="card  border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Networking: HTTP GET</div>
+            <div class="card-body">
+                <h5 class="card-title">HTTP GET</h5>
+                <p class="card-text">Request a resource from website or web API</p>
+                <ul>
+                    <li>Resource is requested using a url</li>
+                    <li>Can include a query string in the url following a ?</li>
+                </ul>
+            </div>
+            <div class="card-footer"><a href="#">More</a></div>
+        </div>
+    </div>
 
 {{/unless}}
