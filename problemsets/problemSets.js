@@ -74,98 +74,9 @@ var question_example =
 	"variant": 42,
 	"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
 	"average of all the values as a double",
-	"options": {}, // for grading
+	"parameters": {}, // for grading
 	"cards": []
 };
-
-
-var all_questions = [
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 1,
-		"instruction_text": "Print \"hello world\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 2,
-		"instruction_text": "Print \"hi world\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 3,
-		"instruction_text": "Print \"sup world\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 4,
-		"instruction_text": "Print \"hey world\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 5,
-		"instruction_text": "Print \"greetings world\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 6,
-		"instruction_text": "Print \"howdy world\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 7,
-		"instruction_text": "Print \"hey planet\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 8,
-		"instruction_text": "Print \"hi planet\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 9,
-		"instruction_text": "Print \"sup planet\" to the screen",
-		"cards": []
-	},
-	{
-		"concept": "variables",
-		"type": 1,
-		"variant": 10,
-		"instruction_text": "Print \"hello planet\" to the screen",
-		"cards": []
-	}
-];
-
-function populate_questions() {
-	var promises = [];
-	for (var i in all_questions) {
-		promises.push(collection_questions.insert(all_questions[i], function (err, stuff) {
-			console.log("added " + stuff);
-		}));
-		console.log("adding " + i);
-	}
-	Promise.all(promises).then(function () {
-		console.log("all done");
-	})
-}
-
-//populate_questions();
 
 
 var card_example = "Link to lecture content and videos";
@@ -249,7 +160,6 @@ exports.get_ps = function get_ps(req, res, course) {
 				res.render('questions/ps', res.to_template);
 			} else {
 				res.to_template.current_problem_set_number = user_ps.current_ps.ps_number;
-				// TODO: get proper ps number
 				// TODO: grab feedback, result, XP, level, progress to next lab/homework
 				res.render('questions/ps', res.to_template);
 			}
@@ -273,6 +183,7 @@ function get_random_question(concept, type, questions_list) {
 		var question = questions[Math.floor(Math.random() * questions.length)];
 		questions_list.push(question);
 	});
+
 	//return {
 	//	"concept": "algos1",
 	//	"type": 2,
@@ -281,15 +192,67 @@ function get_random_question(concept, type, questions_list) {
 	//	"average of all the values as a double: " + random_section_id(),
 	//	"cards": []
 	//};
+
 }
 
+var level_requirements = {
+	"1": []
+};
+
+function get_level_requirements(current_level) {
+	switch (current_level) {
+		case 1:
+			return {
+				"xp_for_next_level": 1000,
+				"question_targets": [
+					{
+						"concept": "variables",
+						"type": 1,
+						"cumulative_number_correct": 4
+					},
+					{
+						"concept": "variables",
+						"type": 2,
+						"cumulative_number_correct": 4
+					},
+					{
+						"concept": "variables",
+						"type": 3,
+						"cumulative_number_correct": 4
+					},
+					{
+						"concept": "variables",
+						"type": 4,
+						"cumulative_number_correct": 2
+					},
+					{
+						"concept": "variables",
+						"type": 5,
+						"cumulative_number_correct": 2
+					}
+				]
+			};
+		case 2:
+			return;
+		default:
+			return {};
+	}
+}
+
+var xp_example = {
+	"variables": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0},
+	"methods": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+	"data_structures": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+	"algorithms": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0}
+	// ...
+};
 
 function generate_new_ps(req, res, user_ps, next) {
 
 	console.log(user_ps);
 	var new_ps_number = user_ps.current_ps.ps_number + 1;
-	var current_concept = "algos2";
-	var question_types_remaining = [2, 3, 4, 5];
+	//var current_concept = "algos2";
+	//var question_types_remaining = [2, 3, 4, 5];
 	var bonus_multiplier = 1;
 	var ps =
 	{
@@ -304,13 +267,84 @@ function generate_new_ps(req, res, user_ps, next) {
 
 	ps['class_name'] = java_class_name(ps);
 
-	// TODO: get random questions based on XP/Level/Lab/HW
-
 	var number_of_questions = 5;
+
+	var question_types = [];
+
+	var level_requirements = get_level_requirements(1); // TODO get level
+	var player_xp = user_ps.xp;
+	var questions_needed = [];
+	for (var index = 0; index < level_requirements.question_targets.length; index++) {
+		var requirement = level_requirements.question_targets[index];
+
+		//{
+		//	"xp_for_next_level":100,
+		//	"question_targets": [
+		//	{
+		//		"concept": "variables",
+		//		"type": 1,
+		//		"cumulative_number_correct": 4
+		//	},
+		//	{
+		//		"concept": "variables",
+		//		"type": 2,
+		//		"cumulative_number_correct": 4
+		//	},
+		//	{
+		//		"concept": "variables",
+		//		"type": 3,
+		//		"cumulative_number_correct": 4
+		//	},
+		//	{
+		//		"concept": "variables",
+		//		"type": 4,
+		//		"cumulative_number_correct": 2
+		//	},
+		//	{
+		//		"concept": "variables",
+		//		"type": 5,
+		//		"cumulative_number_correct": 2
+		//	}
+		//]
+		//}
+
+		var number_needed = requirement.cumulative_number_correct;
+		if (player_xp[requirement.concept] && player_xp[requirement.concept][requirement.type]) {
+			number_needed -= player_xp[requirement.concept][requirement.type];
+		}
+
+		questions_needed.push({
+			"concept": requirement.concept,
+			"type": requirement.type,
+			"priority": number_needed
+		});
+	}
+
+	//questions_needed.sort(function(a,b){
+	//	return b.priority - a.priority;
+	//});
+
+	console.log(questions_needed);
+
+	// TODO choose from questions remaining while favoring early ones. Watch for questions_needed < 5
+
+	for (var i = 0; i < number_of_questions; i++) {
+		var highest_priority_value = Number.MIN_VALUE;
+		var highest_priority_question = {"concept": "variables", "type": 1};
+		for (var j = 0; j < questions_needed.length; j++) {
+			if(questions_needed[j].priority > highest_priority_value){
+				highest_priority_value = questions_needed[j].priority;
+				highest_priority_question = questions_needed[j];
+			}
+		}
+		question_types.push(highest_priority_question);
+		questions_needed[j].priority -= 1;
+	}
+
 	var questions = [];
 	var promises = [];
-	for (var i = 0; i < number_of_questions; i++) {
-		promises.push(get_random_question("variables", 1, questions));
+	for (var j = 0; j < question_types.length; j++) {
+		promises.push(get_random_question(question_types[j]["concept"], question_types[j]["type"], questions));
 	}
 
 
@@ -454,10 +488,10 @@ function api_send_ps_results(req, res, course) {
 				var result = results[i];
 				var question = record.current_ps.questions[i];
 				if (result.correct) {
-					if(!xp[question.concept]){
+					if (!xp[question.concept]) {
 						xp[question.concept] = {};
 					}
-					if(!xp[question.concept][question.type.toString()]){
+					if (!xp[question.concept][question.type.toString()]) {
 						xp[question.concept][question.type.toString()] = 0;
 					}
 					xp[question.concept][question.type.toString()] += record.current_ps.multiplier;

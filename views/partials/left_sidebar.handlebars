@@ -1,7 +1,7 @@
 <div class="left-side-bar">
     <div class="sidebar-well">
 
-        <h4>&nbsp;{{ course.number_upper }}</h4>
+        <h6>&nbsp;{{ course.number_upper }}</h6>
 
         {{#each course.extra}}
             &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/{{this.page_type}}">{{this.title}}</a>
@@ -13,7 +13,7 @@
 
             <!--<hr/>-->
 
-            <h4>&nbsp;Assessment</h4>
+            <h6>&nbsp;Assessment</h6>
         {{#unless course.course_options.no_autolab}}
             &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
             <br/>
@@ -36,7 +36,7 @@
 
             <!--<hr/>-->
 
-            <h4>&nbsp;Training</h4>
+            <h6>&nbsp;Training</h6>
             {{#unless course.course_options.no_question_site}}
             &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
                      target="_blank">-Questions</a>
