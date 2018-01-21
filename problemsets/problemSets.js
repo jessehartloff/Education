@@ -147,6 +147,26 @@ exports.get_ps = function get_ps(req, res, course) {
 				res.render('questions/ps', res.to_template);
 			} else {
 				res.to_template.user_ps = user_ps;
+
+				var ps_completed = [];
+				for (var i in user_ps.all_ps_assigned) {
+					if (i !== user_ps.current_ps.ps_number) {
+						var prepared_ps = user_ps.all_ps_assigned[i];
+						for(var j in prepared_ps.questions){
+							if(prepared_ps.results) {
+								prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
+								prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
+							}
+						}
+						ps_completed.push(prepared_ps);
+					}
+				}
+				ps_completed.sort(function(a, b){
+					return b.ps_number - a.ps_number;
+				});
+				res.to_template.ps_completed = ps_completed;
+
+
 				res.to_template.xp_for_next_level = level_requirements.get_level_requirements(user_ps.level).xp_for_next_level;
 				if (user_ps.level > 1) {
 					res.to_template.xp_for_previous_level = level_requirements.get_level_requirements(user_ps.level - 1).xp_for_next_level;

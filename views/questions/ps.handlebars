@@ -85,7 +85,7 @@
 
             <h5>Previous Problem Sets</h5>
 
-            {{#each user_ps.all_ps_assigned}}
+            {{#each ps_completed}}
 
                 <div class="card border-dark mb-3">
                     <div class="card-body">
@@ -98,7 +98,14 @@
                             {{#each questions}}
                                 <p>Question {{increment @index}}</p>
                                 <p>
-                                    {{this.instruction_text}}
+                                    {{this.instruction_text}}<br/>
+                                    {{#if this.correct}}
+                                        Correct
+                                    {{else}}
+                                        Incorrect
+                                    {{/if}}
+                                    <br/>
+                                    {{this.feedback}}
                                 </p>
                                 {{#each this.cards}}
                                     <p>
