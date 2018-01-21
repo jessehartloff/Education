@@ -2,26 +2,13 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
 var users = require('../util/users');
+var level_requirements = require('./level_requirements/requirements');
+
 var collection_ps = db.get('ps');
 var collection_questions = db.get('questions');
 
 var current_course = 'cse115-s18';
 
-var collection_entry_example =
-{
-	'username': 'hartloff',
-	'lab_section': 'B3',
-	'id': 1232313123, // For card swipe
-	'section_id': 123455, // Unique id matching AutoLab section
-	'current_ps': {},
-	'current_ps_finished': false,
-	'all_ps_assigned': {}, // keyed by ps_number
-	//'all_ps_results': {}, // keyed by ps_number
-
-	'levels': {},
-	'xp': {},
-	'lab_stuff': "? we'll get there. Worst case, manually checked/verified. Maybe only checked on card swipe.."
-};
 
 var xp_example = {
 	"variables": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0},
@@ -159,8 +146,14 @@ exports.get_ps = function get_ps(req, res, course) {
 				req.flash("error", "User " + req.user.username + " is not registered for this feature. If you are enrolled in CSE115 send and email to hartloff@buffalo.edu with the subject \"CSE115 Problem Set Registration\" immediately to unlock problem sets");
 				res.render('questions/ps', res.to_template);
 			} else {
-				res.to_template.current_problem_set_number = user_ps.current_ps.ps_number;
-				// TODO: grab feedback, result, XP, level, progress to next lab/homework
+				res.to_template.user_ps = user_ps;
+				res.to_template.xp_for_next_level = level_requirements.get_level_requirements(user_ps.level).xp_for_next_level;
+				if (user_ps.level > 1) {
+					res.to_template.xp_for_previous_level = level_requirements.get_level_requirements(user_ps.level - 1).xp_for_next_level;
+				} else {
+					res.to_template.xp_for_previous_level = 0;
+				}
+				res.to_template.xp_percentage_to_next_level = 100 * (user_ps.total_xp - res.to_template.xp_for_previous_level) / (res.to_template.xp_for_next_level - res.to_template.xp_for_previous_level);
 				res.render('questions/ps', res.to_template);
 			}
 		});
@@ -195,49 +188,6 @@ function get_random_question(concept, type, questions_list) {
 
 }
 
-var level_requirements = {
-	"1": []
-};
-
-function get_level_requirements(current_level) {
-	switch (current_level) {
-		case 1:
-			return {
-				"xp_for_next_level": 1000,
-				"question_targets": [
-					{
-						"concept": "variables",
-						"type": 1,
-						"cumulative_number_correct": 4
-					},
-					{
-						"concept": "variables",
-						"type": 2,
-						"cumulative_number_correct": 4
-					},
-					{
-						"concept": "variables",
-						"type": 3,
-						"cumulative_number_correct": 4
-					},
-					{
-						"concept": "variables",
-						"type": 4,
-						"cumulative_number_correct": 2
-					},
-					{
-						"concept": "variables",
-						"type": 5,
-						"cumulative_number_correct": 2
-					}
-				]
-			};
-		case 2:
-			return;
-		default:
-			return {};
-	}
-}
 
 var xp_example = {
 	"variables": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0},
@@ -251,16 +201,23 @@ function generate_new_ps(req, res, user_ps, next) {
 
 	console.log(user_ps);
 	var new_ps_number = user_ps.current_ps.ps_number + 1;
-	//var current_concept = "algos2";
-	//var question_types_remaining = [2, 3, 4, 5];
-	var bonus_multiplier = 1;
+	var previous_generation_time = user_ps.current_ps.time_generated;
+	var ms_in_day = 1000 * 60 * 60 * 24;
+
+	var point_value = 100.0;
+	var multipliers = [];
+	if (Math.floor(Date.now() / ms_in_day) !== Math.floor(previous_generation_time / ms_in_day)) {
+		multipliers.push({"reason": "First Problem Set of the Day", "multiplier": 1.5});
+		point_value *= 1.5;
+	}
 	var ps =
 	{
 		'assigned_username': req.user.username,
 		'ps_number': new_ps_number,
 		//'concept': current_concept,
 		//'submitted': false,
-		'multiplier': bonus_multiplier,
+		'point_value': point_value,
+		"multipliers": multipliers,
 		'time_generated': Date.now(),
 		'time_completed': 0
 	};
@@ -271,42 +228,11 @@ function generate_new_ps(req, res, user_ps, next) {
 
 	var question_types = [];
 
-	var level_requirements = get_level_requirements(1); // TODO get level
+	var this_level_requirements = level_requirements.get_level_requirements(user_ps.level);
 	var player_xp = user_ps.xp;
 	var questions_needed = [];
-	for (var index = 0; index < level_requirements.question_targets.length; index++) {
-		var requirement = level_requirements.question_targets[index];
-
-		//{
-		//	"xp_for_next_level":100,
-		//	"question_targets": [
-		//	{
-		//		"concept": "variables",
-		//		"type": 1,
-		//		"cumulative_number_correct": 4
-		//	},
-		//	{
-		//		"concept": "variables",
-		//		"type": 2,
-		//		"cumulative_number_correct": 4
-		//	},
-		//	{
-		//		"concept": "variables",
-		//		"type": 3,
-		//		"cumulative_number_correct": 4
-		//	},
-		//	{
-		//		"concept": "variables",
-		//		"type": 4,
-		//		"cumulative_number_correct": 2
-		//	},
-		//	{
-		//		"concept": "variables",
-		//		"type": 5,
-		//		"cumulative_number_correct": 2
-		//	}
-		//]
-		//}
+	for (var index = 0; index < this_level_requirements.question_targets.length; index++) {
+		var requirement = this_level_requirements.question_targets[index];
 
 		var number_needed = requirement.cumulative_number_correct;
 		if (player_xp[requirement.concept] && player_xp[requirement.concept][requirement.type]) {
@@ -320,28 +246,20 @@ function generate_new_ps(req, res, user_ps, next) {
 		});
 	}
 
-	//questions_needed.sort(function(a,b){
-	//	return b.priority - a.priority;
-	//});
-
-	console.log(questions_needed);
-
-	// TODO choose from questions remaining while favoring early ones. Watch for questions_needed < 5
-
 	for (var i = 0; i < number_of_questions; i++) {
 		var highest_priority_value = Number.MIN_VALUE;
 		var highest_priority_index = -1;
-		var highest_priority_question = {"concept": "variables", "type": 1};
+		var highest_priority_question = {"concept": "variables", "type": "1"};
 		for (var j = 0; j < questions_needed.length; j++) {
-			if(questions_needed[j].priority > highest_priority_value){
+			if (questions_needed[j].priority > highest_priority_value) {
 				highest_priority_value = questions_needed[j].priority;
 				highest_priority_index = j;
 				highest_priority_question = questions_needed[j];
 			}
 		}
-		if(highest_priority_index === -1){
+		if (highest_priority_index === -1) {
 			// bad
-		}else {
+		} else {
 			question_types.push(highest_priority_question);
 			questions_needed[highest_priority_index].priority -= 1;
 		}
@@ -425,28 +343,14 @@ exports.ps_download = function ps_download(req, res, course) {
 
 };
 
-//exports.ps_download_new = function ps_download_new(req, res, course) {
-//	// TODO: Do not allow unless current PS has been graded! Must complete a gameplay loop before starting the next one
-//	// TODO generate new PS
-//	res.setHeader('Content-disposition', 'attachment; filename=ProblemSet_hartloff_0001.java');
-//	console.log(__dirname);
-//	res.send("\npublic class ProblemSet_hartloff_0001{\n\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello world!\");\n\t}\n}\n\n");
-//};
-//
-//exports.ps_download_current = function ps_download_current(req, res, course) {
-//	// TODO: build and send current PS
-//	res.setHeader('Content-disposition', 'attachment; filename=ProblemSet_hartloff_0001.java');
-//	console.log(__dirname);
-//	res.send("\npublic class ProblemSet_hartloff_0001{\n\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello world!\");\n\t}\n}\n\n");
-//};
 
 exports.ps_api = function ps_api(req, res, course) {
 	if (req.body.key !== "super_secret_key") {
 		// TODO: better keys
-		res.send("nope");
+		res.send("You can't use this API");
 	} else if (!req.get('User-Agent')) {
 		// TODO
-		res.send("nah");
+		res.send("You can't use this API");
 	} else if (req.body.request_type === "get_current_ps") {
 		api_get_current_ps(req, res, course);
 	} else if (req.body.request_type === "send_ps_results") {
@@ -483,14 +387,14 @@ function api_send_ps_results(req, res, course) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
 			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
-			// TODO: Mark some feedback to show this no credit submission to the user with a note
+			// TODO: ~Mark some feedback to show this no credit submission to the user with a note
 			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress.");
 		} else {
 
 			var xp = record.xp;
+			var number_correct = 0;
 
 			for (var i in results) {
-				//var question_number = i + 1;
 				var result = results[i];
 				var question = record.current_ps.questions[i];
 				if (result.correct) {
@@ -500,18 +404,32 @@ function api_send_ps_results(req, res, course) {
 					if (!xp[question.concept][question.type.toString()]) {
 						xp[question.concept][question.type.toString()] = 0;
 					}
-					xp[question.concept][question.type.toString()] += record.current_ps.multiplier;
+					xp[question.concept][question.type.toString()] += 1;
+					number_correct++;
 				}
 			}
 
-			// TODO
-			// database error in api_send_ps_results: TypeError: Cannot read property '1' of undefined
+			// Tally up total xp
+			var total_xp = record.total_xp + number_correct * record.current_ps.multiplier;
+
+			// Check for level up
+			var level_up = false;
+			var new_level = record.level;
+			if (total_xp >= level_requirements.get_level_requirements(record.level).xp_for_next_level) {
+				level_up = true;
+				new_level++;
+			}
 
 			var toSet = {};
 			toSet["current_ps_finished"] = true;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".results"] = results;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".time_completed"] = Date.now();
 			toSet["xp"] = xp;
+			toSet["total_xp"] = total_xp;
+			if (level_up) {
+				toSet["level"] = new_level;
+				toSet["leveled_up"] = true;
+			}
 
 			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
 				if (err) {
@@ -546,6 +464,10 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 				'lab_section': lab_section,
 				'id': number_id, // For card swipe
 				'section_id': section_id, // Unique id matching AutoLab section
+				"level": 1,
+				"total_xp": 0,
+				'xp': {},
+				'current_ps_finished': true,
 				'current_ps': {
 					'assigned_username': username,
 					'ps_number': 0,
@@ -555,16 +477,9 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 						//{},{},{},{},{}
 					]
 				},
-				'current_ps_finished': true,
 				'all_ps_assigned': {}, // keyed by ps_number
-				'all_ps_results': {}, // keyed by ps_number
-
-				'levels': {},
-				'xp': {},
 				'labs': {},
-				'homework': {},
-				'extra': {},
-				'extra_text': ""
+				'homework': {}
 			};
 			collection_ps.insert(collection_entry_example, next());
 		}
@@ -586,50 +501,3 @@ function random_section_id(token_length) {
 // function set_user_number_id(username, section_id){}
 
 //add_ps_user("sophie", "A1", "11111111", "1234567890", function(){console.log("user added");});
-
-//console.log(Date.now());
-var f = {
-	"assigned_username": "sophie",
-	"ps_number": 6,
-	"bonus_multiplier": 1,
-	"time_generated": 1516251363210,
-	"time_completed": 0,
-	"class_name": "ProblemSet_sophie_0006",
-	"questions": [{
-		"_id": "5a5fc896241e006889983c25",
-		"concept": "variables",
-		"type": 1,
-		"variant": 7,
-		"instruction_text": "Print \"hey planet\" to the screen",
-		"cards": []
-	}, {
-		"_id": "5a5fc896241e006889983c28",
-		"concept": "variables",
-		"type": 1,
-		"variant": 10,
-		"instruction_text": "Print \"hello planet\" to the screen",
-		"cards": []
-	}, {
-		"_id": "5a5fc896241e006889983c1f",
-		"concept": "variables",
-		"type": 1,
-		"variant": 1,
-		"instruction_text": "Print \"hello world\" to the screen",
-		"cards": []
-	}, {
-		"_id": "5a5fc896241e006889983c1f",
-		"concept": "variables",
-		"type": 1,
-		"variant": 1,
-		"instruction_text": "Print \"hello world\" to the screen",
-		"cards": []
-	}, {
-		"_id": "5a5fc896241e006889983c27",
-		"concept": "variables",
-		"type": 1,
-		"variant": 9,
-		"instruction_text": "Print \"sup planet\" to the screen",
-		"cards": []
-	}]
-};
-

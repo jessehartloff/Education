@@ -24,3 +24,8 @@ exports.ifExists = function(object, key, options){
 exports.ifNotExists = function(object, key, options){
 	return !object || !object[key] ? options.fn(this) : options.inverse(this);
 };
+
+exports.increment = function(value, options)
+{
+	return parseInt(value) + 1;
+};
