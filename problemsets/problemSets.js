@@ -170,7 +170,7 @@ exports.get_ps = function get_ps(req, res, course) {
 
 
 				// determine active loop section
-				if(user_ps.ps_completed){
+				if(user_ps.current_ps_finished){
 					res.to_template.new_ps_active = true;
 				}else{
 					res.to_template.submit_ps_active = true;
