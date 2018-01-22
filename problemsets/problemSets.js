@@ -210,9 +210,12 @@ question_example =
 };
 
 function get_random_question(concept, type, questions_list) {
+	console.log(concept);
+	console.log(type);
 	return collection_questions.find({"concept": concept, "type": type}, function (err, questions) {
 		var question = questions[Math.floor(Math.random() * questions.length)];
 		questions_list.push(question);
+		console.log(question);
 	});
 
 	//return {
