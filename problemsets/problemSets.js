@@ -293,7 +293,7 @@ function generate_new_ps(req, res, user_ps, next) {
 	}
 
 	for (var i = 0; i < number_of_questions; i++) {
-		var highest_priority_value = Number.MIN_VALUE;
+		var highest_priority_value = Number.NEGATIVE_INFINITY;
 		var highest_priority_index = -1;
 		var highest_priority_question = {"concept": "variables", "type": "1"};
 		for (var j = 0; j < questions_needed.length; j++) {
@@ -304,6 +304,7 @@ function generate_new_ps(req, res, user_ps, next) {
 			}
 		}
 		if (highest_priority_index === -1) {
+			console.log("highest_priority_index = -1");
 			// bad
 		} else {
 			question_types.push(highest_priority_question);
