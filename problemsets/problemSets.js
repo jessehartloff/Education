@@ -154,6 +154,9 @@ exports.get_ps = function get_ps(req, res, course) {
 					if (i !== user_ps.current_ps.ps_number.toString()) {
 						var prepared_ps = user_ps.all_ps_assigned[i];
 						for(var j in prepared_ps.questions){
+							if(!prepared_ps.questions[j]){
+								continue;
+							}
 							if(prepared_ps.results) {
 								prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
 								prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
