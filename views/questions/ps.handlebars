@@ -116,8 +116,8 @@
                         Not yet submitted
                     {{/if}}
                 </p>
-                {{#each multiplier}}
-                    <div class="alert alert-success"><h4>x{{this.multiplier}}</h4>: {{this.reason}}</div>
+                {{#each multipliers}}
+                    <div class="alert alert-warning"><h4>x{{this.multiplier}}</h4>: {{this.reason}}</div>
                 {{/each}}
                 {{#each questions}}
                     <p>Question {{increment @index}}<br/>

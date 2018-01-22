@@ -448,7 +448,11 @@ function api_send_ps_results(req, res, course) {
 			}
 
 			// Tally up total xp
-			var total_xp = record.total_xp + number_correct * record.current_ps.multiplier;
+			var multiplier = 1.0;
+			for(var i=0; i<record.current_ps.multiplier.length; i++){
+				multiplier *= record.current_ps.multiplier[i].multiplier;
+			}
+			var total_xp = record.total_xp + number_correct * multiplier;
 
 			// Check for level up
 			var level_up = false;
