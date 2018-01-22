@@ -101,11 +101,11 @@
 
 
     {{#with user_ps.current_ps}}
-    <div class="card border-dark mb-3">
-        <div class="card-header text-white bg-primary">
-            <h5>{{class_name}}</h5>
-        </div>
-        <div class="card-body">
+        <div class="card border-dark mb-3">
+            <div class="card-header text-white bg-primary">
+                <h5>{{class_name}}</h5>
+            </div>
+            <div class="card-body">
                 <!--<h5>Current Problem Set</h5>-->
                 <p>
                     {{#if user_ps.current_ps_finished}}
@@ -123,14 +123,23 @@
                     <p>Question {{increment @index}}<br/>
                         {{this.instruction_text}}
                     </p>
+                    {{#if this.feedback}}
+                        {{#if this.correct}}
+                            Correct
+                        {{else}}
+                            Incorrect
+                        {{/if}}
+                        <br/>
+                        {{this.feedback}}
+                    {{/if}}
                     {{#each this.cards}}
                         <p>
                             Card: {{this}}
                         </p>
                     {{/each}}
                 {{/each}}
+            </div>
         </div>
-    </div>
     {{/with}}
 
 

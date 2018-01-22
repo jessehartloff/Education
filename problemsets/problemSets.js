@@ -215,6 +215,8 @@ question_example =
 function get_random_question(concept, type, questions_list) {
 	console.log(concept);
 	console.log(type);
+	console.log(typeof concept);
+	console.log(typeof type);
 	return collection_questions.find({"concept": concept, "type": type}, function (err, questions) {
 		var question = questions[Math.floor(Math.random() * questions.length)];
 		questions_list.push(question);
@@ -454,7 +456,7 @@ function api_send_ps_results(req, res, course) {
 			}
 
 			// Tally up total xp
-			var multiplier = 1.0;
+			var multiplier = 100.0;
 			for(var i=0; i<record.current_ps.multipliers.length; i++){
 				multiplier *= record.current_ps.multipliers[i].multiplier;
 			}
