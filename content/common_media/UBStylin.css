@@ -114,7 +114,6 @@ div.right-side-bar {
     overflow: auto;
 }
 
-
 @media only screen and (max-width: 575px) {
     div.left-side-bar {
         display: none;
@@ -142,7 +141,41 @@ div.right-side-bar {
     }
 }
 
+div.xp-progress {
+    background: #000000;
+    border: 1px solid #000000;
+    border-radius: 25px;
+    height: 15px;
+}
 
+div.xp-progress-bar {
+    background: linear-gradient(to bottom, #bbbb00 0%, #ffff00 35%,  #ffff00 60%, #bbbb00 100%);
+}
+
+a.btn-custom{
+    text-decoration: none;
+    padding:10px;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    font-size: larger;
+}
+
+.btn-primary-custom, .btn-primary-custom:hover, .btn-primary-custom:active{
+    /*border: 1px solid #000000;*/
+    /*border-radius: 5px;*/
+    color: white;
+    background: linear-gradient(to bottom, #168eff 1%, #1662ed 100%);
+    /*box-shadow: 1px 1px 0 #168eff, inset 0 1px 0 #168eff;*/
+    /*text-shadow: 1px 1px 0 rgba(0,0,0,0.25);*/
+}
+
+
+.btn-secondary-custom, .btn-secondary-custom:hover, .btn-secondary-custom:active{
+    /*border: 1px solid #666666;*/
+    /*border-radius: 5px;*/
+    color:#666666;
+    background: linear-gradient(to bottom, #cccccc 1%,  #aaaaaa 100%);
+}
 
 div.lecture-section-well {
     border-radius: 0;
@@ -171,7 +204,6 @@ div.reference-well {
     padding: 10px;
     margin: 5px 2px;
 }
-
 
 span.reference-link {
     color: green;
@@ -283,12 +315,12 @@ div.messages {
     padding-right: 20px;
 }
 
-a{
+a {
     text-decoration: none;
     color: #0000EE;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
     color: #0000EE;
 }
@@ -298,7 +330,7 @@ a.menu_link {
     color: #808080;
 }
 
-a.menu_link:hover{
+a.menu_link:hover {
     color: #000000;
 }
 

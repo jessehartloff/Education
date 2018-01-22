@@ -181,6 +181,7 @@ exports.get_ps = function get_ps(req, res, course) {
 				});
 				res.to_template.ps_completed = ps_completed;
 
+// todo: progress bar should go from brown to glowing yellow as level increases
 
 				// determine active loop section
 				if (user_ps.current_ps_finished) {

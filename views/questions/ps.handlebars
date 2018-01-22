@@ -23,7 +23,7 @@
     <!-- AutoLab link for submissions -->
     <!-- Log EVERYTHING! -->
 
-    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary{{/if}} mb-3">
+    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">
         <div class="card-body">
             <h5>Level {{user_ps.level}}: {{level_name}}</h5>
             <!--<span>{{xp_for_previous_level}}</span>-->
@@ -33,8 +33,8 @@
 
             <div class="row">
                 <div class="col col-xs-auto">
-                    <div class="progress">
-                        <div class="progress-bar bg-warning" style="width:{{xp_percentage_to_next_level}}%"></div>
+                    <div class="progress xp-progress">
+                        <div class="progress-bar xp-progress-bar" style="width:{{xp_percentage_to_next_level}}%"></div>
                     </div>
                 </div>
                 <div class="col-xs-auto">
@@ -51,24 +51,25 @@
         <div class="card-body">
 
             <a href="/courses/{{course.course}}/ps-download"
-               class="btn {{#if new_ps_active}}btn-primary{{else}}btn-secondary{{/if}}">
+               class="btn-custom {{#if new_ps_active}}btn-primary-custom{{else}}btn-secondary-custom{{/if}}">
                 {{#if user_ps.current_ps_finished}}
                     Download Problem Set {{increment user_ps.current_ps.ps_number}}
                 {{else}}
                     Re-Download Problem Set {{user_ps.current_ps.ps_number}}
                 {{/if}}</a>
-            <br/><br/>
+            <br/><br/><br/>
             <a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
-               target="_blank" class="btn {{#if submit_ps_active}}btn-primary{{else}}btn-secondary{{/if}}">Submit
+               target="_blank" class="btn-custom {{#if submit_ps_active}}btn-primary-custom{{else}}btn-secondary-custom{{/if}}">Submit
                 Problem
                 Set {{user_ps.current_ps.ps_number}} on Autolab</a>
 
             {{#if user_ps.current_ps_finished}}
                 <p>
-                <div class="alert alert-info">Problem Set {{user_ps.current_ps.ps_number}} has been submitted for
-                    credit. It can be submitted again for practice and feedback that will be displayed only on AutoLab,
-                    but cannot be submitted again for credit.
-                </div>
+                    <br/>
+                <!--<div class="card bg-light mb-3"><div class="card-body">-->
+                * Problem Set {{user_ps.current_ps.ps_number}} has been graded and cannot be submitted again for credit.
+                    It can still be submitted for practice and the feedback will only be displayed in AutoLab
+                <!--</div>-->
                 </p>
             {{/if}}
         </div>
@@ -102,11 +103,10 @@
 
     {{#with user_ps.current_ps}}
         <div class="card border-dark mb-3">
-            <div class="card-header text-white bg-primary">
+            <div class="card-header{{#unless ../user_ps.current_ps_finished}} text-white bg-primary{{/unless}}">
                 <h5>{{class_name}}</h5>
             </div>
             <div class="card-body">
-                <!--<h5>Current Problem Set</h5>-->
                 <p>
                     {{#if user_ps.current_ps_finished}}
                         Submitted. You cannot earn more points for the problem set, though you can resubmit on AutoLab
@@ -140,16 +140,24 @@
                 {{/each}}
             </div>
         </div>
+    {{else}}
+
+        <div class="card border-dark mb-3">
+            <div class="card-body">
+                CLick above to start your first problem set
+            </div>
+        </div>
     {{/with}}
 
 
     {{#each ps_completed}}
+        {{#with this}}
 
         <div class="card border-dark mb-3">
+            <div class="card-header">
+                <h5>{{class_name}}</h5>
+            </div>
             <div class="card-body">
-                {{#with this}}
-                    <h5>{{class_name}}</h5>
-
                     {{#each multipliers}}
                         <div class="alert alert-warning"><strong>x{{this.multiplier}}</strong>: {{this.reason}}</div>
                     {{/each}}
@@ -171,9 +179,9 @@
                             </p>
                         {{/each}}
                     {{/each}}
-                {{/with}}
             </div>
         </div>
+        {{/with}}
     {{/each}}
 
 
