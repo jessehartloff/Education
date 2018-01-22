@@ -117,7 +117,7 @@
                     {{/if}}
                 </p>
                 {{#each multipliers}}
-                    <div class="alert alert-warning"><h4>x{{this.multiplier}}</h4>: {{this.reason}}</div>
+                    <div class="alert alert-warning"><strong>x{{this.multiplier}}</strong>: {{this.reason}}</div>
                 {{/each}}
                 {{#each questions}}
                     <p>Question {{increment @index}}<br/>
@@ -141,8 +141,8 @@
                 {{#with this}}
                     <h5>{{class_name}}</h5>
 
-                    {{#each multiplier}}
-                        <div class="alert alert-success"><h4>x{{this.multiplier}}</h4>: {{this.reason}}</div>
+                    {{#each multipliers}}
+                        <div class="alert alert-warning"><strong>x{{this.multiplier}}</strong>: {{this.reason}}</div>
                     {{/each}}
                     {{#each questions}}
                         <p>Question {{increment @index}}</p>

@@ -90,7 +90,7 @@ router.post('/login', function (req, res, next) {
 
 	// Don't follow an outside link. This is not for security, and offers no added security, but for convenience
 	// in case someone uses a strange referer or links directly to the login page
-	if(!destination || (!destination.includes("localhost") && !destination.includes("fury.buffalo.edu"))){
+	if(!destination || (!destination.includes("localhost") && !destination.includes("fury.cse.buffalo.edu"))){
 		destination = '/user/profile';
 	}
 	passport.authenticate('local', {
