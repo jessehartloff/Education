@@ -114,20 +114,35 @@ div.right-side-bar {
     overflow: auto;
 }
 
-div.left-side-bar {
-    /*color: #ffffff;*/
-    /*background-color: #f7fbff;*/
-    background-color: #ffffff;
-    /*background-color: #155db9;*/
-    /*width: 100%;*/
-    /*padding: 2px;*/
-    width: 16.7%;
-    padding-right: 5px;
-    position: fixed;
-    height: calc(100% - 32px);
-    overflow: auto;
-    /*background-color: #156ad2;*/
+
+@media only screen and (max-width: 575px) {
+    div.left-side-bar {
+        display: none;
+        width: 0.0%;
+        height: 0.0%;
+    }
 }
+
+@media only screen and (min-width: 576px) {
+    div.left-side-bar {
+        border-right: solid #000000;
+        border-width: 1px;
+        /*color: #ffffff;*/
+        /*background-color: #f7fbff;*/
+        background-color: #ffffff;
+        /*background-color: #155db9;*/
+        /*width: 100%;*/
+        /*padding: 2px;*/
+        width: 16.7%;
+        padding-right: 5px;
+        position: fixed;
+        height: calc(100% - 32px);
+        overflow: auto;
+        /*background-color: #156ad2;*/
+    }
+}
+
+
 
 div.lecture-section-well {
     border-radius: 0;
@@ -157,9 +172,6 @@ div.reference-well {
     margin: 5px 2px;
 }
 
-div.reference {
-
-}
 
 span.reference-link {
     color: green;
@@ -174,6 +186,8 @@ div.group-card {
 
 div.content-area {
     height: calc(100% - 32px);
+    padding-left: 10px;
+    padding-right: 10px;
     /*background-color: white;*/
 }
 
@@ -369,7 +383,7 @@ body {
 /*display: none;*/
 /*}*/
 
-@media only screen and (max-device-width: 400px) {
+@media only screen and (max-width: 400px) {
     .tiny-text {
         display: inline-block;
     }
@@ -379,7 +393,7 @@ body {
     }
 }
 
-@media only screen and (min-device-width: 401px) {
+@media only screen and (min-width: 401px) {
     .tiny-text {
         display: none;
     }

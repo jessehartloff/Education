@@ -76,12 +76,25 @@ router.get('/profile', function (req, res) {
 
 
 router.get('/login', function (req, res) {
+	res.to_template.prev_path = req.headers.referer;
+	console.log("4" + req.headers.referer);
+	if(!res.to_template.prev_path){
+		res.to_template.prev_path = '/user/profile';
+	}
 	res.render('login', res.to_template);
 });
 
 router.post('/login', function (req, res, next) {
+	var destination = req.body.prev_path;
+	console.log("6" + req.body.prev_path);
+
+	// Don't follow an outside link. This is not for security, and offers no added security, but for convenience
+	// in case someone uses a strange referer or links directly to the login page
+	if(!destination || (!destination.includes("localhost") && !destination.includes("fury.buffalo.edu"))){
+		destination = '/user/profile';
+	}
 	passport.authenticate('local', {
-		successRedirect: '/user/profile',
+		successRedirect: destination,
 		failureRedirect: '/user/login',
 		failureFlash: true
 	})(req, res, next);

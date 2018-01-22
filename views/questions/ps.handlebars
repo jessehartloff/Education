@@ -1,3 +1,11 @@
+<div class="card border-dark mb-3">
+
+    <div class="card-header">
+        <h1>Problem Sets</h1>
+    </div>
+
+</div>
+
 {{#unless user}}
     <div class="card border-dark mb-3">
         <div class="card-body">
@@ -15,45 +23,90 @@
     <!-- AutoLab link for submissions -->
     <!-- Log EVERYTHING! -->
 
+    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary{{/if}} mb-3">
+        <div class="card-body">
+            <h5>Level {{user_ps.level}}: {{level_name}}</h5>
+            <!--<span>{{xp_for_previous_level}}</span>-->
+            <hr/>
+
+            <p>Next Level: {{next_level_name}}</p>
+
+            <div class="row">
+                <div class="col col-xs-auto">
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" style="width:{{xp_percentage_to_next_level}}%"></div>
+                    </div>
+                </div>
+                <div class="col-xs-auto">
+                    {{user_ps.total_xp}} / {{xp_for_next_level}}
+                </div>
+                <div class="col col-xs-10">
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="card border-dark mb-3">
         <div class="card-body">
 
-            <a href="/courses/{{course.course}}/ps-download" class="btn btn-primary">
+            <a href="/courses/{{course.course}}/ps-download"
+               class="btn {{#if new_ps_active}}btn-primary{{else}}btn-secondary{{/if}}">
                 {{#if user_ps.current_ps_finished}}
-                    Download New Problem Set
+                    Download Problem Set {{increment user_ps.current_ps.ps_number}}
                 {{else}}
-                    Download Current Problem Set
+                    Re-Download Problem Set {{user_ps.current_ps.ps_number}}
                 {{/if}}</a>
             <br/><br/>
-            <p>
-                Submit here, then come back for a new problem set: <a
-                    href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
-                    target="_blank">Autolab</a>
-            </p>
+            <a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
+               target="_blank" class="btn {{#if submit_ps_active}}btn-primary{{else}}btn-secondary{{/if}}">Submit
+                Problem
+                Set {{user_ps.current_ps.ps_number}} on Autolab</a>
 
+            {{#if user_ps.current_ps_finished}}
+                <p>
+                <div class="alert alert-info">Problem Set {{user_ps.current_ps.ps_number}} has been submitted for
+                    credit. It can be submitted again for practice and feedback that will be displayed only on AutoLab,
+                    but cannot be submitted again for credit.
+                </div>
+                </p>
+            {{/if}}
         </div>
     </div>
 
 
+    <!--<div class="card border-dark mb-3 {{#if new_ps_active}}text-white bg-primary{{/if}}">-->
+    <!--<div class="card-body">-->
+
+    <!--<a href="/courses/{{course.course}}/ps-download" class="btn btn-default">-->
+            <!--{{#if user_ps.current_ps_finished}}-->
+    <!--Download Problem Set {{increment user_ps.current_ps.ps_number}}-->
+            <!--{{else}}-->
+    <!--Re-Download Problem Set {{user_ps.current_ps.ps_number}}-->
+            <!--{{/if}}</a>-->
+
+
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="card border-dark {{#if submit_ps_active}}text-white bg-primary{{/if}} mb-3">-->
+    <!--<div class="card-body">-->
+    <!--<p>-->
+    <!--<a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"-->
+    <!--target="_blank" class="btn btn-default">Submit on Autolab</a>-->
+    <!--</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    {{#with user_ps.current_ps}}
     <div class="card border-dark mb-3">
-        <div class="card-body">
-            <p>Level {{user_ps.level}}</p>
-            <!--<span>{{xp_for_previous_level}}</span>-->
-            <div class="progress">
-                <div class="progress-bar" style="width:{{xp_percentage_to_next_level}}%">{{user_ps.total_xp}}
-                    / {{xp_for_next_level}}</div>
-            </div>
-            <!--<span>{{xp_for_next_level}}</span>-->
+        <div class="card-header text-white bg-primary">
+            <h5>{{class_name}}</h5>
         </div>
-    </div>
-
-
-    <div class="card border-dark mb-3">
         <div class="card-body">
-            {{#with user_ps.current_ps}}
                 <!--<h5>Current Problem Set</h5>-->
-                <h5>{{class_name}}</h5>
                 <p>
                     {{#if user_ps.current_ps_finished}}
                         Submitted. You cannot earn more points for the problem set, though you can resubmit on AutoLab
@@ -76,50 +129,44 @@
                         </p>
                     {{/each}}
                 {{/each}}
-            {{/with}}
         </div>
     </div>
+    {{/with}}
 
-    <div class="card border-dark mb-3">
-        <div class="card-body">
 
-            <h5>Previous Problem Sets</h5>
+    {{#each ps_completed}}
 
-            {{#each ps_completed}}
+        <div class="card border-dark mb-3">
+            <div class="card-body">
+                {{#with this}}
+                    <h5>{{class_name}}</h5>
 
-                <div class="card border-dark mb-3">
-                    <div class="card-body">
-                        {{#with this}}
-                            <h5>{{class_name}}</h5>
-
-                            {{#each multiplier}}
-                                <div class="alert alert-success"><h4>x{{this.multiplier}}</h4>: {{this.reason}}</div>
-                            {{/each}}
-                            {{#each questions}}
-                                <p>Question {{increment @index}}</p>
-                                <p>
-                                    {{this.instruction_text}}<br/>
-                                    {{#if this.correct}}
-                                        Correct
-                                    {{else}}
-                                        Incorrect
-                                    {{/if}}
-                                    <br/>
-                                    {{this.feedback}}
-                                </p>
-                                {{#each this.cards}}
-                                    <p>
-                                        Card: {{this}}
-                                    </p>
-                                {{/each}}
-                            {{/each}}
-                        {{/with}}
-                    </div>
-                </div>
-            {{/each}}
-
+                    {{#each multiplier}}
+                        <div class="alert alert-success"><h4>x{{this.multiplier}}</h4>: {{this.reason}}</div>
+                    {{/each}}
+                    {{#each questions}}
+                        <p>Question {{increment @index}}</p>
+                        <p>
+                            {{this.instruction_text}}<br/>
+                            {{#if this.correct}}
+                                Correct
+                            {{else}}
+                                Incorrect
+                            {{/if}}
+                            <br/>
+                            {{this.feedback}}
+                        </p>
+                        {{#each this.cards}}
+                            <p>
+                                Card: {{this}}
+                            </p>
+                        {{/each}}
+                    {{/each}}
+                {{/with}}
+            </div>
         </div>
-    </div>
+    {{/each}}
+
 
     <!-- Priority 2 -->
     <!-- Progress towards next goal -->
@@ -134,12 +181,6 @@
     <!-- Priority 4 -->
     <!-- Tie into office hours tracking/queueing -->
 
-
-    <div class="card border-dark mb-3">
-        <div class="card-body">
-
-        </div>
-    </div>
 
     <div class="card-deck">
         <div class="card  border-dark mb-3" style="max-width: 18rem;">

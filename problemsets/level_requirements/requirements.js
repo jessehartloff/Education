@@ -1,4 +1,4 @@
-exports.get_level_requirements =  function get_level_requirements(current_level) {
+exports.get_level_requirements = function get_level_requirements(current_level) {
 	switch (current_level) {
 		case 1:
 			return level1();
@@ -35,72 +35,46 @@ exports.get_level_requirements =  function get_level_requirements(current_level)
 		default:
 			return level16();
 	}
-}
+};
 
 
 function level1() {
 	return {
+		"level_name": "Computing with Variables",
 		"xp_for_next_level": 2500,
 		"question_targets": [
-			{
-				"concept": "variables",
-				"type": 1,
-				"cumulative_number_correct": 5
-			},
-			{
-				"concept": "variables",
-				"type": 2,
-				"cumulative_number_correct": 4
-			},
-			{
-				"concept": "variables",
-				"type": 3,
-				"cumulative_number_correct": 3
-			},
-			{
-				"concept": "variables",
-				"type": 4,
-				"cumulative_number_correct": 2
-			},
-			{
-				"concept": "variables",
-				"type": 5,
-				"cumulative_number_correct": 2
-			}
+			{"concept": "variables", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "variables", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "variables", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "variables", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "variables", "type": "5", "cumulative_number_correct": 2}
 		]
 	};
 }
 
-
 function level2() {
 	return {
+		"level_name": "Computing with Methods",
 		"xp_for_next_level": 5000,
 		"question_targets": [
-			{
-				"concept": "methods",
-				"type": 1,
-				"cumulative_number_correct": 5
-			},
-			{
-				"concept": "methods",
-				"type": 2,
-				"cumulative_number_correct": 4
-			},
-			{
-				"concept": "methods",
-				"type": 3,
-				"cumulative_number_correct": 3
-			},
-			{
-				"concept": "methods",
-				"type": 4,
-				"cumulative_number_correct": 2
-			},
-			{
-				"concept": "methods",
-				"type": 5,
-				"cumulative_number_correct": 2
-			}
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
 		].concat(level1().question_targets)
+	};
+}
+
+function level3() {
+	return {
+		"xp_for_next_level": 7500,
+		"question_targets": [
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+		].concat(level2().question_targets)
 	};
 }
