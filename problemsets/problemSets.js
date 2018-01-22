@@ -151,21 +151,31 @@ exports.get_ps = function get_ps(req, res, course) {
 				// retrieve and sort previous problem sets
 				var ps_completed = [];
 				for (var i in user_ps.all_ps_assigned) {
-					if (i !== user_ps.current_ps.ps_number.toString()) {
-						var prepared_ps = user_ps.all_ps_assigned[i];
-						for(var j in prepared_ps.questions){
-							if(!prepared_ps.questions[j]){
-								continue;
-							}
-							if(prepared_ps.results) {
+					//if (i !== user_ps.current_ps.ps_number.toString()) {
+					var prepared_ps = user_ps.all_ps_assigned[i];
+					for (var j in prepared_ps.questions) {
+						if (!prepared_ps.questions[j]) {
+							continue;
+						}
+						if (prepared_ps.results) {
+							if (i !== user_ps.current_ps.ps_number.toString()) {
 								prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
 								prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
+							} else if (user_ps.current_ps_finished) {
+								res.to_template.user_ps.current_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
+								res.to_template.user_ps.current_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
 							}
 						}
+					}
+					if (i !== user_ps.current_ps.ps_number.toString()) {
 						ps_completed.push(prepared_ps);
 					}
+					//}else if(user_ps.current_ps_finished){
+					//	res.to_template.user_ps.current_ps["correct"] = prepared_ps.results[j].correct;
+					//	res.to_template.user_ps.current_ps["feedback"] = prepared_ps.results[j].feedback;
+					//}
 				}
-				ps_completed.sort(function(a, b){
+				ps_completed.sort(function (a, b) {
 					// sorts reverse alphabetically
 					return b.ps_number - a.ps_number;
 				});
@@ -173,13 +183,13 @@ exports.get_ps = function get_ps(req, res, course) {
 
 
 				// determine active loop section
-				if(user_ps.current_ps_finished){
+				if (user_ps.current_ps_finished) {
 					res.to_template.new_ps_active = true;
-				}else{
+				} else {
 					res.to_template.submit_ps_active = true;
 				}
 				//grading_ps_active // future tech when sockets and hook are implemented. Give them something to do
-									// while grading
+				// while grading
 
 
 				// retrieve xp and level stats
@@ -192,7 +202,7 @@ exports.get_ps = function get_ps(req, res, course) {
 				res.to_template.xp_percentage_to_next_level = 100 * (user_ps.total_xp - res.to_template.xp_for_previous_level) / (res.to_template.xp_for_next_level - res.to_template.xp_for_previous_level);
 
 				res.to_template.level_name = level_requirements.get_level_requirements(user_ps.level).level_name;
-				res.to_template.next_level_name = level_requirements.get_level_requirements(user_ps.level+1).level_name;
+				res.to_template.next_level_name = level_requirements.get_level_requirements(user_ps.level + 1).level_name;
 
 				// ship it
 				res.render('questions/ps', res.to_template);
@@ -458,7 +468,7 @@ function api_send_ps_results(req, res, course) {
 
 			// Tally up total xp
 			var multiplier = 100.0;
-			for(var i=0; i<record.current_ps.multipliers.length; i++){
+			for (var i = 0; i < record.current_ps.multipliers.length; i++) {
 				multiplier *= record.current_ps.multipliers[i].multiplier;
 			}
 			var total_xp = record.total_xp + number_correct * multiplier;
