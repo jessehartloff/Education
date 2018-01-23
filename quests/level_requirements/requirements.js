@@ -57,10 +57,10 @@ function level2() {
 		"level_name": "Computing with Methods",
 		"xp_for_next_level": 5000,
 		"question_targets": [
-			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 4},
 			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 3},
 			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
 		].concat(level1().question_targets)
 	};
@@ -68,29 +68,29 @@ function level2() {
 
 function level3() {
 	return {
-		"level_name": "Controlling Code",
+		"level_name": "Handling Data",
 		"xp_for_next_level": 7500,
 		"question_targets": [
-			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
-			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+			{"concept": "data_structures", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "data_structures", "type": "2", "cumulative_number_correct": 5},
+			{"concept": "data_structures", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "data_structures", "type": "4", "cumulative_number_correct": 3},
+			{"concept": "data_structures", "type": "5", "cumulative_number_correct": 2}
 		].concat(level2().question_targets)
 	};
 }
 
 function level4() {
 	return {
-		"level_name": "Handling Data",
+		"level_name": "Controlling Code",
 		"xp_for_next_level": 10000,
 		"question_targets": [
-			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
-			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
-		].concat(level2().question_targets)
+			{"concept": "control_flow", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "control_flow", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "control_flow", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "control_flow", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "control_flow", "type": "5", "cumulative_number_correct": 2}
+		].concat(level3().question_targets)
 	};
 }
 
@@ -104,7 +104,7 @@ function level5() {
 			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
 			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
 			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
-		].concat(level2().question_targets)
+		].concat(level4().question_targets)
 	};
 }
 
@@ -120,7 +120,7 @@ function level15() {
 			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
 			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
 			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
-		].concat(level2().question_targets)
+		].concat(level1().question_targets)
 	};
 }
 
@@ -134,6 +134,6 @@ function level16() {
 			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
 			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
 			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
-		].concat(level2().question_targets)
+		].concat(level1().question_targets)
 	};
 }
