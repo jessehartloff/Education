@@ -14,19 +14,19 @@
             <!--<hr/>-->
 
             <h6>&nbsp;Assessment</h6>
-        {{#unless course.course_options.no_autolab}}
-            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
-            <br/>
-        {{/unless}}
+            {{#unless course.course_options.no_autolab}}
+                &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
+                <br/>
+            {{/unless}}
             {{#each course.assignments}}
                 {{#ifIndexLimited ../course.course @index 2}}
-                &nbsp;<a class="menu_link {{this.short_title}}"
-                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
-                <br/>
+                    &nbsp;<a class="menu_link {{this.short_title}}"
+                             href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
+                    <br/>
                 {{else}}
-                &nbsp;<a class="menu_link"
-                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}"></a>{{this.title}}
-                <br/>
+                    &nbsp;<a class="menu_link"
+                             href="/courses/{{../course.course}}/assignments/{{this.short_title}}"></a>{{this.title}}
+                    <br/>
                 {{/ifIndexLimited}}
             {{/each}}
         {{/if}}
@@ -38,19 +38,15 @@
 
             <h6>&nbsp;Training</h6>
             {{#unless course.course_options.no_question_site}}
-            &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
-                     target="_blank">-Questions</a>
-            <br/>
+                &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
+                         target="_blank">-Questions</a>
+                <br/>
             {{/unless}}
 
             {{#each course.lectures}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
-                {{@index}}. {{this.title}}</a>
+                {{increment @index}}. {{this.title}}</a>
                 <br/>
-                {{else}}
-                    &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}"></a>
-                    {{@index}}. {{this.title}}
-                    <br/>
             {{/each}}
         {{/if}}
 

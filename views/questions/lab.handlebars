@@ -1,0 +1,247 @@
+<div class="card border-dark mb-3">
+
+    <div class="card-header">
+        <h1>Lab</h1>
+    </div>
+
+</div>
+
+{{#unless user}}
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <h4>You must be logged in to use this feature. If you are taking this class you should create an account and
+                log in.
+            </h4>
+        </div>
+    </div>
+{{else}}
+
+
+    <!-- Priority 1! -->
+    <!-- Get new PS (Warn them that it will replace an un-submitted PS if they have one out) -->
+    <!-- AutoLab link for submissions -->
+    <!-- Log EVERYTHING! -->
+
+    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">
+        <div class="card-body">
+            <h5>Level {{user_ps.level}}: {{level_name}}</h5>
+            <!--<span>{{xp_for_previous_level}}</span>-->
+            <hr/>
+
+            <p>Next Level: {{next_level_name}}</p>
+
+            <div class="row">
+                <div class="col col-xs-auto">
+                    <div class="progress xp-progress">
+                        <div class="progress-bar xp-progress-bar" style="width:{{xp_percentage_to_next_level}}%"></div>
+                    </div>
+                </div>
+                <div class="col-xs-auto">
+                    {{user_ps.total_xp}} / {{xp_for_next_level}}
+                </div>
+                <div class="col col-xs-10">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+
+            <a href="/courses/{{course.course}}/ps-download"
+               class="btn-custom {{#if new_ps_active}}btn-primary-custom{{else}}btn-secondary-custom{{/if}}">
+                {{#if user_ps.current_ps_finished}}
+                    Download Problem Set {{increment user_ps.current_ps.ps_number}}
+                {{else}}
+                    Re-Download Problem Set {{user_ps.current_ps.ps_number}}
+                {{/if}}</a>
+            <br/><br/><br/>
+            <a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"
+               target="_blank" class="btn-custom {{#if submit_ps_active}}btn-primary-custom{{else}}btn-secondary-custom{{/if}}">Submit
+                Problem
+                Set {{user_ps.current_ps.ps_number}} on Autolab</a>
+
+            {{#if user_ps.current_ps_finished}}
+                <p>
+                    <br/>
+                <!--<div class="card bg-light mb-3"><div class="card-body">-->
+                * Problem Set {{user_ps.current_ps.ps_number}} has been graded and cannot be submitted again for credit.
+                    It can still be submitted for practice and the feedback will only be displayed in AutoLab
+                <!--</div>-->
+                </p>
+            {{/if}}
+        </div>
+    </div>
+
+
+    <!--<div class="card border-dark mb-3 {{#if new_ps_active}}text-white bg-primary{{/if}}">-->
+    <!--<div class="card-body">-->
+
+    <!--<a href="/courses/{{course.course}}/ps-download" class="btn btn-default">-->
+            <!--{{#if user_ps.current_ps_finished}}-->
+    <!--Download Problem Set {{increment user_ps.current_ps.ps_number}}-->
+            <!--{{else}}-->
+    <!--Re-Download Problem Set {{user_ps.current_ps.ps_number}}-->
+            <!--{{/if}}</a>-->
+
+
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="card border-dark {{#if submit_ps_active}}text-white bg-primary{{/if}} mb-3">-->
+    <!--<div class="card-body">-->
+    <!--<p>-->
+    <!--<a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"-->
+    <!--target="_blank" class="btn btn-default">Submit on Autolab</a>-->
+    <!--</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    {{#with user_ps.current_ps}}
+        <div class="card border-dark mb-3">
+            <div class="card-header{{#unless ../user_ps.current_ps_finished}} text-white bg-primary{{/unless}}">
+                <h5>{{class_name}}</h5>
+            </div>
+            <div class="card-body">
+                <p>
+                    {{#if user_ps.current_ps_finished}}
+                        Submitted. You cannot earn more points for the problem set, though you can resubmit on AutoLab
+                        for
+                        extra practice
+                    {{else}}
+                        Not yet submitted
+                    {{/if}}
+                </p>
+                {{#each multipliers}}
+                    <div class="alert alert-warning"><strong>x{{this.multiplier}}</strong>: {{this.reason}}</div>
+                {{/each}}
+                {{#each questions}}
+                    <p>Question {{increment @index}}<br/>
+                        {{this.instruction_text}}
+                    </p>
+                    {{#if this.feedback}}
+                        {{#if this.correct}}
+                            Correct
+                        {{else}}
+                            Incorrect
+                        {{/if}}
+                        <br/>
+                        {{this.feedback}}
+                    {{/if}}
+                    {{#each this.cards}}
+                        <p>
+                            Card: {{this}}
+                        </p>
+                    {{/each}}
+                {{/each}}
+            </div>
+        </div>
+    {{else}}
+
+        <div class="card border-dark mb-3">
+            <div class="card-body">
+                CLick above to start your first problem set
+            </div>
+        </div>
+    {{/with}}
+
+
+    {{#each ps_completed}}
+        {{#with this}}
+
+        <div class="card border-dark mb-3">
+            <div class="card-header">
+                <h5>{{class_name}}</h5>
+            </div>
+            <div class="card-body">
+                    {{#each multipliers}}
+                        <div class="alert alert-warning"><strong>x{{this.multiplier}}</strong>: {{this.reason}}</div>
+                    {{/each}}
+                    {{#each questions}}
+                        <p>Question {{increment @index}}</p>
+                        <p>
+                            {{this.instruction_text}}<br/>
+                            {{#if this.correct}}
+                                Correct
+                            {{else}}
+                                Incorrect
+                            {{/if}}
+                            <br/>
+                            {{this.feedback}}
+                        </p>
+                        {{#each this.cards}}
+                            <p>
+                                Card: {{this}}
+                            </p>
+                        {{/each}}
+                    {{/each}}
+            </div>
+        </div>
+        {{/with}}
+    {{/each}}
+
+
+    <!-- Priority 2 -->
+    <!-- Progress towards next goal -->
+    <!-- Feedback on most recent PS -->
+
+    <!-- Priority 3 -->
+    <!-- Re-download current PS is it's checked out and not submitted -->
+    <!-- Feedback for all previous PSs -->
+    <!-- Remind them of office hours after poor performance -->
+    <!-- Report an issue button -->
+
+    <!-- Priority 4 -->
+    <!-- Tie into office hours tracking/queueing -->
+
+
+    <div class="card-deck">
+        <div class="card  border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Variables: Expressions</div>
+            <div class="card-body">
+                <h5 class="card-title">Expressions</h5>
+                <p class="card-text">A section of code that evaluates to a single value</p>
+                <ul>
+                    <li>Can include function calls</li>
+                    <li>The resulting value can be used anywhere a value can be used</li>
+                    <li>An expression can be a single variable</li>
+                </ul>
+            </div>
+            <div class="card-footer"><a href="#">More</a></div>
+        </div>
+
+
+        <div class="card  border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Data Structures: ArrayList</div>
+            <div class="card-body">
+                <h5 class="card-title">ArrayList</h5>
+                <p class="card-text">A data structure that can store multiple values of a single type</p>
+                <ul>
+                    <li>Values are indexed from 0 to size-1</li>
+                    <li>The type that can be stored must be declared with a type parameter. Ex.
+                        ArrayList&lt;Integer&gt;</li>
+                    <li>Type parameter must be a class, not a primitive (Starts with capital letter)</li>
+                </ul>
+            </div>
+            <div class="card-footer"><a href="#">More</a></div>
+        </div>
+
+
+        <div class="card  border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white">Networking: HTTP GET</div>
+            <div class="card-body">
+                <h5 class="card-title">HTTP GET</h5>
+                <p class="card-text">Request a resource from website or web API</p>
+                <ul>
+                    <li>Resource is requested using a url</li>
+                    <li>Can include a query string in the url following a ?</li>
+                </ul>
+            </div>
+            <div class="card-footer"><a href="#">More</a></div>
+        </div>
+    </div>
+
+{{/unless}}

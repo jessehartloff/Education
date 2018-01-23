@@ -68,7 +68,66 @@ function level2() {
 
 function level3() {
 	return {
+		"level_name": "Controlling Code",
 		"xp_for_next_level": 7500,
+		"question_targets": [
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+		].concat(level2().question_targets)
+	};
+}
+
+function level4() {
+	return {
+		"level_name": "Handling Data",
+		"xp_for_next_level": 10000,
+		"question_targets": [
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+		].concat(level2().question_targets)
+	};
+}
+
+function level5() {
+	return {
+		"level_name": "Analyzing Data",
+		"xp_for_next_level": 10000,
+		"question_targets": [
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+		].concat(level2().question_targets)
+	};
+}
+
+
+
+function level15() {
+	return {
+		"level_name": "End Game",
+		"xp_for_next_level": 999999,
+		"question_targets": [
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+		].concat(level2().question_targets)
+	};
+}
+
+function level16() {
+	return {
+		"level_name": "null",
+		"xp_for_next_level": 9999999,
 		"question_targets": [
 			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
 			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},

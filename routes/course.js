@@ -5,7 +5,9 @@ var course_util = require('../util/course');
 var projects_util = require('../util/projects');
 var api_util = require('../util/api');
 var questions_util = require('../questions/questions');
-var ps_util = require('../problemsets/problemSets');
+var ps_util = require('../quests/problemSets');
+var lab_util = require('../quests/lab');
+var hw_util = require('../quests/projects');
 
 
 // D: Check AutoLab multiple sections
@@ -49,9 +51,23 @@ router.get('/:course/lectures/:lecture', function (req, res) {
 	course_util.render_content(req, res, 'lectures', req.params.lecture);
 });
 
+
+router.get('/:course/assignments/ps', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.get_ps);
+});
+
+router.get('/:course/assignments/lab', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.get_lab);
+});
+
+router.get('/:course/assignments/hw', function (req, res) {
+	course_util.preprocess_course(req, res, hw_util.get_hw);
+});
+
 router.get('/:course/assignments/:assignment', function (req, res) {
 	course_util.render_content(req, res, 'assignments', req.params.assignment);
 });
+
 
 router.get('/:course/enroll', function (req, res) {
 	if (res.to_template.user) {

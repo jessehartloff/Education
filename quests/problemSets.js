@@ -1,7 +1,6 @@
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
-var users = require('../util/users');
 var level_requirements = require('./level_requirements/requirements');
 
 var collection_ps = db.get('ps');
@@ -491,6 +490,8 @@ function api_send_ps_results(req, res, course) {
 			if (level_up) {
 				toSet["level"] = new_level;
 				toSet["leveled_up"] = true;
+				// TODO: Something with this. Give them a satisfying message when they visit the page again. Maybe add
+				//       it as feedback on the PS itself
 			}
 
 			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {

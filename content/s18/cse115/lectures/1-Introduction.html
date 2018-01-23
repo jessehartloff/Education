@@ -1,13 +1,26 @@
 ---
-title: Variables
+title: Introduction
 short_title: variables
-next_content_short: functions
+next_content_short: methods
 previous_content_short: none
 ---
 
+[* Let's take advantage of that perfect processor *]
+[* image: processor *]
+[* Move basic method stuff here so they can do the PS questions (line, parabola) *]
+
 [Monday - Intro to the course]
-[Wednesday - Variables, Expressions]
-[Friday - Defining and calling methods]
+[Wednesday - Variables]
+[Friday - Expressions]
+
+[Monday - No class - Labor day]
+[Wednesday - Calling methods (Math, String), Defining methods (void, various numbers of parameters)]
+[Friday - Activity: variables, expressions, writing the body of a method]
+
+[With hindsight: This week seemed fine, but students struggled in lab since they never had to write a method header
+until then. Next time have PS/Lecture questions that only have a comment that gives an english description of the
+method they should write without providing the skeleton]
+
 
 == Classes
 
@@ -25,16 +38,16 @@ previous_content_short: none
 
 Introduction:
 <p>Computer programs manipulate data.  Data is stored in a computer's
-memory.  A <span class="vocabulary">variable</span> is a location in
-the computer's memory that has a name.</p>
+    memory.  A <span class="vocabulary">variable</span> is a location in
+    the computer's memory that has a name.</p>
 
 <p>
-In Java variables must be declared before they can be used.
-A <span class="vocabulary">declaration</span> gives a variable both a
-<span class="deeper-dive" data-concept="variables" data-topic="name"></span> and a 
-<span class="deeper-dive" data-concept="variables" data-topic="type"></span>.
-The <span class="vocabulary">type</span> of a
-variable says what kind of value will be stored in the variable.</p>
+    In Java variables must be declared before they can be used.
+    A <span class="vocabulary">declaration</span> gives a variable both a
+    <span class="deeper-dive" data-concept="variables" data-topic="name"></span> and a
+    <span class="deeper-dive" data-concept="variables" data-topic="type"></span>.
+    The <span class="vocabulary">type</span> of a
+    variable says what kind of value will be stored in the variable.</p>
 
 
 <p>For example,
@@ -53,11 +66,11 @@ type <span><code class="java">int</code></span>.
 </p>
 
 <p>The order is again important: we first write the name of the
-variable, then the assignment operator ('='), followed by the value to
-be stored in the variable.  The semicolon marks the end of the
-assignment.  In the example above the declaration of the variable and
-the assignment of a value to the variable are done in two separate
-instructions.
+    variable, then the assignment operator ('='), followed by the value to
+    be stored in the variable.  The semicolon marks the end of the
+    assignment.  In the example above the declaration of the variable and
+    the assignment of a value to the variable are done in two separate
+    instructions.
 </p>
 
 <p>We can combine these two steps into one, which is sometimes a convenience:
@@ -67,7 +80,7 @@ instructions.
 </code></pre>
 
 <p>
-Both examples have the same result and follow these two steps:
+    Both examples have the same result and follow these two steps:
 </p>
 <ol>
     <li><span><code class="java">int myFirstVariable</code></span> - Declare a variable named myFirstVariable of type int</li>
@@ -175,7 +188,7 @@ Syntax:
 </ul>
 
 <p>
-<code class="java">System.out.print</code></li> prints its argument to the console exactly as its written.  The following two examples produce exactly the same output:
+    <code class="java">System.out.print</code></li> prints its argument to the console exactly as its written.  The following two examples produce exactly the same output:
 </p>
 
 <p>Using one <code class="java">System.out.print</code> statement:
@@ -192,7 +205,7 @@ Syntax:
 </code></pre>
 
 <p>
-<code class="java">System.out.println</code></li> prints its argument to the console just like <code class="java">System.out.print</code>, but it also prints a newline character to the console.  This means that the next thing to be printed will appear at the start of the next line.
+    <code class="java">System.out.println</code></li> prints its argument to the console just like <code class="java">System.out.print</code>, but it also prints a newline character to the console.  This means that the next thing to be printed will appear at the start of the next line.
 </p>
 
 <p>Using two <code class="java">System.out.println</code> statements:
@@ -202,10 +215,10 @@ Syntax:
     System.out.print("rld!");
 </code></pre>
 <p>
-produces two lines of output:
+    produces two lines of output:
 </p>
 <p>
-<kbd>Hello Wo<br>rld!</kbd>
+    <kbd>Hello Wo<br>rld!</kbd>
 </p>
 
 
@@ -225,8 +238,8 @@ produces two lines of output:
 
     // This line will be ignored the computer (everything to the right of '//' on this line)
     /*
-      Comments allow us to leave notes for each other in our code.
-      The computer will ignore all this text
+    Comments allow us to leave notes for each other in our code.
+    The computer will ignore all this text
     */
 
     age = 18;
@@ -247,8 +260,8 @@ produces two lines of output:
     int x = 7;    // 7 is an expression, whose value is 7 (makes sense!)
     int y = 5;    // 5 is an expression, whose value is 5
     int z = x + y;  // x is an expression, whose value is whatever is stored in x (7 in this case)
-                    // y is an expression, whose value is whatever is stored in y (5 in this case)
-                    // x + y is an expression, whose value is the sum of the values of x and y
+    // y is an expression, whose value is whatever is stored in y (5 in this case)
+    // x + y is an expression, whose value is the sum of the values of x and y
     System.out.println(z);  // z is an expression
 </code></pre>
 
@@ -257,7 +270,7 @@ produces two lines of output:
 </p>
 
 <p>
-In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is stored in the int variable named z.
+    In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is stored in the int variable named z.
 </p>
 
 <hr/>
@@ -282,9 +295,9 @@ In this example the expression <code>x + y</code> is an expression that is evalu
 </p>
 
 <p> The operator / denotes division, but division works a little
-differently for int values than it does for double values.  For int
-values / computes the integer quotient.  The corresponding remainder
-can be computed using the % operator.
+    differently for int values than it does for double values.  For int
+    values / computes the integer quotient.  The corresponding remainder
+    can be computed using the % operator.
 <pre><code class="java">
     int a = 15;
     int b = 6;
@@ -388,14 +401,14 @@ This is correct because 2.0 * 6.0 is 15.0
 <pre><code class="java">
     public class LectureExample{
 
-        public static void Q1(){
-            String message = "I was called from main";
-            System.out.println("Message from Q1: " + message);
-        }
+    public static void Q1(){
+    String message = "I was called from main";
+    System.out.println("Message from Q1: " + message);
+    }
 
-        public static void main(String[] args){
-            Q1();
-        }
+    public static void main(String[] args){
+    Q1();
+    }
 
     }
 </code></pre>
@@ -410,4 +423,5 @@ This is correct because 2.0 * 6.0 is 15.0
     executed, the computer returned to main to look for more code to run. It instead finds the end of main and
     program stops.
 </p>
+
 
