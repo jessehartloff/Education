@@ -8,6 +8,8 @@ previous_content_short: ds
 [* They know for-each from data structures. Start with the other 2 loops (quickly) then move to conditionals *]
 [* We're utilizing some hardware. Now let's control how code is executed *]
 [* image?:  *]
+[* add: charAt *]
+[* look over iteration and restructure. It was just dumped here *]
 
 [Monday - if/else/else if]
 [Wednesday - while loop]
@@ -41,6 +43,160 @@ previous_content_short: ds
 <p>
     This code will cause a compiler error (the computer cannot understand how to run the code).
 </p>
+
+
+
+
+
+
+
+== Iteration
+
+<p>
+    We now have 2 data structures that we can use to store and recall data, but what if we want to work with all the
+    data in a data structure? In this lesson we will visit every element in a data structure using iteration.
+</p>
+
+<p>
+    We already have the tools we need to iterate over an ArrayList by combining the size method, the get method, and a
+    for loop.
+</p>
+
+<pre><code class="java">
+    static String charsToString(ArrayList&lt;Character&gt; inputList){
+    // Concatenate all the Characters in the list into a single String.
+    String result = "";
+    for(int i=0; i&lt;inputList.size(); i++){
+    result = result + inputList.get(i);
+    }
+    return result;
+    }
+</code></pre>
+
+<p>
+    In this method we are given an ArrayList of Characters, but we have no information about the list. To learn about
+    the the ArrayList we will call its methods and use the return values in our code. First, we know we'll need a loop
+    that run once for each element of the ArrayList so we will ask inputList to tell us its size and use this value to
+    setup our loop. We carefully setup this loop so the index variable <code>i</code> will exactly match the index
+    values of the ArrayList. This way we can call <code>inputList.get(i)</code> in the loop and know it will be called
+    for every element of the list.
+</p>
+
+<p>
+    We can create an ArrayList and call this method as follows:
+</p>
+
+<pre><code class="java">
+    ArrayList&lt;Character&gt; letters = new ArrayList&lt;Character&gt;();
+    letters.add('l');
+    letters.add('u');
+    letters.add('c');
+    letters.add('k');
+    letters.add('y');
+    String returnedString = charsToString(letters);
+    System.out.println(returnedString);
+</code></pre>
+
+<p>Output: <kbd>lucky</kbd></p>
+
+<p>
+    When <code>charToString(letters)</code> is called in this example it will run the code in the method with letters as
+    inputList. Then the method code is executed.
+</p>
+
+<pre><code class="java">
+    String result = "";
+    for(int i=0; i&lt;inputList.size(); i++){
+    result = result + inputList.get(i);
+    }
+    return result;
+</code></pre>
+
+<p>
+    Since the inputList for this call contains 5 elements, its size method will return 5 and the code will become:
+</p>
+
+<pre><code class="java">
+    String result = "";
+    for(int i=0; i&lt;5; i++){
+    result = result + inputList.get(i);
+    }
+    return result;
+</code></pre>
+
+<p>
+    Simplifying this loop will yield:
+</p>
+
+<pre><code class="java">
+    String result = "";
+    result = result + inputList.get(0);
+    result = result + inputList.get(1);
+    result = result + inputList.get(2);
+    result = result + inputList.get(3);
+    result = result + inputList.get(4);
+    return result;
+</code></pre>
+
+<p>
+    Then accessing the elements of the list will result in the final code that will be executed.
+</p>
+
+<pre><code class="java">
+    String result = "";
+    result = result + 'l';
+    result = result + 'u';
+    result = result + 'c';
+    result = result + 'k';
+    result = result + 'y';
+    return result;
+</code></pre>
+
+<p>
+    Showing 1 step further we can see how the String result is being constructed 1 character at a time.
+</p>
+
+<pre><code class="java">
+    String result = "";
+    result = "" + 'l';
+    result = "l" + 'u';
+    result = "lu" + 'c';
+    result = "luc" + 'k';
+    result = "luck" + 'y';
+    return "lucky";
+</code></pre>
+
+<p>
+    This example shows how iterating over a data structure is accomplished. Next we will see a few more examples along
+    with alternate syntax will be necessary to iterate over HashMaps which are not indexed in this predictable manner.
+</p>
+
+<hr/>
+
+<p>
+    Before we iterate over a HashMap, let's revisit Strings and explain something we've seen earlier in the course.
+</p>
+
+<pre><code class="java">
+    static String reverse(String input){
+    // return the reverse of the string
+
+    String reversed = "";
+    for(int i=input.length()-1; i>=0; i--){
+    reversed = reversed + input.charAt(i);
+    }
+    return reversed;
+    }
+</code></pre>
+
+<p>
+    Here we see how we can reverse a String using the tools we've seen earlier in the course. We are reversing the input
+    String by iterating over its chars in reverse order while building a new String. This is very similar to the
+    previous example except we don't use ArrayList and we iterate from the length of the String minus 1 to 0 instead
+    from 0 to the length of the String minus 1.
+</p>
+
+
 
 
 == Loops

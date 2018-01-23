@@ -8,6 +8,7 @@ previous_content_short: functions
 [* Data structures + for-each as the intro to loops *]
 [* That stuff was cool, but what if we have many values. Let's take advantage of our RAM *]
 [* image: RAM chips *]
+[* remove: all loops except for-each. Need to restructure a bit *]
 
 [Monday - Using ArrayList including as input to their method (unknown number of unknown values!)]
 [Wednesday - Using Map]
@@ -374,160 +375,160 @@ public class HashMapExample {
 <kbd>{}<br/>{home theatre=2100, watch=850, luggage=1099}<br/>1099<br/>2100<br/>3</kbd>
 
 
-== Iteration
+<!--== Iteration-->
 
-<p>
-    We now have 2 data structures that we can use to store and recall data, but what if we want to work with all the
-    data in a data structure? In this lesson we will visit every element in a data structure using iteration.
-</p>
+<!--<p>-->
+    <!--We now have 2 data structures that we can use to store and recall data, but what if we want to work with all the-->
+    <!--data in a data structure? In this lesson we will visit every element in a data structure using iteration.-->
+<!--</p>-->
 
-<p>
-    We already have the tools we need to iterate over an ArrayList by combining the size method, the get method, and a
-    for loop.
-</p>
+<!--<p>-->
+    <!--We already have the tools we need to iterate over an ArrayList by combining the size method, the get method, and a-->
+    <!--for loop.-->
+<!--</p>-->
 
-<pre><code class="java">
-    static String charsToString(ArrayList&lt;Character&gt; inputList){
-        // Concatenate all the Characters in the list into a single String.
-        String result = "";
-        for(int i=0; i&lt;inputList.size(); i++){
-            result = result + inputList.get(i);
-        }
-        return result;
-    }
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--static String charsToString(ArrayList&lt;Character&gt; inputList){-->
+        <!--// Concatenate all the Characters in the list into a single String.-->
+        <!--String result = "";-->
+        <!--for(int i=0; i&lt;inputList.size(); i++){-->
+            <!--result = result + inputList.get(i);-->
+        <!--}-->
+        <!--return result;-->
+    <!--}-->
+<!--</code></pre>-->
 
-<p>
-    In this method we are given an ArrayList of Characters, but we have no information about the list. To learn about
-    the the ArrayList we will call its methods and use the return values in our code. First, we know we'll need a loop
-    that run once for each element of the ArrayList so we will ask inputList to tell us its size and use this value to
-    setup our loop. We carefully setup this loop so the index variable <code>i</code> will exactly match the index
-    values of the ArrayList. This way we can call <code>inputList.get(i)</code> in the loop and know it will be called
-    for every element of the list.
-</p>
+<!--<p>-->
+    <!--In this method we are given an ArrayList of Characters, but we have no information about the list. To learn about-->
+    <!--the the ArrayList we will call its methods and use the return values in our code. First, we know we'll need a loop-->
+    <!--that run once for each element of the ArrayList so we will ask inputList to tell us its size and use this value to-->
+    <!--setup our loop. We carefully setup this loop so the index variable <code>i</code> will exactly match the index-->
+    <!--values of the ArrayList. This way we can call <code>inputList.get(i)</code> in the loop and know it will be called-->
+    <!--for every element of the list.-->
+<!--</p>-->
 
-<p>
-    We can create an ArrayList and call this method as follows:
-</p>
+<!--<p>-->
+    <!--We can create an ArrayList and call this method as follows:-->
+<!--</p>-->
 
-<pre><code class="java">
-    ArrayList&lt;Character&gt; letters = new ArrayList&lt;Character&gt;();
-    letters.add('l');
-    letters.add('u');
-    letters.add('c');
-    letters.add('k');
-    letters.add('y');
-    String returnedString = charsToString(letters);
-    System.out.println(returnedString);
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--ArrayList&lt;Character&gt; letters = new ArrayList&lt;Character&gt;();-->
+    <!--letters.add('l');-->
+    <!--letters.add('u');-->
+    <!--letters.add('c');-->
+    <!--letters.add('k');-->
+    <!--letters.add('y');-->
+    <!--String returnedString = charsToString(letters);-->
+    <!--System.out.println(returnedString);-->
+<!--</code></pre>-->
 
-<p>Output: <kbd>lucky</kbd></p>
+<!--<p>Output: <kbd>lucky</kbd></p>-->
 
-<p>
-    When <code>charToString(letters)</code> is called in this example it will run the code in the method with letters as
-    inputList. Then the method code is executed.
-</p>
+<!--<p>-->
+    <!--When <code>charToString(letters)</code> is called in this example it will run the code in the method with letters as-->
+    <!--inputList. Then the method code is executed.-->
+<!--</p>-->
 
-<pre><code class="java">
-    String result = "";
-    for(int i=0; i&lt;inputList.size(); i++){
-        result = result + inputList.get(i);
-    }
-    return result;
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--String result = "";-->
+    <!--for(int i=0; i&lt;inputList.size(); i++){-->
+        <!--result = result + inputList.get(i);-->
+    <!--}-->
+    <!--return result;-->
+<!--</code></pre>-->
 
-<p>
-    Since the inputList for this call contains 5 elements, its size method will return 5 and the code will become:
-</p>
+<!--<p>-->
+    <!--Since the inputList for this call contains 5 elements, its size method will return 5 and the code will become:-->
+<!--</p>-->
 
-<pre><code class="java">
-    String result = "";
-    for(int i=0; i&lt;5; i++){
-        result = result + inputList.get(i);
-    }
-    return result;
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--String result = "";-->
+    <!--for(int i=0; i&lt;5; i++){-->
+        <!--result = result + inputList.get(i);-->
+    <!--}-->
+    <!--return result;-->
+<!--</code></pre>-->
 
-<p>
-    Simplifying this loop will yield:
-</p>
+<!--<p>-->
+    <!--Simplifying this loop will yield:-->
+<!--</p>-->
 
-<pre><code class="java">
-    String result = "";
-    result = result + inputList.get(0);
-    result = result + inputList.get(1);
-    result = result + inputList.get(2);
-    result = result + inputList.get(3);
-    result = result + inputList.get(4);
-    return result;
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--String result = "";-->
+    <!--result = result + inputList.get(0);-->
+    <!--result = result + inputList.get(1);-->
+    <!--result = result + inputList.get(2);-->
+    <!--result = result + inputList.get(3);-->
+    <!--result = result + inputList.get(4);-->
+    <!--return result;-->
+<!--</code></pre>-->
 
-<p>
-    Then accessing the elements of the list will result in the final code that will be executed.
-</p>
+<!--<p>-->
+    <!--Then accessing the elements of the list will result in the final code that will be executed.-->
+<!--</p>-->
 
-<pre><code class="java">
-    String result = "";
-    result = result + 'l';
-    result = result + 'u';
-    result = result + 'c';
-    result = result + 'k';
-    result = result + 'y';
-    return result;
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--String result = "";-->
+    <!--result = result + 'l';-->
+    <!--result = result + 'u';-->
+    <!--result = result + 'c';-->
+    <!--result = result + 'k';-->
+    <!--result = result + 'y';-->
+    <!--return result;-->
+<!--</code></pre>-->
 
-<p>
-    Showing 1 step further we can see how the String result is being constructed 1 character at a time.
-</p>
+<!--<p>-->
+    <!--Showing 1 step further we can see how the String result is being constructed 1 character at a time.-->
+<!--</p>-->
 
-<pre><code class="java">
-    String result = "";
-    result = "" + 'l';
-    result = "l" + 'u';
-    result = "lu" + 'c';
-    result = "luc" + 'k';
-    result = "luck" + 'y';
-    return "lucky";
-</code></pre>
+<!--<pre><code class="java">-->
+    <!--String result = "";-->
+    <!--result = "" + 'l';-->
+    <!--result = "l" + 'u';-->
+    <!--result = "lu" + 'c';-->
+    <!--result = "luc" + 'k';-->
+    <!--result = "luck" + 'y';-->
+    <!--return "lucky";-->
+<!--</code></pre>-->
 
-<p>
-    This example shows how iterating over a data structure is accomplished. Next we will see a few more examples along
-    with alternate syntax will be necessary to iterate over HashMaps which are not indexed in this predictable manner.
-</p>
+<!--<p>-->
+    <!--This example shows how iterating over a data structure is accomplished. Next we will see a few more examples along-->
+    <!--with alternate syntax will be necessary to iterate over HashMaps which are not indexed in this predictable manner.-->
+<!--</p>-->
 
-<hr/>
+<!--<hr/>-->
 
-<p>
-    Before we iterate over a HashMap, let's revisit Strings and explain something we've seen earlier in the course.
-</p>
+<!--<p>-->
+    <!--Before we iterate over a HashMap, let's revisit Strings and explain something we've seen earlier in the course.-->
+<!--</p>-->
 
-<pre><code class="java">
-    static String reverse(String input){
-        // return the reverse of the string
+<!--<pre><code class="java">-->
+    <!--static String reverse(String input){-->
+        <!--// return the reverse of the string-->
 
-        String reversed = "";
-        for(int i=input.length()-1; i>=0; i--){
-            reversed = reversed + input.charAt(i);
-        }
-        return reversed;
-    }
-</code></pre>
+        <!--String reversed = "";-->
+        <!--for(int i=input.length()-1; i>=0; i&#45;&#45;){-->
+            <!--reversed = reversed + input.charAt(i);-->
+        <!--}-->
+        <!--return reversed;-->
+    <!--}-->
+<!--</code></pre>-->
 
-<p>
-    Here we see how we can reverse a String using the tools we've seen earlier in the course. We are reversing the input
-    String by iterating over its chars in reverse order while building a new String. This is very similar to the
-    previous example except we don't use ArrayList and we iterate from the length of the String minus 1 to 0 instead
-    from 0 to the length of the String minus 1.
-</p>
+<!--<p>-->
+    <!--Here we see how we can reverse a String using the tools we've seen earlier in the course. We are reversing the input-->
+    <!--String by iterating over its chars in reverse order while building a new String. This is very similar to the-->
+    <!--previous example except we don't use ArrayList and we iterate from the length of the String minus 1 to 0 instead-->
+    <!--from 0 to the length of the String minus 1.-->
+<!--</p>-->
 
 
 == For-Each Loop
 
-<p>
-    We've seen that we can iterate over an ArrayList by relying on its values being indexed from 0 to size-1 making it
-    possible to use the index of a for loop to access the elements, but how can we do this with keys in a HashMap that
-    don't have to follow any convention? As the title suggests, we will use what's called a For-Each Loop.
-</p>
+<!--<p>-->
+    <!--We've seen that we can iterate over an ArrayList by relying on its values being indexed from 0 to size-1 making it-->
+    <!--possible to use the index of a for loop to access the elements, but how can we do this with keys in a HashMap that-->
+    <!--don't have to follow any convention? As the title suggests, we will use what's called a For-Each Loop.-->
+<!--</p>-->
 
 <p>
     A For-Each Loop is a loop that executes once for each element in a given data structure and follows this syntax:
