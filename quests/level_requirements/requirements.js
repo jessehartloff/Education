@@ -41,7 +41,7 @@ exports.get_level_requirements = function get_level_requirements(current_level) 
 function level1() {
 	return {
 		"level_name": "Computing with Variables",
-		"xp_for_next_level": 2500,
+		"xp_for_next_level": 2000,
 		"question_targets": [
 			{"concept": "variables", "type": "1", "cumulative_number_correct": 5},
 			{"concept": "variables", "type": "2", "cumulative_number_correct": 4},
@@ -55,7 +55,7 @@ function level1() {
 function level2() {
 	return {
 		"level_name": "Computing with Methods",
-		"xp_for_next_level": 5000,
+		"xp_for_next_level": 4000,
 		"question_targets": [
 			{"concept": "methods", "type": "1", "cumulative_number_correct": 4},
 			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
@@ -69,7 +69,7 @@ function level2() {
 function level3() {
 	return {
 		"level_name": "Handling Data",
-		"xp_for_next_level": 7500,
+		"xp_for_next_level": 6000,
 		"question_targets": [
 			{"concept": "data_structures", "type": "1", "cumulative_number_correct": 5},
 			{"concept": "data_structures", "type": "2", "cumulative_number_correct": 5},
@@ -83,7 +83,7 @@ function level3() {
 function level4() {
 	return {
 		"level_name": "Controlling Code",
-		"xp_for_next_level": 10000,
+		"xp_for_next_level": 8000,
 		"question_targets": [
 			{"concept": "control_flow", "type": "1", "cumulative_number_correct": 5},
 			{"concept": "control_flow", "type": "2", "cumulative_number_correct": 4},

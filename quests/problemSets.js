@@ -180,8 +180,6 @@ exports.get_ps = function get_ps(req, res, course) {
 				});
 				res.to_template.ps_completed = ps_completed;
 
-// ~todo: progress bar should go from brown to glowing yellow as level increases
-
 				if(user_ps.leveled_up){
 					res.to_template.leveled_up = true;
 					collection_ps.update({username: req.user.username},{$set:{leveled_up:false}});
@@ -478,8 +476,8 @@ function api_send_ps_results(req, res, course) {
 				record.current_ps.multipliers.push({"reason": "All questions correct!", "multiplier": 1.5});
 			}
 
-			var base_xp_per_question = 100.0;
 			// Tally up total xp
+			var base_xp_per_question = 100.0;
 			var multiplier = base_xp_per_question;
 			for (var i = 0; i < record.current_ps.multipliers.length; i++) {
 				multiplier *= record.current_ps.multipliers[i].multiplier;
@@ -510,7 +508,6 @@ function api_send_ps_results(req, res, course) {
 			if (level_up) {
 				toSet["level"] = new_level;
 				toSet["leveled_up"] = true;
-				// TODO: Something with this. Give them a satisfying message when they visit the page again. Maybe add it as feedback on the PS itself
 			}
 
 			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
