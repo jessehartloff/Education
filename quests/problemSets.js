@@ -67,24 +67,38 @@ var question_example =
 
 var card_example = "Link to lecture content and videos";
 
-function instructions_to_javadoc(instructions, width, indent) {
-	if (!width) {
-		width = 120;
+function instructions_to_javadoc(instructions, max_width, indent) {
+	if (!max_width) {
+		max_width = 100;
 	}
 	if (!indent) {
 		indent = "    "
 	}
 
+	var line = "";
+
 	var docs = indent + "/**\n";
+	var last_space = 0;
 
-	docs += indent + " * " + instructions;
+	for(var i=0; i<instructions.length; i++){
+		line += instructions.charAt(i);
+		if(instructions.charAt(i) === " "){
+			last_space = line.length;
+		}else if(instructions.charAt(i) === "\n"){
+			docs += indent + " * " + line;
+			line = "";
+		}
 
-	// TODO: Instructions at char max
-	// look through keeping track of last space seen
-	// when char+max hits, add a "\n     * " after last seen space
-	// reset counter and add "     * " at \n in instructions
+		if(line.length > max_width && last_space != 0) {
+			docs += indent + " * " + line.slice(0, last_space) + "\n";
+			line = line.slice(last_space, line.length);
+		}
 
-	docs += indent + "\n";
+	}
+
+	if(line.length > 0){
+		docs += indent + " * " + line + "\n";
+	}
 	docs += indent + " */\n";
 	return docs;
 }
@@ -105,16 +119,21 @@ function build_ps_text(problem_set) {
 
 	var question_number = 1;
 	for (var i in problem_set.questions) {
-		var instructions = problem_set.questions[i].instruction_text;
+		if(!problem_set.questions[i]){
+			console.log("question is null");
+			continue;
+		}
+		var instructions = "q" + question_number.toString() + ": Write a public static method named q" + question_number.toString() + " that" + problem_set.questions[i].instruction_text;
 
 		ps += instructions_to_javadoc(instructions);
-		ps += "    public static void q" + question_number.toString() + "(){\n";
+		//ps += "    public static void q" + question_number.toString() + "(){\n";
+		//ps += "    \n";
+		//ps += "        /* your code for question " + question_number.toString() + " goes here */\n";
+		//ps += "    \n";
+		//ps += "    }\n";
 		ps += "    \n";
-		ps += "        /* your code for question " + question_number.toString() + " goes here */\n";
 		ps += "    \n";
-		ps += "    }\n";
-		ps += "\n";
-		ps += "\n";
+		ps += "    \n";
 
 		question_number++;
 	}
