@@ -182,6 +182,11 @@ exports.get_ps = function get_ps(req, res, course) {
 
 // todo: progress bar should go from brown to glowing yellow as level increases
 
+				if(user_ps.leveled_up){
+					res.to_template.leveled_up = true;
+					//collection_ps.update({username: req.user.username},{$set:{leveled_up:false}});
+				}
+
 				// determine active loop section
 				if (user_ps.current_ps_finished) {
 					res.to_template.new_ps_active = true;

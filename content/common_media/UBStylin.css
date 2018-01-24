@@ -16,6 +16,30 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+@keyframes example {
+    0% {background-color: #eeee00;
+        box-shadow: 0 0 5px #ffff00;}
+    50% {background-color: #ffff00;
+        box-shadow: 0 0 30px #ffff00;}
+    100% {background-color: #eeee00;
+        box-shadow: 0 0 5px #ffff00;}
+}
+
+div.leveled_up{
+    background-color: #eeee00;
+    box-shadow: 0 0 5px #ffff00;
+    animation: 3s example infinite ease-in-out;
+}
+
+.leveled_up_title{
+    /*color: #ffff00;*/
+}
+
+.badge-xp{
+    background: yellow;
+    /*border: 1px solid black;*/
+}
+
 /*a.hw1{*/
 /*color: #dac800;*/
 /*}*/

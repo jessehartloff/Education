@@ -10,8 +10,7 @@
     <div class="card border-dark mb-3">
         <div class="card-body">
             <h4>You must be logged in to use this feature. If you are taking this class you should create an account and
-                log
-                in.
+                login.
             </h4>
         </div>
     </div>
@@ -19,13 +18,22 @@
 
 
     <!-- Priority 1! -->
-    <!-- Get new PS (Warn them that it will replace an un-submitted PS if they have one out) -->
-    <!-- AutoLab link for submissions -->
+    <!-- Add content. Make all the questions and add requirements -->
     <!-- Log EVERYTHING! -->
 
-    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">
+    <!-- Priority 2 -->
+
+    <!-- Priority 3 -->
+    <!-- Remind them of office hours after poor performance -->
+    <!-- Report an issue button -->
+
+    <!-- Priority 4 -->
+    <!-- Tie into office hours tracking/queueing -->
+
+
+    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}}{{#if leveled_up}} leveled_up{{/if}} mb-3">
         <div class="card-body">
-            <h5>Level {{user_ps.level}}: {{level_name}}</h5>
+            <h5{{#if leveled_up}} class="leveled_up_title"{{/if}}>Level {{user_ps.level}}: {{level_name}}{{#if leveled_up}} <span class="badge badge-xp"></span>{{/if}}</h5>
             <!--<span>{{xp_for_previous_level}}</span>-->
             <hr/>
 
@@ -124,7 +132,7 @@
                     </p>
                     {{#if this.feedback}}
                         {{#if this.correct}}
-                            <span class="badge badge-warning">+100</span>
+                            <span class="badge badge-xp">+100</span>
                         {{else}}
                             <span class="badge badge-default">+0</span>
                         {{/if}}
@@ -155,7 +163,7 @@
 
         <div class="card border-dark mb-3">
             <div class="card-header">
-                <h5>{{class_name}}</h5>{{#if earned_xp}} <span class="badge badge-warning">+{{earned_xp}}</span>{{/if}}
+                <h5>{{class_name}}</h5>{{#if earned_xp}} <span class="badge badge-xp">+{{earned_xp}}</span>{{/if}}
             </div>
             <div class="card-body">
                     {{#each multipliers}}
@@ -186,18 +194,6 @@
     {{/each}}
 
 
-    <!-- Priority 2 -->
-    <!-- Progress towards next goal -->
-    <!-- Feedback on most recent PS -->
-
-    <!-- Priority 3 -->
-    <!-- Re-download current PS is it's checked out and not submitted -->
-    <!-- Feedback for all previous PSs -->
-    <!-- Remind them of office hours after poor performance -->
-    <!-- Report an issue button -->
-
-    <!-- Priority 4 -->
-    <!-- Tie into office hours tracking/queueing -->
 
 
     <div class="card-deck">
