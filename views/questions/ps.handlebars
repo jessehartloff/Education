@@ -108,10 +108,9 @@
             </div>
             <div class="card-body">
                 <p>
-                    {{#if user_ps.current_ps_finished}}
+                    {{#if ../user_ps.current_ps_finished}}
                         Submitted. You cannot earn more points for the problem set, though you can resubmit on AutoLab
-                        for
-                        extra practice
+                        for extra practice
                     {{else}}
                         Not yet submitted
                     {{/if}}
@@ -125,9 +124,9 @@
                     </p>
                     {{#if this.feedback}}
                         {{#if this.correct}}
-                            Correct
+                            <span class="badge badge-warning">+100</span>
                         {{else}}
-                            Incorrect
+                            <span class="badge badge-default">+0</span>
                         {{/if}}
                         <br/>
                         {{this.feedback}}
@@ -137,6 +136,7 @@
                             Card: {{this}}
                         </p>
                     {{/each}}
+                    <hr/>
                 {{/each}}
             </div>
         </div>
@@ -155,7 +155,7 @@
 
         <div class="card border-dark mb-3">
             <div class="card-header">
-                <h5>{{class_name}}</h5>
+                <h5>{{class_name}}</h5>{{#if earned_xp}} <span class="badge badge-warning">+{{earned_xp}}</span>{{/if}}
             </div>
             <div class="card-body">
                     {{#each multipliers}}
@@ -166,9 +166,9 @@
                         <p>
                             {{this.instruction_text}}<br/>
                             {{#if this.correct}}
-                                Correct
+                                <span class="badge badge-warning">+100</span>
                             {{else}}
-                                Incorrect
+                                <span class="badge badge-default">+0</span>
                             {{/if}}
                             <br/>
                             {{this.feedback}}
@@ -178,6 +178,7 @@
                                 Card: {{this}}
                             </p>
                         {{/each}}
+                        <hr/>
                     {{/each}}
             </div>
         </div>

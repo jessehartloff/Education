@@ -444,16 +444,19 @@ function api_send_ps_results(req, res, course) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
 			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
-			// TODO: ~Mark some feedback to show this no credit submission to the user with a note
 			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress.");
 		} else {
 
 			var xp = record.xp;
 			var number_correct = 0;
 
-			for (var i in results) {
+			for (var i =0; i<results.length; i++) {
 				var result = results[i];
 				var question = record.current_ps.questions[i];
+				if(!question){
+					console.log(req.user.username + ": error in api_send_ps_results. Question index " + i + " not found");
+					continue;
+				}
 				if (result.correct) {
 					if (!xp[question.concept]) {
 						xp[question.concept] = {};
@@ -466,12 +469,22 @@ function api_send_ps_results(req, res, course) {
 				}
 			}
 
+			if(number_correct === record.current_ps.questions.length){
+				record.current_ps.multipliers.push({"reason": "All questions correct!", "multiplier": 1.5});
+			}
+
+			var base_xp_per_question = 100.0;
 			// Tally up total xp
-			var multiplier = 100.0;
+			var multiplier = base_xp_per_question;
 			for (var i = 0; i < record.current_ps.multipliers.length; i++) {
 				multiplier *= record.current_ps.multipliers[i].multiplier;
 			}
-			var total_xp = record.total_xp + number_correct * multiplier;
+
+			var total_xp = record.total_xp;
+			var earned_xp = number_correct * multiplier;
+			if(earned_xp && earned_xp >= -1){
+				total_xp += earned_xp;
+			}
 
 			// Check for level up
 			var level_up = false;
@@ -483,6 +496,8 @@ function api_send_ps_results(req, res, course) {
 
 			var toSet = {};
 			toSet["current_ps_finished"] = true;
+			toSet["all_ps_assigned." + record.current_ps.ps_number + ".xp_earned"] = earned_xp;
+			toSet["all_ps_assigned." + record.current_ps.ps_number + ".multipliers"] = record.current_ps.multipliers;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".results"] = results;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".time_completed"] = Date.now();
 			toSet["xp"] = xp;
@@ -490,8 +505,7 @@ function api_send_ps_results(req, res, course) {
 			if (level_up) {
 				toSet["level"] = new_level;
 				toSet["leveled_up"] = true;
-				// TODO: Something with this. Give them a satisfying message when they visit the page again. Maybe add
-				//       it as feedback on the PS itself
+				// TODO: Something with this. Give them a satisfying message when they visit the page again. Maybe add it as feedback on the PS itself
 			}
 
 			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
