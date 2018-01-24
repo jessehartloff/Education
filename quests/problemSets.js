@@ -486,9 +486,9 @@ function api_send_ps_results(req, res, course) {
 			}
 
 			var total_xp = record.total_xp;
-			var earned_xp = number_correct * multiplier;
-			if(earned_xp && earned_xp >= -1){
-				total_xp += earned_xp;
+			var xp_earned = number_correct * multiplier;
+			if(xp_earned && xp_earned >= -1){
+				total_xp += xp_earned;
 			}
 
 			// Check for level up
@@ -501,7 +501,7 @@ function api_send_ps_results(req, res, course) {
 
 			var toSet = {};
 			toSet["current_ps_finished"] = true;
-			toSet["all_ps_assigned." + record.current_ps.ps_number + ".xp_earned"] = earned_xp;
+			toSet["all_ps_assigned." + record.current_ps.ps_number + ".xp_earned"] = xp_earned;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".multipliers"] = record.current_ps.multipliers;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".results"] = results;
 			toSet["all_ps_assigned." + record.current_ps.ps_number + ".time_completed"] = Date.now();
