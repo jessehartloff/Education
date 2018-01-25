@@ -67,12 +67,23 @@ var question_example =
 
 var card_example = "Link to lecture content and videos";
 
-function instructions_to_javadoc(instructions, max_width, indent) {
+function instructions_to_javadoc(question, question_number, max_width, indent) {
 	if (!max_width) {
-		max_width = 100;
+		max_width = 90;
 	}
 	if (!indent) {
 		indent = "    "
+	}
+
+	var instructions = "q" + question_number.toString() + ": ";
+
+	if(question.concept == "classes"){
+		instructions = question.instruction_text;
+	}else if(question.concept == "classes"){
+		instructions = question.instruction_text;
+	}else{
+		instructions += "Write a public static method named q" +
+			question_number.toString() + " that" + question.instruction_text;
 	}
 
 	var line = "";
@@ -123,14 +134,14 @@ function build_ps_text(problem_set) {
 			console.log("question is null");
 			continue;
 		}
-		var instructions = "q" + question_number.toString() + ": Write a public static method named q" + question_number.toString() + " that" + problem_set.questions[i].instruction_text;
 
-		ps += instructions_to_javadoc(instructions);
+		ps += instructions_to_javadoc(problem_set.questions[i], question_number);
 		//ps += "    public static void q" + question_number.toString() + "(){\n";
 		//ps += "    \n";
 		//ps += "        /* your code for question " + question_number.toString() + " goes here */\n";
 		//ps += "    \n";
 		//ps += "    }\n";
+		ps += "    \n";
 		ps += "    \n";
 		ps += "    \n";
 		ps += "    \n";
@@ -148,6 +159,7 @@ function build_ps_text(problem_set) {
 	return ps;
 }
 
+// TODO: idea, if this ever ties into office hours, give them a 10% bonus after each office hours visit
 
 // entry point
 exports.get_ps = function get_ps(req, res, course) {

@@ -72,10 +72,10 @@ function level3() {
 		"xp_for_next_level": 6000,
 		"question_targets": [
 			{"concept": "data_structures", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "data_structures", "type": "2", "cumulative_number_correct": 5},
+			{"concept": "data_structures", "type": "2", "cumulative_number_correct": 4},
 			{"concept": "data_structures", "type": "3", "cumulative_number_correct": 3},
 			{"concept": "data_structures", "type": "4", "cumulative_number_correct": 3},
-			{"concept": "data_structures", "type": "5", "cumulative_number_correct": 2}
+			{"concept": "data_structures", "type": "5", "cumulative_number_correct": 3}
 		].concat(level2().question_targets)
 	};
 }
@@ -85,11 +85,11 @@ function level4() {
 		"level_name": "Controlling Code",
 		"xp_for_next_level": 8000,
 		"question_targets": [
-			{"concept": "control_flow", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "control_flow", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "control_flow", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "control_flow", "type": "4", "cumulative_number_correct": 2},
-			{"concept": "control_flow", "type": "5", "cumulative_number_correct": 2}
+			{"concept": "control_flow", "type": "1", "cumulative_number_correct": 0},
+			{"concept": "control_flow", "type": "2", "cumulative_number_correct": 0},
+			{"concept": "control_flow", "type": "3", "cumulative_number_correct": 0},
+			{"concept": "control_flow", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "control_flow", "type": "5", "cumulative_number_correct": 0}
 		].concat(level3().question_targets)
 	};
 }
@@ -99,11 +99,11 @@ function level5() {
 		"level_name": "Analyzing Data",
 		"xp_for_next_level": 10000,
 		"question_targets": [
-			{"concept": "methods", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "methods", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "methods", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "methods", "type": "4", "cumulative_number_correct": 2},
-			{"concept": "methods", "type": "5", "cumulative_number_correct": 2}
+			{"concept": "methods", "type": "1", "cumulative_number_correct": 0},
+			{"concept": "methods", "type": "2", "cumulative_number_correct": 0},
+			{"concept": "methods", "type": "3", "cumulative_number_correct": 0},
+			{"concept": "methods", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "methods", "type": "5", "cumulative_number_correct": 0}
 		].concat(level4().question_targets)
 	};
 }
