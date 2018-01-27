@@ -100,11 +100,11 @@ function level5() {
 		"level_name": "Analyzing Data",
 		"xp_for_next_level": 10000,
 		"question_targets": [
-			{"concept": "algorithms", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "algorithms", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "algorithms", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "algorithms", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "algorithms", "type": "5", "cumulative_number_correct": 0}
+			{"concept": "algorithms", "type": "1", "cumulative_number_correct": 2}, // sig value (return value)
+			{"concept": "algorithms", "type": "2", "cumulative_number_correct": 2}, // find first
+			{"concept": "algorithms", "type": "3", "cumulative_number_correct": 1}, // closest to <double>
+			{"concept": "algorithms", "type": "4", "cumulative_number_correct": 0}, // sig value (return index/key)
+			{"concept": "algorithms", "type": "5", "cumulative_number_correct": 0}  // sig value (return tie count)
 		].concat(level4().question_targets)
 	};
 }
@@ -115,11 +115,11 @@ function level6() {
 		"level_name": "Data on Files",
 		"xp_for_next_level": 12000,
 		"question_targets": [
-			{"concept": "files", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "files", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "files", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "files", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "files", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "files", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "files", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "files", "type": "3", "cumulative_number_correct": 0},
+			//{"concept": "files", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "files", "type": "5", "cumulative_number_correct": 5}
 		].concat(level5().question_targets)
 	};
 }
@@ -128,14 +128,14 @@ function level6() {
 
 function level7() {
 	return {
-		"level_name": "",
+		"level_name": "Object Class",
 		"xp_for_next_level": 14000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "", "type": "5", "cumulative_number_correct": 5}
 		].concat(level6().question_targets)
 	};
 }
@@ -144,14 +144,14 @@ function level7() {
 
 function level8() {
 	return {
-		"level_name": "",
+		"level_name": "Getting Graphical",
 		"xp_for_next_level": 16000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
+			{"concept": "", "type": "4", "cumulative_number_correct": 5}
+			//{"concept": "", "type": "5", "cumulative_number_correct": 5}
 		].concat(level7().question_targets)
 	};
 }
@@ -160,30 +160,30 @@ function level8() {
 
 function level9() {
 	return {
-		"level_name": "",
+		"level_name": "Extending Classes",
 		"xp_for_next_level": 18000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			{"concept": "", "type": "3", "cumulative_number_correct": 5},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "5", "cumulative_number_correct": 0}
 		].concat(level8().question_targets)
 	};
 }
 
 
 
-function level110() {
+function level10() {
 	return {
-		"level_name": "",
+		"level_name": "Polymorphism",
 		"xp_for_next_level": 20000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "", "type": "5", "cumulative_number_correct": 5}
 		].concat(level9().question_targets)
 	};
 }
@@ -192,14 +192,14 @@ function level110() {
 
 function level11() {
 	return {
-		"level_name": "",
+		"level_name": "The Internets!",
 		"xp_for_next_level": 22000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "", "type": "5", "cumulative_number_correct": 5}
 		].concat(level10().question_targets)
 	};
 }
@@ -208,14 +208,14 @@ function level11() {
 
 function level12() {
 	return {
-		"level_name": "",
+		"level_name": "Language of the Internet",
 		"xp_for_next_level": 24000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "", "type": "5", "cumulative_number_correct": 5}
 		].concat(level11().question_targets)
 	};
 }
@@ -224,7 +224,7 @@ function level12() {
 
 function level13() {
 	return {
-		"level_name": "Triple Gauntlet / The Arena / Endless Arena",
+		"level_name": "The Gauntlet",
 		"xp_for_next_level": 30000,
 		"question_targets": [
 			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
@@ -240,14 +240,15 @@ function level13() {
 
 function level14() {
 	return {
-		"level_name": "The Colosseum: Boss Rush",
+		"level_name": "Under Construction..",
+		//"level_name": "The Colosseum: Boss Rush",
 		"xp_for_next_level": 32000,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
+			//{"concept": "", "type": "5", "cumulative_number_correct": 0}
 		].concat(level13().question_targets)
 	};
 }
@@ -259,11 +260,11 @@ function level15() {
 		"level_name": "End Game",
 		"xp_for_next_level": 999999,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "", "type": "4", "cumulative_number_correct": 2},
-			{"concept": "", "type": "5", "cumulative_number_correct": 2}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 5},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 4},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 3},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 2},
+			//{"concept": "", "type": "5", "cumulative_number_correct": 2}
 		].concat(level14().question_targets)
 	};
 }
@@ -273,11 +274,11 @@ function level16() {
 		"level_name": "null",
 		"xp_for_next_level": 9999999,
 		"question_targets": [
-			{"concept": "", "type": "1", "cumulative_number_correct": 5},
-			{"concept": "", "type": "2", "cumulative_number_correct": 4},
-			{"concept": "", "type": "3", "cumulative_number_correct": 3},
-			{"concept": "", "type": "4", "cumulative_number_correct": 2},
-			{"concept": "", "type": "5", "cumulative_number_correct": 2}
+			//{"concept": "", "type": "1", "cumulative_number_correct": 5},
+			//{"concept": "", "type": "2", "cumulative_number_correct": 4},
+			//{"concept": "", "type": "3", "cumulative_number_correct": 3},
+			//{"concept": "", "type": "4", "cumulative_number_correct": 2},
+			//{"concept": "", "type": "5", "cumulative_number_correct": 2}
 		].concat(level15().question_targets)
 	};
 }

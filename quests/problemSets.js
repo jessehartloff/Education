@@ -79,7 +79,9 @@ function instructions_to_javadoc(question, question_number, max_width, indent) {
 
 	if(question.concept == "classes"){
 		instructions = question.instruction_text;
-	}else if(question.concept == "classes"){
+	}else if(question.concept == "inheritance"){
+		instructions = question.instruction_text;
+	}else if(question.concept == "polymorphism"){
 		instructions = question.instruction_text;
 	}else{
 		instructions += "Write a public static method named q" +
@@ -127,6 +129,8 @@ function build_ps_text(problem_set) {
 	ps += "public class " + java_class_name(problem_set) + "{\n";
 	ps += "    \n";
 	ps += "    \n";
+
+	// TODO: check for OOP questions and add a caution that we are abusing inner classes
 
 	var question_number = 1;
 	for (var i in problem_set.questions) {
@@ -436,6 +440,7 @@ exports.ps_download = function ps_download(req, res, course) {
 
 
 exports.ps_api = function ps_api(req, res, course) {
+	console.log("API: " + req.body);
 	if (req.body.key !== "super_secret_key") {
 		// TODO: better keys
 		res.send("You can't use this API");
@@ -446,10 +451,17 @@ exports.ps_api = function ps_api(req, res, course) {
 		api_get_current_ps(req, res, course);
 	} else if (req.body.request_type === "send_ps_results") {
 		api_send_ps_results(req, res, course);
+	} else if (req.body.request_type === "violation") {
+		api_record_violation(req, res, course);
 	} else {
 		res.send("bad request type: " + req.body.request_type);
 	}
 };
+
+function api_record_violation(req, res, course) {
+	// TODO
+	res.send("Violation");
+}
 
 function api_get_current_ps(req, res, course) {
 	var section_id = req.body.section_id;
@@ -478,7 +490,7 @@ function api_send_ps_results(req, res, course) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
 			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
-			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress.");
+			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress");
 		} else {
 
 			var xp = record.xp;
