@@ -76,7 +76,7 @@ function level3() {
 			{"concept": "data_structures", "type": "3", "cumulative_number_correct": 1}, // sum of fixed indices in list of ints
 			{"concept": "data_structures", "type": "4", "cumulative_number_correct": 0}, // HashMap iteration w/ String concatenate
 			{"concept": "data_structures", "type": "5", "cumulative_number_correct": 0}  // Iterate over ArrayList<String/int/double> and do a bunch of math/aggregate
-			   																		     // TODO: This one sucks solid idea, needs to be adjusted. See java code (previous 2 are also not great)
+			   																		     // TODO: This one sucks. solid idea, needs to be adjusted. See java code (previous 2 are also not great)
 		].concat(level2().question_targets)
 	};
 }
@@ -115,11 +115,11 @@ function level6() {
 		"level_name": "Data on Files",
 		"xp_for_next_level": 12000,
 		"question_targets": [
-			//{"concept": "files", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "files", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "files", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "files", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "files", "type": "5", "cumulative_number_correct": 5}
+			{"concept": "files", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "files", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "files", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "files", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "files", "type": "5", "cumulative_number_correct": 0}
 		].concat(level5().question_targets)
 	};
 }
@@ -128,14 +128,14 @@ function level6() {
 
 function level7() {
 	return {
-		"level_name": "Object Class",
+		"level_name": "Objects and Classes",
 		"xp_for_next_level": 14000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 5}
+			{"concept": "classes", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "classes", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "classes", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "classes", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "classes", "type": "5", "cumulative_number_correct": 0}
 		].concat(level6().question_targets)
 	};
 }
@@ -147,11 +147,11 @@ function level8() {
 		"level_name": "Getting Graphical",
 		"xp_for_next_level": 16000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			{"concept": "", "type": "4", "cumulative_number_correct": 5}
-			//{"concept": "", "type": "5", "cumulative_number_correct": 5}
+			{"concept": "gui", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "gui", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "gui", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "gui", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "gui", "type": "5", "cumulative_number_correct": 0}
 		].concat(level7().question_targets)
 	};
 }
@@ -163,11 +163,11 @@ function level9() {
 		"level_name": "Extending Classes",
 		"xp_for_next_level": 18000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			{"concept": "", "type": "3", "cumulative_number_correct": 5},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			{"concept": "inheritance", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "inheritance", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "inheritance", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "inheritance", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "inheritance", "type": "5", "cumulative_number_correct": 0}
 		].concat(level8().question_targets)
 	};
 }
@@ -179,11 +179,11 @@ function level10() {
 		"level_name": "Polymorphism",
 		"xp_for_next_level": 20000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 5}
+			{"concept": "polymorphism", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "polymorphism", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "polymorphism", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "polymorphism", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "polymorphism", "type": "5", "cumulative_number_correct": 0}
 		].concat(level9().question_targets)
 	};
 }
@@ -195,11 +195,11 @@ function level11() {
 		"level_name": "The Internets!",
 		"xp_for_next_level": 22000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 5}
+			{"concept": "networking", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "networking", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "networking", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "networking", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "networking", "type": "5", "cumulative_number_correct": 0}
 		].concat(level10().question_targets)
 	};
 }
@@ -211,11 +211,11 @@ function level12() {
 		"level_name": "Language of the Internet",
 		"xp_for_next_level": 24000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			{"concept": "", "type": "5", "cumulative_number_correct": 5}
+			{"concept": "json", "type": "1", "cumulative_number_correct": 2},
+			{"concept": "json", "type": "2", "cumulative_number_correct": 2},
+			{"concept": "json", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "json", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "json", "type": "5", "cumulative_number_correct": 0}
 		].concat(level11().question_targets)
 	};
 }
@@ -226,13 +226,7 @@ function level13() {
 	return {
 		"level_name": "The Gauntlet",
 		"xp_for_next_level": 30000,
-		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "5", "cumulative_number_correct": 0}
-		].concat(level12().question_targets)
+		"question_targets": level12().question_targets
 	};
 }
 
@@ -240,15 +234,14 @@ function level13() {
 
 function level14() {
 	return {
-		"level_name": "Under Construction..",
-		//"level_name": "The Colosseum: Boss Rush",
+		"level_name": "The Colosseum",
 		"xp_for_next_level": 32000,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 0},
-			//{"concept": "", "type": "5", "cumulative_number_correct": 0}
+			{"concept": "challenge", "type": "1", "cumulative_number_correct": 1},
+			{"concept": "challenge", "type": "2", "cumulative_number_correct": 1},
+			{"concept": "challenge", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "challenge", "type": "4", "cumulative_number_correct": 1},
+			{"concept": "challenge", "type": "5", "cumulative_number_correct": 1}
 		].concat(level13().question_targets)
 	};
 }
@@ -258,13 +251,13 @@ function level14() {
 function level15() {
 	return {
 		"level_name": "End Game",
-		"xp_for_next_level": 999999,
+		"xp_for_next_level": 99999,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 5},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 4},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 3},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 2},
-			//{"concept": "", "type": "5", "cumulative_number_correct": 2}
+			{"concept": "ssj", "type": "1", "cumulative_number_correct": 1},
+			{"concept": "ssj", "type": "2", "cumulative_number_correct": 1},
+			{"concept": "ssj", "type": "3", "cumulative_number_correct": 1},
+			{"concept": "ssj", "type": "4", "cumulative_number_correct": 1},
+			{"concept": "ssj", "type": "5", "cumulative_number_correct": 1}
 		].concat(level14().question_targets)
 	};
 }
@@ -272,15 +265,13 @@ function level15() {
 function level16() {
 	return {
 		"level_name": "null",
-		"xp_for_next_level": 9999999,
+		"xp_for_next_level": 999999,
 		"question_targets": [
-			//{"concept": "", "type": "1", "cumulative_number_correct": 5},
-			//{"concept": "", "type": "2", "cumulative_number_correct": 4},
-			//{"concept": "", "type": "3", "cumulative_number_correct": 3},
-			//{"concept": "", "type": "4", "cumulative_number_correct": 2},
-			//{"concept": "", "type": "5", "cumulative_number_correct": 2}
+			//{"concept": "ssj", "type": "1", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "2", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "3", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "4", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "5", "cumulative_number_correct": 1}
 		].concat(level15().question_targets)
 	};
 }
-
-// TODO add more end game levels. Can be the same questions, but it's fun to see the xp bar fill up

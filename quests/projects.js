@@ -5,6 +5,7 @@ var level_requirements = require('./level_requirements/requirements');
 
 var collection_ps = db.get('ps');
 
+// TODO: HW. Unlocks at certain levels
 
 // entry point
 exports.get_hw = function get_hw(req, res, course) {

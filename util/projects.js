@@ -258,6 +258,8 @@ function rate_project(project, rater, rating) {
 	// TODO
 	// Check if rater has rated this project before
 	// add rating if they haven't
+	// or rate each release
+	// or rate all the time for any reason, or when I or the team create an new event
 }
 
 exports.projects_page = function projects_page(req, res, course) {

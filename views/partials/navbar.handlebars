@@ -88,13 +88,12 @@
 
 
         <ul class="navbar-nav navbar-right">
-            <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
             {{#if user}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/user/profile">
                         {{user.username}}<span class="caret"></span>
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="/user/profile">Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/user/logout">Logout</a>

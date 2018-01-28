@@ -10,23 +10,24 @@
         {{/if}}
 
 
-        <div class="btn-group">
+        <div><!-- class="btn-group"-->
             {{#each content.sections}}
-                <a href="#section{{@index}}" class="btn btn-outline-dark" role="button">{{ this.title }}</a>
+                <a href="#section{{@index}}" class="btn btn-outline-dark" style="margin-bottom: 5px" role="button">{{ this.title }}</a>
             {{/each}}
         </div>
     </div>
-    <div id="section0"></div>
 </div>
 
 
 {{#each content.sections}}
-    <div id="section{{@index}}"></div>
+
+    <div id="section{{@index}}" class="section-marker"></div>
     <div class="card border-dark mb-3">
         <!--<div class="card-header">{{ this.title }}</div>-->
         <div class="card-body">
             <h3 class="card-title">{{ this.title }}</h3>
             <p class="card-text">{{{this.content}}}</p>
         </div>
+
     </div>
 {{/each}}

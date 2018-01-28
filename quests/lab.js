@@ -6,6 +6,11 @@ var level_requirements = require('./level_requirements/requirements');
 var collection_ps = db.get('ps');
 
 
+// TODO: Labs. Get lab after it's been activated which I do manually at the end of the friday lecture
+// TODO: They can only access the lab after swiping into lab. Before this, the lab shows, but is greyed out
+// TODO: Each lab has a level recommendation and a warning/confirmation if they check out a lab for which they are under leveled
+
+
 // entry point
 exports.get_lab = function get_lab(req, res, course) {
 	if (!req.user) {

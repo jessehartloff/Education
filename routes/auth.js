@@ -86,7 +86,7 @@ router.get('/login', function (req, res) {
 
 router.post('/login', function (req, res, next) {
 	var destination = req.body.prev_path;
-	console.log("6" + req.body.prev_path);
+	//console.log("6" + req.body.prev_path);
 
 	// Don't follow an outside link. This is not for security, and offers no added security, but for convenience
 	// in case someone uses a strange referer or links directly to the login page
@@ -109,7 +109,7 @@ router.post('/register', function (req, res, next) {
 			db.get('users').findOne({'username': username}, {}, function (err, record) {
 				if (record) {
 					req.flash('error', 'a user with username ' + username + ' already exists. Use the forgot password ' +
-						'link to reset your password.');
+						'link to reset your password');
 					res.redirect('/user/login');
 				} else {
 					add_user(username);
@@ -367,7 +367,7 @@ function email_password_reset_link(email, token) {
 		//replyTo: 'hartloff@buffalo.edu',
 		to: email,
 		subject: 'CSE Course: Set password',
-		text: 'Click the link below to set your password' +
+		text: 'Welcome to the course! Please click the link below to set your password' +
 		'\n\nusername: ' + email_to_ubit(email) +
 		'\nverification link: ' + 'https://fury.cse.buffalo.edu/user/reset-password/' + token +
 		'\n\nPlease login and set your password.'

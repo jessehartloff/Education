@@ -67,6 +67,27 @@ var question_example =
 
 var card_example = "Link to lecture content and videos";
 
+
+// TODO: Log EVERYTHING!
+
+// TODO: Remind them of office hours after poor performance
+
+// TODO: Add consumable multipliers that can be awarded to to individuals or to the entire class. Quantity should be stored. Could have different values as well. For each type they have, a new button appears next to the check out PS button. They can earn these in many ways (1.2x for attending office hours, several 1.5x for response rates, several 1.2 for completing 442 tasks?)
+// Cleanup
+// TODO: Register students. Set fixed section numbers and check for new students w/o a number as they add/drop. No reassignments or duplicates
+// Syllabus w/ grading
+// TODO: Make a card for each concept
+// TODO: Display first PS just like the others. Display card for each PS
+// TODO: Check if they have testing code in main
+// TODO: Killing Spree
+// TODO: Notifications when they unlock hw / reach recommended level for labs
+// TODO: Tie into office hours tracking/queueing
+
+// TODO: Register independent study
+
+// TODO: Do all of 442..
+
+
 function instructions_to_javadoc(question, question_number, max_width, indent) {
 	if (!max_width) {
 		max_width = 90;
@@ -459,7 +480,7 @@ exports.ps_api = function ps_api(req, res, course) {
 };
 
 function api_record_violation(req, res, course) {
-	// TODO
+	// TODO: add to violation collection
 	res.send("Violation");
 }
 
