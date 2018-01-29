@@ -648,7 +648,9 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 				},
 				'all_ps_assigned': {}, // keyed by ps_number
 				'labs': {},
-				'homework': {}
+				'homework': {},
+				'leveled_up': false,
+				'extra':{}
 			};
 			collection_ps.insert(collection_entry_example, next());
 			log.info(username + ": registered for problem sets with id " + section_id);
@@ -674,3 +676,5 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 // function set_user_number_id(username, section_id){}
 
 //add_ps_user("sophie", "A1", "11111111", "1234567890", function(){console.log("user added");});
+
+

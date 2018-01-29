@@ -73,7 +73,9 @@ app.use(function (req, res, next) {
 		var username = req.user.username;
 	}
 
-	log.silly(username + ": requested " + req.url + " (" + req.headers['user-agent'] + ")");
+	if (!req.headers['user-agent'].includes("csps-support@buffalo.edu")) {
+		log.silly(username + ": requested " + req.url + " (" + req.headers['user-agent'] + ")");
+	}
 
 	next();
 });
@@ -87,7 +89,7 @@ router.get('/profile', function (req, res) {
 router.get('/login', function (req, res) {
 	res.to_template.prev_path = req.headers.referer;
 	//console.log("4" + req.headers.referer);
-	if(!res.to_template.prev_path){
+	if (!res.to_template.prev_path) {
 		res.to_template.prev_path = '/user/profile';
 	}
 	res.render('login', res.to_template);
@@ -99,7 +101,7 @@ router.post('/login', function (req, res, next) {
 
 	// Don't follow an outside link. This is not for security, and offers no added security, but for convenience
 	// in case someone uses a strange referer or links directly to the login page
-	if(!destination || (!destination.includes("localhost") && !destination.includes("fury.cse.buffalo.edu"))){
+	if (!destination || (!destination.includes("localhost") && !destination.includes("fury.cse.buffalo.edu"))) {
 		destination = '/user/profile';
 	}
 
