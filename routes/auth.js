@@ -225,8 +225,8 @@ router.post('/reset-password', function (req, res) {
 router.get('/logout', function (req, res) {
 	if (req.user) {
 		console.log('user ' + req.user.username + ' logged out');
-		req.logout();
 		log.info(req.user.username + ": logged out manually");
+		req.logout();
 		req.flash('success', 'logged out');
 	} else {
 		// not logged in
