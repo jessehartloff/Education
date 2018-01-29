@@ -164,18 +164,31 @@
                             Submitted. You cannot earn more points for the problem set. You can resubmit on AutoLab
                             for extra practice until you check out a new problem set
                         </p>
+                        <hr/>
                     {{/if}}{{/if}}
                     {{#each questions}}
                         <p>Question {{increment @index}}</p>
                         <p>
                             {{this.instruction_text}}<br/>
-                            {{#if this.correct}}
-                                <span class="badge badge-xp">+100</span>
+                            {{#if @first}}
+                                {{#if ../user_ps.current_ps_finished}}
+                                    {{#if this.correct}}
+                                        <span class="badge badge-xp">+100</span>
+                                    {{else}}
+                                        <span class="badge badge-default">+0</span>
+                                    {{/if}}
+                                    <br/>
+                                    {{this.feedback}}
+                                {{/if}}
                             {{else}}
-                                <span class="badge badge-default">+0</span>
+                                {{#if this.correct}}
+                                    <span class="badge badge-xp">+100</span>
+                                {{else}}
+                                    <span class="badge badge-default">+0</span>
+                                {{/if}}
+                                <br/>
+                                {{this.feedback}}
                             {{/if}}
-                            <br/>
-                            {{this.feedback}}
                         </p>
                         {{#each this.cards}}
                             <p>
