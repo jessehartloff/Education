@@ -101,13 +101,13 @@ function instructions_to_javadoc(question, question_number, max_width, indent) {
 
 	var instructions = "q" + question_number.toString() + ": ";
 
-	if(question.concept == "classes"){
+	if (question.concept == "classes") {
 		instructions = question.instruction_text;
-	}else if(question.concept == "inheritance"){
+	} else if (question.concept == "inheritance") {
 		instructions = question.instruction_text;
-	}else if(question.concept == "polymorphism"){
+	} else if (question.concept == "polymorphism") {
 		instructions = question.instruction_text;
-	}else{
+	} else {
 		instructions += "Write a public static method named q" +
 			question_number.toString() + " that" + question.instruction_text;
 	}
@@ -117,23 +117,23 @@ function instructions_to_javadoc(question, question_number, max_width, indent) {
 	var docs = indent + "/**\n";
 	var last_space = 0;
 
-	for(var i=0; i<instructions.length; i++){
+	for (var i = 0; i < instructions.length; i++) {
 		line += instructions.charAt(i);
-		if(instructions.charAt(i) === " "){
+		if (instructions.charAt(i) === " ") {
 			last_space = line.length;
-		}else if(instructions.charAt(i) === "\n"){
+		} else if (instructions.charAt(i) === "\n") {
 			docs += indent + " * " + line;
 			line = "";
 		}
 
-		if(line.length > max_width && last_space != 0) {
+		if (line.length > max_width && last_space != 0) {
 			docs += indent + " * " + line.slice(0, last_space) + "\n";
 			line = line.slice(last_space, line.length);
 		}
 
 	}
 
-	if(line.length > 0){
+	if (line.length > 0) {
 		docs += indent + " * " + line + "\n";
 	}
 	docs += indent + " */\n";
@@ -158,7 +158,7 @@ function build_ps_text(problem_set) {
 
 	var question_number = 1;
 	for (var i in problem_set.questions) {
-		if(!problem_set.questions[i]){
+		if (!problem_set.questions[i]) {
 			console.log("question is null");
 			continue;
 		}
@@ -232,7 +232,7 @@ exports.get_ps = function get_ps(req, res, course) {
 						}
 					}
 					//if (i !== user_ps.current_ps.ps_number.toString()) {
-						ps_completed.push(prepared_ps);
+					ps_completed.push(prepared_ps);
 					//}
 
 					//}else if(user_ps.current_ps_finished){
@@ -246,9 +246,9 @@ exports.get_ps = function get_ps(req, res, course) {
 				});
 				res.to_template.ps_completed = ps_completed;
 
-				if(user_ps.leveled_up){
+				if (user_ps.leveled_up) {
 					res.to_template.leveled_up = true;
-					collection_ps.update({username: req.user.username},{$set:{leveled_up:false}});
+					collection_ps.update({username: req.user.username}, {$set: {leveled_up: false}});
 				}
 
 				// determine active loop section
@@ -480,7 +480,7 @@ exports.ps_api = function ps_api(req, res, course) {
 	//console.log("API: " + req.body);
 	if (req.body.key !== "super_secret_key") {
 		res.send("You can't use this API");
-		res.warn("Bad access to problem set API")
+		log.warn("Bad access to problem set API")
 	} else if (!req.headers['user-agent']) {
 		res.send("You can't use this API");
 		log.warn("Bad user-agent to problem set API")
@@ -521,7 +521,6 @@ function api_send_ps_results(req, res, course) {
 	var section_id = req.body.section_id;
 	var results = req.body.results;
 
-	log.info(section_id + ": submitted ps " + record.current_ps.ps_number.toString);
 
 	collection_ps.findOne({"section_id": section_id}, {}, function (err, record) {
 		if (err) {
@@ -531,18 +530,19 @@ function api_send_ps_results(req, res, course) {
 		} else if (!record) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
-			log.info(section_id + ": submission was for feedback");
+			log.info(section_id + ": resubmitted ps " + record.current_ps.ps_number.toString + " for feedback");
 			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
 			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress");
 		} else {
 
+			log.info(section_id + ": submitted ps " + record.current_ps.ps_number.toString + " for credit");
 			var xp = record.xp;
 			var number_correct = 0;
 
-			for (var i =0; i<results.length; i++) {
+			for (var i = 0; i < results.length; i++) {
 				var result = results[i];
 				var question = record.current_ps.questions[i];
-				if(!question){
+				if (!question) {
 					console.log(req.user.username + ": error in api_send_ps_results. Question index " + i + " not found");
 					log.error(req.user.username + ": error in api_send_ps_results. Question index " + i.toString() + " not found");
 					continue;
@@ -559,7 +559,9 @@ function api_send_ps_results(req, res, course) {
 				}
 			}
 
-			if(number_correct === record.current_ps.questions.length){
+			log.info(section_id + ": answered " + number_correct.toString() + "/" + record.current_ps.questions.length.toString() + " correct");
+
+			if (number_correct === record.current_ps.questions.length) {
 				log.info(section_id + ": all correct bonus on ps " + record.current_ps.ps_number.toString);
 				record.current_ps.multipliers.push({"reason": "All questions correct!", "multiplier": 1.5});
 			}
@@ -573,7 +575,7 @@ function api_send_ps_results(req, res, course) {
 
 			var total_xp = record.total_xp;
 			var xp_earned = number_correct * multiplier;
-			if(xp_earned && xp_earned >= -1){
+			if (xp_earned && xp_earned >= -1) {
 				total_xp += xp_earned;
 			}
 
@@ -596,7 +598,7 @@ function api_send_ps_results(req, res, course) {
 			if (level_up) {
 				toSet["level"] = new_level;
 				toSet["leveled_up"] = true;
-				log.info(section_id + ": leveled up to level " + new_level.toString() +"!");
+				log.info(section_id + ": leveled up to level " + new_level.toString() + "!");
 			}
 
 			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
