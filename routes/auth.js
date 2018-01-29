@@ -98,7 +98,9 @@ router.get('/login', function (req, res) {
 router.post('/login', function (req, res, next) {
 	var destination = req.body.prev_path;
 	//console.log("6" + req.body.prev_path);
-
+	if (req.body.username.endsWith('@buffalo.edu')) {
+		req.body.username = email_to_ubit(req.body.username);
+	}
 	// Don't follow an outside link. This is not for security, and offers no added security, but for convenience
 	// in case someone uses a strange referer or links directly to the login page
 	if (!destination || (!destination.includes("localhost") && !destination.includes("fury.cse.buffalo.edu"))) {
