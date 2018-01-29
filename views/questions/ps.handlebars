@@ -73,79 +73,6 @@
     </div>
 
 
-    <!--<div class="card border-dark mb-3 {{#if new_ps_active}}text-white bg-primary{{/if}}">-->
-    <!--<div class="card-body">-->
-
-    <!--<a href="/courses/{{course.course}}/ps-download" class="btn btn-default">-->
-            <!--{{#if user_ps.current_ps_finished}}-->
-    <!--Download Problem Set {{increment user_ps.current_ps.ps_number}}-->
-            <!--{{else}}-->
-    <!--Re-Download Problem Set {{user_ps.current_ps.ps_number}}-->
-            <!--{{/if}}</a>-->
-
-
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--<div class="card border-dark {{#if submit_ps_active}}text-white bg-primary{{/if}} mb-3">-->
-    <!--<div class="card-body">-->
-    <!--<p>-->
-    <!--<a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/problemsets"-->
-    <!--target="_blank" class="btn btn-default">Submit on Autolab</a>-->
-    <!--</p>-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-            <!--{{#with user_ps.current_ps}}-->
-    <!--<div class="card border-dark mb-3">-->
-    <!--<div class="card-header{{#unless ../user_ps.current_ps_finished}} text-white bg-primary{{/unless}}">-->
-    <!--<h5>{{class_name}}</h5>-->
-    <!--</div>-->
-    <!--<div class="card-body">-->
-    <!--<p>-->
-            <!--{{#if ../user_ps.current_ps_finished}}-->
-    <!--Submitted. You cannot earn more points for the problem set, though you can resubmit on AutoLab-->
-    <!--for extra practice-->
-            <!--{{else}}-->
-    <!--Not yet submitted-->
-            <!--{{/if}}-->
-    <!--</p>-->
-            <!--{{#each multipliers}}-->
-    <!--<div class="alert alert-xp"><strong>x{{this.multiplier}}</strong>: {{this.reason}}</div>-->
-            <!--{{/each}}-->
-            <!--{{#each questions}}-->
-    <!--<p>Question {{increment @index}}<br/>-->
-    <!--{{this.instruction_text}}-->
-    <!--</p>-->
-            <!--{{#if this.feedback}}-->
-            <!--{{#if this.correct}}-->
-    <!--<span class="badge badge-xp">+100</span>-->
-            <!--{{else}}-->
-    <!--<span class="badge badge-default">+0</span>-->
-            <!--{{/if}}-->
-    <!--<br/>-->
-    <!--{{this.feedback}}-->
-            <!--{{/if}}-->
-            <!--{{#each this.cards}}-->
-    <!--<p>-->
-    <!--Card: {{this}}-->
-    <!--</p>-->
-            <!--{{/each}}-->
-    <!--<hr/>-->
-            <!--{{/each}}-->
-    <!--</div>-->
-    <!--</div>-->
-            <!--{{else}}-->
-
-    <!--<div class="card border-dark mb-3">-->
-    <!--<div class="card-body">-->
-    <!--CLick above to start your first problem set-->
-    <!--</div>-->
-    <!--</div>-->
-            <!--{{/with}}-->
-
 
     {{#each ps_completed}}
         {{#with this}}
@@ -170,8 +97,8 @@
                         <p>Question {{increment @index}}</p>
                         <p>
                             {{this.instruction_text}}<br/>
-                            {{#if @first}}
-                                {{#if ../user_ps.current_ps_finished}}
+                            {{#if @../first}}
+                                {{#if ../../user_ps.current_ps_finished}}
                                     {{#if this.correct}}
                                         <span class="badge badge-xp">+100</span>
                                     {{else}}
