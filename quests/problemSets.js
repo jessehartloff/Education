@@ -530,12 +530,12 @@ function api_send_ps_results(req, res, course) {
 		} else if (!record) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
-			log.info(section_id + ": resubmitted ps " + record.current_ps.ps_number.toString + " for feedback");
+			log.info(section_id + ": resubmitted ps " + record.current_ps.ps_number.toString() + " for feedback");
 			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
 			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress");
 		} else {
 
-			log.info(section_id + ": submitted ps " + record.current_ps.ps_number.toString + " for credit");
+			log.info(section_id + ": submitted ps " + record.current_ps.ps_number.toString() + " for credit");
 			var xp = record.xp;
 			var number_correct = 0;
 
@@ -562,7 +562,7 @@ function api_send_ps_results(req, res, course) {
 			log.info(section_id + ": answered " + number_correct.toString() + "/" + record.current_ps.questions.length.toString() + " correct");
 
 			if (number_correct === record.current_ps.questions.length) {
-				log.info(section_id + ": all correct bonus on ps " + record.current_ps.ps_number.toString);
+				log.info(section_id + ": all correct bonus on ps " + record.current_ps.ps_number.toString());
 				record.current_ps.multipliers.push({"reason": "All questions correct!", "multiplier": 1.5});
 			}
 
