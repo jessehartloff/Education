@@ -6,7 +6,7 @@ var request = require('request');
 router.get('/cse115', function (req, res) {
 
 	var userAgent = req.get('User-Agent');
-	console.log(userAgent);
+	//console.log(userAgent);
 	var question = req.query["question"];
 
 	if(userAgent.indexOf("Java") == -1){

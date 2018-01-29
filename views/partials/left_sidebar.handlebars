@@ -21,15 +21,10 @@
                 <br/>
             {{/unless}}
             {{#each course.assignments}}
-                {{#ifIndexLimited ../course.course @index 2}}
-                    &nbsp;<a class="menu_link {{this.short_title}}"
-                             href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
-                    <br/>
-                {{else}}
-                    &nbsp;<a class="menu_link"
-                             href="/courses/{{../course.course}}/assignments/{{this.short_title}}"></a>{{this.title}}
-                    <br/>
-                {{/ifIndexLimited}}
+                &nbsp;<a class="menu_link {{this.short_title}}"
+                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
+                <br/>
+
             {{/each}}
         {{/if}}
 

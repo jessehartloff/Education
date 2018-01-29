@@ -2,6 +2,7 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
 var level_requirements = require('./level_requirements/requirements');
+var log = require('winston');
 
 var collection_ps = db.get('ps');
 var collection_questions = db.get('questions');
@@ -69,6 +70,7 @@ var card_example = "Link to lecture content and videos";
 
 
 // TODO: Log EVERYTHING!
+// TODO. logs; add students; send email
 
 // TODO: Remind them of office hours after poor performance
 
@@ -82,6 +84,7 @@ var card_example = "Link to lecture content and videos";
 // TODO: Killing Spree
 // TODO: Notifications when they unlock hw / reach recommended level for labs
 // TODO: Tie into office hours tracking/queueing
+// TODO: idea - Eclipse che for lecture code. Students can see it live in their browser and the examples can be saved
 
 // TODO: Register independent study
 
@@ -184,7 +187,7 @@ function build_ps_text(problem_set) {
 	return ps;
 }
 
-// TODO: idea, if this ever ties into office hours, give them a 10% bonus after each office hours visit
+// TODO: idea, if this ever ties into office hours, give them a 20% bonus after each office hours visit
 
 // entry point
 exports.get_ps = function get_ps(req, res, course) {
@@ -195,9 +198,11 @@ exports.get_ps = function get_ps(req, res, course) {
 			if (err) {
 				console.log("database error in get_ps: " + err);
 				req.flash("error", "Database error 1");
+				log.error(req.user.username + ": in get_ps");
 				res.render('questions/ps', res.to_template);
 			} else if (!user_ps) {
 				console.log("user not enrolled for problem sets: " + req.user.username);
+				log.warn(req.user.username + ": not enrolled in problem sets");
 				req.flash("error", "User " + req.user.username + " is not registered for this feature. If you are enrolled in CSE115 send and email to hartloff@buffalo.edu with the subject \"CSE115 Problem Set Registration\" immediately to unlock problem sets");
 				res.render('questions/ps', res.to_template);
 			} else {
@@ -213,18 +218,23 @@ exports.get_ps = function get_ps(req, res, course) {
 							continue;
 						}
 						if (prepared_ps.results) {
-							if (i !== user_ps.current_ps.ps_number.toString()) {
+							if (i !== user_ps.current_ps.ps_number.toString() || user_ps.current_ps_finished) {
 								prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
 								prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
-							} else if (user_ps.current_ps_finished) {
-								res.to_template.user_ps.current_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
-								res.to_template.user_ps.current_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
 							}
+							//if (i !== user_ps.current_ps.ps_number.toString()) {
+							//	prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
+							//	prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
+							//} else if (user_ps.current_ps_finished) {
+							//	res.to_template.user_ps.current_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
+							//	res.to_template.user_ps.current_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
+							//}
 						}
 					}
-					if (i !== user_ps.current_ps.ps_number.toString()) {
+					//if (i !== user_ps.current_ps.ps_number.toString()) {
 						ps_completed.push(prepared_ps);
-					}
+					//}
+
 					//}else if(user_ps.current_ps_finished){
 					//	res.to_template.user_ps.current_ps["correct"] = prepared_ps.results[j].correct;
 					//	res.to_template.user_ps.current_ps["feedback"] = prepared_ps.results[j].feedback;
@@ -247,7 +257,7 @@ exports.get_ps = function get_ps(req, res, course) {
 				} else {
 					res.to_template.submit_ps_active = true;
 				}
-				//grading_ps_active // future tech when sockets and hook are implemented. Give them something to do
+				//grading_ps_active // TODO: future tech when sockets and hook are implemented. Give them something to do
 				// while grading
 
 
@@ -282,14 +292,14 @@ question_example =
 };
 
 function get_random_question(concept, type, questions_list) {
-	console.log(concept);
-	console.log(type);
-	console.log(typeof concept);
-	console.log(typeof type);
+	//console.log(concept);
+	//console.log(type);
+	//console.log(typeof concept);
+	//console.log(typeof type);
 	return collection_questions.find({"concept": concept, "type": type}, function (err, questions) {
 		var question = questions[Math.floor(Math.random() * questions.length)];
 		questions_list.push(question);
-		console.log(question);
+		//console.log(question);
 	});
 
 	//return {
@@ -314,14 +324,16 @@ var xp_example = {
 
 function generate_new_ps(req, res, user_ps, next) {
 
-	console.log(user_ps);
 	var new_ps_number = user_ps.current_ps.ps_number + 1;
+	log.info(req.user.username + ": generating problem set " + new_ps_number.toString());
+
 	var previous_generation_time = user_ps.current_ps.time_generated;
 	var ms_in_day = 1000 * 60 * 60 * 24;
 
 	var point_value = 100.0;
 	var multipliers = [];
 	if (Math.floor(Date.now() / ms_in_day) !== Math.floor(previous_generation_time / ms_in_day)) {
+		log.info(req.user.username + ": first problem set of the day");
 		multipliers.push({"reason": "First Problem Set of the Day", "multiplier": 1.5});
 		point_value *= 1.5;
 	}
@@ -374,6 +386,7 @@ function generate_new_ps(req, res, user_ps, next) {
 		}
 		if (highest_priority_index === -1) {
 			console.log("highest_priority_index = -1");
+			log.warn(req.user.username + ": I've got a bad feeling about this..");
 			// bad
 		} else {
 			question_types.push(highest_priority_question);
@@ -409,8 +422,8 @@ function generate_new_ps(req, res, user_ps, next) {
 		toSet['all_ps_assigned.' + new_ps_number] = ps;
 		user_ps.current_ps = ps;
 
-		console.log("toSet");
-		console.log(toSet);
+		//console.log("toSet");
+		//console.log(toSet);
 
 		collection_ps.update({username: req.user.username}, {
 			$set: toSet
@@ -427,12 +440,13 @@ function send_current_ps(req, res, user_ps) {
 	var ps = user_ps.current_ps;
 	res.setHeader('Content-disposition', 'attachment; filename=' + java_class_name(ps) + '.java');
 	console.log("sending ps " + ps.ps_number + " to: " + req.user.username);
+	log.info(req.user.username + ": downloading problem set " + ps.ps_number.toString());
 	res.send(build_ps_text(ps));
 }
 
 exports.ps_download = function ps_download(req, res, course) {
-	console.log("ps_download");
-	console.log(req.user.username);
+	//console.log("ps_download");
+	//console.log(req.user.username);
 
 	if (!req.user) {
 		res.render('questions/ps', res.to_template);
@@ -441,9 +455,11 @@ exports.ps_download = function ps_download(req, res, course) {
 			if (err) {
 				console.log("database error in ps_download: " + err);
 				req.flash("error", "Database error 1");
+				log.error(req.user.username + ": error in ps_download");
 				res.render('questions/ps', res.to_template);
 			} else if (!user_ps) {
 				console.log("user not enrolled for problem sets: " + req.user.username);
+				log.warn(req.user.username + ": not enrolled in problem sets");
 				req.flash("error", "User " + req.user.username + " is not registered for this feature. If you are enrolled in CSE115 send and email to hartloff@buffalo.edu with the subject \"CSE115 Problem Set Registration\" immediately to unlock problem sets");
 				res.render('questions/ps', res.to_template);
 			} else {
@@ -461,13 +477,13 @@ exports.ps_download = function ps_download(req, res, course) {
 
 
 exports.ps_api = function ps_api(req, res, course) {
-	console.log("API: " + req.body);
+	//console.log("API: " + req.body);
 	if (req.body.key !== "super_secret_key") {
-		// TODO: better keys
 		res.send("You can't use this API");
-	} else if (!req.get('User-Agent')) {
-		// TODO
+		res.warn("Bad access to problem set API")
+	} else if (!req.headers['user-agent']) {
 		res.send("You can't use this API");
+		log.warn("Bad user-agent to problem set API")
 	} else if (req.body.request_type === "get_current_ps") {
 		api_get_current_ps(req, res, course);
 	} else if (req.body.request_type === "send_ps_results") {
@@ -476,11 +492,12 @@ exports.ps_api = function ps_api(req, res, course) {
 		api_record_violation(req, res, course);
 	} else {
 		res.send("bad request type: " + req.body.request_type);
+		log.warn("Problem set API bad request type: " + req.body.request_type);
 	}
 };
 
 function api_record_violation(req, res, course) {
-	// TODO: add to violation collection
+	log.error("VIOLATION DETECTED");
 	res.send("Violation");
 }
 
@@ -490,6 +507,7 @@ function api_get_current_ps(req, res, course) {
 	collection_ps.findOne({"section_id": section_id}, {}, function (err, record) {
 		if (err) {
 			console.log("database error in api_get_current_ps: " + err);
+			log.error("error in api_get_current_ps");
 			res.send("database error");
 		} else if (!record) {
 			res.send("No user found with section_id " + section_id);
@@ -503,13 +521,17 @@ function api_send_ps_results(req, res, course) {
 	var section_id = req.body.section_id;
 	var results = req.body.results;
 
+	log.info(section_id + ": submitted ps " + record.current_ps.ps_number.toString);
+
 	collection_ps.findOne({"section_id": section_id}, {}, function (err, record) {
 		if (err) {
 			console.log("database error in api_send_ps_results: " + err);
+			log.error(section_id + "error in api_send_ps_results");
 			res.send("database error");
 		} else if (!record) {
 			res.send("No user found with section_id " + section_id);
 		} else if (record.current_ps_finished) {
+			log.info(section_id + ": submission was for feedback");
 			console.log("Resubmission for no credit. section_id=" + section_id + " problem set=" + record.current_ps.ps_number);
 			res.send("This problem set has already been submitted for credit. This submission will not count towards course progress");
 		} else {
@@ -522,6 +544,7 @@ function api_send_ps_results(req, res, course) {
 				var question = record.current_ps.questions[i];
 				if(!question){
 					console.log(req.user.username + ": error in api_send_ps_results. Question index " + i + " not found");
+					log.error(req.user.username + ": error in api_send_ps_results. Question index " + i.toString() + " not found");
 					continue;
 				}
 				if (result.correct) {
@@ -537,6 +560,7 @@ function api_send_ps_results(req, res, course) {
 			}
 
 			if(number_correct === record.current_ps.questions.length){
+				log.info(section_id + ": all correct bonus on ps " + record.current_ps.ps_number.toString);
 				record.current_ps.multipliers.push({"reason": "All questions correct!", "multiplier": 1.5});
 			}
 
@@ -572,12 +596,14 @@ function api_send_ps_results(req, res, course) {
 			if (level_up) {
 				toSet["level"] = new_level;
 				toSet["leveled_up"] = true;
+				log.info(section_id + ": leveled up to level " + new_level.toString() +"!");
 			}
 
 			collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
 				if (err) {
 					console.log("database error in api_get_current_ps update: " + err);
 					res.send("database error");
+					log.error(section_id + ": updating the database after grading ps in api_get_current_ps");
 				} else {
 					res.send("Results sent to course site");
 				}
@@ -586,8 +612,6 @@ function api_send_ps_results(req, res, course) {
 		}
 	});
 
-
-// Send PS results and feedback by section_id
 
 }
 
@@ -625,19 +649,23 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 				'homework': {}
 			};
 			collection_ps.insert(collection_entry_example, next());
+			log.info(username + ": registered for problem sets with id " + section_id);
 		}
 	});
 }
 
-function random_section_id(token_length) {
-	var length = token_length || 10;
-	var alphabet = '012356789';
-	var token = '';
-	for (var i = 0; i < length; i++) {
-		token += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-	}
-	return token;
-}
+// TODO: Add all the students
+
+// handled elsewhere
+//function random_section_id(token_length) {
+//	var length = token_length || 10;
+//	var alphabet = '012356789';
+//	var token = '';
+//	for (var i = 0; i < length; i++) {
+//		token += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+//	}
+//	return token;
+//}
 // function set_user_section_id(username, section_id){}
 
 // function set_user_lab_section(username, lab_section){}

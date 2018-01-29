@@ -2,24 +2,17 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
 var users = require('./users');
+var log = require('winston');
 
-function team_formation_checks() {
-
-}
 
 function generate_messages(req, res, course) {
 
 	console.log(course.course_options);
-	if (users.user_enrolled(req)) {
-		if (course.course_options && course.course_options.message)
+	//if (users.user_enrolled(req)) {
+		if (course.course_options && course.course_options.message) {
 			req.flash('course_info', course.course_options.message);
-		//if (req.params.course === 'cse442-f17') {
-		//	req.flash('course_info', 'Form your team');
-		//} else if (req.params.course === 'cse115-f17') {
-		//	req.flash('course_info', 'Upcoming deadline');
-		//}
-	}
-
+		}
+	//}
 
 }
 
@@ -45,6 +38,7 @@ exports.preprocess_course = preprocess_course = function preprocess_course(req, 
 		if (err) {
 			console.log(err);
 			req.flash('error', 'Course not found ' + err);
+			log.warn(req.params.course + ': error in preprocess_course');
 			res.redirect('/courses/');
 		} else if (!record) {
 			req.flash('error', 'Course not found');

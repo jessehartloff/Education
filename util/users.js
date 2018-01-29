@@ -6,6 +6,8 @@ var course_collection = db.get('course_content');
 
 var bcrypt = require('bcryptjs');
 
+// Deprecated
+
 exports.user_enrolled = function user_enrolled(req){
 	return req.user && req.params.course && req.user.courses_enrolled && req.user.courses_enrolled[req.params.course];
 };
