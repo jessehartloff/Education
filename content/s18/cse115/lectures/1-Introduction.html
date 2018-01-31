@@ -399,22 +399,28 @@ This is correct because 2.0 * 6.0 is 15.0
 
 
 <pre><code class="java">
-    public class LectureExample{
+public class LectureExample{
 
-    public static void Q1(){
-    String message = "I was called from main";
-    System.out.println("Message from Q1: " + message);
+    public static void q1(){
+        String message = "I was called from main";
+        System.out.println("Message from Q1: " + message);
+    }
+
+    public static int q2(int x){
+        return x+2;
     }
 
     public static void main(String[] args){
-    Q1();
+        q1();
+        int y = q2(5);
+        System.out.println(y);
     }
 
-    }
+}
 </code></pre>
 
 <p>
-    Output: <kbd>Message from Q1: I was called from main</kbd>
+    Output: <kbd>Message from Q1: I was called from main<br/>7</kbd>
 </p>
 
 <p>
