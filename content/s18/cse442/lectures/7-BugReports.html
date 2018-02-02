@@ -1,0 +1,93 @@
+---
+title: Hot Fixes
+short_title: vc
+next_content_short: null
+previous_content_short: null
+---
+
+
+== Hot Fixes
+
+<p>
+    Note that this protocol only applies to bugs that are reported in your public releases. Bugs found by the team
+    in development should be fixed with a feature branch following the code contribution protocol.
+</p>
+
+== Protocol
+
+<ul>
+    <li>Respond to the bug report within 24 hours</li>
+    <li>Assign the task to the team member(s) in the affected area(s)</li>
+    <li>Create a hot fix branch off of master for the bug</li>
+    <li>Eliminate the bug on the hot fix branch and verify proper functionality</li>
+    <li>Pull request, review, and merge into master and develop</li>
+    <li>Create new release and pull into production in a timely manner</li>
+</ul>
+
+
+<hr/>
+<h4>Respond to the bug report</h4>
+
+<p>
+    Once a bug is reported as an issue on your team's GitHub repository your team must make first contact within 24
+    hours, excluding Saturday and Sunday (Ex. If a bug is reported Friday night or over the weekend you have until
+    Monday night to respond). This first contact can be as little as a comment on the issue. If the task is assigned to
+    team member this counts as first contact.
+</p>
+<hr/>
+<h4>Assign the bug to a Team Member</h4>
+
+<p>
+    The team must first determine which member, or members, of the team should be responsible for fixing the bug. If the
+    team cannot come to an agreement you should move to your team's dispute resolution protocol. Once the appropriate
+    member(s) are decided assign the issue to them.
+</p>
+
+<hr/>
+<h4>Hot Fix Branch</h4>
+
+<p>
+    Similar to creating a feature branch, create a hot fix branch from the master branch. This branch will contain the
+    current state of your project that is running in production.
+</p>
+
+<hr/>
+<h4>Eliminate the Bug</h4>
+
+<p>
+    Work on the hot fix branch until the bug is fixed. Be sure to test the new code in your development environment and
+    verify that the bug has been eliminated while maintaining the functionality of the project.
+</p>
+
+
+<hr/>
+<h4>Pull Request and Merge</h4>
+
+<p>
+    Create a pull request to merge the code into master. After the pull request is reviewed, approved, and merged you
+    will also merge the fix into your develop branch.
+</p>
+
+
+<hr/>
+<h4>Update Release and Production</h4>
+
+<p>
+    Create a new release of your master branch in GitHub with an incremented third digit of the version number. For
+    example if the previous release was v0.1.0 this release will be v0.1.1. Once your master branch contains the
+    updated code, update your production release so your users and testers can benefit from the update.
+</p>
+
+
+<hr/>
+<h4>Timely Bug Fix</h4>
+
+<p>
+    This entire protocol must be completed within 1 week (168 hours) of the time the issue for the bug was initially
+    created. Note that other constraints may require the bug to be fixed sooner (Ex. If the bug is preventing
+    others from testing your software).
+</p>
+
+
+
+

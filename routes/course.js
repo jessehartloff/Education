@@ -142,6 +142,32 @@ router.post('/:course/ps-api', function (req, res) {
 // end Problem Sets
 
 
+
+
+// Labs
+router.get('/:course/lab', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.get_lab);
+});
+
+//router.get('/:course/lab-checkout', function (req, res) {
+//	course_util.preprocess_course(req, res, lab_util.lab_checkout);
+//});
+
+//router.get('/:course/ps-download-new', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_new);
+//});
+//
+//router.get('/:course/ps-download-current', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_current);
+//});
+
+router.post('/:course/lab-api', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.lab_api);
+});
+// end Labs
+
+
+
 router.get('/:course/:extra', function (req, res) {
 	course_util.render_content(req, res, 'extra', req.params.extra);
 });
