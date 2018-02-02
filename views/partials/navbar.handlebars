@@ -61,7 +61,12 @@
             {{#if course.lectures}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/courses/{{course.course}}/">
-                        <div class="display-text">Training</div>
+
+                        {{#if course.course_options.has_project}}
+                            <div class="display-text">Protocols</div>
+                        {{else}}
+                            <div class="display-text">Training</div>
+                        {{/if}}
                         <div class="tiny-text">T<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                         </div>
 

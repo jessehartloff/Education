@@ -33,7 +33,11 @@
 
             <hr/>
 
-            <h6>&nbsp;Training</h6>
+            {{#if course.course_options.has_project}}
+                <h6>&nbsp;Protocols</h6>
+            {{else}}
+                <h6>&nbsp;Training</h6>
+            {{/if}}
             {{#unless course.course_options.no_question_site}}
                 &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
                          target="_blank">-Questions</a>

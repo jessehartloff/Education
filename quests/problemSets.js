@@ -69,26 +69,21 @@ var question_example =
 var card_example = "Link to lecture content and videos";
 
 
-// TODO: Log EVERYTHING!
-// TODO. logs; add students; send email
+// TODO: send email
 
 // TODO: Remind them of office hours after poor performance
 
 // TODO: Add consumable multipliers that can be awarded to to individuals or to the entire class. Quantity should be stored. Could have different values as well. For each type they have, a new button appears next to the check out PS button. They can earn these in many ways (1.2x for attending office hours, several 1.5x for response rates, several 1.2 for completing 442 tasks?)
-// Cleanup
-// TODO: Register students. Set fixed section numbers and check for new students w/o a number as they add/drop. No reassignments or duplicates
+// TODO: Cleanup code
+// Register students. Set fixed section numbers and check for new students w/o a number as they add/drop. No reassignments or duplicates
 // Syllabus w/ grading
 // TODO: Make a card for each concept
-// TODO: Display first PS just like the others. Display card for each PS
+// Display first PS just like the others. Display card for each PS
 // TODO: Check if they have testing code in main
 // TODO: Killing Spree
 // TODO: Notifications when they unlock hw / reach recommended level for labs
 // TODO: Tie into office hours tracking/queueing
 // TODO: idea - Eclipse che for lecture code. Students can see it live in their browser and the examples can be saved
-
-// TODO: Register independent study
-
-// TODO: Do all of 442..
 
 
 function instructions_to_javadoc(question, question_number, max_width, indent) {
@@ -292,10 +287,6 @@ question_example =
 };
 
 function get_random_question(concept, type, questions_list) {
-	//console.log(concept);
-	//console.log(type);
-	//console.log(typeof concept);
-	//console.log(typeof type);
 	return collection_questions.find({"concept": concept, "type": type}, function (err, questions) {
 		var question = questions[Math.floor(Math.random() * questions.length)];
 		questions_list.push(question);
@@ -658,20 +649,8 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 	});
 }
 
-// TODO: Add all the students
 
-// handled elsewhere
-//function random_section_id(token_length) {
-//	var length = token_length || 10;
-//	var alphabet = '012356789';
-//	var token = '';
-//	for (var i = 0; i < length; i++) {
-//		token += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-//	}
-//	return token;
-//}
 // function set_user_section_id(username, section_id){}
-
 // function set_user_lab_section(username, lab_section){}
 // function set_user_number_id(username, section_id){}
 
