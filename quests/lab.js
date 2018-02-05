@@ -344,7 +344,7 @@ function start_new_lab(req, res, username, lab_number) {
 					get_random_version(req, res, lab_number, 1, function (req, res, version) {
 						var lab_attempt =
 						{
-							"lab_number": lab_number,
+							"lab_number": parseInt(lab_number),
 							"lab_id": "lab" + lab_number,
 							complete: false,
 							current_part: 1,
@@ -392,13 +392,18 @@ function time_expired(req, res, username) {
 
 exports.start_lab = function start_lab(req, res, course) {
 	collection_ps.findOne({username: req.user.username}, {}, function (err, user_ps) {
+		if(err || !user_ps){
+			req.flash("error", "There was a problem accessing the database");
+			console.log(err + " | " + user_ps);
+			res.redirect('/courses/' + req.params.course + '/lab');
+		}
 		if (!user_ps.lab_validation) {
 			req.flash("error", "You need to check into lab with a TA before starting a lab");
 			res.redirect('/courses/' + req.params.course + '/lab');
 		} else if (user_ps.valid_until < Date.now()) {
 			time_expired(req, res, req.user.username);
 		} else {
-			if (Object.keys(user_ps.current_lab_attempt).length > 0) {
+			if (user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
 				resume_lab(req, res, user_ps.current_lab_attempt);
 			} else {
 				console.log("ggg: " + req.params.lab_number);
