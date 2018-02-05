@@ -200,6 +200,15 @@ a.btn-custom {
     font-size: larger;
 }
 
+.btn-complete-custom, .btn-complete-custom:hover, .btn-complete-custom:active {
+    /*border: 1px solid #000000;*/
+    /*border-radius: 5px;*/
+    color: white;
+    background: linear-gradient(to bottom, #07e700 1%, #00a511 100%);
+    /*box-shadow: 1px 1px 0 #168eff, inset 0 1px 0 #168eff;*/
+    /*text-shadow: 1px 1px 0 rgba(0,0,0,0.25);*/
+}
+
 .btn-primary-custom, .btn-primary-custom:hover, .btn-primary-custom:active {
     /*border: 1px solid #000000;*/
     /*border-radius: 5px;*/

@@ -149,6 +149,19 @@ router.get('/:course/lab', function (req, res) {
 	course_util.preprocess_course(req, res, lab_util.get_lab);
 });
 
+router.post('/:course/lab-check-in', function (req, res) {
+	console.log("gsdf");
+	course_util.preprocess_course(req, res, lab_util.lab_check_in);
+});
+
+router.get('/:course/active-lab/:lab_number', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.start_lab);
+});
+
+router.post('/:course/active-lab/:lab_number', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.answer_lab_question);
+});
+
 //router.get('/:course/lab-checkout', function (req, res) {
 //	course_util.preprocess_course(req, res, lab_util.lab_checkout);
 //});

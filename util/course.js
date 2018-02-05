@@ -7,7 +7,7 @@ var log = require('winston');
 
 function generate_messages(req, res, course) {
 
-	console.log(course.course_options);
+	//console.log(course.course_options);
 	//if (users.user_enrolled(req)) {
 		if (course.course_options && course.course_options.message) {
 			req.flash('course_info', course.course_options.message);
