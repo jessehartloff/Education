@@ -582,13 +582,12 @@ function api_send_lab_results(req, res, course) {
 				console.log("database error in api_send_lab_results: " + err);
 				log.error(section_id + "error in api_send_lab_results");
 				res.send("database error");
-			} else if (!record) {
+			} else if (!user_ps) {
 				res.send("No user found with section_id " + section_id);
 			} else {
 
 				log.info(section_id + ": completed AutoLab for " + user_ps.current_lab_attempt.lab_id);
-
-
+				collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.autolab_complete": true}});
 				// Check for lab complete
 				if (user_ps.current_lab_attempt.all_parts_complete) {
 					collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
@@ -598,30 +597,6 @@ function api_send_lab_results(req, res, course) {
 					});
 				}
 				res.send("AutoLab Complete");
-				//
-				//var toSet = {};
-				//toSet["current_ps_finished"] = true;
-				//toSet["all_ps_assigned." + record.current_ps.ps_number + ".xp_earned"] = xp_earned;
-				//toSet["all_ps_assigned." + record.current_ps.ps_number + ".multipliers"] = record.current_ps.multipliers;
-				//toSet["all_ps_assigned." + record.current_ps.ps_number + ".results"] = results;
-				//toSet["all_ps_assigned." + record.current_ps.ps_number + ".time_completed"] = Date.now();
-				//toSet["xp"] = xp;
-				//toSet["total_xp"] = total_xp;
-				//if (level_up) {
-				//	toSet["level"] = new_level;
-				//	toSet["leveled_up"] = true;
-				//	log.info(section_id + ": leveled up to level " + new_level.toString() + "!");
-				//}
-				//
-				//collection_ps.update({"section_id": section_id}, {$set: toSet}, function (err) {
-				//	if (err) {
-				//		console.log("database error in api_get_current_ps update: " + err);
-				//		res.send("database error");
-				//		log.error(section_id + ": updating the database after grading ps in api_get_current_ps");
-				//	} else {
-				//		res.send("Results sent to course site");
-				//	}
-				//});
 
 			}
 		});
