@@ -27,18 +27,18 @@ function extract_number_from_scan(scan) {
 
 
 exports.scan_to_username = function scan_to_username(scan, req, res, next){
-	console.log("scan: " + scan);
+	//console.log("scan: " + scan);
 	if (!scan) {
 		console.log("bad scan: " + scan);
 		return scan;
 	}
 	var number = extract_number_from_scan(scan);
-	console.log("number: " + number);
+	//console.log("number: " + number);
 	collection_ps.findOne({"id":number}, {}, function(err, record){
 		if(err || !record){
 			next(req, res, "");
 		}else{
-			console.log("record: " + JSON.stringify(record));
+			//console.log("record: " + JSON.stringify(record));
 			next(req, res, record.username);
 		}
 	});

@@ -214,8 +214,8 @@ function get_random_question(req, res, lab_number, part_number, version_number, 
 		} else {
 			var question_number = Math.floor(Math.random() * questions.length);
 			var question = questions[question_number];
-			console.log("question: " + question);
-			console.log("questions: " + questions);
+			//console.log("question: " + question);
+			//console.log("questions: " + questions);
 			collection_ps.update({username: req.user.username}, {$set: {"current_lab_attempt.current_question": question}}, function (err, x) {
 				next(req, res, question);
 			});
