@@ -203,7 +203,7 @@ function get_random_version(req, res, lab_number, part_number, next) { // get -o
 }
 
 function get_random_question(req, res, lab_number, part_number, version_number, next) {
-	console.log(lab_number + ","+ part_number+ ","+ version_number);
+	//console.log(lab_number + "," + part_number + "," + version_number);
 	collection_lab_questions.find({
 		lab_number: parseInt(lab_number),
 		part: parseInt(part_number),
@@ -239,7 +239,6 @@ function get_random_question(req, res, lab_number, part_number, version_number, 
 }
 
 
-
 function resume_lab(req, res, lab_attempt) {
 // {{lab.lab_number}}
 // {{lab.title}}
@@ -270,50 +269,84 @@ function resume_lab(req, res, lab_attempt) {
 	//	"instruction_text": "You have an Internet connection with a download speed of 40 Mbps.In a class named \"Lab1\" Write a public static method named \"downloadTime\" that will take a double as a parameter representing a file size in GB that returns a double representing the number of seconds it will take to download the file. This method will be submitted to AutoLab after answering 10 questions.\nNote: Mbps stands for MegaBits per second and file sizes are given in GigaBytes. There are 8 bits in a byte"
 	//}
 
-	collection_labs.findOne({"lab_id": lab_attempt.lab_id}, {}, function (err, lab) {
-		res.to_template.lab = lab;
-		collection_lab_versions.findOne({
-			lab_number: parseInt(lab_attempt.lab_number),
-			part_number: parseInt(lab_attempt.current_part),
-			version_number: parseInt(lab_attempt.version_number)
-		}, {}, function (err, version) {
-			res.to_template.part = version;
+	if (lab_attempt.all_parts_complete) {
+		if (lab_attempt.autolab_complete) {
+			collection_ps.update({"username": req.user.username}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
+				req.flash("success", "Completed lab " + lab_attempt.lab_number);
+				end_lab(req, res, req.user.username); // TODO: Wrongs method
+			});
+		} else {
+			req.flash("success", "All questions complete. Follow instructions to submit your code on AutoLab to complete this lab");
+			collection_labs.findOne({"lab_id": lab_attempt.lab_id}, {}, function (err, lab) {
+				res.to_template.lab = lab;
+				res.render('questions/lab_active', res.to_template);
+			});
+		}
+	} else {
 
-			//"lab_number": 1,
-			//	"part": 1,
-			//	"version": 1,
-			//	"question_number": 0,
-			//	"parameters": {
-			//	"data_used": 20,
-			//		"units": "GB"
-			//},
-			//"question_text": "How much will it cost to use 20.0 GB of data?",
+		collection_labs.findOne({"lab_id": lab_attempt.lab_id}, {}, function (err, lab) {
+			res.to_template.lab = lab;
+			collection_lab_versions.findOne({
+				lab_number: parseInt(lab_attempt.lab_number),
+				part_number: parseInt(lab_attempt.current_part),
+				version_number: parseInt(lab_attempt.version_number)
+			}, {}, function (err, version) {
+				res.to_template.part = version;
 
-			//if (!lab_attempt.current_question) {
-			get_random_question(req, res, lab_attempt.lab_number, lab_attempt.current_part, lab_attempt.version_number, function (req, res, question) {
+				//"lab_number": 1,
+				//	"part": 1,
+				//	"version": 1,
+				//	"question_number": 0,
+				//	"parameters": {
+				//	"data_used": 20,
+				//		"units": "GB"
+				//},
+				//"question_text": "How much will it cost to use 20.0 GB of data?",
 
-				collection_lab_questions.findOne({
-					lab_number: parseInt(lab_attempt.lab_number),
-					part: parseInt(lab_attempt.current_part),
-					version: parseInt(lab_attempt.version_number),
-					question_number: parseInt(question.question_number)
-				}, {}, function (err, question) {
-					res.to_template.question = question;
-					res.render('questions/lab_active', res.to_template);
+				//if (!lab_attempt.current_question) {
+				get_random_question(req, res, lab_attempt.lab_number, lab_attempt.current_part, lab_attempt.version_number, function (req, res, question) {
+					if(!question){
+						req.flash("success", "No more questions to answers");
+						res.render('questions/lab_active', res.to_template);
+					}else {
+						collection_lab_questions.findOne({
+							lab_number: parseInt(lab_attempt.lab_number),
+							part: parseInt(lab_attempt.current_part),
+							version: parseInt(lab_attempt.version_number),
+							question_number: parseInt(question.question_number)
+						}, {}, function (err, question) {
+
+							res.to_template.question = question;
+							res.render('questions/lab_active', res.to_template);
+						});
+					}
+
 				});
+				//}
+
 
 			});
-			//}
-
-
 		});
-	});
-
+	}
 
 }
 
-function end_lab() {
+function end_lab(req, res, username) {
 	// move current lab to attempted labs. Occurs when lab is completed or time runs out
+	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
+		collection_ps.update({username: username}, {
+			$set: {
+				current_lab_attempt: {},
+				lab_attempts_this_session: 0,
+				lab_validation: false
+			},
+			$push: {
+				previous_lab_attempts: user_ps.current_lab_attempt
+			}
+		}, function (err, result) {
+			res.redirect('/courses/' + req.params.course + '/lab');
+		});
+	});
 }
 
 function start_new_lab(req, res, username, lab_number) {
@@ -361,7 +394,7 @@ function start_new_lab(req, res, username, lab_number) {
 							}
 						}, function (err, result) {
 							//get_random_question(req, res, lab_number, 1, version.version_number, function (req, res, question) {
-								resume_lab(req, res, lab_attempt);
+							resume_lab(req, res, lab_attempt);
 							//});
 						});
 
@@ -374,30 +407,16 @@ function start_new_lab(req, res, username, lab_number) {
 
 function time_expired(req, res, username) {
 	req.flash("error", "This lab session has ended. You may attempt this lab again in a future lab session");
-	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
-		collection_ps.update({username: username}, {
-			$set: {
-				current_lab_attempt: {},
-				lab_attempts_this_session: 0,
-				lab_validation: false
-			},
-			$push: {
-				previous_lab_attempts: user_ps.current_lab_attempt
-			}
-		}, function (err, result) {
-			res.redirect('/courses/' + req.params.course + '/lab');
-		});
-	});
+	end_lab(req, res, username);
 }
 
 exports.start_lab = function start_lab(req, res, course) {
 	collection_ps.findOne({username: req.user.username}, {}, function (err, user_ps) {
-		if(err || !user_ps){
+		if (err || !user_ps) {
 			req.flash("error", "There was a problem accessing the database");
 			console.log(err + " | " + user_ps);
 			res.redirect('/courses/' + req.params.course + '/lab');
-		}
-		if (!user_ps.lab_validation) {
+		}else if (!user_ps.lab_validation) {
 			req.flash("error", "You need to check into lab with a TA before starting a lab");
 			res.redirect('/courses/' + req.params.course + '/lab');
 		} else if (user_ps.valid_until < Date.now()) {
@@ -406,7 +425,7 @@ exports.start_lab = function start_lab(req, res, course) {
 			if (user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
 				resume_lab(req, res, user_ps.current_lab_attempt);
 			} else {
-				console.log("ggg: " + req.params.lab_number);
+				//console.log("ggg: " + req.params.lab_number);
 				start_new_lab(req, res, req.user.username, req.params.lab_number);
 			}
 		}
@@ -428,7 +447,11 @@ exports.start_lab = function start_lab(req, res, course) {
 exports.answer_lab_question = function answer_lab_question(req, res, course) {
 	// Check if user is still checked in. If not, close current lab if it exists
 	collection_ps.findOne({username: req.user.username}, {}, function (err, user_ps) {
-		if (!user_ps.lab_validation) {
+		if (err || !user_ps) {
+			req.flash("error", "Could not find your lab");
+			console.log(err + " | " + user_ps);
+			res.redirect('/courses/' + req.params.course + '/lab');
+		}else if (!user_ps.lab_validation) {
 			req.flash("error", "You need to check into lab with a TA before starting a lab");
 			res.redirect('/courses/' + req.params.course + '/lab');
 		} else if (user_ps.valid_until < Date.now()) {
@@ -461,13 +484,13 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 						get_random_version(req, res, parseInt(current_lab_attempt.lab_number), next_part, function (req, res, version) {
 							if (version === "done") {
 								collection_ps.update({username: req.user.username}, {$set: {"current_lab_attempt.all_parts_complete": true}}, function (err, record) {
-									if (user_ps.current_lab_attempt.autolab_complete) {
-										collection_ps.update({username: req.user.username}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
-											req.flash("success", "Completed lab " + current_lab_attempt.lab_number);
-											// TODO: Call completed lab to move current_lab to the finished labs and such
-											res.redirect('/courses/' + req.params.course + '/lab');
-										});
-									}
+									//if (user_ps.current_lab_attempt.autolab_complete) {
+									//	collection_ps.update({username: req.user.username}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
+									//		req.flash("success", "Completed lab " + current_lab_attempt.lab_number);
+									//		res.redirect('/courses/' + req.params.course + '/lab');
+										//});
+									//}
+									resume_lab(req, res, current_lab_attempt); // resume_lab checks if AutoLab is sat
 								});
 							} else {
 								resume_lab(req, res, current_lab_attempt);
@@ -488,7 +511,7 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 						resume_lab(req, res, current_lab_attempt);
 					});
 				}
-			}else{
+			} else {
 				req.flash("error", "Question incorrect");
 				resume_lab(req, res, current_lab_attempt);
 			}
