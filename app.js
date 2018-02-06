@@ -33,8 +33,7 @@ app.use(flash());
 //app.use()
 
 // view engine setup
-var hbs = exphbs.create({defaultLayout: 'main',
-	helpers : handlebar_helpers});
+var hbs = exphbs.create({defaultLayout: 'main', helpers : handlebar_helpers});
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
