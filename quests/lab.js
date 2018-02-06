@@ -13,8 +13,6 @@ var collection_lab_questions = db.get('lab_questions'); // get question by <lab>
 var collection_tas = db.get('tas');
 
 
-// TODO: Labs. Get lab after it's been activated which I do manually at the end of the friday lecture
-// TODO: They can only access the lab after swiping into lab. Before this, the lab shows, but is greyed out
 // TODO: Each lab has a level recommendation and a warning/confirmation if they check out a lab for which they are under leveled
 
 var example =
@@ -65,21 +63,9 @@ var question_example =
 // entry point
 exports.get_lab = function get_lab(req, res, course) {
 
-	// TODO: ** Change API key and add a level of security
-
-	// TODO: Check if they currently have a lab checked out. If they do, check if it's expired. If it isn't, take them to that lab at their current spot
-	// TODO: Show all /*available*/ labs (some are greyed out, but I only update the database as labs are ready
-	// TODO: Let them choose a lab if the TA has authenticated them. Warning if they are under-leveled. Prevent checkout if they already did 2 this session
-
-	// Once a lab attempt begins:
-	// TODO: Initial instructions and back story
-	// TODO: Rapid fire questions from part 1 / pre-lab
-	// TODO: Lab proper instructions and back story. Let them know that they will be submitting this to AutoLab
-	// TODO: Rapid fire questions from part 2
-	// TODO: A note when the questions end that they still need to submit on AutoLab
-	// TODO: Wait for the word from AutoLab so we know when the lab is done
-	// TODO: Once lab is done go back to the main page and let them choose one more if this is their first
-	// TODO: If possible, give them a different version on subsequent attempts of the same lab
+	// TODO: Warning if they are under-leveled
+	// TODO: If one is available, give them a different version on subsequent attempts of the same lab
+	// TODO: Check if they have an old lab checked out, but didn't come back to this page until after checking in for the next week
 
 	if (!req.user) {
 		res.render('questions/lab', res.to_template);
@@ -117,7 +103,7 @@ exports.get_lab = function get_lab(req, res, course) {
 
 					collection_tas.findOne({username: req.user.username}, {}, function (err, record) {
 						res.to_template.user_is_TA = !err && record;
-						// ~TODO: Always give them access
+						// TODO: Always give TAs access
 						res.render('questions/lab', res.to_template);
 					});
 				});
@@ -171,19 +157,17 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 };
 
 
-// TODO: On every action, check if lab has ended and update validation if expired
 
 function get_random_version(req, res, lab_number, part_number, next) { // get -or- checkout
 	collection_lab_versions.find({
 		lab_number: parseInt(lab_number),
 		part_number: parseInt(part_number)
 	}, {}, function (err, versions) {
-		if (err || !versions) {
+		if (err || !versions || versions.length == 0) {
 			if (part_number <= 2) {
 				log.error("error finding lab versions for lab " + lab_number + " part " + part_number + " - " + err);
 				res.redirect('/courses/' + req.params.course + '/lab');
 			} else {
-				// TODO: end of lab (except AutoLab submission)
 				next(req, res, "done");
 			}
 		} else {
@@ -273,7 +257,7 @@ function resume_lab(req, res, lab_attempt) {
 		if (lab_attempt.autolab_complete) {
 			collection_ps.update({"username": req.user.username}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
 				req.flash("success", "Completed lab " + lab_attempt.lab_number);
-				end_lab(req, res, req.user.username); // TODO: Wrongs method
+				end_lab(req, res, req.user.username); // TODO: Wrong method
 			});
 		} else {
 			req.flash("success", "All questions complete. Follow instructions to submit your code on AutoLab to complete this lab");
@@ -306,7 +290,7 @@ function resume_lab(req, res, lab_attempt) {
 				//if (!lab_attempt.current_question) {
 				get_random_question(req, res, lab_attempt.lab_number, lab_attempt.current_part, lab_attempt.version_number, function (req, res, question) {
 					if(!question){
-						req.flash("success", "No more questions to answers");
+						req.flash("success", "No more questions to answers. Submit on AuoLab");
 						res.render('questions/lab_active', res.to_template);
 					}else {
 						collection_lab_questions.findOne({
@@ -335,13 +319,11 @@ function end_lab(req, res, username) {
 	// move current lab to attempted labs. Occurs when lab is completed or time runs out
 	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
 		collection_ps.update({username: username}, {
-			$set: {
-				current_lab_attempt: {},
-				lab_attempts_this_session: 0,
-				lab_validation: false
-			},
 			$push: {
 				previous_lab_attempts: user_ps.current_lab_attempt
+			},
+			$set: {
+				current_lab_attempt: {}
 			}
 		}, function (err, result) {
 			res.redirect('/courses/' + req.params.course + '/lab');
@@ -370,7 +352,7 @@ function start_new_lab(req, res, username, lab_number) {
 					}
 					if (number_of_attempts > 1) {
 						req.flash("Already completed 2 labs this session");
-						log.info(username + ": Attempted more than 2 labs is a session")
+						log.info(username + ": Attempted more than 2 labs is a session");
 						res.redirect('/courses/' + req.params.course + '/lab');
 					}
 					number_of_attempts++;
@@ -407,7 +389,16 @@ function start_new_lab(req, res, username, lab_number) {
 
 function time_expired(req, res, username) {
 	req.flash("error", "This lab session has ended. You may attempt this lab again in a future lab session");
-	end_lab(req, res, username);
+	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
+		collection_ps.update({username: username}, {
+			$set: {
+				lab_attempts_this_session: 0,
+				lab_validation: false
+			}
+		}, function (err, result) {
+			end_lab(req, res, username);
+		});
+	});
 }
 
 exports.start_lab = function start_lab(req, res, course) {
@@ -430,17 +421,6 @@ exports.start_lab = function start_lab(req, res, course) {
 			}
 		}
 	});
-	// Check if user is still checked in. If not, close current lab if it exists
-
-	//console.log("starting lab " + req.params.lab_number);
-	// TODO: Check if a lab is already active. Make sure this lab can be checked out. Make sure it hasn't been completed
-
-	// TODO: If no active lab, check one out matching the lab number
-
-
-	//resume_lab();
-
-	//res.render('questions/lab_active', res.to_template);
 };
 
 
@@ -448,7 +428,7 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 	// Check if user is still checked in. If not, close current lab if it exists
 	collection_ps.findOne({username: req.user.username}, {}, function (err, user_ps) {
 		if (err || !user_ps) {
-			req.flash("error", "Could not find your lab");
+			req.flash("error", "Could not find your lab"); // TODO: Minor, this was hit after answering a question after lab was complete
 			console.log(err + " | " + user_ps);
 			res.redirect('/courses/' + req.params.course + '/lab');
 		}else if (!user_ps.lab_validation) {
@@ -610,16 +590,17 @@ function api_send_lab_results(req, res, course) {
 			} else {
 
 				log.info(section_id + ": completed AutoLab for " + user_ps.current_lab_attempt.lab_id);
-				collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.autolab_complete": true}});
+				collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.autolab_complete": true}}, function(err, x){
+					res.send("AutoLab Complete");
+				});
 				// Check for lab complete
-				if (user_ps.current_lab_attempt.all_parts_complete) {
-					collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
-						//req.flash("success", "Completed lab " + current_lab_attempt.lab_number);
-						//res.redirect('/courses/' + req.params.course + '/lab');
-
-					});
-				}
-				res.send("AutoLab Complete");
+				//if (user_ps.current_lab_attempt.all_parts_complete) {
+				//	collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.complete": true}}, function (err, record) {
+				//		//req.flash("success", "Completed lab " + current_lab_attempt.lab_number);
+				//		//res.redirect('/courses/' + req.params.course + '/lab');
+				//
+				//	});
+				//}
 
 			}
 		});
