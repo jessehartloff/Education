@@ -28,7 +28,6 @@
     </div>
 
 
-
     <div class="card border-dark mb-3">
         <div class="card-header">
             <h5>Question</h5>
@@ -42,14 +41,15 @@
                 {{question.question_text}}
             </p>
 
-            <form action="/courses/{{course.course}}/active-lab/{{lab.lab_number}}" method="post">
-                <div class="form-group">
-                    <input type="text" id="student_answer" name="student_answer" autofocus>
-                    <br/><br/>
-                    <input type="submit" value="submit">
-                </div>
-            </form>
-
+            {{#unless lab.all_parts_complete}}
+                <form action="/courses/{{course.course}}/active-lab/{{lab.lab_number}}" method="post">
+                    <div class="form-group">
+                        <input type="text" id="student_answer" name="student_answer" autofocus>
+                        <br/><br/>
+                        <input type="submit" value="submit">
+                    </div>
+                </form>
+            {{/unless}}
         </div>
     </div>
 
@@ -59,7 +59,6 @@
             <h5>AutoLab Instructions</h5>
         </div>
         <div class="card-body">
-
 
             <p>
                 {{lab.autolab_instructions}}
