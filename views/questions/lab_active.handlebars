@@ -41,7 +41,7 @@
                 {{question.question_text}}
             </p>
 
-            {{#unless lab.all_parts_complete}}
+            {{#unless lab_attempt.all_parts_complete}}
                 <form action="/courses/{{course.course}}/active-lab/{{lab.lab_number}}" method="post">
                     <div class="form-group">
                         <input type="text" id="student_answer" name="student_answer" autofocus>
