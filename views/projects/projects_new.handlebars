@@ -1,0 +1,118 @@
+<!--<div class="well lecture-section-well">-->
+<!--<h1>Projects</h1>-->
+<!--</div>-->
+
+{{#unless course.course_options.has_project_new}}
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <p>There are no projects for this course</p>
+        </div>
+    </div>
+{{else}}
+
+    <div class="row group-card">
+    {{#each projects}}
+        {{#ifEven @index}}
+            </div>
+            <div class="row group-card">
+        {{/ifEven}}
+
+            <div class="col-sm-6">
+
+                <div class="card border-dark mb-3">
+                    <div class="card-body">
+
+                        <!--<div class="panel panel-default">-->
+                        <!--<div class="panel-heading panel-heading-project-card">-->
+
+
+                        <div class="row" style="display: flex; align-items: center;">
+
+
+                            <div class="col-xs-8">
+
+                                <h3>
+                                    {{#if this.landing_page_link}}
+                                        <a href="{{this.landing_page_link}}">
+                                            {{this.project_name}}
+                                        </a>
+                                    {{else}}
+                                        {{this.project_name}}
+                                    {{/if}}
+                                </h3>
+
+                                <h4>{{this.team_name}}</h4>
+
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                    {{#if this.repository_link_primary}}
+                                        <a href="{{this.repository_link_primary}}"><img
+                                                src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                                    {{/if}}
+
+                                    {{#if this.communication_channel}}
+                                        <a href="{{this.communication_channel}}"><img style="max-height:32px"
+                                                                                      src="/static/logo-dark.png"/></a>&nbsp;
+                                    {{/if}}
+                            </div>
+
+                        </div>
+
+                        <hr/>
+
+                    <!--</div>-->
+                    <!--<div class="card-body">-->
+
+
+
+                        {{#each this.video_submissions as |video|}}
+                            {{#if @last}}
+                                <div class="embed-responsive embed-responsive-16by9 thumbnail"
+                                     style="background-image: url('https://img.youtube.com/vi/{{ video.link }}/0.jpg');"
+                                     onclick="loadVideo(this, '{{ video.link }}')">
+                                    <!--<div class="row">-->
+                                    <!--<img class="img-responsive" style="cursor: pointer; width: 100%;"-->
+                                    <!--src="https://img.youtube.com/vi/{{ video.link }}/sddefault.jpg"/>-->
+                                    <!--</div>-->
+                                </div>
+                            {{/if}}
+                        {{/each}}
+
+
+                        {{!--
+                        {{#each this.video_submissions as |video|}}
+                            {{#unless @first}}
+                                {{#unless @last}}
+                                    -
+                                {{/unless}}
+                            {{/unless}}
+                            {{#unless @last}}
+                                <h5 style="display: inline-block;"><a
+                                        href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
+
+                                </h5>
+                            {{/unless}}
+                        {{/each}}
+                        --}}
+
+                        <br/>
+
+                        <p>{{ this.project_description_short }}</p>
+                        <p>
+                            <a href="/courses/{{../course.course}}/project/{{this.team_id}}">
+                                more
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    {{/each}}
+    </div>
+
+
+    <!--<form action="/courses/{{course.course}}/create-project" method="get">-->
+        <!--<div>-->
+            <!--<input type="submit" value="Create Project"/>-->
+        <!--</div>-->
+    <!--</form>-->
+{{/unless}}
