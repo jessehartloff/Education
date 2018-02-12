@@ -163,12 +163,14 @@ function get_random_version(req, res, lab_number, part_number, user_ps, next) { 
 			for (var index = 0; index < versions.length; index++) {
 				version_priority.push(0);
 			}
-			for (var i = 0; i < user_ps.previous_lab_attempts.length; i++) {
-				var attempt = user_ps.previous_lab_attempts[i];
-				if (attempt && attempt.lab_number === lab_number &&
-					attempt.current_part === part_number &&
-					attempt.version_number != undefined && version_priority[attempt.version_number] != undefined) {
-					version_priority[attempt.version_number] = version_priority[attempt.version_number] + 1;
+			if(user_ps.previous_lab_attempts) {
+				for (var i = 0; i < user_ps.previous_lab_attempts.length; i++) {
+					var attempt = user_ps.previous_lab_attempts[i];
+					if (attempt && attempt.lab_number === lab_number &&
+						attempt.current_part === part_number &&
+						attempt.version_number != undefined && version_priority[attempt.version_number] != undefined) {
+						version_priority[attempt.version_number] = version_priority[attempt.version_number] + 1;
+					}
 				}
 			}
 			var most_priority = Math.min.apply(null, version_priority);
