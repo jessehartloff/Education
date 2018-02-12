@@ -57,7 +57,8 @@ exports.get_lab = function get_lab(req, res, course) {
 							collection_ps.update({username: req.user.username}, {
 								$set: {
 									lab_validation: true,
-									valid_until: Date.now() + 72000000
+									valid_until: Date.now() + 72000000,
+									lab_attempts_this_session: 0
 								}
 							}, function (err, record) {
 								res.render('questions/lab', res.to_template);
@@ -92,9 +93,9 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 					} else {
 
 						// Find the end of lab. Assumes labs start on a even numbered hour TODO: Add actual lab sections
-						var ten_minutes = 1000*60*10;
+						var ten_minutes = 1000 * 60 * 10;
 						var valid_until = new Date(Date.now() + ten_minutes);
-						var hour_adjustment = valid_until.getHours()%2 === 0 ? 1 : 0;
+						var hour_adjustment = valid_until.getHours() % 2 === 0 ? 1 : 0;
 						valid_until.setHours(valid_until.getHours() + hour_adjustment);
 						valid_until.setMinutes(50);
 						valid_until.setSeconds(0);
@@ -109,7 +110,8 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 								$set: {
 									current_lab_attempt: {},
 									lab_validation: true,
-									valid_until: valid_until
+									valid_until: valid_until,
+									lab_attempts_this_session: 0
 								}
 							}, function (err, result) {
 								req.flash("success", user_ps.username + " checked into lab");
@@ -120,7 +122,8 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 							collection_ps.update({username: user_ps.username}, {
 								$set: {
 									lab_validation: true,
-									valid_until: valid_until
+									valid_until: valid_until,
+									lab_attempts_this_session: 0
 								},
 								$push: {
 									all_validations: {"ta": req.user.username, "timestamp": Date.now()}
@@ -320,7 +323,7 @@ function start_new_lab(req, res, username, lab_number) {
 						req.flash("success", "You already completed this lab");
 						log.info(username + ": Attempted to retry a completed lab: lab" + lab_number);
 						res.redirect('/courses/' + req.params.course + '/lab');
-					//} else if (user_ps.level <= lab.lab_number) {
+						//} else if (user_ps.level <= lab.lab_number) {
 						// TODO: Activate this if there are issues with underleveled students
 						//req.flash("error", "You are underleveled. The required level for this lab is " + (lab.lab_number + 1));
 						//res.redirect('/courses/' + req.params.course + '/lab');
@@ -330,7 +333,7 @@ function start_new_lab(req, res, username, lab_number) {
 							number_of_attempts = user_ps.lab_attempts_this_session;
 						}
 						if (number_of_attempts > 1) {
-							req.flash("Already completed 2 labs this session");
+							req.flash("error", "Already completed 2 labs this session");
 							log.info(username + ": Attempted more than 2 labs is a session");
 							res.redirect('/courses/' + req.params.course + '/lab');
 						} else {
@@ -431,8 +434,11 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 				var computed = req.body.student_answer;
 				var current_lab_attempt = user_ps.current_lab_attempt;
 				var current_question = current_lab_attempt.current_question;
-
+				console.log(JSON.stringify(current_lab_attempt));
 				var grader = current_question.grader;
+				console.log("***");
+				console.log(grader.expected);
+				console.log(computed);
 				var correct = false;
 				if (grader.comparator === "double") {
 					correct = compare.doubles(grader.expected, computed);
@@ -465,17 +471,29 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 										resume_lab(req, res, current_lab_attempt); // resume_lab checks if AutoLab is sat
 									});
 								} else {
-									if (version.autolab_instructions) {
-										if (current_lab_attempt.autolab_instructions) {
-											log.warn("Already has autolab instructions. Look into this");
-										}
-										current_lab_attempt.autolab_instructions = version.autolab_instructions;
-										collection_ps.update({username: req.user.username}, {$set: {"current_lab_attempt.autolab_instructions": version.autolab_instructions}}, function (err, record) {
-											resume_lab(req, res, current_lab_attempt);
+
+									//"version_number": 0,
+									//	"questions_required": 5,
+									collection_ps.update({username: req.user.username},
+										{
+											$set: {
+												"current_lab_attempt.version_number": version.version_number,
+												"current_lab_attempt.part_questions_required": version.questions_required
+											}
+										}, function (err, record) {
+
+											if (version.autolab_instructions) {
+												if (current_lab_attempt.autolab_instructions) {
+													log.warn("Already has autolab instructions. Look into this");
+												}
+												current_lab_attempt.autolab_instructions = version.autolab_instructions;
+												collection_ps.update({username: req.user.username}, {$set: {"current_lab_attempt.autolab_instructions": version.autolab_instructions}}, function (err, record) {
+													resume_lab(req, res, current_lab_attempt);
+												});
+											} else {
+												resume_lab(req, res, current_lab_attempt);
+											}
 										});
-									} else {
-										resume_lab(req, res, current_lab_attempt);
-									}
 								}
 							});
 
