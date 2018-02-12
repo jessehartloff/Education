@@ -84,8 +84,9 @@ ArrayList(import, new, type parameter, primitive vs object, what's an object?)]
 <hr/>
 <h4>new</h4>
 <p>
-    To create an ArrayList, we can't simply give it a value. We must use the new keyword as well as specify the type
-    parameter. Here we create a new ArrayList of Integers and name it listOfIntegers.
+    To create an ArrayList, we can't simply give it a value like we did with other variables. We must use the keyword
+    "new" as well as specify what type of values the ArrayList can store with a type parameter. Here we create a new
+    ArrayList of Integers and name it listOfIntegers.
 </p>
 <pre><code class="java">
     ArrayList&lt;Integer&gt; listOfIntegers = new ArrayList&lt;Integer&gt;();
@@ -118,7 +119,7 @@ ArrayList(import, new, type parameter, primitive vs object, what's an object?)]
 <hr/>
 <h4>get</h4>
 <p>
-    We'll also use the get method which returns a value at a particular index. Indexing in lists range from 0 to the
+    Now we'll use the get method which returns a value at a particular index. Indexing in lists range from 0 to the
     number of elements minus 1.
 </p>
 <pre><code class="java">
@@ -233,7 +234,7 @@ public class DataStructureExample {
 
 <p>
     Java's HashMap is similar to the ArrayList, except instead of indexing its values by sequential integers starting at
-    0 the values are indexed by any type chosen by the programmer with no meaningful ordering. Thus when we store a
+    0 the values are indexed by any type chosen by the programmer with no meaningful ordering. Thus, when we store a
     value in a HashMap we must also provide an index value known as a key. We then call an element in a HashMap a
     key-value pair.
 </p>
@@ -246,8 +247,8 @@ public class DataStructureExample {
 <hr/>
 <h4>new</h4>
 <p>
-    Just like an ArrayList, we must use the new keyword to create a new instance of a HashMap. Since a HashMap need a
-    type for its keys as well as it's values we must provide 2 types when creating a HashMap. The first type will
+    Just like an ArrayList, we must use the new keyword to create a new instance of a HashMap. Since a HashMap needs a
+    type for its keys as well as its values we must provide 2 types when creating a HashMap. The first type will
     specify the type for the keys and the second will determine the type of the values.
 </p>
 <pre>
@@ -531,7 +532,8 @@ public class HashMapExample {
 <!--</p>-->
 
 <p>
-    A For-Each Loop is a loop that executes once for each element in a given data structure and follows this syntax:
+    A For-Each Loop allows us to execute a block of code once for each element in a given data structure. The For-Each
+    is specified by this syntax:
 </p>
 
 <pre><code class="java">
@@ -541,9 +543,7 @@ public class HashMapExample {
 </code></pre>
 
 <p>
-    We can rewrite the previous ArrayList example using a For-Each Loop to generate the same result, but without needing
-    an index variable or calling the get method. The loop will automatically get each element, store it in a variable
-    with the type and name we provide, and execute the body of the loop.
+    In this example we will use a For-Each loop to combine all the Characters in an ArrayList into a single String.
 </p>
 
 <pre><code class="java">
@@ -571,11 +571,11 @@ public class HashMapExample {
     all the data in the HashMap.
 </p>
 
-<p>
-    Note: We can iterate over the <a
-        href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html">Entries</a> of
-    a HashMap, but we have all the tools we need to access the data without having to explore this additional class.
-</p>
+<!--<p>-->
+    <!--Note: We can iterate over the <a-->
+        <!--href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html">Entries</a> of-->
+    <!--a HashMap, but we have all the tools we need to access the data without having to explore this additional class.-->
+<!--</p>-->
 
 <pre><code class="java">
     HashMap&lt;String, Integer&gt; itemPrices = new HashMap&lt;String, Integer&gt;();
@@ -602,7 +602,7 @@ public class HashMapExample {
 <h3>values</h3>
 
 <p>
-    In certain cases we are only concerned with the values in HashMap and want to bypass the keys entirely. In these
+    In certain cases we are only concerned with the values in a HashMap and want to bypass the keys entirely. In these
     situations we can use the values method which returns a Collection containing all the values that we can iterate
     through with a For-Each Loop.
 </p>
