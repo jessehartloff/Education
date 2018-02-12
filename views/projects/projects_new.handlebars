@@ -26,10 +26,10 @@
                         <!--<div class="panel-heading panel-heading-project-card">-->
 
 
-                        <div class="row" style="display: flex; align-items: center;">
+                        <!--<div class="row" style="display: flex; align-items: center;">-->
 
 
-                            <div class="col-xs-8">
+                            <!--<div class="col-xs-8">-->
 
                                 <h3>
                                     {{#if this.landing_page_link}}
@@ -42,23 +42,23 @@
                                 </h3>
 
                                 <h4>{{this.team_name}}</h4>
+                        <br/>
 
-                            </div>
-                            <div class="col-xs-4 text-right">
-                                    {{#if this.repository_link_primary}}
-                                        <a href="{{this.repository_link_primary}}"><img
+                            <!--</div>-->
+                            <!--<div class="col-xs-4 text-right">-->
+                                    {{!if this.repository}}
+                                        <a href="https://github.com/{{this.repository}}"><img
                                                 src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                                    {{!if}}
+
+                                    {{#if this.gitter}}
+                                        <a href="https://gitter.im/{{this.gitter}}"><img style="max-height:32px" src="/static/gitter.png"/></a>&nbsp;
                                     {{/if}}
+                            <!--</div>-->
 
-                                    {{#if this.communication_channel}}
-                                        <a href="{{this.communication_channel}}"><img style="max-height:32px"
-                                                                                      src="/static/logo-dark.png"/></a>&nbsp;
-                                    {{/if}}
-                            </div>
+                        <!--</div>-->
 
-                        </div>
-
-                        <hr/>
+                        <!--<hr/>-->
 
                     <!--</div>-->
                     <!--<div class="card-body">-->
@@ -78,6 +78,11 @@
                             {{/if}}
                         {{/each}}
 
+                        <hr/>
+
+                        {{#each this.team_members as |dev|}}
+                            {{dev.name}}<br/>
+                        {{/each}}
 
                         {{!--
                         {{#each this.video_submissions as |video|}}
@@ -95,14 +100,14 @@
                         {{/each}}
                         --}}
 
-                        <br/>
+                        <!--<br/>-->
 
-                        <p>{{ this.project_description_short }}</p>
-                        <p>
-                            <a href="/courses/{{../course.course}}/project/{{this.team_id}}">
-                                more
-                            </a>
-                        </p>
+                        <!--<p>{{ this.project_description_short }}</p>-->
+                        <!--<p>-->
+                            <!--<a href="/courses/{{../course.course}}/project/{{this.team_id}}">-->
+                                <!--more-->
+                            <!--</a>-->
+                        <!--</p>-->
                     </div>
                 </div>
             </div>
