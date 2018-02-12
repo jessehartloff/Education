@@ -19,9 +19,9 @@
 
 
     <!--<div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">-->
-        <!--<div class="card-body">-->
-            <!--<h5>Level {{user_ps.level}}: {{level_name}}</h5>-->
-        <!--</div>-->
+    <!--<div class="card-body">-->
+    <!--<h5>Level {{user_ps.level}}: {{level_name}}</h5>-->
+    <!--</div>-->
     <!--</div>-->
 
     {{#if user_is_TA}}
@@ -60,19 +60,21 @@
             {{#each labs}}
                 <a href="/courses/{{../course.course}}/active-lab/{{this.lab_number}}"
                         class="btn-custom
-                {{#if ../user_ps.lab_validation}}
-                    {{#if this.released}}
-                        {{#if this.complete}}
+                       {{#if this.complete}}
                                 btn-complete-custom disabled">Lab {{this.lab_number}}: {{this.title}} [Complete]
-                        {{else}}
+                {{else}}
+                    {{#if ../user_ps.lab_validation}}
+                        {{#if this.released}}
                             btn-primary-custom">Start Lab {{this.lab_number}}: {{this.title}}
+                        {{else}}
+                            btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
                         {{/if}}
                     {{else}}
                         btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
                     {{/if}}
-                {{else}}
-                    btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
+
                 {{/if}}
+
                 </a>
                 <br/>
                 <br/>
