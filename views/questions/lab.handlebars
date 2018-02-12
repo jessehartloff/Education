@@ -18,11 +18,11 @@
 
 
 
-    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">
-        <div class="card-body">
-            <h5>Level {{user_ps.level}}: {{level_name}}</h5>
-        </div>
-    </div>
+    <!--<div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">-->
+        <!--<div class="card-body">-->
+            <!--<h5>Level {{user_ps.level}}: {{level_name}}</h5>-->
+        <!--</div>-->
+    <!--</div>-->
 
     {{#if user_is_TA}}
 
@@ -31,7 +31,8 @@
 
                 <form action="/courses/{{course.course}}/lab-check-in" method="post">
                     <div class="form-group">
-                        <input type="text" id="scan" name="scan" autofocus> &nbsp; <--- scan card or enter person number to check students into lab
+                        <input type="text" id="scan" name="scan" autofocus> &nbsp; <--- scan card or enter person number
+                        to check students into lab
                         <br/><br/>
                         <input type="submit" value="submit">
                     </div>
@@ -59,21 +60,22 @@
             {{#each labs}}
                 <a href="/courses/{{../course.course}}/active-lab/{{this.lab_number}}"
                         class="btn-custom
-                    {{#if ../user_ps.lab_validation}}
-                        {{#if this.released}}
-                            {{#if this.completed}}
-                            btn-complete-custom disabled">(Complete) Lab {{this.lab_number}}: {{this.title}}
-                            {{else}}
-                                btn-primary-custom">Start Lab {{this.lab_number}}: {{this.title}}
-                            {{/if}}
+                {{#if ../user_ps.lab_validation}}
+                    {{#if this.released}}
+                        {{#if this.complete}}
+                                btn-complete-custom disabled">Lab {{this.lab_number}}: {{this.title}} [Complete]
                         {{else}}
-                        btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
+                            btn-primary-custom">Start Lab {{this.lab_number}}: {{this.title}}
                         {{/if}}
                     {{else}}
                         btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
                     {{/if}}
+                {{else}}
+                    btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
+                {{/if}}
                 </a>
-
+                <br/>
+                <br/>
             {{else}}
                 <h3>No Labs available</h3>
             {{/each}}

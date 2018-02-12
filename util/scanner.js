@@ -39,7 +39,7 @@ exports.scan_to_username = function scan_to_username(scan, req, res, next){
 			next(req, res, "");
 		}else{
 			//console.log("record: " + JSON.stringify(record));
-			next(req, res, record.username);
+			next(req, res, record);
 		}
 	});
 };

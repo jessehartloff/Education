@@ -10,67 +10,6 @@ var collection_questions = db.get('questions');
 var current_course = 'cse115-s18';
 
 
-var xp_example = {
-	"variables": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0},
-	"functions": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-	"data_structures": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-	"algorithms": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0}
-	// ...
-};
-
-var ps_example =
-{
-	'assigned_username': 'hartloff',
-	'ps_number': 4,
-	'class_name': 'ProblemSet_hartloff_0004',
-	//'concept': 'algos2',
-	//'submitted': true,
-	'questions': [
-		{}, {}, {}, {}, {}
-	],
-	'multiplier': 2,
-	'time_generated': 2,
-	'time_completed': 3,
-	'results': [
-		{}, {}, {}, {}, {}
-	]
-};
-
-var ps_results_example =
-//{
-	//'assigned_username': 'hartloff',
-	//'ps_number': 4,
-	//'concept': 'algos2',
-	//'submitted': true,
-	//'questions':
-	[
-		{'correct': true, 'feedback': "good job"}
-		//{'number': "q1", 'correct': true, 'feedback': "good job"}
-		//{'type': 4, 'variant': 521, 'correct': true, "feedback": "good job"},
-		//{'type': 2, 'variant': 19, 'correct': true, "feedback": "good job"},
-		//{'type': 1, 'variant': 823, 'correct': true, "feedback": "good job"},
-		//{'type': 5, 'variant': 79, 'correct': true, "feedback": "good job"},
-		//{'type': 3, 'variant': 372, 'correct': true, "feedback": "good job"}
-	];
-//}; // -or- {'submitted': false}
-
-var question_example =
-{
-	"concept": "algos1",
-	"type": 2,
-	"variant": 42,
-	"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
-	"average of all the values as a double",
-	"parameters": {}, // for grading
-	"cards": []
-};
-
-
-var card_example = "Link to lecture content and videos";
-
-
-// TODO: send email
-
 // TODO: Remind them of office hours after poor performance
 
 // TODO: Add consumable multipliers that can be awarded to to individuals or to the entire class. Quantity should be stored. Could have different values as well. For each type they have, a new button appears next to the check out PS button. They can earn these in many ways (1.2x for attending office hours, several 1.5x for response rates, several 1.2 for completing 442 tasks?)
@@ -182,7 +121,6 @@ function build_ps_text(problem_set) {
 	return ps;
 }
 
-// TODO: idea, if this ever ties into office hours, give them a 20% bonus after each office hours visit
 
 // entry point
 exports.get_ps = function get_ps(req, res, course) {
@@ -203,10 +141,9 @@ exports.get_ps = function get_ps(req, res, course) {
 			} else {
 				res.to_template.user_ps = user_ps;
 
-				// retrieve and sort previous problem sets
+				// retrieve and sort all problem sets
 				var ps_completed = [];
 				for (var i in user_ps.all_ps_assigned) {
-					//if (i !== user_ps.current_ps.ps_number.toString()) {
 					var prepared_ps = user_ps.all_ps_assigned[i];
 					for (var j in prepared_ps.questions) {
 						if (!prepared_ps.questions[j]) {
@@ -217,23 +154,10 @@ exports.get_ps = function get_ps(req, res, course) {
 								prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
 								prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
 							}
-							//if (i !== user_ps.current_ps.ps_number.toString()) {
-							//	prepared_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
-							//	prepared_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
-							//} else if (user_ps.current_ps_finished) {
-							//	res.to_template.user_ps.current_ps.questions[j]["correct"] = prepared_ps.results[j].correct;
-							//	res.to_template.user_ps.current_ps.questions[j]["feedback"] = prepared_ps.results[j].feedback;
-							//}
 						}
 					}
-					//if (i !== user_ps.current_ps.ps_number.toString()) {
 					ps_completed.push(prepared_ps);
-					//}
 
-					//}else if(user_ps.current_ps_finished){
-					//	res.to_template.user_ps.current_ps["correct"] = prepared_ps.results[j].correct;
-					//	res.to_template.user_ps.current_ps["feedback"] = prepared_ps.results[j].feedback;
-					//}
 				}
 				ps_completed.sort(function (a, b) {
 					// sorts reverse alphabetically
@@ -252,8 +176,8 @@ exports.get_ps = function get_ps(req, res, course) {
 				} else {
 					res.to_template.submit_ps_active = true;
 				}
-				//grading_ps_active // TODO: future tech when sockets and hook are implemented. Give them something to do
-				// while grading
+				//grading_ps_active
+				// TODO: future tech - When sockets and hook are implemented. Give them something to do while grading
 
 
 				// retrieve xp and level stats
@@ -268,6 +192,8 @@ exports.get_ps = function get_ps(req, res, course) {
 				res.to_template.level_name = level_requirements.get_level_requirements(user_ps.level).level_name;
 				res.to_template.next_level_name = level_requirements.get_level_requirements(user_ps.level + 1).level_name;
 
+				// TODO: send consumables to template
+
 				// ship it
 				res.render('questions/ps', res.to_template);
 			}
@@ -276,42 +202,14 @@ exports.get_ps = function get_ps(req, res, course) {
 };
 
 
-question_example =
-{
-	"concept": "algos1",
-	"type": "2",
-	"variant": 42,
-	"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
-	"average of all the values as a double",
-	"cards": []
-};
-
 function get_random_question(concept, type, questions_list) {
 	return collection_questions.find({"concept": concept, "type": type}, function (err, questions) {
 		var question = questions[Math.floor(Math.random() * questions.length)];
 		questions_list.push(question);
-		//console.log(question);
 	});
-
-	//return {
-	//	"concept": "algos1",
-	//	"type": 2,
-	//	"variant": 42,
-	//	"instruction_text": "Write a method that takes an ArrayList of Integers as its only parameter and outputs the " +
-	//	"average of all the values as a double: " + random_section_id(),
-	//	"cards": []
-	//};
-
 }
 
 
-var xp_example = {
-	"variables": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0},
-	"methods": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-	"data_structures": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-	"algorithms": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0}
-	// ...
-};
 
 function generate_new_ps(req, res, user_ps, next) {
 
@@ -328,12 +226,13 @@ function generate_new_ps(req, res, user_ps, next) {
 		multipliers.push({"reason": "First Problem Set of the Day", "multiplier": 1.5});
 		point_value *= 1.5;
 	}
+
+	// TODO: check if consumable was used. If so, check if one is available in the database, apply the multiplier, and decrement consumables
+
 	var ps =
 	{
 		'assigned_username': req.user.username,
 		'ps_number': new_ps_number,
-		//'concept': current_concept,
-		//'submitted': false,
 		'point_value': point_value,
 		"multipliers": multipliers,
 		'time_generated': Date.now(),
@@ -393,7 +292,6 @@ function generate_new_ps(req, res, user_ps, next) {
 
 
 	Promise.all(promises).then(function () {
-
 		//questions.shuffle
 		for (var i = questions.length; i > 0; i--) {
 			var random_index = Math.floor(Math.random() * i);
@@ -407,14 +305,11 @@ function generate_new_ps(req, res, user_ps, next) {
 		var toSet = {
 			current_ps_finished: false,
 			current_ps: ps
-			//all_ps_assigned: {}
 		};
 
 		toSet['all_ps_assigned.' + new_ps_number] = ps;
 		user_ps.current_ps = ps;
 
-		//console.log("toSet");
-		//console.log(toSet);
 
 		collection_ps.update({username: req.user.username}, {
 			$set: toSet
@@ -436,9 +331,6 @@ function send_current_ps(req, res, user_ps) {
 }
 
 exports.ps_download = function ps_download(req, res, course) {
-	//console.log("ps_download");
-	//console.log(req.user.username);
-
 	if (!req.user) {
 		res.render('questions/ps', res.to_template);
 	} else {
@@ -455,7 +347,7 @@ exports.ps_download = function ps_download(req, res, course) {
 				res.render('questions/ps', res.to_template);
 			} else {
 				if (user_ps.current_ps_finished) {
-					//send_current_ps(req, res, user_ps);
+					// TODO: Check if a consumable was used
 					generate_new_ps(req, res, user_ps, send_current_ps);
 				} else {
 					send_current_ps(req, res, user_ps);

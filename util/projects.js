@@ -266,6 +266,12 @@ exports.projects_page = function projects_page(req, res, course) {
 	if (course.project && course.project === 'old') {
 		res.to_template.projects = course.projects;
 		res.render('projects/projects_archived', res.to_template);
+	} else if (course.course_options.has_project_new) {
+		var projects_collection = db.get('projects');
+		projects_collection.find({'course': course.course}, {sort: {_id: 1}}, function (err, all_projects) {
+			res.to_template.projects = all_projects;
+			res.render('projects/projects_new', res.to_template);
+		});
 	} else {
 		if (users.user_enrolled(req)) {
 			res.to_template.user.course_options = res.to_template.user.courses_enrolled[course.course].options;

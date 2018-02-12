@@ -75,6 +75,14 @@
                             </div>
                         {{/each}}
                     {{/if}}
+                    {{#if messages.warn}}
+                        {{#each messages.warn}}
+                            <div class="alert alert-warning">
+                                <b>{{this}}</b><br/>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+
 
                     {{#if message}}
                         <div class="alert alert-warning alert-dismissable">
