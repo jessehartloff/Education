@@ -102,7 +102,7 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 
 						if (user_ps.lab_validation && user_ps.valid_until < Date.now()) {
 							// In case they never hit a time expired before checking in next week. This would let them pick up where they left off
-							collection_ps.update({username: username}, {
+							collection_ps.update({username: user_ps.username}, {
 								$push: {
 									previous_lab_attempts: user_ps.current_lab_attempt,
 									all_validations: {"ta": req.user.username, "timestamp": Date.now()}
