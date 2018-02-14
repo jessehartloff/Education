@@ -29,39 +29,40 @@
                         <!--<div class="row" style="display: flex; align-items: center;">-->
 
 
-                            <!--<div class="col-xs-8">-->
+                        <!--<div class="col-xs-8">-->
 
-                                <h3>
-                                    {{#if this.landing_page_link}}
-                                        <a href="{{this.landing_page_link}}">
-                                            {{this.project_name}}
-                                        </a>
-                                    {{else}}
-                                        {{this.project_name}}
-                                    {{/if}}
-                                </h3>
+                        <h3>
+                            {{#if this.landing_page_link}}
+                                <a href="{{this.landing_page_link}}">
+                                    {{this.project_name}}
+                                </a>
+                            {{else}}
+                                {{this.project_name}}
+                            {{/if}}
+                        </h3>
 
-                                <h4>{{this.team_name}}</h4>
+                        <h4>{{this.team_name}}</h4>
                         <br/>
 
-                            <!--</div>-->
-                            <!--<div class="col-xs-4 text-right">-->
-                                    {{!if this.repository}}
-                                        <a href="https://github.com/{{this.repository}}"><img
-                                                src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
-                                    {{!if}}
+                        <!--</div>-->
+                        <!--<div class="col-xs-4 text-right">-->
+                        {{!if this.repository}}
+                        <a href="https://github.com/{{this.repository}}"><img
+                                src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                        {{!if}}
 
-                                    {{#if this.gitter}}
-                                        <a href="https://gitter.im/{{this.gitter}}"><img style="max-height:32px" src="/static/gitter.png"/></a>&nbsp;
-                                    {{/if}}
-                            <!--</div>-->
+                        {{#if this.gitter}}
+                            <a href="https://gitter.im/{{this.gitter}}"><img style="max-height:32px"
+                                                                             src="/static/gitter.png"/></a>&nbsp;
+                        {{/if}}
+                        <!--</div>-->
 
                         <!--</div>-->
 
                         <!--<hr/>-->
 
-                    <!--</div>-->
-                    <!--<div class="card-body">-->
+                        <!--</div>-->
+                        <!--<div class="card-body">-->
 
 
 
@@ -82,10 +83,16 @@
 
                         {{#each this.team_members as |dev|}}
                             {{#if dev.github_id}}
-                                &nbsp;<a href="https://github.com/{{dev.github_id}}">
-                                <img style="max-height:16px" src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                            <a href="https://github.com/{{dev.github_id}}">
+                                <!--<img style="max-height:16px" src="/static/GitHub-Mark-32px.png"/></a>&nbsp;-->
                             {{/if}}
-                            {{dev.name}}<br/>
+
+                            {{dev.name}}
+
+                            {{#if dev.github_id}}
+                            </a>
+                            {{/if}}
+                            <br/>
                         {{/each}}
 
                         {{!--
@@ -108,9 +115,9 @@
 
                         <!--<p>{{ this.project_description_short }}</p>-->
                         <!--<p>-->
-                            <!--<a href="/courses/{{../course.course}}/project/{{this.team_id}}">-->
-                                <!--more-->
-                            <!--</a>-->
+                        <!--<a href="/courses/{{../course.course}}/project/{{this.team_id}}">-->
+                        <!--more-->
+                        <!--</a>-->
                         <!--</p>-->
                     </div>
                 </div>
@@ -120,8 +127,8 @@
 
 
     <!--<form action="/courses/{{course.course}}/create-project" method="get">-->
-        <!--<div>-->
-            <!--<input type="submit" value="Create Project"/>-->
-        <!--</div>-->
+    <!--<div>-->
+    <!--<input type="submit" value="Create Project"/>-->
+    <!--</div>-->
     <!--</form>-->
 {{/unless}}
