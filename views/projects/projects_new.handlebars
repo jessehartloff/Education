@@ -81,6 +81,10 @@
                         <hr/>
 
                         {{#each this.team_members as |dev|}}
+                            {{#if dev.github_id}}
+                                &nbsp;<a href="https://github.com/{{dev.github_id}}">
+                                <img style="max-height:16px" src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
+                            {{/if}}
                             {{dev.name}}<br/>
                         {{/each}}
 
