@@ -23,14 +23,13 @@ previous_content_short: ds
 
 <p>
     Any time a section of code is surrounded by {braces} we call this section a code block. We saw code blocks
-    corresponding to if statements and we will see them in loops as well. Code blocks are most commonly used in control
-    flow to tell the program which section of code to run after checking a conditional. When the conditional of an
-    if statement is true, the following block of code is executed. When the conditional of an if statement is false,
-    the following block of code is skipped.
+    corresponding to methods and For-Each loops and we will see several more uses of code blocks in this section. Code
+    blocks are most commonly used in control
+    flow to tell the program which sections of code should be executed together.
 </p>
 
 <p>
-    Variables created inside a block or code are destroyed at the end of that block.
+    <strong>Variable Scope</strong>: Variables created inside a block of code are destroyed at the end of that block.
 </p>
 
 <pre><code class="java">
@@ -43,10 +42,6 @@ previous_content_short: ds
 <p>
     This code will cause a compiler error (the computer cannot understand how to run the code).
 </p>
-
-
-
-
 
 
 
@@ -74,8 +69,8 @@ previous_content_short: ds
 <pre><code class="java">
     int temperature=65;
     while(temperature<70){
-        System.out.println("Temperature set to: " + temperature);
         temperature = temperature+1;
+        System.out.println("Temperature set to: " + temperature);
     }
     System.out.println("Final Temperature: " + temperature);
 </code></pre>
@@ -83,11 +78,11 @@ previous_content_short: ds
 <p>
     Output:
 </p>
-<kbd>Temperature set to: 65<br/>
-    Temperature set to: 66<br/>
+<kbd>Temperature set to: 66<br/>
     Temperature set to: 67<br/>
     Temperature set to: 68<br/>
     Temperature set to: 69<br/>
+    Temperature set to: 70<br/>
     Final Temperature: 70
 </kbd>
 
@@ -107,7 +102,7 @@ previous_content_short: ds
 
 <p>
     This is repetitive, but it isn't too bad. However, this code is much less flexible than our code that uses a while
-    loop. Let's assume we want o set the temperature to 75 instead of 70. With a while loop our example becomes:
+    loop. Let's assume we want to set the temperature to 75 instead of 70. With a while loop our example becomes:
 </p>
 
 
@@ -123,8 +118,7 @@ previous_content_short: ds
 <p>
     Output:
 </p>
-<kbd>Temperature set to: 65<br/>
-    Temperature set to: 66<br/>
+<kbd>Temperature set to: 66<br/>
     Temperature set to: 67<br/>
     Temperature set to: 68<br/>
     Temperature set to: 69<br/>
@@ -133,6 +127,7 @@ previous_content_short: ds
     Temperature set to: 72<br/>
     Temperature set to: 73<br/>
     Temperature set to: 74<br/>
+    Temperature set to: 75<br/>
     Final Temperature: 75
 </kbd>
 <p>
@@ -346,13 +341,10 @@ previous_content_short: ds
 
 == Iteration
 
-<p>
-    We now have 2 data structures that we can use to store and recall data, but what if we want to work with all the
-    data in a data structure? In this lesson we will visit every element in a data structure using iteration.
-</p>
 
 <p>
-    We already have the tools we need to iterate over an ArrayList by combining the size method, the get method, and a
+    We already have the tools we need to iterate over data structures by using the For-Each loop. Now we will see
+    another way to iterate over an ArrayList by combining the size method, the get method, and a
     for loop.
 </p>
 
@@ -460,15 +452,12 @@ previous_content_short: ds
     return "lucky";
 </code></pre>
 
-<p>
-    This example shows how iterating over a data structure is accomplished. Next we will see a few more examples along
-    with alternate syntax will be necessary to iterate over HashMaps which are not indexed in this predictable manner.
-</p>
+
 
 <hr/>
 
 <p>
-    Before we iterate over a HashMap, let's revisit Strings and explain something we've seen earlier in the course.
+    Now let's revisit Strings and explain something we've seen earlier in the course.
 </p>
 
 <pre><code class="java">
