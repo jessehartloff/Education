@@ -1,5 +1,5 @@
 ---
-title: Hot Fixes
+title: Hot Fix
 short_title: bugs
 next_content_short: disputes
 previous_content_short: changes
@@ -16,6 +16,30 @@ previous_content_short: changes
 <p>
     Note that this protocol only applies to bugs that are reported in your public releases by your users. Bugs found by
     the team in development should be fixed with a feature branch following the code contribution protocol.
+</p>
+
+== Bug Types
+
+<p>
+    Bugs come in many varieties and teams have different ways of classifying a bug. For the purposes of this course we
+    will use the following definitions to classify bugs:
+</p>
+
+<ul>
+    <li><strong>Trivial Bug: </strong> Behavior of the software that was not intended by the developers, but does not
+        affect the user experience or that is so specific that it only affect a negligible number of users or use cases
+    </li>
+    <li><strong>Minor Bug: </strong> Behavior of the software that was not intended by the developers that
+        negatively affects the user experience for a non-negligible number of users or use cases, but
+        that does not prevent a user from utilizing the implemented features</li>
+    <li><strong>Major Bug: </strong> A bug that prevents users from utilizing one or more features that have been
+        implemented</li>
+    <li><strong>Critical Bug: </strong> A bug that prevents users from enabling the user story/stories of the project,
+        or that compromises the security of the software or its users.</li>
+</ul>
+
+<p>
+    With the exception of trivial bugs, all reported bugs will initiate this protocol.
 </p>
 
 == Protocol
@@ -102,7 +126,7 @@ previous_content_short: changes
 <p>
     This entire protocol must be completed within 1 week (168 hours), not counting spring break, of the time the issue for the bug was initially
     created. Note that other constraints may require the bug to be fixed sooner (Ex. If the bug is preventing
-    others from testing your software).
+    others from testing your software during alpha or beta testing).
 </p>
 
 
