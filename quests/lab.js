@@ -88,7 +88,7 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 				card_scanner.scan_to_username(scan, req, res, function (req, res, user_ps) {
 					if (!user_ps) {
 						req.flash("error", "User not found. Please rescan");
-						log.warn(req.user.username + ": Failed to check a student into lab - " + req.body.scan);
+						log.warn(req.user.username + ": Failed to check a student into lab - " + req.body.scan + err);
 						res.redirect('/courses/' + req.params.course + '/lab');
 					} else {
 
@@ -110,13 +110,15 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 								lab_attempts_this_session: 0
 							};
 
-							if (user_ps.current_lab_attempt &&
-								user_ps.current_lab_attempt.all_parts_complete &&
-								user_ps.current_lab_attempt.autolab_complete) {
-								to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
-								to_set[user_ps.current_lab_attempt].complete = true;
-							}
+							if(user_ps && user_ps.current_lab_attempt) {
 
+								if (user_ps.current_lab_attempt &&
+									user_ps.current_lab_attempt.all_parts_complete &&
+									user_ps.current_lab_attempt.autolab_complete) {
+									to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+									to_set[user_ps.current_lab_attempt].complete = true;
+								}
+							}
 
 							collection_ps.update({username: user_ps.username}, {
 								$push: {
