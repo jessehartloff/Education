@@ -116,8 +116,8 @@ function get_members(req, res, course_id, this_project, next) {
 			res.redirect('/courses/' + course_id + '/projects');
 		} else {
 
-			console.log('first');
-			console.log(members);
+			//console.log('first');
+			//console.log(members);
 			var members_simple = [];
 			for (var i in members) {
 				members_simple.push(members[i].username);

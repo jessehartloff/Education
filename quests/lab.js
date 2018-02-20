@@ -102,17 +102,28 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 
 						if (user_ps.lab_validation && user_ps.valid_until < Date.now()) {
 							// In case they never hit a time expired before checking in next week. This would let them pick up where they left off
+
+							var to_set = {
+								current_lab_attempt: {},
+								lab_validation: true,
+								valid_until: valid_until,
+								lab_attempts_this_session: 0
+							};
+
+							if (user_ps.current_lab_attempt &&
+								user_ps.current_lab_attempt.all_parts_complete &&
+								user_ps.current_lab_attempt.autolab_complete) {
+								to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+								to_set[user_ps.current_lab_attempt].complete = true;
+							}
+
+
 							collection_ps.update({username: user_ps.username}, {
 								$push: {
 									previous_lab_attempts: user_ps.current_lab_attempt,
 									all_validations: {"ta": req.user.username, "timestamp": Date.now()}
 								},
-								$set: {
-									current_lab_attempt: {},
-									lab_validation: true,
-									valid_until: valid_until,
-									lab_attempts_this_session: 0
-								}
+								$set: to_set
 							}, function (err, result) {
 								req.flash("success", user_ps.username + " checked into lab");
 								log.info(user_ps.username + " was checked into lab by " + req.user.username);
@@ -163,7 +174,7 @@ function get_random_version(req, res, lab_number, part_number, user_ps, next) { 
 			for (var index = 0; index < versions.length; index++) {
 				version_priority.push(0);
 			}
-			if(user_ps.previous_lab_attempts) {
+			if (user_ps.previous_lab_attempts) {
 				for (var i = 0; i < user_ps.previous_lab_attempts.length; i++) {
 					var attempt = user_ps.previous_lab_attempts[i];
 					if (attempt && attempt.lab_number === lab_number &&
@@ -373,12 +384,22 @@ function start_new_lab(req, res, username, lab_number) {
 
 function time_expired(req, res, username) {
 	req.flash("error", "This lab session has ended. You may attempt this lab again in a future lab session");
+
+	var to_set = {
+		lab_attempts_this_session: 0,
+		lab_validation: false
+	};
+
+	if (user_ps.current_lab_attempt &&
+		user_ps.current_lab_attempt.all_parts_complete &&
+		user_ps.current_lab_attempt.autolab_complete) {
+		to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+		to_set[user_ps.current_lab_attempt].complete = true;
+	}
+
 	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
 		collection_ps.update({username: username}, {
-			$set: {
-				lab_attempts_this_session: 0,
-				lab_validation: false
-			}
+			$set: to_set
 		}, function (err, result) {
 			end_lab(req, res, username);
 		});
@@ -436,11 +457,11 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 				var computed = req.body.student_answer;
 				var current_lab_attempt = user_ps.current_lab_attempt;
 				var current_question = current_lab_attempt.current_question;
-				console.log(JSON.stringify(current_lab_attempt));
+				//console.log(JSON.stringify(current_lab_attempt));
 				var grader = current_question.grader;
-				console.log("***");
-				console.log(grader.expected);
-				console.log(computed);
+				//console.log("***");
+				//console.log(grader.expected);
+				//console.log(computed);
 				var correct = false;
 				if (grader.comparator === "double") {
 					correct = compare.doubles(grader.expected, computed);
@@ -558,10 +579,10 @@ exports.lab_api = function lab_api(req, res, course) {
 	//console.log("API: " + req.body);
 	if (req.body.key !== "super_secret_key") {
 		res.send("You can't use this API");
-		log.error("VIOLATION: Bad access to lab API" + req.body)
+		log.error("VIOLATION: Bad access to lab API" + JSON.stringify(req.body))
 	} else if (!req.headers['user-agent']) {
 		res.send("You can't use this API");
-		log.error("VIOLATION: Bad user-agent to lab API" + req.body)
+		log.error("VIOLATION: Bad user-agent to lab API" + JSON.stringify(req.body))
 	} else if (req.body.request_type === "get_current_lab") {
 		api_get_current_lab(req, res, course);
 	} else if (req.body.request_type === "send_lab_results") {
@@ -575,13 +596,12 @@ exports.lab_api = function lab_api(req, res, course) {
 };
 
 function api_record_violation(req, res, course) {
-	log.error("VIOLATION DETECTED" + req.body);
+	log.error("VIOLATION DETECTED" + JSON.stringify(req.body));
 	res.send("Violation");
 }
 
 function api_get_current_lab(req, res, course) {
 	var section_id = req.body.section_id;
-
 	collection_ps.findOne({"section_id": section_id}, {}, function (err, record) {
 		if (err) {
 			log.error("database error in api_get_current_lab: " + err);
@@ -589,7 +609,10 @@ function api_get_current_lab(req, res, course) {
 		} else if (!record) {
 			log.error("No user found with section_id: " + section_id);
 			res.send("No user found with section_id: " + section_id);
-		} else {
+		} else if (record.valid_until < Date.now()) {
+			// TODO: Check how this looks in AutoLab. It might be gross
+			time_expired(req, res, req.user.username);
+		}else {
 			res.send(JSON.stringify(record.current_lab_attempt))
 		}
 	});
@@ -608,11 +631,25 @@ function api_send_lab_results(req, res, course) {
 				res.send("error");
 			} else if (!user_ps) {
 				res.send("No user found with section_id: " + section_id);
+			}else if (user_ps.valid_until < Date.now()) {
+				// TODO: Check how this looks in AutoLab. It might be gross
+				time_expired(req, res, req.user.username);
 			} else {
 				log.info(user_ps.username + ": completed AutoLab for " + user_ps.current_lab_attempt.lab_id);
-				collection_ps.update({"section_id": section_id}, {$set: {"current_lab_attempt.autolab_complete": true}}, function (err, x) {
-					res.send("AutoLab Complete");
-				});
+
+				var to_set = {"current_lab_attempt.autolab_complete": true};
+				if (user_ps.current_lab_attempt &&
+					user_ps.current_lab_attempt.all_parts_complete) {
+					to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+					to_set[user_ps.current_lab_attempt].complete = true;
+				}
+
+				collection_ps.update({"section_id": section_id},
+					{
+						$set: to_set
+					}, function (err, x) {
+						res.send("AutoLab Complete");
+					});
 
 			}
 		});

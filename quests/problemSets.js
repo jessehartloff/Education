@@ -363,10 +363,10 @@ exports.ps_api = function ps_api(req, res, course) {
 	//console.log("API: " + req.body);
 	if (req.body.key !== "super_secret_key") {
 		res.send("You can't use this API");
-		log.error("VIOLATION: Bad access to problem set API" + req.body)
+		log.error("VIOLATION: Bad access to problem set API" + JSON.stringify(req.body))
 	} else if (!req.headers['user-agent']) {
 		res.send("You can't use this API");
-		log.error("VIOLATION: Bad user-agent to problem set API" + req.body)
+		log.error("VIOLATION: Bad user-agent to problem set API" + JSON.stringify(req.body))
 	} else if (req.body.request_type === "get_current_ps") {
 		api_get_current_ps(req, res, course);
 	} else if (req.body.request_type === "send_ps_results") {
@@ -380,7 +380,7 @@ exports.ps_api = function ps_api(req, res, course) {
 };
 
 function api_record_violation(req, res, course) {
-	log.error("VIOLATION DETECTED" + req.body);
+	log.error("VIOLATION DETECTED" + JSON.stringify(req.body));
 	res.send("Violation");
 }
 
