@@ -387,6 +387,10 @@ function time_expired(req, res, username) {
 
 	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
 
+		if(!user_ps){
+			end_lab(req, res, username);
+		}
+
 		var to_set = {
 			lab_attempts_this_session: 0,
 			lab_validation: false
