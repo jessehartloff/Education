@@ -13,6 +13,15 @@ var collection_lab_questions = db.get('lab_questions'); // get question by <lab>
 var collection_tas = db.get('tas');
 
 
+
+// TODO:
+//1|educatio | GET /courses/cse115-s18/assignments/lab 200 94.316 ms - 14124
+//1|educatio | GET /static/UBStylin.css 200 1.179 ms - 11148
+//1|educatio | GET /static/functions.js 200 3.437 ms - 3303
+//1|educatio | (node:20848) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 4):
+// TypeError: Cannot read property 'current_lab_attempt' of undefined
+//1|educatio | GET /courses/cse115-s18/active-lab/3 - - ms - -
+
 // entry point
 exports.get_lab = function get_lab(req, res, course) {
 
@@ -88,7 +97,7 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 				card_scanner.scan_to_username(scan, req, res, function (req, res, user_ps) {
 					if (!user_ps) {
 						req.flash("error", "User not found. Please rescan");
-						log.warn(req.user.username + ": Failed to check a student into lab - " + req.body.scan + err);
+						log.warn(req.user.username + ": Failed to check a student into lab - " + req.body.scan + " | " + JSON.stringify(user_ps));
 						res.redirect('/courses/' + req.params.course + '/lab');
 					} else {
 
@@ -103,34 +112,29 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 						if (user_ps.lab_validation && user_ps.valid_until < Date.now()) {
 							// In case they never hit a time expired before checking in next week. This would let them pick up where they left off
 
-							//var to_set = {
-							//	current_lab_attempt: {},
-							//	lab_validation: true,
-							//	valid_until: valid_until,
-							//	lab_attempts_this_session: 0
-							//};
-							//
-							//if(user_ps && user_ps.current_lab_attempt) {
-							//
-							//	if (user_ps.current_lab_attempt &&
-							//		user_ps.current_lab_attempt.all_parts_complete &&
-							//		user_ps.current_lab_attempt.autolab_complete) {
-							//		to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
-							//		to_set[user_ps.current_lab_attempt].complete = true;
-							//	}
-							//}
+
+							var to_set = {
+								current_lab_attempt: {},
+								lab_validation: true,
+								valid_until: valid_until,
+								lab_attempts_this_session: 0
+							};
+
+							if(user_ps && user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
+
+								if (user_ps.current_lab_attempt.all_parts_complete &&
+									user_ps.current_lab_attempt.autolab_complete) {
+
+									to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+								}
+							}
 
 							collection_ps.update({username: user_ps.username}, {
 								$push: {
 									previous_lab_attempts: user_ps.current_lab_attempt,
 									all_validations: {"ta": req.user.username, "timestamp": Date.now()}
 								},
-								$set: {
-									current_lab_attempt: {},
-									lab_validation: true,
-									valid_until: valid_until,
-									lab_attempts_this_session: 0
-								}
+								$set: to_set
 							}, function (err, result) {
 								req.flash("success", user_ps.username + " checked into lab");
 								log.info(user_ps.username + " was checked into lab by " + req.user.username);
@@ -231,81 +235,86 @@ function get_random_question(req, res, lab_number, part_number, version_number, 
 function resume_lab(req, res, lab_attempt) {
 
 	collection_ps.findOne({username: req.user.username}, {}, function (err, user_ps) {
-		lab_attempt = user_ps.current_lab_attempt;
-		//console.log(JSON.stringify(lab_attempt, null, 2));
-		res.to_template.lab_attempt = lab_attempt;
+		if(err || !user_ps){
+			log.warn("error in resume_lab: " + err);
+			res.redirect('/courses/' + req.params.course + '/lab');
+		}else {
+			lab_attempt = user_ps.current_lab_attempt;
+			//console.log(JSON.stringify(lab_attempt, null, 2));
+			res.to_template.lab_attempt = lab_attempt;
 
-		if (lab_attempt.all_parts_complete) {
-			if (lab_attempt.autolab_complete) {
+			if (lab_attempt.all_parts_complete) {
+				if (lab_attempt.autolab_complete) {
 
-				//var user_lab = user_ps.labs["lab" + this_lab.lab_number];
-				//if (user_lab) {
-				//	all_labs[i].complete = user_lab.complete;
-				var to_set = {"current_lab_attempt.complete": true};
-				to_set["labs." + lab_attempt.lab_id + ".complete"] = true;
+					//var user_lab = user_ps.labs["lab" + this_lab.lab_number];
+					//if (user_lab) {
+					//	all_labs[i].complete = user_lab.complete;
+					var to_set = {"current_lab_attempt.complete": true};
+					to_set["labs." + lab_attempt.lab_id + ".complete"] = true;
 
-				collection_ps.update({"username": req.user.username}, {$set: to_set}, function (err, record) {
-					req.flash("success", "Completed lab " + lab_attempt.lab_number);
-					end_lab(req, res, req.user.username);
-				});
+					collection_ps.update({"username": req.user.username}, {$set: to_set}, function (err, record) {
+						req.flash("success", "Completed lab " + lab_attempt.lab_number);
+						end_lab(req, res, req.user.username);
+					});
+				} else {
+					req.flash("success", "All questions complete. Follow instructions to submit your code on AutoLab to complete this lab");
+					collection_labs.findOne({"lab_id": lab_attempt.lab_id}, {}, function (err, lab) {
+						res.to_template.lab = lab;
+						res.render('questions/lab_active', res.to_template);
+					});
+				}
 			} else {
-				req.flash("success", "All questions complete. Follow instructions to submit your code on AutoLab to complete this lab");
+
 				collection_labs.findOne({"lab_id": lab_attempt.lab_id}, {}, function (err, lab) {
 					res.to_template.lab = lab;
-					res.render('questions/lab_active', res.to_template);
-				});
-			}
-		} else {
+					if (user_ps.level <= lab.lab_number) {
+						req.flash("warn", "You are underleveled. The recommended level for this lab is " + (lab.lab_number + 1))
+					}
+					collection_lab_versions.findOne({
+						lab_number: parseInt(lab_attempt.lab_number),
+						part_number: parseInt(lab_attempt.current_part),
+						version_number: parseInt(lab_attempt.version_number)
+					}, {}, function (err, version) {
+						res.to_template.part = version;
 
-			collection_labs.findOne({"lab_id": lab_attempt.lab_id}, {}, function (err, lab) {
-				res.to_template.lab = lab;
-				if (user_ps.level <= lab.lab_number) {
-					req.flash("warn", "You are underleveled. The recommended level for this lab is " + (lab.lab_number + 1))
-				}
-				collection_lab_versions.findOne({
-					lab_number: parseInt(lab_attempt.lab_number),
-					part_number: parseInt(lab_attempt.current_part),
-					version_number: parseInt(lab_attempt.version_number)
-				}, {}, function (err, version) {
-					res.to_template.part = version;
+						//"lab_number": 1,
+						//	"part": 1,
+						//	"version": 1,
+						//	"question_number": 0,
+						//	"parameters": {
+						//	"data_used": 20,
+						//		"units": "GB"
+						//},
+						//"question_text": "How much will it cost to use 20.0 GB of data?",
 
-					//"lab_number": 1,
-					//	"part": 1,
-					//	"version": 1,
-					//	"question_number": 0,
-					//	"parameters": {
-					//	"data_used": 20,
-					//		"units": "GB"
-					//},
-					//"question_text": "How much will it cost to use 20.0 GB of data?",
-
-					//if (!lab_attempt.current_question) {
-					get_random_question(req, res, lab_attempt.lab_number, lab_attempt.current_part, lab_attempt.version_number, function (req, res, question) {
-						if (!question) {
-							req.flash("success", "No more questions to answers. Submit on AutoLab");
-							res.render('questions/lab_active', res.to_template);
-						} else {
-							collection_lab_questions.findOne({
-								lab_number: parseInt(lab_attempt.lab_number),
-								part: parseInt(lab_attempt.current_part),
-								version: parseInt(lab_attempt.version_number),
-								question_number: parseInt(question.question_number)
-							}, {}, function (err, question) {
-
-								res.to_template.question = question;
+						//if (!lab_attempt.current_question) {
+						get_random_question(req, res, lab_attempt.lab_number, lab_attempt.current_part, lab_attempt.version_number, function (req, res, question) {
+							if (!question) {
+								req.flash("success", "No more questions to answers. Submit on AutoLab");
 								res.render('questions/lab_active', res.to_template);
-							});
-						}
+							} else {
+								collection_lab_questions.findOne({
+									lab_number: parseInt(lab_attempt.lab_number),
+									part: parseInt(lab_attempt.current_part),
+									version: parseInt(lab_attempt.version_number),
+									question_number: parseInt(question.question_number)
+								}, {}, function (err, question) {
+
+									res.to_template.question = question;
+									res.render('questions/lab_active', res.to_template);
+								});
+							}
+
+						});
+						//}
+
 
 					});
-					//}
-
-
 				});
-			});
+			}
 		}
-
 	});
+
 }
 
 function end_lab(req, res, username) {
@@ -394,20 +403,20 @@ function time_expired(req, res, username) {
 
 	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
 
-		if(!user_ps){
-			end_lab(req, res, username);
-		}
+
 
 		var to_set = {
 			lab_attempts_this_session: 0,
 			lab_validation: false
 		};
 
-		if (user_ps.current_lab_attempt &&
-			user_ps.current_lab_attempt.all_parts_complete &&
-			user_ps.current_lab_attempt.autolab_complete) {
-			to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
-			to_set[user_ps.current_lab_attempt].complete = true;
+		if(user_ps && user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
+			if (user_ps.current_lab_attempt.all_parts_complete &&
+				user_ps.current_lab_attempt.autolab_complete) {
+
+				to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+				to_set["current_lab_attempt.complete"] = true;
+			}
 		}
 
 		collection_ps.update({username: username}, {
@@ -653,7 +662,7 @@ function api_send_lab_results(req, res, course) {
 				if (user_ps.current_lab_attempt &&
 					user_ps.current_lab_attempt.all_parts_complete) {
 					to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
-					to_set[user_ps.current_lab_attempt].complete = true;
+					to_set["current_lab_attempt.complete"] = true;
 				}
 
 				collection_ps.update({"section_id": section_id},

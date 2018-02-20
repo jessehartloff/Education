@@ -36,7 +36,7 @@ exports.scan_to_username = function scan_to_username(scan, req, res, next){
 	//console.log("number: " + number);
 	collection_ps.findOne({"id":number}, {}, function(err, record){
 		if(err || !record){
-			next(req, res, "");
+			next(req, res, null);
 		}else{
 			//console.log("record: " + JSON.stringify(record));
 			next(req, res, record);
