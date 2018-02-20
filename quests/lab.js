@@ -103,29 +103,34 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 						if (user_ps.lab_validation && user_ps.valid_until < Date.now()) {
 							// In case they never hit a time expired before checking in next week. This would let them pick up where they left off
 
-							var to_set = {
-								current_lab_attempt: {},
-								lab_validation: true,
-								valid_until: valid_until,
-								lab_attempts_this_session: 0
-							};
-
-							if(user_ps && user_ps.current_lab_attempt) {
-
-								if (user_ps.current_lab_attempt &&
-									user_ps.current_lab_attempt.all_parts_complete &&
-									user_ps.current_lab_attempt.autolab_complete) {
-									to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
-									to_set[user_ps.current_lab_attempt].complete = true;
-								}
-							}
+							//var to_set = {
+							//	current_lab_attempt: {},
+							//	lab_validation: true,
+							//	valid_until: valid_until,
+							//	lab_attempts_this_session: 0
+							//};
+							//
+							//if(user_ps && user_ps.current_lab_attempt) {
+							//
+							//	if (user_ps.current_lab_attempt &&
+							//		user_ps.current_lab_attempt.all_parts_complete &&
+							//		user_ps.current_lab_attempt.autolab_complete) {
+							//		to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+							//		to_set[user_ps.current_lab_attempt].complete = true;
+							//	}
+							//}
 
 							collection_ps.update({username: user_ps.username}, {
 								$push: {
 									previous_lab_attempts: user_ps.current_lab_attempt,
 									all_validations: {"ta": req.user.username, "timestamp": Date.now()}
 								},
-								$set: to_set
+								$set: {
+									current_lab_attempt: {},
+									lab_validation: true,
+									valid_until: valid_until,
+									lab_attempts_this_session: 0
+								}
 							}, function (err, result) {
 								req.flash("success", user_ps.username + " checked into lab");
 								log.info(user_ps.username + " was checked into lab by " + req.user.username);
