@@ -385,19 +385,20 @@ function start_new_lab(req, res, username, lab_number) {
 function time_expired(req, res, username) {
 	req.flash("error", "This lab session has ended. You may attempt this lab again in a future lab session");
 
-	var to_set = {
-		lab_attempts_this_session: 0,
-		lab_validation: false
-	};
-
-	if (user_ps.current_lab_attempt &&
-		user_ps.current_lab_attempt.all_parts_complete &&
-		user_ps.current_lab_attempt.autolab_complete) {
-		to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
-		to_set[user_ps.current_lab_attempt].complete = true;
-	}
-
 	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
+
+		var to_set = {
+			lab_attempts_this_session: 0,
+			lab_validation: false
+		};
+
+		if (user_ps.current_lab_attempt &&
+			user_ps.current_lab_attempt.all_parts_complete &&
+			user_ps.current_lab_attempt.autolab_complete) {
+			to_set["labs." + user_ps.current_lab_attempt.lab_id + ".complete"] = true;
+			to_set[user_ps.current_lab_attempt].complete = true;
+		}
+
 		collection_ps.update({username: username}, {
 			$set: to_set
 		}, function (err, result) {
