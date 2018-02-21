@@ -150,7 +150,6 @@ router.get('/:course/lab', function (req, res) {
 });
 
 router.post('/:course/lab-check-in', function (req, res) {
-	console.log("gsdf");
 	course_util.preprocess_course(req, res, lab_util.lab_check_in);
 });
 
