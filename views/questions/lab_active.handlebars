@@ -30,6 +30,25 @@
 
     <div class="card border-dark mb-3">
         <div class="card-header">
+            <h5>AutoLab Instructions</h5>
+        </div>
+        <div class="card-body">
+
+            {{#unless lab_attempt.autolab_complete}}
+                <p>
+                    {{{lab_attempt.autolab_instructions}}}
+                </p>
+            {{else}}
+                <p>
+                    AutoLab complete!
+                </p>
+            {{/unless}}
+        </div>
+    </div>
+
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">
             <h5>Questions</h5>
         </div>
         <div class="card-body">
@@ -57,25 +76,6 @@
             {{else}}
                 <p>
                     All questions complete!
-                </p>
-            {{/unless}}
-        </div>
-    </div>
-
-
-    <div class="card border-dark mb-3">
-        <div class="card-header">
-            <h5>AutoLab Instructions</h5>
-        </div>
-        <div class="card-body">
-
-            {{#unless lab_attempt.autolab_complete}}
-                <p>
-                    {{{lab_attempt.autolab_instructions}}}
-                </p>
-            {{else}}
-                <p>
-                    AutoLab complete!
                 </p>
             {{/unless}}
         </div>
