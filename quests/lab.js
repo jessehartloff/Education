@@ -489,7 +489,7 @@ exports.answer_lab_question = function answer_lab_question(req, res, course) {
 				} else if (grader.comparator === "integer") {
 					correct = compare.integers(grader.expected, computed);
 				} else if (grader.comparator === "string") {
-					correct = compare.string(grader.expected, computed);
+					correct = compare.strings(grader.expected, computed);
 				}
 				if (correct) {
 					req.flash("success", "Question correct");
