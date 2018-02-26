@@ -225,6 +225,21 @@ a.btn-custom {
     background: linear-gradient(to bottom, #cccccc 1%, #aaaaaa 100%);
 }
 
+.btn-disabled-custom, .btn-disabled-custom:hover, .btn-disabled-custom:active {
+    /*border: 1px solid #666666;*/
+    /*border-radius: 5px;*/
+    cursor: default;
+    color: #666666;
+    background: linear-gradient(to bottom, #cccccc 1%, #aaaaaa 100%);
+}
+
+.btn-consumable-custom, .btn-consumable-custom:hover, .btn-consumable-custom:active {
+    /*border: 1px solid #666666;*/
+    /*border-radius: 5px;*/
+    color: black;
+    background: linear-gradient(to bottom, #ffff00 1%, #dddd00 100%);
+}
+
 div.lecture-section-well {
     border-radius: 0;
     /*padding: 10px;*/

@@ -7,6 +7,10 @@ exports.ifEven = function(number, options){
 	return number%2 === 0 && number !==0 ? options.fn(this) : options.inverse(this);
 };
 
+exports.ifZero = function(number, options){
+	return number === 0 ? options.fn(this) : options.inverse(this);
+};
+
 //exports.ifIndexLimited = function(course, index, compare, options){
 //	// :\
 //	if(course === 'cse115-f17'){

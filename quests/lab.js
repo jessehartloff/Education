@@ -186,6 +186,8 @@ function get_random_version(req, res, lab_number, part_number, user_ps, next) { 
 				version_priority.push(0);
 			}
 			if (user_ps.previous_lab_attempts) {
+				// TODO: Fix this. Looks like I can get away with it for now, but this only checks the last section reached. If the lab was complete it sits on an undefined section and won't count here.. but students don't redo labs and I'm not concerned with sections they completed since there's only variance on the AutoLab question
+				// TODO: factor in the total number of students who got the version
 				for (var i = 0; i < user_ps.previous_lab_attempts.length; i++) {
 					var attempt = user_ps.previous_lab_attempts[i];
 					if (attempt && attempt.lab_number === lab_number &&

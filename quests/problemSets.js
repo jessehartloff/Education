@@ -12,7 +12,7 @@ var current_course = 'cse115-s18';
 
 // TODO: Remind them of office hours after poor performance
 
-// TODO: Add consumable multipliers that can be awarded to to individuals or to the entire class. Quantity should be stored. Could have different values as well. For each type they have, a new button appears next to the check out PS button. They can earn these in many ways (1.2x for attending office hours, several 1.5x for response rates, several 1.2 for completing 442 tasks?)
+// Add consumable multipliers that can be awarded to to individuals or to the entire class. Quantity should be stored. Could have different values as well. For each type they have, a new button appears next to the check out PS button. They can earn these in many ways (1.2x for attending office hours, several 1.5x for response rates, several 1.2 for completing 442 tasks?)
 // TODO: Cleanup code
 // Register students. Set fixed section numbers and check for new students w/o a number as they add/drop. No reassignments or duplicates
 // Syllabus w/ grading
@@ -192,8 +192,6 @@ exports.get_ps = function get_ps(req, res, course) {
 				res.to_template.level_name = level_requirements.get_level_requirements(user_ps.level).level_name;
 				res.to_template.next_level_name = level_requirements.get_level_requirements(user_ps.level + 1).level_name;
 
-				// TODO: send consumables to template
-
 				// ship it
 				res.render('questions/ps', res.to_template);
 			}
@@ -227,7 +225,31 @@ function generate_new_ps(req, res, user_ps, next) {
 		point_value *= 1.5;
 	}
 
-	// TODO: check if consumable was used. If so, check if one is available in the database, apply the multiplier, and decrement consumables
+	var multiplier = "none";
+	if(req.query.multiplier){
+		multiplier = req.query.multiplier;
+	}
+
+	if(multiplier === "small"){
+		if(user_ps.small_multipliers_remaining > 0){
+			multipliers.push({"reason": "Used consumable multiplier", "multiplier": 1.2});
+			var small_remaining = user_ps.small_multipliers_remaining - 1;
+			collection_ps.update({username:user_ps.username},{$set:{small_multipliers_remaining:small_remaining}});
+		}else{
+			req.flash("error", "You don't have any 1.2x consumables. Checking out problem set without consumable multiplier")
+		}
+	}else if(multiplier === "large"){
+		if(user_ps.large_multipliers_remaining > 0){
+			multipliers.push({"reason": "Used consumable multiplier", "multiplier": 1.5});
+			var large_remaining = user_ps.large_multipliers_remaining - 1;
+			collection_ps.update({username:user_ps.username},{$set:{large_multipliers_remaining:large_remaining}});
+		}else{
+			req.flash("error", "You don't have any 1.5x consumables. Checking out problem set without consumable multiplier")
+		}
+	}else{
+		// no multiplier used
+	}
+
 
 	var ps =
 	{
@@ -347,7 +369,6 @@ exports.ps_download = function ps_download(req, res, course) {
 				res.render('questions/ps', res.to_template);
 			} else {
 				if (user_ps.current_ps_finished) {
-					// TODO: Check if a consumable was used
 					generate_new_ps(req, res, user_ps, send_current_ps);
 				} else {
 					send_current_ps(req, res, user_ps);

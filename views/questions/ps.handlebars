@@ -45,13 +45,27 @@
     <div class="card border-dark mb-3">
         <div class="card-body">
 
-            <a href="/courses/{{course.course}}/ps-download"
+            <a href="/courses/{{course.course}}/ps-download?multiplier=none"
                class="btn-custom {{#if new_ps_active}}btn-primary-custom{{else}}btn-secondary-custom{{/if}}">
                 {{#if user_ps.current_ps_finished}}
                     Download Problem Set {{increment user_ps.current_ps.ps_number}}
                 {{else}}
                     Re-Download Problem Set {{user_ps.current_ps.ps_number}}
-                {{/if}}</a>
+                {{/if}}</a><br/><br/>
+
+            {{#if user_ps.current_ps_finished}}
+                <a href="/courses/{{course.course}}/ps-download?multiplier=small"
+                   class="btn-custom {{#ifZero user_ps.small_multipliers_remaining}}btn-disabled-custom{{else}}btn-consumable-custom{{/ifZero}}">
+                    Download PS {{increment user_ps.current_ps.ps_number}} with 1.2x Multiplier ({{user_ps.small_multipliers_remaining}} remaining)
+                </a><br/><br/>
+                <a href="/courses/{{course.course}}/ps-download?multiplier=large"
+                   class="btn-custom {{#ifZero user_ps.large_multipliers_remaining}}btn-disabled-custom{{else}}btn-consumable-custom{{/ifZero}}">
+                    Download PS {{increment user_ps.current_ps.ps_number}} with 1.5x Multiplier ({{user_ps.large_multipliers_remaining}} remaining)
+                </a>
+            {{else}}
+                1.2x multipliers remaining: {{user_ps.small_multipliers_remaining}}<br/>
+                1.5x multipliers remaining: {{user_ps.large_multipliers_remaining}}
+            {{/if}}
             <br/><br/><br/>
             <a href="https://autograder.cse.buffalo.edu/courses/CSE115-s18/assessments/pstest"
                target="_blank"
