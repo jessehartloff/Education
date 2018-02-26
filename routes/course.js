@@ -10,6 +10,12 @@ var lab_util = require('../quests/lab');
 var hw_util = require('../quests/projects');
 
 
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/education');
+
+var collection_ethics = db.get('ethics');
+
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
 // TOD/: They must list what they will learn from the project (new skills/tech) In the team contract for each member
@@ -27,6 +33,19 @@ var hw_util = require('../quests/projects');
 
 router.get('/', function (req, res) {
 	res.render('index', res.to_template);
+});
+
+
+router.get('/:course/ethicslecture', function (req, res) {
+	if(req.user && req.user.username== "hartloff"){
+		res.redirect("https://fury.cse.buffalo.edu/courses/cse115-s18/lectures/internet");
+	}else{
+		var data = {};
+		data.timestamp = Date.now();
+		data.useragent = req.headers['user-agent'];
+		collection_ethics.insert(data);
+		res.send("error");
+	}
 });
 
 
