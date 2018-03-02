@@ -7,14 +7,12 @@ var api_util = require('../util/api');
 var questions_util = require('../questions/questions');
 var ps_util = require('../quests/problemSets');
 var lab_util = require('../quests/lab');
-var hw_util = require('../quests/projects');
 
 
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/education');
 
-var collection_ethics = db.get('ethics');
 
 // TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
 
@@ -36,18 +34,6 @@ router.get('/', function (req, res) {
 });
 
 
-router.get('/:course/ethicslecture', function (req, res) {
-	if(req.user && req.user.username== "hartloff"){
-		res.redirect("https://fury.cse.buffalo.edu/courses/cse115-s18/lectures/internet");
-	}else{
-		var data = {};
-		data.timestamp = Date.now();
-		data.useragent = req.headers['user-agent'];
-		collection_ethics.insert(data);
-		res.send("error");
-	}
-});
-
 
 router.get('/:course/lectures/:lecture', function (req, res) {
 	course_util.render_content(req, res, 'lectures', req.params.lecture);
@@ -62,9 +48,6 @@ router.get('/:course/assignments/lab', function (req, res) {
 	course_util.preprocess_course(req, res, lab_util.get_lab);
 });
 
-router.get('/:course/assignments/hw', function (req, res) {
-	course_util.preprocess_course(req, res, hw_util.get_hw);
-});
 
 router.get('/:course/assignments/:assignment', function (req, res) {
 	course_util.render_content(req, res, 'assignments', req.params.assignment);
