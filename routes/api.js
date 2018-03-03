@@ -48,7 +48,7 @@ router.get('/musicRatings/getAllSongs', function (req, res) {
 		if (err) {
 			req.send("error while getting ratings");
 		} else {
-			console.log(song_details);
+			//console.log(song_details);
 
 			for (var index = 0; index < song_details.length; index++) {
 				var current_song = song_details[index];
@@ -57,7 +57,7 @@ router.get('/musicRatings/getAllSongs', function (req, res) {
 			}
 			collection_ratings.find({}, {}, function (err, all_ratings) {
 
-				console.log(all_ratings);
+				//console.log(all_ratings);
 				for (var i = 0; i < all_ratings.length; i++) {
 					var current_rating = all_ratings[i];
 					results[current_rating.youtubeID]["ratings"].push(current_rating.rating);
@@ -69,7 +69,15 @@ router.get('/musicRatings/getAllSongs', function (req, res) {
 					to_send.push(results[id]);
 				}
 
-				console.log(to_send);
+				// shuffle
+				for (var i = to_send.length; i > 0; i--) {
+					var random_index = Math.floor(Math.random() * i);
+					var temp = to_send[i - 1];
+					to_send[i - 1] = to_send[random_index];
+					to_send[random_index] = temp;
+				}
+
+				//console.log(to_send);
 				res.send(JSON.stringify(to_send));
 
 			})
