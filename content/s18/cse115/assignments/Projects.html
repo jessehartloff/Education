@@ -78,6 +78,68 @@ previous_content_short: lab
     can share and analyze preferences.
 </p>
 
+<p>
+    By the end of this project we will analyzing ratings of song that have been made by this class of CSE115 student.
+    Add your ratings using this the form below and you will compute the top rated songs in the class by objective 5.
+</p>
+
+
+<br/>
+<hr/>
+<h4>Rate Songs</h4><br/>
+
+<p>
+    Use this form to rate songs find the classes favorite songs. Aggregate results will appear here:
+    <a href="http://fury.cse.buffalo.edu/api/musicRatings/getAllSongs">http://fury.cse.buffalo.edu/api/musicRatings/getAllSongs</a>
+</p>
+
+<p>
+    Each rated song must be linked to a YouTube video by providing the id for the video. This id is an 11 digit String
+    that is unique for each video and can be found in the url
+    of the video. See <a href="https://docs.joeworkman.net/rapidweaver/stacks/youtube/video-id">here</a> for an example.
+</p>
+
+<p>
+    * You must be logged in to rate songs
+</p>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/api/musicRatings/rateSong" method="post">
+
+            <div>
+                <label>YouTube ID (11 digit id from url):</label>
+                <input type="text" name="youtube_id"/>
+            </div>
+            <br/>
+            <div>
+                <label>Your Rating:</label>&nbsp;
+                <input type="radio" name="rating" value="1"> 1 &nbsp;&nbsp;
+                <input type="radio" name="rating" value="2"> 2&nbsp;&nbsp;
+                <input type="radio" name="rating" value="3"> 3&nbsp;&nbsp;
+                <input type="radio" name="rating" value="4"> 4&nbsp;&nbsp;
+                <input type="radio" name="rating" value="5"> 5
+            </div>
+            <br/>
+            <label>* Artist and Title are only required if the song is not yet in the API</label><br/>
+            <div>
+                <label>Artist:</label>
+                <input type="text" name="artist"/>
+            </div>
+
+            <div>
+                <label>Title:</label>
+                <input type="text" name="title"/>
+            </div>
+
+            <div>
+                <input type="submit" value="Rate Song"/>
+            </div>
+
+        </form>
+    </div>
+</div>
+
 <br/>
 <hr/>
 <h4>
@@ -142,7 +204,7 @@ previous_content_short: lab
 
 
 <a href="/static/data/sample_songs.csv">sample_songs.csv</a><br/>
-<a href="/static/data/large_songs.csv">large_songs.csv</a>
+<a href="/static/data/large_songs.csv">large_songs.csv</a><br/>
 
 <h5>Tasks</h5>
 
@@ -153,7 +215,8 @@ previous_content_short: lab
 
 <ol>
     <li>Create a package named "ratables" inside the ratings package. In the newly created ratables package, create a
-        class named "Song" containing the following methods. Note that none of these methods are static since they will belong
+        class named "Song" containing the following methods. Note that none of these methods are static since they will
+        belong
         to
         instances of the Song class and not the class itself:
         <ol type="i">
@@ -206,7 +269,8 @@ previous_content_short: lab
         of YouTubeIDs (Strings) to Song objects)
     </li>
     <li>
-        In the RatingsAnalyzer class write a public static method named "bestSong" that takes three parameters (an ArrayList of Songs,
+        In the RatingsAnalyzer class write a public static method named "bestSong" that takes three parameters (an
+        ArrayList of Songs,
         an int, and a double) and returns a Song. The method will return the Song from the parameter ArrayList with the
         highest Bayesian average. The int and double parameters are the number of extra reviews and the value of those
         reviews to be used while computing the Bayesian averages (You should call your method from objective 1 to
@@ -230,7 +294,7 @@ previous_content_short: lab
 </p>
 
 <a href="/static/data/sample_products.csv">sample_products.csv</a><br/>
-<a href="/static/data/large_products.csv">large_products.csv</a>
+<a href="/static/data/large_products.csv">large_products.csv</a><br/>
 
 <p>
     Amazon data provided by:<br/>
@@ -325,20 +389,23 @@ previous_content_short: lab
     <li>
         Now that we've refactored the our ratables to be either songs or products we will need to write methods in the
         rest of our program that will handle and ratables. To start, whenever we read data from a source we will return
-        the data as Ratables instead of Songs or Products. For this task, write a public static method in the DataSources class
+        the data as Ratables instead of Songs or Products. For this task, write a public static method in the
+        DataSources class
         named "readSongsAsRatables" that takes a String as a parameter and returns an ArrayList of Ratables. This method
         will read a csv file with Song ratings in the same format as in the readSongCSVFile method. The only difference
         is the return type which is an ArrayList of Ratables instead of an ArrayList of Songs. (Hint: you can call
         readSongCSVFile from this method and add all the Songs into a new ArrayList of Ratables)
     </li>
     <li>
-        Write a public static method in the DataSources class named "readProductCSVFile" that takes a String as a parameter and
+        Write a public static method in the DataSources class named "readProductCSVFile" that takes a String as a
+        parameter and
         returns an ArrayList of Ratables. The input String is the name of a csv file where each line is in the format
         "asin,reviewerName,rating,review" and the output is an ArrayList of Ratables containing all the product ratings
         from this file.
     </li>
     <li>
-        In the RatingsAnalyzer class write a public static method named "bestRatable" that takes three parameters (an ArrayList of
+        In the RatingsAnalyzer class write a public static method named "bestRatable" that takes three parameters (an
+        ArrayList of
         Ratable,
         an int, and a double) and returns a Ratable. The method will return the Ratable from the parameter ArrayList
         with the
@@ -387,7 +454,8 @@ previous_content_short: lab
             </li>
         </ol>
     </li>
-    <li>In the RatingsAnalyzer class write a public static method named "getTopK" an ArrayList of Ratables, an int (k), and a
+    <li>In the RatingsAnalyzer class write a public static method named "getTopK" an ArrayList of Ratables, an int (k),
+        and a
         Comparator of Ratables as
         parameters and returns an ArrayList of Ratables. This method returns the top k ratables from the ArrayList based
         on the provided Comparator. This method
@@ -416,9 +484,10 @@ previous_content_short: lab
 <h5>Task</h5>
 
 <ol>
-    <li>Write a public static method in the DataSources class named "getSongsFromAPI" that takes no parameters and returns an
+    <li>Write a public static method in the DataSources class named "getSongsFromAPI" that takes no parameters and
+        returns an
         ArrayList of Ratables. This method will access the API endpoint at the url
-        "http://fury.cse.buffalo.edu/musicRatings/getAllSongs"
+        "http://fury.cse.buffalo.edu/api/musicRatings/getAllSongs"
         which will return a JSON array where each element in the array is a JSON object in the format
         {"title":"No Regrets", "artist":"Aesop Rock", "ratings":[5,5,4,5], "youtubeID":"sClhmDN5Fcs"}. The method will
         return all the data given by the API in an ArrayList of Ratables

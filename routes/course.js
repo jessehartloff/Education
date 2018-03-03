@@ -14,8 +14,6 @@ var monk = require('monk');
 var db = monk('localhost:27017/education');
 
 
-// TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
-
 // TOD/: They must list what they will learn from the project (new skills/tech) In the team contract for each member
 
 // ~TODO: Office hours App
@@ -23,7 +21,7 @@ var db = monk('localhost:27017/education');
 
 // ~Ambitious: Chat on each project page. Team mates messages display differently
 
-// ~TODO: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
+// Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
 
 // ~TODO: Q&A tied to lecture sections
 // ~TODO: User roles and different views for Student/TA/Instructor (For office hours)
