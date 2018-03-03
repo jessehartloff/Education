@@ -141,6 +141,9 @@ previous_content_short: lab
 </p>
 
 
+<a href="/static/data/sample_songs.csv">sample_songs.csv</a><br/>
+<a href="/static/data/large_songs.csv">large_songs.csv</a>
+
 <h5>Tasks</h5>
 
 <p>
@@ -150,7 +153,7 @@ previous_content_short: lab
 
 <ol>
     <li>Create a package named "ratables" inside the ratings package. In the newly created ratables package, create a
-        class named "Song" containing the following. Note that none of these methods are static since they will belong
+        class named "Song" containing the following methods. Note that none of these methods are static since they will belong
         to
         instances of the Song class and not the class itself:
         <ol type="i">
@@ -159,7 +162,7 @@ previous_content_short: lab
                 values must be stored in instance variables of your choosing
             </li>
             <li>
-                A public method named "getID" that takes no parameters and return the youTubeID that was provided when
+                A public method named "getID" that takes no parameters and returns the youTubeID that was provided when
                 the constructor was called as a String
             </li>
             <li>
@@ -191,7 +194,7 @@ previous_content_short: lab
     </li>
     <li>
         Create a new class in the ratings package named "DataSources" that will contains methods that read data into our
-        program. In this class write a method named "readSongCSVFile"
+        program. In this class write a public static method named "readSongCSVFile"
         that takes one String as a parameter and returns an ArrayList of Songs. The input parameter is the name of a
         csv file containing song ratings where each line is in the format "YouTubeID,artist,title,rating"
         This method will return all the data in this file in an ArrayList of Songs.
@@ -203,7 +206,7 @@ previous_content_short: lab
         of YouTubeIDs (Strings) to Song objects)
     </li>
     <li>
-        In the RatingsAnalyzer class write a method named "bestSong" that takes three parameters (an ArrayList of Songs,
+        In the RatingsAnalyzer class write a public static method named "bestSong" that takes three parameters (an ArrayList of Songs,
         an int, and a double) and returns a Song. The method will return the Song from the parameter ArrayList with the
         highest Bayesian average. The int and double parameters are the number of extra reviews and the value of those
         reviews to be used while computing the Bayesian averages (You should call your method from objective 1 to
@@ -226,14 +229,16 @@ previous_content_short: lab
     implements its methods.
 </p>
 
+<a href="/static/data/sample_products.csv">sample_products.csv</a><br/>
+<a href="/static/data/large_products.csv">large_products.csv</a>
+
 <p>
     Amazon data provided by:<br/>
     Ups and downs: Modeling the visual evolution of fashion trends with one-class collaborative filtering
     R. He, J. McAuley
     WWW, 2016
-    <br/><br/>
-    and
-    <br/><br/>
+    <br/>
+    <br/>
     Image-based recommendations on styles and substitutes
     J. McAuley, C. Targett, J. Shi, A. van den Hengel
     SIGIR, 2015
@@ -320,20 +325,20 @@ previous_content_short: lab
     <li>
         Now that we've refactored the our ratables to be either songs or products we will need to write methods in the
         rest of our program that will handle and ratables. To start, whenever we read data from a source we will return
-        the data as Ratables instead of Songs or Products. For this task, write a method in the DataSources class
+        the data as Ratables instead of Songs or Products. For this task, write a public static method in the DataSources class
         named "readSongsAsRatables" that takes a String as a parameter and returns an ArrayList of Ratables. This method
         will read a csv file with Song ratings in the same format as in the readSongCSVFile method. The only difference
         is the return type which is an ArrayList of Ratables instead of an ArrayList of Songs. (Hint: you can call
         readSongCSVFile from this method and add all the Songs into a new ArrayList of Ratables)
     </li>
     <li>
-        Write a method in the DataSources class named "readProductCSVFile" that takes a String as a parameter and
+        Write a public static method in the DataSources class named "readProductCSVFile" that takes a String as a parameter and
         returns an ArrayList of Ratables. The input String is the name of a csv file where each line is in the format
         "asin,reviewerName,rating,review" and the output is an ArrayList of Ratables containing all the product ratings
         from this file.
     </li>
     <li>
-        In the RatingsAnalyzer class write a method named "bestRatable" that takes three parameters (an ArrayList of
+        In the RatingsAnalyzer class write a public static method named "bestRatable" that takes three parameters (an ArrayList of
         Ratable,
         an int, and a double) and returns a Ratable. The method will return the Ratable from the parameter ArrayList
         with the
@@ -382,12 +387,12 @@ previous_content_short: lab
             </li>
         </ol>
     </li>
-    <li>In the RatingsAnalyzer class write a method named "getTopK" an ArrayList of Ratables, an int (k), and a
+    <li>In the RatingsAnalyzer class write a public static method named "getTopK" an ArrayList of Ratables, an int (k), and a
         Comparator of Ratables as
         parameters and returns an ArrayList of Ratables. This method returns the top k ratables from the ArrayList based
         on the provided Comparator. This method
         must return the list in order such that the first element is the first ratable according to the provided
-        Comparator
+        Comparator. Ties can be broken arbitrarily
     </li>
 </ol>
 
@@ -408,12 +413,11 @@ previous_content_short: lab
     with real-time data that is constantly updating
 </p>
 
-<h5>Tasks</h5>
+<h5>Task</h5>
 
 <ol>
-    <li>Write a method in the DataSources class named "getSongsFromAPI" that takes no parameters and returns an
-        ArrayList
-        of Ratables. This method will access the API endpoint at the url
+    <li>Write a public static method in the DataSources class named "getSongsFromAPI" that takes no parameters and returns an
+        ArrayList of Ratables. This method will access the API endpoint at the url
         "http://fury.cse.buffalo.edu/musicRatings/getAllSongs"
         which will return a JSON array where each element in the array is a JSON object in the format
         {"title":"No Regrets", "artist":"Aesop Rock", "ratings":[5,5,4,5], "youtubeID":"sClhmDN5Fcs"}. The method will
@@ -439,9 +443,6 @@ previous_content_short: lab
     criteria whether we were analyzing Amazon product reviews from a csv file or song ratings from a web API.
 </p>
 
-<p>
-
-</p>
 
 <!--== RhymeBot-->
 
