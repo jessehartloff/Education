@@ -26,24 +26,21 @@ var current_course = 'cse115-s18';
 
 
 function instructions_to_javadoc(question, question_number, max_width, indent) {
+
+	var instructions = "q" + question_number.toString() + ": ";
+
+	instructions += "Write a public static method named q" +
+		question_number.toString() + " that" + question.instruction_text;
+
+	return to_javadoc(instructions);
+}
+
+function to_javadoc(instructions, max_width, indent) {
 	if (!max_width) {
 		max_width = 90;
 	}
 	if (!indent) {
 		indent = "    "
-	}
-
-	var instructions = "q" + question_number.toString() + ": ";
-
-	if (question.concept == "classes") {
-		instructions = question.instruction_text;
-	} else if (question.concept == "inheritance") {
-		instructions = question.instruction_text;
-	} else if (question.concept == "polymorphism") {
-		instructions = question.instruction_text;
-	} else {
-		instructions += "Write a public static method named q" +
-			question_number.toString() + " that" + question.instruction_text;
 	}
 
 	var line = "";
@@ -58,11 +55,13 @@ function instructions_to_javadoc(question, question_number, max_width, indent) {
 		} else if (instructions.charAt(i) === "\n") {
 			docs += indent + " * " + line;
 			line = "";
+			last_space = 0;
 		}
 
 		if (line.length > max_width && last_space != 0) {
 			docs += indent + " * " + line.slice(0, last_space) + "\n";
 			line = line.slice(last_space, line.length);
+			last_space = 0;
 		}
 
 	}
@@ -83,26 +82,50 @@ function java_class_name(problem_set) {
 }
 
 function build_ps_text(problem_set) {
+
+	var class_name = java_class_name(problem_set);
+
 	var ps = "";
-	ps += "public class " + java_class_name(problem_set) + "{\n";
+	ps += "public class " + class_name + "{\n";
 	ps += "    \n";
 	ps += "    \n";
 
-	// TODO: check for OOP questions and add a caution that we are abusing inner classes
+
+	var inner_classes = false;
+	for (var index in problem_set.questions) {
+		var this_question = problem_set.questions[index];
+		if (this_question &&
+			(this_question.concept === "classes" || this_question.concept === "inheritance")) {
+			inner_classes = true;
+		}
+	}
+	if (inner_classes) {
+		ps += to_javadoc("Note: This problem set you will use inner classes by defining " +
+			"custom classes inside the " + class_name + " class. This is only done so you can submit multiple classes a " +
+			"single java file on AutoLab. In most cases it is better " +
+			"practice to define each class in a separate file instead of using inner classes.\n\nFor labs and project " +
+			"you will write " +
+			"your classes in separate files and submit a single jar file containing your entire project");
+		ps += "    \n";
+		ps += "    \n";
+		ps += "    \n";
+	}
+
 
 	var question_number = 1;
-	for (var i in problem_set.questions) {
-		if (!problem_set.questions[i]) {
+	for (var i = 0; i < problem_set.questions.length; i++) {
+		var the_question = problem_set.questions[i];
+		if (!the_question) {
 			console.log("question is null");
 			continue;
 		}
 
-		ps += instructions_to_javadoc(problem_set.questions[i], question_number);
-		//ps += "    public static void q" + question_number.toString() + "(){\n";
-		//ps += "    \n";
-		//ps += "        /* your code for question " + question_number.toString() + " goes here */\n";
-		//ps += "    \n";
-		//ps += "    }\n";
+		if ((the_question.concept === "classes" || the_question.concept === "inheritance")) {
+			ps += to_javadoc("q" + question_number + ": " + the_question.instruction_text);
+		} else {
+			ps += instructions_to_javadoc(the_question, question_number);
+		}
+
 		ps += "    \n";
 		ps += "    \n";
 		ps += "    \n";
@@ -113,6 +136,14 @@ function build_ps_text(problem_set) {
 
 	ps += "    public static void main(String[] args){\n";
 	ps += "        \n";
+
+	if (inner_classes) {
+		ps += "        /* Use the following syntax to instantiate your inner class for testing */\n";
+		ps += "        " + class_name + " outerInstance = new "+class_name+"();\n";
+		ps += "        //InnerClassName innerInstance = outerInstance.new InnerClassName();\n";
+		ps += "        \n";
+	}
+
 	ps += "        /* Test your code here to verify it is correct before submitting */\n";
 	ps += "        \n";
 	ps += "    }\n";
@@ -208,7 +239,6 @@ function get_random_question(concept, type, questions_list) {
 }
 
 
-
 function generate_new_ps(req, res, user_ps, next) {
 
 	var new_ps_number = user_ps.current_ps.ps_number + 1;
@@ -226,27 +256,27 @@ function generate_new_ps(req, res, user_ps, next) {
 	}
 
 	var multiplier = "none";
-	if(req.query.multiplier){
+	if (req.query.multiplier) {
 		multiplier = req.query.multiplier;
 	}
 
-	if(multiplier === "small"){
-		if(user_ps.small_multipliers_remaining > 0){
+	if (multiplier === "small") {
+		if (user_ps.small_multipliers_remaining > 0) {
 			multipliers.push({"reason": "Used consumable multiplier", "multiplier": 1.2});
 			var small_remaining = user_ps.small_multipliers_remaining - 1;
-			collection_ps.update({username:user_ps.username},{$set:{small_multipliers_remaining:small_remaining}});
-		}else{
+			collection_ps.update({username: user_ps.username}, {$set: {small_multipliers_remaining: small_remaining}});
+		} else {
 			req.flash("error", "You don't have any 1.2x consumables. Checking out problem set without consumable multiplier")
 		}
-	}else if(multiplier === "large"){
-		if(user_ps.large_multipliers_remaining > 0){
+	} else if (multiplier === "large") {
+		if (user_ps.large_multipliers_remaining > 0) {
 			multipliers.push({"reason": "Used consumable multiplier", "multiplier": 1.5});
 			var large_remaining = user_ps.large_multipliers_remaining - 1;
-			collection_ps.update({username:user_ps.username},{$set:{large_multipliers_remaining:large_remaining}});
-		}else{
+			collection_ps.update({username: user_ps.username}, {$set: {large_multipliers_remaining: large_remaining}});
+		} else {
 			req.flash("error", "You don't have any 1.5x consumables. Checking out problem set without consumable multiplier")
 		}
-	}else{
+	} else {
 		// no multiplier used
 	}
 
@@ -554,7 +584,7 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 				'labs': {},
 				'homework': {},
 				'leveled_up': false,
-				'extra':{}
+				'extra': {}
 			};
 			collection_ps.insert(collection_entry_example, next());
 			log.info(username + ": registered for problem sets with id " + section_id);

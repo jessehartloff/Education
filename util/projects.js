@@ -32,8 +32,8 @@ function random_id(token_length) {
 
 
 //function random_id34e(token_length) {
-//	var length = token_length || 8;
-//	var alphabet = '0123456789QWERTYUIOPLKJHGFDSAZXCVBNM';
+//	var length = token_length || 12;
+//	var alphabet = '0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm';
 //	var token = '';
 //	for (var i = 0; i < length; i++) {
 //		token += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
@@ -41,7 +41,7 @@ function random_id(token_length) {
 //	console.log(token);
 //	return token;
 //}
-//
+////
 //random_id34e();
 //random_id34e();
 //random_id34e();

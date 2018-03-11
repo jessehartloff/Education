@@ -34,4 +34,3 @@ function add_large_multipliers(username, quantity){
 		}
 	});
 }
-
