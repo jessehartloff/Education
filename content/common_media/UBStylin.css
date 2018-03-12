@@ -11,6 +11,10 @@ div.hidden {
     width: 0;
 }
 
+span.strike{
+    text-decoration: line-through;
+}
+
 body {
     font-size: 0.875rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
