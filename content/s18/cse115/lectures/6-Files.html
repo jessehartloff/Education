@@ -61,14 +61,14 @@ previous_content_short: algos
 
 
 <pre><code class="java">
-    String filename = "src/test.txt";
+    String filename = "test.txt";
     for(String line : Files.readAllLines(Paths.get(filename))){
         System.out.println(line);
     }
 </code></pre>
 
 <p>
-    This code snippet will read a file in the folder "src" named "test.txt" and iterate over each line in a for-each
+    This code snippet will read a file named "test.txt" and iterate over each line in a for-each
     loop. Inside the loop we print each line to the screen. This is the syntax we will use to read files in this course.
 </p>
 
@@ -103,7 +103,7 @@ previous_content_short: algos
 
 <pre><code class="java">
     try{
-        String filename = "src/test.txt";
+        String filename = "test.txt";
         for(String line : Files.readAllLines(Paths.get(filename))){
             System.out.println(line);
         }
@@ -132,7 +132,7 @@ public class FileReadExample {
 
     public static void main(String[] args){
         try{
-            String filename = "src/test.txt";
+            String filename = "test.txt";
             for(String line : Files.readAllLines(Paths.get(filename))){
                 System.out.println(line);
             }
@@ -145,7 +145,7 @@ public class FileReadExample {
 </code></pre>
 
 <p>
-    This program will attempt to read <code>src/test.txt</code> and print its contents to the screen. If an error occurs
+    This program will attempt to read <code>test.txt</code> and print its contents to the screen. If an error occurs
     while reading the file (ex. the file doesn't exist) the catch block will execute and the error will be printed
     <em>without</em> crashing the program.
 </p>
@@ -184,7 +184,7 @@ public class FileReadExample {
 </p>
 
 <pre><code class="java">
-    String filename = "src/example.txt";
+    String filename = "example.txt";
     String textToWrite = "This will be written to the file";
     Files.write(Paths.get(filename), textToWrite.getBytes());
 </code></pre>
@@ -216,7 +216,7 @@ public class FileReadExample {
         public static void main(String[] args){
 
             try{
-                String filename = "src/example.txt";
+                String filename = "example.txt";
                 String textToWrite = "This will be written to the file";
                 Files.write(Paths.get(filename), textToWrite.getBytes());
             }catch(IOException ex){
