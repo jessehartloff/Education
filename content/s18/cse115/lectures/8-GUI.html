@@ -129,7 +129,8 @@ public class Example{
 <pre><code class="java">
     ImageIcon image = null;
         try{
-            URL url = new URL("http://www.buffalo.edu/UBT/UBT-archives/volume25number1/images/sports01.jpg");
+            String longURL = "https://www.buffalo.edu/content/www/brand/identity/university-logo-and-marks/jcr:content/par/image_1.img.438.auto.q65.png/1460123370265.png";
+            URL url = new URL(longURL);
             image = new ImageIcon(url);
         }catch(MalformedURLException e){
             e.printStackTrace();
@@ -360,6 +361,66 @@ public class Example{
 
 
 <hr/>
+
+<h4>Mouse Listeners</h4>
+
+<p>
+    The last listener we will use is the MouseListener. As the name implies, when a MouseListener is attached to gui
+    component it will react to events based on the user's mouse. It will listen for 5 different events related to the
+    mouse which are "mouseClicked", "mousePressed", "mouseReleased", "mouseEntered", and "mouseExited". In the example
+    below we create a JLabel and change the color of the text based on the mouse. Of course, we can write any code
+    we'd like in each of these methods but changes colors is helpful to see when each of these methods is called.
+</p>
+
+<p>
+    To change the text color of this JLabel we are calling the "setForeground" method with an instance of the
+    Color class as an argument. This class has several constance for common colors and, as we see in the mouseEntered
+    method, can be instantiated with three integers representing the RGB (Red, Green, Blue) values for a color.
+</p>
+
+<p>
+    Note that often times the mouseClicked method is called whenever the mouseReleased method is called which
+    replaces the released color in this example. To see the text change to red you can press and hold the mouse button
+    on the JLabel, move the mouse off of the JLabel, then release the mouse. This registers as a mouse release without
+    being a click. It is important to be aware of subtleties like this when using a mouse listener in complex programs.
+</p>
+
+<pre><code class="java">
+    JLabel label = new JLabel("Color Changer");
+    label.addMouseListener(new MouseListener(){
+
+        @Override
+        public void mouseClicked(MouseEvent e){
+            label.setForeground(Color.GREEN);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e){
+            label.setForeground(Color.GRAY);
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e){
+            label.setForeground(Color.RED);
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e){
+            label.setForeground(new Color(255,0,255));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e){
+            label.setForeground(Color.BLACK);
+        }
+
+    });
+</code></pre>
+
+
+
+<hr/>
+
 
 <h4>Combo Box</h4>
 

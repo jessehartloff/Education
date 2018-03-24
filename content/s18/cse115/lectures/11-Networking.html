@@ -287,14 +287,14 @@ public static String getRequest(String url){
 </p>
 
 <pre><code class="java">
-public static String postRequest(String url, String params, boolean json){
+public static String postRequest(String url, String body, boolean json){
     String response = "";
     try{
         ContentType type = ContentType.DEFAULT_TEXT;
         if(json){
             type = ContentType.APPLICATION_JSON;
         }
-        response = Request.Post(url).bodyString(params, type).execute().returnContent().asString();
+        response = Request.Post(url).bodyString(body, type).execute().returnContent().asString();
     }catch(IOException ex){
         ex.printStackTrace();
     }

@@ -192,7 +192,7 @@ function level10() {
 
 function level11() {
 	return {
-		"level_name": "The Internets!",
+		"level_name": "The Internet",
 		"xp_for_next_level": 22000,
 		"question_targets": [
 			{"concept": "networking", "type": "1", "cumulative_number_correct": 2},
@@ -208,7 +208,7 @@ function level11() {
 
 function level12() {
 	return {
-		"level_name": "Language of the Internet",
+		"level_name": "The Language of the Internet",
 		"xp_for_next_level": 24000,
 		"question_targets": [
 			{"concept": "json", "type": "1", "cumulative_number_correct": 2},
@@ -234,7 +234,7 @@ function level13() {
 
 function level14() {
 	return {
-		"level_name": "The Colosseum",
+		"level_name": "The Final Challenge",
 		"xp_for_next_level": 32000,
 		"question_targets": [
 			{"concept": "challenge", "type": "1", "cumulative_number_correct": 1},
@@ -253,11 +253,11 @@ function level15() {
 		"level_name": "End Game",
 		"xp_for_next_level": 99999,
 		"question_targets": [
-			{"concept": "ssj", "type": "1", "cumulative_number_correct": 1},
-			{"concept": "ssj", "type": "2", "cumulative_number_correct": 1},
-			{"concept": "ssj", "type": "3", "cumulative_number_correct": 1},
-			{"concept": "ssj", "type": "4", "cumulative_number_correct": 1},
-			{"concept": "ssj", "type": "5", "cumulative_number_correct": 1}
+			//{"concept": "ssj", "type": "1", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "2", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "3", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "4", "cumulative_number_correct": 1},
+			//{"concept": "ssj", "type": "5", "cumulative_number_correct": 1}
 		].concat(level14().question_targets)
 	};
 }

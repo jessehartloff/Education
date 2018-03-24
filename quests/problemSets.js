@@ -95,15 +95,16 @@ function build_ps_text(problem_set) {
 	for (var index in problem_set.questions) {
 		var this_question = problem_set.questions[index];
 		if (this_question &&
-			(this_question.concept === "classes" || this_question.concept === "inheritance")) {
+			(this_question.concept === "classes" || this_question.concept === "inheritance" ||
+			this_question.concept === "polymorphism" || this_question.concept === "json")) {
 			inner_classes = true;
 		}
 	}
 	if (inner_classes) {
-		ps += to_javadoc("Note: This problem set you will use inner classes by defining " +
-			"custom classes inside the " + class_name + " class. This is only done so you can submit multiple classes a " +
+		ps += to_javadoc("Note: In this problem set level you will use inner classes by defining " +
+			"custom classes inside the " + class_name + " class. This is only done so you can submit multiple classes in a " +
 			"single java file on AutoLab. In most cases it is better " +
-			"practice to define each class in a separate file instead of using inner classes.\n\nFor labs and project " +
+			"practice to define each class in a separate file instead of using inner classes.\n\nFor labs and projects " +
 			"you will write " +
 			"your classes in separate files and submit a single jar file containing your entire project");
 		ps += "    \n";
@@ -120,7 +121,7 @@ function build_ps_text(problem_set) {
 			continue;
 		}
 
-		if ((the_question.concept === "classes" || the_question.concept === "inheritance")) {
+		if ((the_question.concept === "classes" || the_question.concept === "inheritance" || the_question.concept === "polymorphism" || this_question.concept === "json")) {
 			ps += to_javadoc("q" + question_number + ": " + the_question.instruction_text);
 		} else {
 			ps += instructions_to_javadoc(the_question, question_number);
@@ -139,7 +140,7 @@ function build_ps_text(problem_set) {
 
 	if (inner_classes) {
 		ps += "        /* Use the following syntax to instantiate your inner class for testing */\n";
-		ps += "        " + class_name + " outerInstance = new "+class_name+"();\n";
+		ps += "        " + class_name + " outerInstance = new " + class_name + "();\n";
 		ps += "        //InnerClassName innerInstance = outerInstance.new InnerClassName();\n";
 		ps += "        \n";
 	}

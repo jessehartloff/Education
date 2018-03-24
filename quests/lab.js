@@ -13,15 +13,6 @@ var collection_lab_questions = db.get('lab_questions'); // get question by <lab>
 var collection_tas = db.get('tas');
 
 
-
-// TODO:
-//1|educatio | GET /courses/cse115-s18/assignments/lab 200 94.316 ms - 14124
-//1|educatio | GET /static/UBStylin.css 200 1.179 ms - 11148
-//1|educatio | GET /static/functions.js 200 3.437 ms - 3303
-//1|educatio | (node:20848) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 4):
-// TypeError: Cannot read property 'current_lab_attempt' of undefined
-//1|educatio | GET /courses/cse115-s18/active-lab/3 - - ms - -
-
 // entry point
 exports.get_lab = function get_lab(req, res, course) {
 
@@ -82,6 +73,54 @@ exports.get_lab = function get_lab(req, res, course) {
 	}
 };
 
+function get_section(day, hour) {
+	// :/
+	if (day === 1 && hour === 9) {
+		return "A5"
+	} else if (day === 2) {
+		switch(hour){
+			case 9:
+				return "A1";
+			case 11:
+				return "A10";
+			case 13:
+				return "A11";
+			case 15:
+				return "A2";
+			case 17:
+				return "A3";
+			case 19:
+				return "A12";
+		}
+	} else if (day === 3) {
+		switch(hour){
+			case 9:
+				return "A4";
+			case 15:
+				return "A6";
+			case 17:
+				return "A7";
+		}
+	} else if (day === 4) {
+		switch(hour){
+			case 9:
+				return "A8";
+			case 11:
+				return "A9";
+		}
+	} else if (day === 5) {
+		switch(hour){
+			case 17:
+				return "A14";
+			case 19:
+				return "A13";
+		}
+	} else {
+		return "Outside of lab";
+	}
+
+
+}
 
 exports.lab_check_in = function lab_check_in(req, res, course) {
 	//console.log(req.user);
@@ -109,6 +148,16 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 						valid_until.setMinutes(50);
 						valid_until.setSeconds(0);
 
+						var this_lab_section = get_section(valid_until.getDay(), valid_until.getHours());
+						var student_section = user_ps.lab_section;
+						if (this_lab_section !== student_section) {
+							log.warn(user_ps.username + " [lab_section_violation] is registered for lab section " + student_section +
+								" and attended section " + this_lab_section);
+							req.flash("error", user_ps.username + " is registered for section " + student_section +
+								". This is section " + this_lab_section + ". If the student stays in lab, notify Jesse " +
+								"on slack");
+						}
+
 						if (user_ps.lab_validation && user_ps.valid_until < Date.now()) {
 							// In case they never hit a time expired before checking in next week. This would let them pick up where they left off
 
@@ -120,7 +169,7 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 								lab_attempts_this_session: 0
 							};
 
-							if(user_ps && user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
+							if (user_ps && user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
 
 								if (user_ps.current_lab_attempt.all_parts_complete &&
 									user_ps.current_lab_attempt.autolab_complete) {
@@ -136,7 +185,7 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 								},
 								$set: to_set
 							}, function (err, result) {
-								req.flash("success", user_ps.username + " checked into lab");
+								req.flash("success", user_ps.username + " checked into lab. Registered section: " + student_section);
 								log.info(user_ps.username + " was checked into lab by " + req.user.username);
 								res.redirect('/courses/' + req.params.course + '/lab');
 							});
@@ -151,7 +200,7 @@ exports.lab_check_in = function lab_check_in(req, res, course) {
 									all_validations: {"ta": req.user.username, "timestamp": Date.now()}
 								}
 							}, function (err, record) {
-								req.flash("success", user_ps.username + " checked into lab");
+								req.flash("success", user_ps.username + " checked into lab. Registered section: " + student_section);
 								log.info(user_ps.username + " was checked into lab by " + req.user.username);
 								res.redirect('/courses/' + req.params.course + '/lab');
 							});
@@ -237,10 +286,10 @@ function get_random_question(req, res, lab_number, part_number, version_number, 
 function resume_lab(req, res, lab_attempt) {
 
 	collection_ps.findOne({username: req.user.username}, {}, function (err, user_ps) {
-		if(err || !user_ps){
+		if (err || !user_ps) {
 			log.warn("error in resume_lab: " + err);
 			res.redirect('/courses/' + req.params.course + '/lab');
-		}else {
+		} else {
 			lab_attempt = user_ps.current_lab_attempt;
 			//console.log(JSON.stringify(lab_attempt, null, 2));
 			res.to_template.lab_attempt = lab_attempt;
@@ -406,13 +455,12 @@ function time_expired(req, res, username) {
 	collection_ps.findOne({username: username}, {}, function (err, user_ps) {
 
 
-
 		var to_set = {
 			lab_attempts_this_session: 0,
 			lab_validation: false
 		};
 
-		if(user_ps && user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
+		if (user_ps && user_ps.current_lab_attempt && Object.keys(user_ps.current_lab_attempt).length > 0) {
 			if (user_ps.current_lab_attempt.all_parts_complete &&
 				user_ps.current_lab_attempt.autolab_complete) {
 
@@ -635,7 +683,7 @@ function api_get_current_lab(req, res, course) {
 		} else if (record.valid_until < Date.now()) {
 			// TODO: Check how this looks in AutoLab. It might be gross
 			time_expired(req, res, req.user.username);
-		}else {
+		} else {
 			res.send(JSON.stringify(record.current_lab_attempt))
 		}
 	});
@@ -654,7 +702,7 @@ function api_send_lab_results(req, res, course) {
 				res.send("error");
 			} else if (!user_ps) {
 				res.send("No user found with section_id: " + section_id);
-			}else if (user_ps.valid_until < Date.now()) {
+			} else if (user_ps.valid_until < Date.now()) {
 				// TODO: Check how this looks in AutoLab. It might be gross
 				time_expired(req, res, req.user.username);
 			} else {

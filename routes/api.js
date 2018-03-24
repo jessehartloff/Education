@@ -34,6 +34,11 @@ router.get('/cse115', function (req, res) {
 
 });
 
+
+
+
+
+
 function clean_url(url) {
 	return url.split('{')[0];
 }
