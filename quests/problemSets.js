@@ -121,7 +121,8 @@ function build_ps_text(problem_set) {
 			continue;
 		}
 
-		if ((the_question.concept === "classes" || the_question.concept === "inheritance" || the_question.concept === "polymorphism" || this_question.concept === "json")) {
+		if ((the_question.concept === "classes" || the_question.concept === "inheritance" ||
+			the_question.concept === "polymorphism" || the_question.concept === "json")) {
 			ps += to_javadoc("q" + question_number + ": " + the_question.instruction_text);
 		} else {
 			ps += instructions_to_javadoc(the_question, question_number);
