@@ -122,7 +122,8 @@ function build_ps_text(problem_set) {
 		}
 
 		if ((the_question.concept === "classes" || the_question.concept === "inheritance" ||
-			the_question.concept === "polymorphism" || the_question.concept === "json")) {
+			the_question.concept === "polymorphism" || the_question.concept === "json" ||
+			the_question.concept === "challenge")) {
 			ps += to_javadoc("q" + question_number + ": " + the_question.instruction_text);
 		} else {
 			ps += instructions_to_javadoc(the_question, question_number);
@@ -490,7 +491,11 @@ function api_send_ps_results(req, res, course) {
 					if (!xp[question.concept][question.type]) {
 						xp[question.concept][question.type] = 0;
 					}
-					xp[question.concept][question.type] += 1;
+					var xp_added = 1;
+					if(question.concept==="challenge"){
+						xp_added = 5; // effectively 1-time questions
+					}
+					xp[question.concept][question.type] += xp_added;
 					number_correct++;
 				}
 			}

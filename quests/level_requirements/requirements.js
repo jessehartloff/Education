@@ -237,11 +237,11 @@ function level14() {
 		"level_name": "The Final Challenge",
 		"xp_for_next_level": 32000,
 		"question_targets": [
-			{"concept": "challenge", "type": "1", "cumulative_number_correct": 1},
-			{"concept": "challenge", "type": "2", "cumulative_number_correct": 1},
-			{"concept": "challenge", "type": "3", "cumulative_number_correct": 1},
-			{"concept": "challenge", "type": "4", "cumulative_number_correct": 1},
-			{"concept": "challenge", "type": "5", "cumulative_number_correct": 1}
+			{"concept": "challenge", "type": "1", "cumulative_number_correct": 0},
+			{"concept": "challenge", "type": "2", "cumulative_number_correct": 0},
+			{"concept": "challenge", "type": "3", "cumulative_number_correct": 0},
+			{"concept": "challenge", "type": "4", "cumulative_number_correct": 0},
+			{"concept": "challenge", "type": "5", "cumulative_number_correct": 0}
 		].concat(level13().question_targets)
 	};
 }
