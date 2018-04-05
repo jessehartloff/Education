@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
-
+var log = require('winston');
 
 app.use(function (req, res, next) {
-
 	var collection = req.db.get('course_list');
 	collection.find({}, {sort: {semester_index:-1, number: 1}}, function (err, data) {
 		if (!res.to_template) {

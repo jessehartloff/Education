@@ -72,35 +72,6 @@ previous_content_short: gui
 </p>
 
 
-== Web API's
-
-<p>
-    We typically interact with the internet by making HTTP GET
-    requests
-    through a web browser. The response of these GET requests is a mix of HTML, CSS, and JavaScript that tells
-    the browser how to display the requested web page. These pages can contain links that we click to make a GET request
-    for another page, or forms with buttons that make POST requests containing the data we enter. But what if want to
-    interact with the Internet through the software we've written? What if we want to write a bot to automate posts on
-    social
-    media, an
-    app to get the current weather and notify us if it's going to rain soon, display only text from blog posts without
-    all the clutter, or watch the current bid on an online auction. All of these are possible with a little work, but it
-    can be tedious to write code that reads pages made for humans. If you are interested in these applications search
-    for tutorials about web crawlers and explore what you can do with you new programming skills.
-</p>
-
-<p>
-    We won't explore web crawlers in this course, but there is another way to write software for the Internet by using
-    Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
-    software instead of
-    viewed in a browser. To this end, when a web API receives an HTTP request the response will only contain the
-    requested data without complex formatting. This raw data will be in a standardized format that is easily parsed with
-    software (ex. CSV, JSON). A web API will not return HTML, CSS, or Javascript. If it did, it would be a
-    web site intended to be viewed through a browser. We will connect to web APIs via java programs to communicate over
-    the Internet.
-</p>
-
-
 == Java Libraries
 
 <p>
@@ -170,16 +141,16 @@ previous_content_short: gui
 </p>
 
 <pre><code class="java">
-    public class NoImports{
+public class NoImports{
 
     public static void main(String[] args){
-    java.util.ArrayList&lt;Integer&gt; numbers = new java.util.ArrayList&lt;&gt;();
-    numbers.add(3);
-    numbers.add(6);
-    System.out.println(numbers.size());
+        java.util.ArrayList&lt;Integer&gt; numbers = new java.util.ArrayList&lt;&gt;();
+        numbers.add(3);
+        numbers.add(6);
+        System.out.println(numbers.size());
     }
 
-    }
+}
 </code></pre>
 
 <p>
@@ -187,18 +158,18 @@ previous_content_short: gui
 </p>
 
 <pre><code class="java">
-    import java.util.ArrayList;
+import java.util.ArrayList;
 
-    public class WithImport{
+public class WithImport{
 
     public static void main(String[] args){
-    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
-    numbers.add(3);
-    numbers.add(6);
-    System.out.println(numbers.size());
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+        numbers.add(3);
+        numbers.add(6);
+        System.out.println(numbers.size());
     }
 
-    }
+}
 </code></pre>
 
 
@@ -210,41 +181,41 @@ previous_content_short: gui
 
 
 
-== CSE115 Library
+<!--== CSE115 Library-->
 
-<p>
-    For the assignments this week we will use the CSE115 library. This is a small library with 3 classes:
-</p>
+<!--<p>-->
+    <!--For the assignments this week we will use the CSE115 library. This is a small library with 3 classes:-->
+<!--</p>-->
 
-<dl>
-    <dt>cse115.math.NormalDistribution</dt>
-    <dd>Instances of this class store the mean and standard deviation of a normal distribution and contains a method to
-        determine the z-score of a provided value.
-    </dd>
-    <dt>cse115.math.Polynomial</dt>
-    <dd>Objects of this class represent polynomials and contain several methods to analyze them.
-    </dd>
-    <dt>cse115.words.Words</dt>
-    <dd>This class is a collection of static methods used for analyzing and comparing words. This class uses the CMU
-        pronunciation dictionary and the Princeton parts of speech dictionaries for it's methods.
-    </dd>
-</dl>
+<!--<dl>-->
+    <!--<dt>cse115.math.NormalDistribution</dt>-->
+    <!--<dd>Instances of this class store the mean and standard deviation of a normal distribution and contains a method to-->
+        <!--determine the z-score of a provided value.-->
+    <!--</dd>-->
+    <!--<dt>cse115.math.Polynomial</dt>-->
+    <!--<dd>Objects of this class represent polynomials and contain several methods to analyze them.-->
+    <!--</dd>-->
+    <!--<dt>cse115.words.Words</dt>-->
+    <!--<dd>This class is a collection of static methods used for analyzing and comparing words. This class uses the CMU-->
+        <!--pronunciation dictionary and the Princeton parts of speech dictionaries for it's methods.-->
+    <!--</dd>-->
+<!--</dl>-->
 
 
-<p>
-    *** If you don't understand some of the concepts in this library you can still complete the assignments this week.
-    A major advantage of using libraries is that you don't have to know how they work. If a question asks you to return
-    a z-score and you find a method in a library that computes z-score, you can call that method with knowing a single
-    thing about statistics. We have been taking advantage of this powerful idea throughout the semester. You don't need
-    to understand how an ArrayList or HashMap is coded to use them to store values, You don't have to understand file
-    systems to call Files.readAllLines, and next week you won't need to understand how the Internet works to make an
-    HTTP request. Abstracting out these low-level details is what allows us to write complex programs.
-</p>
+<!--<p>-->
+    <!--*** If you don't understand some of the concepts in this library you can still complete the assignments this week.-->
+    <!--A major advantage of using libraries is that you don't have to know how they work. If a question asks you to return-->
+    <!--a z-score and you find a method in a library that computes z-score, you can call that method with knowing a single-->
+    <!--thing about statistics. We have been taking advantage of this powerful idea throughout the semester. You don't need-->
+    <!--to understand how an ArrayList or HashMap is coded to use them to store values, You don't have to understand file-->
+    <!--systems to call Files.readAllLines, and next week you won't need to understand how the Internet works to make an-->
+    <!--HTTP request. Abstracting out these low-level details is what allows us to write complex programs.-->
+<!--</p>-->
 
-<p>
-    For the assignments this week you must look through these classes and read the methods that have been implemented,
-    then call the methods needed to answer each question.
-</p>
+<!--<p>-->
+    <!--For the assignments this week you must look through these classes and read the methods that have been implemented,-->
+    <!--then call the methods needed to answer each question.-->
+<!--</p>-->
 
 
 == The Library
@@ -257,9 +228,11 @@ previous_content_short: gui
 </p>
 
 <p>
-    This library will be setup in the repository of any assignment for which it's required.
+    An Eclipse project with this library setup has been provided at:
 </p>
-
+<p>
+    ssh://ubit@timberlake.cse.buffalo.edu/projects/CSE115/Repositories/Fall2017/Networking
+</p>
 
 == HTTP GET
 
@@ -311,17 +284,17 @@ public static String getRequest(String url){
 </p>
 
 <pre><code class="java">
-public static String postRequest(String url, String params){
+public static String postRequest(String url, String params, boolean json){
     String response = "";
-
     try{
-        response = Request.Post(url)
-                .bodyString(params, ContentType.DEFAULT_TEXT)
-                .execute().returnContent().asString();
+        ContentType type = ContentType.DEFAULT_TEXT;
+        if(json){
+            type = ContentType.APPLICATION_JSON;
+        }
+        response = Request.Post(url).bodyString(params, type).execute().returnContent().asString();
     }catch(IOException ex){
         ex.printStackTrace();
     }
-
     return response;
 }
 </code></pre>
@@ -343,6 +316,35 @@ public static String postRequest(String url, String params){
 <p>
     More details on the origin of these two methods can be found here: <a
         href="https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html">https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html</a>
+</p>
+
+
+== Web API's
+
+<p>
+    We typically interact with the internet by making HTTP GET
+    requests
+    through a web browser. The response of these GET requests is a mix of HTML, CSS, and JavaScript that tells
+    the browser how to display the requested web page. These pages can contain links that we click to make a GET request
+    for another page, or forms with buttons that make POST requests containing the data we enter. But what if want to
+    interact with the Internet through the software we've written? What if we want to write a bot to automate posts on
+    social
+    media, an
+    app to get the current weather and notify us if it's going to rain soon, display only text from blog posts without
+    all the clutter, or watch the current bid on an online auction. All of these are possible with a little work, but it
+    can be tedious to write code that reads pages made for humans. If you are interested in these applications search
+    for tutorials about web crawlers and explore what you can do with you new programming skills.
+</p>
+
+<p>
+    We won't explore web crawlers in this course, but there is another way to write software for the Internet by using
+    Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
+    software instead of
+    viewed in a browser. To this end, when a web API receives an HTTP request the response will only contain the
+    requested data without complex formatting. This raw data will be in a standardized format that is easily parsed with
+    software (ex. CSV, JSON). A web API will not return HTML, CSS, or Javascript. If it did, it would be a
+    web site intended to be viewed through a browser. We will connect to web APIs via java programs to communicate over
+    the Internet.
 </p>
 
 

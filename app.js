@@ -20,18 +20,20 @@ var db = monk('localhost:27017/education');
 var course_routes = require('./routes/course');
 var index_routes = require('./routes/index');
 var auth_app = require('./routes/auth');
-var webhook = require('./routes/webhook');
+var api = require('./routes/api');
 var preprocessor = require('./util/preprocessor');
 var handlebar_helpers = require('./util/handlebars_helpers');
+
+var log = require('./logger.js');
 
 var app = express();
 
 app.use(helmet());
 app.use(flash());
+//app.use()
 
 // view engine setup
-var hbs = exphbs.create({defaultLayout: 'main',
-	helpers : handlebar_helpers});
+var hbs = exphbs.create({defaultLayout: 'main', helpers : handlebar_helpers});
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -57,7 +59,7 @@ app.use(auth_app);
 
 app.use('/', index_routes);
 app.use('/courses', course_routes);
-app.use('/webhook', webhook);
+app.use('/api', api);
 //app.use('/', attendance_routes);
 //app.use('/', office_hours_routes);
 

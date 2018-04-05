@@ -4,37 +4,26 @@ var users_util = require('../util/users');
 var course_util = require('../util/course');
 var projects_util = require('../util/projects');
 var api_util = require('../util/api');
+var questions_util = require('../questions/questions');
+var ps_util = require('../quests/problemSets');
+var lab_util = require('../quests/lab');
 
 
-// D: Check AutoLab multiple sections
-// D: 199 activities
-// D: Disable lecture links
-// D: Update university links
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/education');
 
-// TODO: Log everything! Especially from the web hook. I want to pull everything that a particular student has done (push to develop? No code review? No PR? No commits to a feature branch?)
-
-// D: Mobile friendly menu
-
-// D: Course list is random
 
 // TOD/: They must list what they will learn from the project (new skills/tech) In the team contract for each member
 
-// TODO: Show videos with corresponding release on single project page. Finish formatting the single project page
-// D: Bugfix. No enroll button
-
 // ~TODO: Office hours App
-
 // ~TODO: Meeting scheduling
 
-// TODO: Ratings and reviews. I should be able to set a rubric for each sprint and they fill out the rubric. Maybe.. all results shown to the team, only overall is shown publicly
-// TODO: Ratings are hidden until the end of a round (or hidden forever). Reviews can be displayed
-// ~TODO: Public reviews? At least private messages to the team (email lists? Ryver? Github? my site?)
-// Ambitious: Chat on each project page. Team mates messages display differently
+// ~Ambitious: Chat on each project page. Team mates messages display differently
 
-// D: Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
+// Message system at the top (flash) for course messages (ie. next deadline, warning that you haven't submitted)
 
 // ~TODO: Q&A tied to lecture sections
-// ~TODO: Students can join groups and edit their group's content
 // ~TODO: User roles and different views for Student/TA/Instructor (For office hours)
 
 
@@ -43,13 +32,25 @@ router.get('/', function (req, res) {
 });
 
 
+
 router.get('/:course/lectures/:lecture', function (req, res) {
 	course_util.render_content(req, res, 'lectures', req.params.lecture);
 });
 
+
+router.get('/:course/assignments/ps', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.get_ps);
+});
+
+router.get('/:course/assignments/lab', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.get_lab);
+});
+
+
 router.get('/:course/assignments/:assignment', function (req, res) {
 	course_util.render_content(req, res, 'assignments', req.params.assignment);
 });
+
 
 router.get('/:course/enroll', function (req, res) {
 	if (res.to_template.user) {
@@ -106,6 +107,77 @@ router.post('/:course/join-team/:team_id', function (req, res) {
 	course_util.preprocess_course(req, res, projects_util.join_team);
 });
 // end project routes
+
+
+// Questions
+router.get('/:course/questions', function (req, res) {
+	course_util.preprocess_course(req, res, questions_util.get_question);
+});
+
+router.post('/:course/questions', function (req, res) {
+	course_util.preprocess_course(req, res, questions_util.post_question);
+});
+
+
+// Problem Sets
+router.get('/:course/ps', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.get_ps);
+});
+
+router.get('/:course/ps-download', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.ps_download);
+});
+
+//router.get('/:course/ps-download-new', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_new);
+//});
+//
+//router.get('/:course/ps-download-current', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_current);
+//});
+
+router.post('/:course/ps-api', function (req, res) {
+	course_util.preprocess_course(req, res, ps_util.ps_api);
+});
+// end Problem Sets
+
+
+
+
+// Labs
+router.get('/:course/lab', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.get_lab);
+});
+
+router.post('/:course/lab-check-in', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.lab_check_in);
+});
+
+router.get('/:course/active-lab/:lab_number', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.start_lab);
+});
+
+router.post('/:course/active-lab/:lab_number', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.answer_lab_question);
+});
+
+//router.get('/:course/lab-checkout', function (req, res) {
+//	course_util.preprocess_course(req, res, lab_util.lab_checkout);
+//});
+
+//router.get('/:course/ps-download-new', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_new);
+//});
+//
+//router.get('/:course/ps-download-current', function (req, res) {
+//	course_util.preprocess_course(req, res, ps_util.ps_download_current);
+//});
+
+router.post('/:course/lab-api', function (req, res) {
+	course_util.preprocess_course(req, res, lab_util.lab_api);
+});
+// end Labs
+
 
 
 router.get('/:course/:extra', function (req, res) {

@@ -1,0 +1,75 @@
+{
+  "_id": "5a9fea3f6a7297fcb1088113",
+  "course_id": "cse115-s18",
+  "number": "cse115",
+  "semester": "s18",
+  "title": "Computer Science 1",
+  "archived": false,
+  "assignments": [
+    {
+      "title": "Problem Sets",
+      "short_title": "ps"
+    },
+    {
+      "title": "Labs",
+      "short_title": "lab"
+    },
+    {
+      "title": "Projects",
+      "short_title": "hw"
+    }
+  ],
+  "extra": [
+    {
+      "title": "Syllabus",
+      "short_title": "syllabus",
+      "page_type": "syllabus"
+    },
+    {
+      "title": "Feedback",
+      "short_title": "feedback",
+      "page_type": "feedback"
+    }
+  ],
+  "lectures": [
+    {
+      "title": "Introduction",
+      "short_title": "variables"
+    },
+    {
+      "title": "Methods",
+      "short_title": "functions"
+    },
+    {
+      "title": "Data Structures",
+      "short_title": "ds"
+    },
+    {
+      "title": "Control Flow",
+      "short_title": "if"
+    }
+  ],
+  "course_options": {
+    "use_student_account": true,
+    "student_options": false,
+    "has_project": false,
+    "use_autolab": true,
+    "questions_enabled": true,
+    "message": ""
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
