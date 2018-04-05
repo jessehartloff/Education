@@ -1,0 +1,135 @@
+---
+title: Hot Fix
+short_title: bugs
+next_content_short: disputes
+previous_content_short: changes
+---
+
+
+== Hot Fixes
+
+<p>
+    Once your software is released to the public or to your testers you will start to see bug reports in you GitHub
+    issues from these users. It is your responsibility to respond to these reports and resolve the issue.
+</p>
+
+<p>
+    Note that this protocol only applies to bugs that are reported in your public releases by your users. Bugs found by
+    the team in development should be fixed with a feature branch following the code contribution protocol.
+</p>
+
+== Bug Types
+
+<p>
+    Bugs come in many varieties and teams have different ways of classifying a bug. For the purposes of this course we
+    will use the following definitions to classify bugs:
+</p>
+
+<ul>
+    <li><strong>Trivial Bug: </strong> Behavior of the software that was not intended by the developers, but does not
+        affect the user experience or that is so specific that it only affect a negligible number of users or use cases
+    </li>
+    <li><strong>Minor Bug: </strong> Behavior of the software that was not intended by the developers that
+        negatively affects the user experience for a non-negligible number of users or use cases, but
+        that does not prevent a user from utilizing the implemented features</li>
+    <li><strong>Major Bug: </strong> A bug that prevents users from utilizing one or more features that have been
+        implemented</li>
+    <li><strong>Critical Bug: </strong> A bug that prevents users from enabling the user story/stories of the project,
+        or that compromises the security of the software or its users.</li>
+</ul>
+
+<p>
+    With the exception of trivial bugs, all reported bugs will initiate this protocol.
+</p>
+
+== Protocol
+
+<ul>
+    <li>Label the issue and respond to the bug report within 24 hours</li>
+    <li>Assign the task to the team member(s) in the affected area(s)</li>
+    <li>Create a hot fix branch off of master for the bug</li>
+    <li>Eliminate the bug on the hot fix branch and verify proper functionality</li>
+    <li>Pull request, review, and merge into master and develop</li>
+    <li>Create new release and pull into production in a timely manner</li>
+</ul>
+
+
+<hr/>
+<h4>Label and respond to the bug report</h4>
+
+<p>
+    Once a bug is reported as an issue on your team's GitHub repository your team must label/tag the issue as a bug
+    using GitHub labels. Note that the user creating the issue cannot add this label themselves. It is up to the team to
+    determine which created issues are bug reports and which are not. If it is a bug report, this protocol must be
+    followed in full. If the issue is not a bug report, add an appropriate label to the issue based on its type.
+</p>
+
+<p>
+    Whenever and issue is created on your team's GitHub repository that is a bug report your team must make first
+    contact within 24 hours, excluding Saturday and Sunday (Ex. If a bug is reported Friday night or over the weekend
+    you have until Monday night to respond) and spring break, of the creation time of the issue. This first contact can be as simple
+    as a comment on the issue or assigning the task to a team member.
+</p>
+
+
+<hr/>
+<h4>Assign the bug to a Team Member</h4>
+
+<p>
+    The team must first determine which member, or members, of the team will be responsible for fixing the bug. Refer
+    to your team roles to determine who will fix the bug. If the
+    team cannot come to an agreement as to who should fix the bug you should move to your team's dispute resolution
+    protocol, and update your team roles after the next submission. Once the appropriate
+    member(s) are decided assign the issue to them.
+</p>
+
+<hr/>
+<h4>Hot Fix Branch</h4>
+
+<p>
+    Similar to creating a feature branch, create a hot fix branch off of your master branch. This branch will contain
+    the current state of your project that is running in production.
+</p>
+
+<hr/>
+<h4>Eliminate the Bug</h4>
+
+<p>
+    Work on the hot fix branch until the bug is fixed. Be sure to test the new code in your development environment and
+    verify that the bug has been eliminated while maintaining the rest of the functionality of the project
+    (ie. don't create more bugs while fixing one).
+</p>
+
+
+<hr/>
+<h4>Pull Request and Merge</h4>
+
+<p>
+    Create a pull request to merge the code into master. After the pull request is reviewed, approved, and merged you
+    will also merge the fix into your develop branch.
+</p>
+
+
+<hr/>
+<h4>Update Release and Production</h4>
+
+<p>
+    Create a new release of your master branch in GitHub with an incremented minor revision of the version number. For
+    example if the previous release was v0.2.0 this release will be v0.2.1. Once your master branch contains the
+    updated code, update your production release so your users and testers can benefit from the update.
+</p>
+
+
+<hr/>
+<h4>Timely Bug Fix</h4>
+
+<p>
+    This entire protocol must be completed within 1 week (168 hours), not counting spring break, of the time the issue for the bug was initially
+    created. Note that other constraints may require the bug to be fixed sooner (Ex. If the bug is preventing
+    others from testing your software during alpha or beta testing).
+</p>
+
+
+
+
+

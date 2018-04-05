@@ -1,0 +1,91 @@
+<div class="card border-dark mb-3">
+
+    <div class="card-header">
+        <h1>Lab</h1>
+    </div>
+
+</div>
+
+{{#unless user}}
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <h4>You must be logged in to use this feature. If you are taking this class you should create an account and
+                log in.
+            </h4>
+        </div>
+    </div>
+{{else}}
+
+
+
+    <!--<div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">-->
+    <!--<div class="card-body">-->
+    <!--<h5>Level {{user_ps.level}}: {{level_name}}</h5>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    {{#if user_is_TA}}
+
+        <div class="card border-dark mb-3">
+            <div class="card-body">
+
+                <form action="/courses/{{course.course}}/lab-check-in" method="post">
+                    <div class="form-group">
+                        <input type="text" id="scan" name="scan" autofocus> &nbsp; <--- scan card or enter person number
+                        to check students into lab
+                        <br/><br/>
+                        <input type="submit" value="submit">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    {{/if}}
+
+    <div class="card border-dark mb-3">
+        <div class="card-header">
+            <h5>All Labs</h5>
+        </div>
+        <div class="card-body">
+            {{#if user_ps.lab_validation}}
+                <p>
+                    Click a released lab to begin. You are committed once you choose a lab to start. You will not be
+                    able to start another lab this week unless you complete the lab you choose.
+                </p>
+            {{else}}
+                <p>
+                    Labs are only available during your lab section
+                </p>
+            {{/if}}
+
+            {{#each labs}}
+                <a href="/courses/{{../course.course}}/active-lab/{{this.lab_number}}"
+                        class="btn-custom
+                       {{#if this.complete}}
+                                btn-complete-custom disabled">Lab {{this.lab_number}}: {{this.title}} [Complete]
+                {{else}}
+                    {{#if ../user_ps.lab_validation}}
+                        {{#if this.released}}
+                            btn-primary-custom">Start Lab {{this.lab_number}}: {{this.title}}
+                        {{else}}
+                            btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
+                        {{/if}}
+                    {{else}}
+                        btn-secondary-custom disabled">Lab {{this.lab_number}}: {{this.title}}
+                    {{/if}}
+
+                {{/if}}
+
+                </a>
+                <br/>
+                <br/>
+            {{else}}
+                <h3>No Labs available</h3>
+            {{/each}}
+
+        </div>
+    </div>
+
+
+
+{{/unless}}

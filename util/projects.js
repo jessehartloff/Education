@@ -32,8 +32,8 @@ function random_id(token_length) {
 
 
 //function random_id34e(token_length) {
-//	var length = token_length || 8;
-//	var alphabet = '0123456789QWERTYUIOPLKJHGFDSAZXCVBNM';
+//	var length = token_length || 12;
+//	var alphabet = '0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm';
 //	var token = '';
 //	for (var i = 0; i < length; i++) {
 //		token += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
@@ -41,7 +41,7 @@ function random_id(token_length) {
 //	console.log(token);
 //	return token;
 //}
-//
+////
 //random_id34e();
 //random_id34e();
 //random_id34e();
@@ -116,8 +116,8 @@ function get_members(req, res, course_id, this_project, next) {
 			res.redirect('/courses/' + course_id + '/projects');
 		} else {
 
-			console.log('first');
-			console.log(members);
+			//console.log('first');
+			//console.log(members);
 			var members_simple = [];
 			for (var i in members) {
 				members_simple.push(members[i].username);
@@ -258,12 +258,20 @@ function rate_project(project, rater, rating) {
 	// TODO
 	// Check if rater has rated this project before
 	// add rating if they haven't
+	// or rate each release
+	// or rate all the time for any reason, or when I or the team create an new event
 }
 
 exports.projects_page = function projects_page(req, res, course) {
 	if (course.project && course.project === 'old') {
 		res.to_template.projects = course.projects;
 		res.render('projects/projects_archived', res.to_template);
+	} else if (course.course_options.has_project_new) {
+		var projects_collection = db.get('projects');
+		projects_collection.find({'course': course.course}, {sort: {_id: 1}}, function (err, all_projects) {
+			res.to_template.projects = all_projects;
+			res.render('projects/projects_new', res.to_template);
+		});
 	} else {
 		if (users.user_enrolled(req)) {
 			res.to_template.user.course_options = res.to_template.user.courses_enrolled[course.course].options;

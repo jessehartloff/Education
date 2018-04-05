@@ -1,7 +1,9 @@
 <div class="left-side-bar">
-    <div class="well sidebar-well">
+    <div class="sidebar-well">
 
-        <h4>&nbsp;{{ course.number_upper }}</h4>
+        <!--<hr/>-->
+
+        <h6>&nbsp;{{ course.number_upper }}</h6>
 
         {{#each course.extra}}
             &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/{{this.page_type}}">{{this.title}}</a>
@@ -11,52 +13,45 @@
 
         {{#if course.assignments}}
 
-            <!--<hr/>-->
+            <hr/>
 
-            <h4>&nbsp;Assessment</h4>
-        {{#unless course.course_options.no_autolab}}
-            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
-            <br/>
-        {{/unless}}
+            <h6>&nbsp;Assessment</h6>
+            {{#unless course.course_options.no_autolab}}
+                &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/" target="_blank">-Autolab</a>
+                <br/>
+            {{/unless}}
             {{#each course.assignments}}
-                {{#ifIndexLimited ../course.course @index 2}}
                 &nbsp;<a class="menu_link {{this.short_title}}"
                          href="/courses/{{../course.course}}/assignments/{{this.short_title}}">{{this.title}}</a>
                 <br/>
-                {{else}}
-                &nbsp;<a class="menu_link"
-                         href="/courses/{{../course.course}}/assignments/{{this.short_title}}"></a>{{this.title}}
-                <br/>
-                {{/ifIndexLimited}}
+
             {{/each}}
         {{/if}}
 
 
         {{#if course.lectures}}
 
-            <!--<hr/>-->
+            <hr/>
 
-            <h4>&nbsp;Training</h4>
+            {{#if course.course_options.has_project_new}}
+                <h6>&nbsp;Protocols</h6>
+            {{else}}
+                <h6>&nbsp;Training</h6>
+            {{/if}}
             {{#unless course.course_options.no_question_site}}
-            &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
-                     target="_blank">-Questions</a>
-            <br/>
+                &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php"
+                         target="_blank">-Questions</a>
+                <br/>
             {{/unless}}
 
             {{#each course.lectures}}
-                {{#ifIndexLimited ../course.course @index 12}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
-                {{@index}}. {{this.title}}</a>
+                {{increment @index}}. {{this.title}}</a>
                 <br/>
-                {{else}}
-                    &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}"></a>
-                    {{@index}}. {{this.title}}
-                    <br/>
-                {{/ifIndexLimited}}
             {{/each}}
         {{/if}}
 
-        <br/>
+        <!--<hr/>-->
 
     </div>
 </div>

@@ -13,6 +13,7 @@ var crypto = require('crypto');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
+var log = require('winston');
 
 
 var collection = db.get('users');
@@ -47,12 +48,15 @@ function local_strategy_function(username, password, done) {
 			return done(err);
 		}
 		if (!user) {
+			log.warn("Invalid username: " + username);
 			return done(null, false, {message: 'Invalid username.'});
 		}
 		if (!bcrypt.compareSync(password, user.password)) {
+			log.warn("Invalid password: " + username);
 			return done(null, false, {message: 'Incorrect password.'});
 		}
 		delete user.password;
+		log.info(username + ': logged in');
 		return done(null, user);
 	});
 }
@@ -63,9 +67,16 @@ passport.use(new LocalStrategy(local_strategy_function));
 // Check if a user is logged in
 app.use(function (req, res, next) {
 	//console.log(req.user);
+	var username = "anon";
 	if (req.user) {
 		res.to_template.user = req.user;
+		var username = req.user.username;
 	}
+
+	if (!req.headers['user-agent'].includes("csps-support@buffalo.edu")) {
+		log.silly(username + ": requested " + req.url + " (" + req.headers['user-agent'] + ")");
+	}
+
 	next();
 });
 
@@ -76,12 +87,28 @@ router.get('/profile', function (req, res) {
 
 
 router.get('/login', function (req, res) {
+	res.to_template.prev_path = req.headers.referer;
+	//console.log("4" + req.headers.referer);
+	if (!res.to_template.prev_path) {
+		res.to_template.prev_path = '/user/profile';
+	}
 	res.render('login', res.to_template);
 });
 
 router.post('/login', function (req, res, next) {
+	var destination = req.body.prev_path;
+	//console.log("6" + req.body.prev_path);
+	if (req.body.username.endsWith('@buffalo.edu')) {
+		req.body.username = email_to_ubit(req.body.username);
+	}
+	// Don't follow an outside link. This is not for security, and offers no added security, but for convenience
+	// in case someone uses a strange referer or links directly to the login page
+	if (!destination || (!destination.includes("localhost") && !destination.includes("fury.cse.buffalo.edu"))) {
+		destination = '/user/profile';
+	}
+
 	passport.authenticate('local', {
-		successRedirect: '/user/profile',
+		successRedirect: destination,
 		failureRedirect: '/user/login',
 		failureFlash: true
 	})(req, res, next);
@@ -96,10 +123,11 @@ router.post('/register', function (req, res, next) {
 			db.get('users').findOne({'username': username}, {}, function (err, record) {
 				if (record) {
 					req.flash('error', 'a user with username ' + username + ' already exists. Use the forgot password ' +
-						'link to reset your password.');
+						'link to reset your password');
 					res.redirect('/user/login');
 				} else {
 					add_user(username);
+					log.info(username + ": registered an account");
 					req.flash('success', "An account has been created with username " + username + ". A verification link " +
 						"has been sent to your email. Please verify your email to set your password and log in");
 					res.redirect('/user/login');
@@ -162,6 +190,7 @@ router.get('/reset-password/:token', function (req, res) {
 			res.render('reset_password', res.to_template);
 		} else {
 			req.flash('error', 'Invalid or expired link');
+			log.warn("Attempt to use an invalid password reset token: " + req.params.token);
 			res.redirect('/user/login');
 		}
 	});
@@ -178,6 +207,7 @@ router.post('/reset-password', function (req, res) {
 				if (verify_new_passwords(req, req.body.new_password_1, req.body.new_password_2)) {
 					change_password(record.username, req.body.new_password_1);
 					req.flash('success', 'Password reset for user: ' + record.username);
+					log.info(record.username + ": reset password via reset token");
 					res.redirect('/user/login');
 				} else {
 					res.to_template.token = record.token;
@@ -185,6 +215,7 @@ router.post('/reset-password', function (req, res) {
 				}
 			} else {
 				req.flash('error', 'Invalid or expired link');
+				log.warn("Attempt to use an invalid password reset token: " + req.params.token);
 				res.redirect('/user/login');
 			}
 		});
@@ -194,6 +225,7 @@ router.post('/reset-password', function (req, res) {
 router.get('/logout', function (req, res) {
 	if (req.user) {
 		console.log('user ' + req.user.username + ' logged out');
+		log.info(req.user.username + ": logged out manually");
 		req.logout();
 		req.flash('success', 'logged out');
 	} else {
@@ -213,12 +245,14 @@ router.post('/change-password', function (req, res) {
 			}
 			if (err) {
 				//res.render('error', options)
+				log.error(req.user.username + ": in /change-password");
 			} else if (!user) {
 				//res.render('error', options)
 			} else if (user.username === req.user.username) {
 				// authenticated
 				if (verify_new_passwords(req, req.body.new_password_1, req.body.new_password_2)) {
 					change_password(user.username, req.body.new_password_1);
+					log.info(user.username + ": changed password");
 					req.flash('success', 'password updated');
 				}
 			}
@@ -279,6 +313,7 @@ function add_user(username) {
 					console.log(err);
 				} else {
 					console.log('user ' + username + ' added');
+					log.info(username + ": added to the database")
 				}
 			});
 
@@ -354,11 +389,12 @@ function email_password_reset_link(email, token) {
 		//replyTo: 'hartloff@buffalo.edu',
 		to: email,
 		subject: 'CSE Course: Set password',
-		text: 'Click the link below to set your password' +
+		text: 'Welcome to the course! Please click the link below to set your password' +
 		'\n\nusername: ' + email_to_ubit(email) +
 		'\nverification link: ' + 'https://fury.cse.buffalo.edu/user/reset-password/' + token +
 		'\n\nPlease login and set your password.'
 	});
+	log.info(email_to_ubit(email) + ": requested password reset link");
 }
 
 

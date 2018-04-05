@@ -1,0 +1,33 @@
+<div class="card border-dark mb-3">
+
+    <div class="card-header">
+        <h1>Projects</h1>
+    </div>
+
+</div>
+
+{{#unless user}}
+    <div class="card border-dark mb-3">
+        <div class="card-body">
+            <h4>You must be logged in to use this feature. If you are taking this class you should create an account and
+                log
+                in.
+            </h4>
+        </div>
+    </div>
+{{else}}
+
+
+    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">
+        <div class="card-body">
+            <h3>Level {{user_ps.level}}: {{level_name}}</h3>
+        </div>
+    </div>
+    <div class="card border-dark {{#if grading_ps_active}}text-white bg-primary-custom{{/if}} mb-3">
+        <div class="card-body">
+            <h3>No Projects available</h3>
+        </div>
+    </div>
+
+
+{{/unless}}

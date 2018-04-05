@@ -1,0 +1,38 @@
+[
+  {
+    "key_name": "team_name",
+    "display_name": "Team Name",
+    "is_required": true,
+    "default_value": ""
+  },
+  {
+    "key_name": "project_name",
+    "display_name": "Project Name",
+    "is_required": true,
+    "default_value": ""
+  },
+  {
+    "key_name": "project_description",
+    "display_name": "Project Description",
+    "is_required": true,
+    "default_value": ""
+  },
+  {
+    "key_name": "landing_page_link",
+    "display_name": "Landing Page Link",
+    "is_required": true,
+    "default_value": ""
+  },
+  {
+    "key_name": "repository_link_primary",
+    "display_name": "Primary Repository Link",
+    "is_required": true,
+    "default_value": ""
+  },
+  {
+    "key_name": "communication_channel",
+    "display_name": "Contact",
+    "is_required": true,
+    "default_value": ""
+  }
+]

@@ -1,131 +1,136 @@
-<div class="well lecture-section-well">
-    <h1>{{project.project_name}}</h1>
-</div>
-
-{{#if user}}
-    {{#if user.team_founder}}
-        <form action="/courses/{{course.course}}/update-project/{{project.team_id}}" method="get">
-            <div>
-                <input type="submit" value="Edit Project"/>
-            </div>
-        </form>
-    {{/if}}
-{{/if}}
-
-<div class="well lecture-section-well">
+<div class="card border-dark mb-3">
+    <div class="card-body">
+        <h1>{{project.project_name}}</h1>
 
 
-    <h3>
-        {{#if project.landing_page_link}}
-            <a href="{{project.landing_page_link}}">
-                {{project.project_name}}
-            </a>
-        {{else}}
-            {{project.project_name}}
+        {{#if user}}
+            {{#if user.team_founder}}
+                <form action="/courses/{{course.course}}/update-project/{{project.team_id}}" method="get">
+                    <div>
+                        <input type="submit" value="Edit Project"/>
+                    </div>
+                </form>
+            {{/if}}
         {{/if}}
-    </h3>
 
-    {{#if project.repository_link_primary}}
-        <a href="{{project.repository_link_primary}}"><img src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
-    {{/if}}
-
-    {{#if project.communication_channel}}
-        <a href="{{project.communication_channel}}"><img style="max-height:32px" src="/static/logo-dark.png"/></a>&nbsp;
-    {{/if}}
-    <hr/>
+        <div class="well lecture-section-well">
 
 
-    <h4>{{project.team_name}}</h4>
-
-    {{#each members}}
-        <p>
-            {{#if this.options.github_username.value}}
-                &nbsp;<a href="https://github.com/{{this.options.github_username.value}}"><img style="max-height:16px"
-                                                                                               src="/static/GitHub-Mark-32px.png"/></a>
-            {{/if}}
-            {{#if this.options.home_page.value}}
-            <a href="{{this.options.home_page.value}}">
-            {{/if}}
-            {{#if this.options.preferred_name.value}}
-                {{this.options.preferred_name.value}}
-            {{else}}
-                {{this.username}}
-            {{/if}}
-            {{#if this.options.home_page.value}}
-            </a>
-            {{/if}}
-        </p>
-    {{/each}}
-
-
-
-    <hr/>
-    <p>
-        {{project.project_description}}
-    </p>
-
-
-    <h4>Releases</h4>
-
-    {{#if project.releases}}
-        {{#each project.releases}}
-            <a href="{{this.link}}">{{this.tag_name}}</a> - {{this.name}}<br/>
-        {{/each}}
-
-    {{else}}
-        <p>
-            No releases.
-        </p>
-    {{/if}}
-
-    <br/>
-
-    {{#each project.video_submissions as |video|}}
-        {{#if @last}}
-            <div class="embed-responsive embed-responsive-16by9 thumbnail"
-                 style="background-image: url('https://img.youtube.com/vi/{{ video.link }}/0.jpg');"
-                 onclick="loadVideo(this, '{{ video.link }}')">
-                <!--<div class="row">-->
-                <!--<img class="img-responsive" style="cursor: pointer; width: 100%;"-->
-                <!--src="https://img.youtube.com/vi/{{ video.link }}/sddefault.jpg"/>-->
-                <!--</div>-->
-            </div>
-        {{else}}
-
-        {{/if}}
-    {{/each}}
-
-    {{#each project.video_submissions as |video|}}
-        {{#unless @first}}
-            {{#unless @last}}
-                -
-            {{/unless}}
-        {{/unless}}
-        {{#unless @last}}
-            <h5 style="display: inline-block;"><a
-                    href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
-            </h5>
-        {{/unless}}
-    {{/each}}
-
-
-    <h4>Collaboration Issues</h4>
-    {{#if project.issues}}
-        {{#each project.issues}}
-            {{#if this.help_wanted}}
-                {{#if this.open}}
-                    <a href="{{this.link}}">{{this.title}}</a><br/>
-                    {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"
-                                                  style="color:gold"></span> Help Wanted{{/if}}<br/>
+            <h3>
+                {{#if project.landing_page_link}}
+                    <a href="{{project.landing_page_link}}">
+                        {{project.project_name}}
+                    </a>
+                {{else}}
+                    {{project.project_name}}
                 {{/if}}
+            </h3>
+
+            {{#if project.repository_link_primary}}
+                <a href="{{project.repository_link_primary}}"><img src="/static/GitHub-Mark-32px.png"/></a>&nbsp;
             {{/if}}
-        {{/each}}
-    {{else}}
-        <p>
-            No issues found. Create issues and verify that the course webhook is setup properly.
-        </p>
-    {{/if}}
 
+            {{#if project.communication_channel}}
+                <a href="{{project.communication_channel}}"><img style="max-height:32px"
+                                                                 src="/static/logo-dark.png"/></a>&nbsp;
+            {{/if}}
+            <hr/>
+
+
+            <h4>{{project.team_name}}</h4>
+
+            {{#each members}}
+                <p>
+                    {{#if this.options.github_username.value}}
+                        &nbsp;<a href="https://github.com/{{this.options.github_username.value}}"><img
+                            style="max-height:16px"
+                            src="/static/GitHub-Mark-32px.png"/></a>
+                    {{/if}}
+                    {{#if this.options.home_page.value}}
+                    <a href="{{this.options.home_page.value}}">
+                    {{/if}}
+                    {{#if this.options.preferred_name.value}}
+                        {{this.options.preferred_name.value}}
+                    {{else}}
+                        {{this.username}}
+                    {{/if}}
+                    {{#if this.options.home_page.value}}
+                    </a>
+                    {{/if}}
+                </p>
+            {{/each}}
+
+
+
+            <hr/>
+            <p>
+                {{project.project_description}}
+            </p>
+
+
+            <h4>Releases</h4>
+
+            {{#if project.releases}}
+                {{#each project.releases}}
+                    <a href="{{this.link}}">{{this.tag_name}}</a> - {{this.name}}<br/>
+                {{/each}}
+
+            {{else}}
+                <p>
+                    No releases.
+                </p>
+            {{/if}}
+
+            <br/>
+
+            {{#each project.video_submissions as |video|}}
+                {{#if @last}}
+                    <div class="embed-responsive embed-responsive-16by9 thumbnail"
+                         style="background-image: url('https://img.youtube.com/vi/{{ video.link }}/0.jpg');"
+                         onclick="loadVideo(this, '{{ video.link }}')">
+                        <!--<div class="row">-->
+                        <!--<img class="img-responsive" style="cursor: pointer; width: 100%;"-->
+                        <!--src="https://img.youtube.com/vi/{{ video.link }}/sddefault.jpg"/>-->
+                        <!--</div>-->
+                    </div>
+                {{else}}
+
+                {{/if}}
+            {{/each}}
+
+            {{#each project.video_submissions as |video|}}
+                {{#unless @first}}
+                    {{#unless @last}}
+                        -
+                    {{/unless}}
+                {{/unless}}
+                {{#unless @last}}
+                    <h5 style="display: inline-block;"><a
+                            href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
+                    </h5>
+                {{/unless}}
+            {{/each}}
+
+
+            <h4>Collaboration Issues</h4>
+            {{#if project.issues}}
+                {{#each project.issues}}
+                    {{#if this.help_wanted}}
+                        {{#if this.open}}
+                            <a href="{{this.link}}">{{this.title}}</a><br/>
+                            {{#if this.help_wanted}}<span class="glyphicon glyphicon-exclamation-sign"
+                                                          aria-hidden="true"
+                                                          style="color:gold"></span> Help Wanted{{/if}}<br/>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
+            {{else}}
+                <p>
+                    No issues found. Create issues and verify that the course webhook is setup properly.
+                </p>
+            {{/if}}
+
+        </div>
+
+    </div>
 </div>
-
-

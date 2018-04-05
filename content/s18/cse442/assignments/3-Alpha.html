@@ -1,0 +1,254 @@
+---
+title: Alpha Release
+short_title: sprint3
+next_content_short: sprint4
+previous_content_short: sprint2
+due_date: Week 7 (Wednesday, March <span class="strike">16</span> 28 @ 4pm)
+---
+
+
+== Requirements
+
+<ol>
+    <li>Develop Alpha Release: Develop the alpha version of your project that enables your user story/stories</li>
+    <li>Deploy Alpha Release: Deploy the alpha version of your project for your alpha testers</li>
+    <li>Developer Documentation: Write documentation sufficient to on-board a new developer into your project</li>
+    <li>Help Wanted Issues (Individual): Create an issue in your area of the project for an outside developer to
+        complete
+    </li>
+    <li>YouTube Video: Create and submit a YouTube video of your running software</li>
+</ol>
+
+
+== Practical Objective
+<p>
+    <b>Objective</b>: Develop and release the alpha version of your project that enables your user story/stories with
+    no critical bugs. The release must be accessible to a non-technical user.
+<hr/>
+<b>Criteria</b>:
+
+</p>
+<ol>
+    <li>As a non-technical user I was able to easily run/start the software</li>
+    <li>As a technical user I was able to use this release for the user story/stories of this project</li>
+    <li>The "help wanted" tasks have an appropriate scope and are clearly described</li>
+</ol>
+
+<p>
+    Note that the last criteria assesses individual work. If the team has a low score in this criteria the course staff
+    will determine which task(s) caused the low score. If the project has great scores for the first 2 criteria the team
+    members with appropriate and clear tasks will still meet the practical objective while the members with the
+    offending tasks will not.
+</p>
+
+== Develop Alpha Release
+
+<p>
+    A user must be able to use the alpha release of your software for the
+    user story/stories of your project. The alpha release does not have to contain your entire MVP feature set, however
+    the missing features cannot be on the "critical path" since this release must still enable your user story/stories.
+    Any MVP features that are missing must have GitHub issues created for them. These features must be completed before
+    the beta release.
+</p>
+
+<p>
+    For the alpha release you can assume that your users (alpha testers) are technically inclined. It is acceptable if
+    user experience is not very intuitive to a general audience, but a technical user (your fellow CSE442 classmates)
+    should be able to figure out how to use the software.
+</p>
+
+<div class="requirement alert alert-info">
+    Once the Alpha version is complete, merge develop into master via a pull request and create a release from your
+    master branch on GitHub as "v0.2.0"
+</div>
+
+
+== Deploy Alpha Release
+
+<p>
+    The alpha version of your software must be available and accessible to a non-technical user. Note the distinction
+    that once your software is running you can assume your users are technically inclined, but a non-technical user
+    must be able to run/start your software. This requirement will be different depending on each project. Deployment
+    strategies for several
+    primary categories are given below. If you feel your project does not fit into one of these categories please
+    contact the course staff and we can discuss your specific deployment strategy.
+</p>
+
+<h5>Web Application</h5>
+
+<p>
+    If your project is a web application it must be deployed and running on a server that is accessible from any
+    Internet connected device that is running a major browser (Chrome, FireFox, etc). You are responsible for finding a
+    server where you can host your app. There are several free options available that you can use.
+</p>
+
+<p>
+    When deploying a web application you must <strong>ensure that you app is secure</strong>. This includes protecting
+    your site from attacks that can break its functionality or any way for an attacker to obtain any data of your users
+    that should be protected (Ex. An attacker must not be able to log in as one of your users). We will cover securing
+    a web app in lecture before this release is due.
+</p>
+
+<h5>Platform Specific Application</h5>
+
+<p>
+    This includes any app that targets a specific platform that is commonly available including Windows, OSX, Linux,
+    iOS,
+    and Android. Note that this includes both desktop and mobile apps. To deploy these apps you must provide a single
+    executable file that can be ran on the target platform -or- release your app through an official distribution
+    channel (Ex. Windows store, app store, play store). If the app is not released in an official store, a user
+    should be able to download the single file and run/install your software without any addition steps.
+</p>
+
+<p>
+    In addition to providing an executable or adding your software to a store you must also have a device available
+    for your testers to use that has your app installed. This will be necessary when you have an assigned tester who
+    does not have access to your target platform. In addition, if your app is not release in an official store you
+    must have this device available to <strong>all</strong> of your testers. This is for security reasons so they are
+    not installing an arbitrary executable on their own device.
+</p>
+
+<h5>Hardware Application</h5>
+
+<p>
+    A hardware application project is one that requires special hardware that is not commonly available to most users.
+    This includes projects that require specialized devices (Ex. Hololens, VR headset, xbox, myo armband, smart watch)
+    or hardware that was custom built for the project. To deploy such a project you can include instructions in your
+    readme that are simple for non-technical user to follow and run the app assuming they have all the required
+    hardware. This should be as simple as possible for your given use case.
+</p>
+
+<p>
+    Since your testers may not have access to the required hardware you must provide times where you provide a hands on
+    demo for your testers. A reasonable effort must be made to provide an opportunity for all testers to use your
+    software. Lecture time can be scheduled for this purpose.
+</p>
+
+
+== Developer Documentation
+
+<p>
+    During the next phase of the project you will be completing a task for another team in the course, and your class
+    mates will be completing tasks for your team. To facilitate this you must prepare your project for the on-boarding
+    process and make it possible, preferably simple, for a developer to visit your project and contribute code. At the
+    end of the next phase you will be assessed based on how difficult or easy it was for someone to contribute to your
+    project. As with many aspects of this course, submitting quality work in this section will save you time, and
+    possibly your grade, later in the course.
+</p>
+
+<br/>
+<h4>Wiki</h4>
+<p>
+    Write your developer documentation in your GitHub wiki. This documentation must outline the structure of your code
+    and provide everything needed for a new developer to join the team. An
+    outside developer who is unfamiliar with the project should be able to contribute code to your project after reading
+    the wiki without having to contact the team (Though they can, and should, contact the team via your Gitter
+    community).
+</p>
+
+
+<br/>
+<h4>Code Organization</h4>
+<p>
+    Your code itself should also be easy to follow and well-organized. Simplicity is critical here. Meaningful naming,
+    comments where needed, intuitive directory structure, etc. Try to imagine looking at your repository for the first
+    time. Does it make sense? Is it confusing? Are there things that would need explaining? If so, adjust as needed.
+</p>
+
+
+== Help Wanted Issues (Individual)
+
+<p>
+    Each team member must create an issue in your repo to be completed by a student outside your group during the next
+    phase of the project and tagged with the "help wanted" tag. Each issue should be related to the creators area of the
+    project according to your team roles. Be sure that these tasks are clearly defined. Note that you cannot have 1 team
+    member create all these
+    issues. When these tasks are assigned each student will be given a GitHub username and they will find their assigned
+    task by finding a "help wanted" issue created by that user.
+</p>
+<p>
+    The tasks created for outside developers do not have to be substantial, but they must have some impact on your
+    final product (Ex. adding comments or documentation is not acceptable).
+</p>
+
+<p>
+<strong>Recommended</strong>: Write tests for the tasks that will be completed by outside help to make it absolutely
+clear what needs to be accomplished.
+</p>
+
+== YouTube Video
+
+<p>
+    Upload a video demo of your alpha release to YouTube that is shorter than 2 minutes. This video must give an
+    accurate demo of the current state of your project and show your running software. This video will be directed
+    towards a non-technical audience. You should not show any code or use any technical language in this video.
+</p>
+
+<br/>
+<h4>
+    Submission
+</h4>
+
+<p>
+    Add a link to your video in your project's readme before the deadline. You may remove the link to your prototype
+    video
+</p>
+
+
+== Grading
+
+<p>
+    Note: If an individual team member was solely at fault for the team missing a requirement the team may be exonerated
+    of the missing requirement and only the individual will earn a grade decrease. Such incidents will be handled on a
+    case-by-case basis and it must be proven that:
+</p>
+
+<ol>
+    <li>The student at fault did not complete their required work for this submission</li>
+    <li>It is clear that the student knew, or at least should have known, what was required of them for this
+        submission
+    </li>
+</ol>
+
+
+<table class="table table-bordered table-padded text-center">
+    <tr class="active">
+        <td colspan="2">
+            <b>Team</b>
+        </td>
+    </tr>
+    <tr>
+        <td>Completed all technical requirements and achieved the practical objective</td>
+        <td>+1</td>
+    </tr>
+    <tr>
+        <td>Completed all technical requirements</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>One technical requirement was not satisfied</td>
+        <td>-1</td>
+    </tr>
+    <tr>
+        <td>More than one technical requirement was not satisfied</td>
+        <td>-2</td>
+    </tr>
+    <tr class="active">
+        <td colspan="2">
+            <b>Individual</b>
+        </td>
+    </tr>
+    <tr>
+        <td>Completed all assigned tasks and followed proper procedures</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>Did not complete a required task
+        </td>
+        <td>-1</td>
+    </tr>
+    <tr>
+        <td>Did not complete more than one required tasks</td>
+        <td>-2</td>
+    </tr>
+</table>
