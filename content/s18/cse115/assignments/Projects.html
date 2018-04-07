@@ -513,117 +513,413 @@ previous_content_short: lab
 </p>
 
 
-<!--== RhymeBot-->
+<!--Start Rhymes-->
 
-<!--<h4>-->
-<!--Background-->
-<!--http://www.speech.cs.cmu.edu/cgi-bin/cmudict for docs and full dictionary download-->
-<!--</h4>-->
+== Rhymes
 
-<!--<p>-->
+<h4>
+    Background
+</h4>
 
-<!--</p>-->
+<p>
+    Let's make a game! For this project we will develop the game pictured below. In this game the user will be given
+    a reference word and can choose from 4 other words. One of the four choices will rhyme with the given word and
+    the other three will not. The player's goal is to choose the rhyming word.
+</p>
 
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-<!--Objective 1:-->
-<!--</h4>-->
-<!--<br/>-->
-<!--<p>-->
+<img src="/static/rhymes1.png" class="img-fluid"/>
+<br/><br/>
 
-<!--</p>-->
+<p>
+    Once the user selects one of the choices they will earn 1 point if their choice was the rhyming word or lose 1
+    point if their choice did not rhyme with the given word. In either case the user will see a new set of words.
+</p>
 
-<!--<h5>Background</h5>-->
-<!--<p>-->
+<img src="/static/rhymes2.png" class="img-fluid"/>
+<br/><br/>
+<p>
+    For the purposes of this game we will say two words rhyme if the last syllable of each word is the same. A more
+    formal
+    definition is given below.
+</p>
 
-<!--</p>-->
+<br/>
+<hr/>
+<h4>
+    Data
+</h4>
 
-<!--<h5>Tasks</h5>-->
+<p>
+    Download: <a href="/static/data/rhymingDictionary.txt">rhymingDictionary.txt</a><br/>
+    Source: <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">http://www.speech.cs.cmu.edu/cgi-bin/cmudict</a>
+</p>
+<p>
+    To determine if two words rhyme we will first need a way of finding the pronunciation of words. For this purpose we
+    will use the dictionary given above where rhymingDictionary.txt is a subset of the CMU pronunciation dictionary
+    that can be found at the source link. This subset of words were chosen to work well with this project and is
+    suitable for playing this game (ie. Only common words and every word rhymes with at least 1 other word in the file).
+    Please visit the source for documentation and the full dictionary download if you would like to use more than the
+    provided words for other projects.
+</p>
 
-<!--<p>-->
-<!--Setup the structure for this project and write a method to...-->
-<!--</p>-->
+<br/>
+<hr/>
+<h4>
+    Defining a Rhyme
+</h4>
 
-<!--<ol>-->
-<!--<li>Create a new project in Eclipse</li>-->
-<!--<li>Create a new package in the src folder named "rhymes"</li>-->
-<!--<li>In the rhymes package, create a new class named "Main" and write a main method in this class. This class-->
-<!--will be the entry point for the project and will be the only class with a main method. You should use this class-->
-<!--to test your project-->
-<!--</li>-->
-<!--<li>-->
-<!--</li>-->
-<!--</ol>-->
+<p>
+    The pronunciation dictionary provides the sounds for each word and each sound has a type. For the types we are only
+    concerned if the sound is a vowel or not. All vowel sounds end with an integer that determines the stress given to
+    that vowel and other sounds do not have this stress so a vowel can be identified by checking if a sound ends with an
+    integer. We will say that two words rhyme if all the sounds from the last vowel and after are the same. Words
+    will rhyme even if the last vowel sounds have different stress. By defining a rhyme in this way we effectively
+    consider
+    two words to rhyme if their last syllable have the same sound, ignoring stress. For example all the following words
+    from the
+    dictionary will be considered rhymes since the last vowel is the same and all sounds after the last vowel are the
+    same:
+</p>
+
+<p>
+    HALF &nbsp;HH AE1 F<br/>
+    PHOTOGRAPH &nbsp;F OW1 T AH0 G R AE2 F<br/>
+    STAFF &nbsp;S T AE1 F<br/>
+    LAUGH &nbsp;L AE1 F<br/>
+</p>
+<p>
+    These words also all rhyme with each other:
+</p>
+<p>
+    THOUSAND &nbsp;TH AW1 Z AH0 N D<br/>
+    DIAMOND &nbsp;D AY1 M AH0 N D<br/>
+    FUND &nbsp;F AH1 N D<br/>
+    AND &nbsp;AH0 N D<br/>
+    SECOND &nbsp;S EH1 K AH0 N D<br/>
+    ISLAND &nbsp;AY1 L AH0 N D<br/>
+    LEGEND &nbsp;L EH1 JH AH0 N D<br/>
+</p>
+
+<br/>
+<hr/>
+<h4>
+    Objective 1: GUI Layout
+</h4>
+
+<p>
+    Before we start implementing the details of the game we will first setup the gui so we have a convenient way to see
+    the later features we will add to the project.
+</p>
+
+<!--* Objective 1: Setup Testing-->
+<!-- -Write Main-->
+<!-- -setup GUI and GameModel headers so Main compiles-->
+<!-- -GUI has component on the correct panels. Advise that the components should be stored in instance variables since they need to change throughout the game [can return empty JPanels]-->
+<!-- -Recommend to get the GUI looking like it did in the example add x panel to NORTH, etc-->
+<!-- -At the end of this objective they should see something that looks like the game, but with no text-->
 
 
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-<!--Objective 2:-->
-<!--</h4>-->
+<h5>Tasks</h5>
 
-<!--<p>-->
+<ol>
+    <li>Create a new project in Eclipse</li>
+    <li>Create a new package in the src folder named "rhymes"</li>
+    <li>
+        In the rhymes package, create a new class named "GameModel" with a public constructor that takes a String as a
+        parameter. The body of the constructor can be empty for now. We will add methods and instance variables to
+        this class in later objectives
+    </li>
+    <li>
+        In the rhymes package, create a new class named "GUI" with a public constructor that takes an instance of the
+        GameModel class as a parameter. In this class write the following three methods that return JPanels. (Hint:
+        Some of the components on these panels, and the GameModel instance from the constructor, will need to be
+        stored in instance variables and initialized in the
+        constructor to complete later objectives. Planning ahead can save you time later)
+        <ol type="i">
+            <li>
+                A public method named "getWordPanel" that takes no parameters and returns a JPanel. This JPanel will
+                contain a single JLabel. In later objectives this label will contain the word given to the player.
+                (In the example images this is the NORTH panel on the JFrame)
+            </li>
+            <li>
+                A public method named "getChoicesPanel" that takes no parameters and returns a JPanel. This JPanel will
+                contain 4 JButtons with any text, for now. In later objectives these buttons will contain the choices
+                provided for the player. (In the example images this is the CENTER panel on the JFrame)
+            </li>
+            <li>
+                A public method named "getScorePanel" that takes no parameters and returns a JPanel. This JPanel will
+                contain a single JLabel with the text "Score:". In later objectives this label will contain the current
+                score of the player.
+                (In the example images this is the SOUTH panel on the JFrame)
+            </li>
+        </ol>
+    </li>
+    <li>
+        In the rhymes package, create a new class named "Main" and write a main method in this class. This class
+        will be the only one with a main method or a JFrame. Do not add a JFrame anywhere else in your project. In this
+        class you can test and play your game by setting up a JFrame in the same way we've been using in the class
+        and adding the three GUI panels to the locations given above. You will need to create new GameModel and GUI
+        instances to setup this JFrame
+    </li>
+</ol>
 
-<!--</p>-->
+
+<!--/**-->
+<!--* Objective 1: Setup Testing-->
+<!-- -Write Main-->
+<!-- -setup GUI and GameModel headers so Main compiles-->
+<!-- -GUI has component on the correct panels. Advise that the components should be stored in instance variables since they need to change throughout the game [can return empty JPanels]-->
+<!-- -Recommend to get the GUI looking like it did in the example add x panel to NORTH, etc-->
+<!-- -At the end of this objective they should see something that looks like the game, but with no text-->
 
 
-<!--<h5>Tasks</h5>-->
+<br/>
+<hr/>
+<h4>
+    Objective 2: Rhyming Dictionary
+</h4>
 
-<!--<ol>-->
-<!--<li>-->
-<!--</li>-->
-
-<!--</ol>-->
-
-
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-<!--Objective 3:-->
-<!--</h4>-->
-
-<!--<p>-->
-
-<!--</p>-->
-
-<!--<h5>Tasks</h5>-->
-<!--<ul>-->
-<!--<li></li>-->
-<!--</ul>-->
+<p>
+    Since rhyming is a core feature of this game we will need a way to determine whether or not two words rhyme.
+    For this objective we will write a method that will accomplish this by using the rhyming dictionary provided
+    in the data section above.
+</p>
 
 
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-<!--Objective 4:-->
-<!--</h4>-->
-<!--<p>-->
+<h5>Tasks</h5>
 
-<!--</p>-->
 
-<!--<h5>Tasks</h5>-->
+<ol>
+    <li>
+        In the rhymes package, create another package named "dictionary" and in this new package create a class named
+        "RhymingDictionary" with the following
+        <ol type="i">
+            <li>
+                A public constructor that takes a String as a parameter. This String will be interpreted as the filename
+                for a rhyming dictionary in the same format as the one given in the data section of this project
+                (ie. rhymingDictionary.txt). In this format each line contains the word, then two spaces, then each
+                sound in that word separated by single spaces. All this data should be stored in an instance variable(s)
+                so it can be used in the other methods of this class (Hint: while parsing this file you can call .split
+                on each
+                line with " &nbsp;" and " " as parameters instead of "," as we did while parsing csv files)
+            </li>
+            <li>
+                A public method named "isRhyme" that takes two Strings as parameters and returns a boolean. This method
+                returns true if the two input Strings rhyme according to the definition given above. It will return
+                false if the words do not rhyme, or if either word is not in the dictionary
+            </li>
+        </ol>
 
-<!--<ol>-->
-<!--<li></li>-->
-<!--<li></li>-->
-<!--</ol>-->
+    </li>
 
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-<!--Objective 5:-->
-<!--</h4>-->
+</ol>
 
-<!--<p>-->
+<!--Objective 2: Parse Dictionary + isRhyme-->
+<!-- -Create RhymingDictionary in dictionary package-->
+<!-- -Write constructor that parses the file-->
+<!-- -isRhyme-->
 
-<!--</p>-->
+<br/>
+<hr/>
+<h4>
+    Objective 3: Random Words
+</h4>
 
-<!--<h5>Tasks</h5>-->
+<p>
+    Now that we can determine if two words rhyme we can start writing methods that will interact with our game.
+    For this objective you will write methods to get random words to give to the player and generate the 4 random
+    choices.
+</p>
 
-<!--<ol>-->
-<!--<li></li>-->
-<!--</ol>-->
+<h5>Tasks</h5>
+<ul>
+    <li>
+        In the RhymingDictionary class, write a public method named "randomWord" that takes no parameters and returns a
+        String. This method will return a random word that is in the rhyming dictionary. You may use any approach to get
+        a random word as long as each word in the dictionary has [close to] an equal probability of being returned.
+        Recall from Lab 8 that one approach is to call Collections.shuffle on an ArrayList of Strings containing all the
+        words in the dictionary then returning the word at index 0
+    </li>
+    <li>
+        In the RhymingDictionary class, write a public method named "getChoices" that takes a String as a parameter and
+        returns an ArrayList of Strings. The returned ArrayList will contain the 4 choices that will be given to the
+        player of the game. Of the four choices, exactly 1 of them will rhyme with the reference word (the input of
+        this method is the reference word. The rhyming word cannot be the reference word) and the other 3 will not
+        rhyme. All these words will be randomly chosen so the user will have
+        different choices even if they see the same reference word multiple times. The position of the correct choice
+        must also be randomized (ie. If the correct answer is always on the left-most button the game is trivial.
+        Similarly, a
+        multiple choice exam where every answer is "c" can be easy). (Hint: Create two ArrayLists, one with all words
+        that
+        rhyme with the input and another with all words that don't rhyme with the input and call Collections.shuffle
+        on both to get random choices in the way as we used with the randomWord method. Add the four words to ArrayList
+        that you will return, then call Collections.shuffle on these choices before returning them)
+    </li>
+</ul>
+
+
+<!--Objective 3: Random Words-->
+<!-- -randomWord-->
+<!-- -getChoices-->
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 4: The Game Model
+</h4>
+<p>
+    Your next objective is to implement the logic of the game and initialize the gui for the first round of the game.
+    After this objective is complete the gui should look like the gui from the images and will have appropriate choices and a
+    reference word given to the user. You have already written a lot of this functionality in the RhymingDictionary
+    class which will be used to complete this objective.
+</p>
+
+<h5>Tasks</h5>
+
+<ol>
+    <li>
+        Implement the existing GameModel class with the following functionality: (Note that after implementing this class
+        the logic of the game is fully functional and is ready to be played if it is connected to a user interface. By
+        keeping the code for the game separate from the user interface we can easily reuse this game with a different
+        interface. For example, we can use this same game model as a web game by writing a web interface
+        for the game)
+        <ol type="i">
+            <li>
+                Implement the existing constructor to interpret the input String as the filename for a rhyming
+                dictionary file that will be used for this instance of the game and initialize the game by setting the
+                player's score to 0 and generating the first reference word and the 4 choices
+            </li>
+            <li>
+                A public method named "makeChoice" that takes a String as a parameter and has return type void. This
+                method will interpret the input as a guess made by the player and update the state of the game
+                according to the rules of the game given in the background section
+            </li>
+            <li>
+                A public method named "getScore" that takes no parameters and returns the player's current score as an
+                int
+            </li>
+            <li>
+                A public method named "getGivenWord" that takes no parameters and returns the reference word that
+                is given to the player as a String
+            </li>
+            <li>
+                A public method named "getChoices" that takes no parameters and returns the 4 choices that are given to
+                the player as an ArrayList of Strings
+            </li>
+        </ol>
+    </li>
+    <li>Now connect the logic of the game to the gui that we wrote in objective 1. We will do this by implementing
+        the following:
+        <ol type="i">
+            <li>
+                When the GUI constructor is called, set the text of the 2 labels and 4 buttons to the appropriate values
+                from
+                the GameModel instance that is the parameter of the constructor
+            </li>
+            <li>
+                Write a public method named "update" that takes no parameters and has return type void. This method will
+                update the text of the 2 labels and 4 buttons to the appropriate values from
+                the GameModel instance. This method will be called whenever the GameModel instance changes state so the
+                most current information is displayed to the user
+            </li>
+        </ol>
+
+    </li>
+</ol>
+
+
+<!--Objective 4: GameModel-->
+<!-- -GameModel class-->
+<!-- -GUI initialization so the first round of the game is visible in the GUI-->
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 5: Game Controller
+</h4>
+
+<p>
+    At this point you have all the logic needed for the game and a complete gui for the user to interact with the game,
+    however we're missing a way for the model and the gui to interact with each other. We will write one final class
+    that will control this interaction and connect all of our code together to complete the game (If you are interested
+    in learning more about this approach to software design it is formally defined as Model-View-Controller, or
+    <a href="https://en.wikipedia.org/wiki/Model–view–controller">MVC</a>)
+</p>
+
+<h5>Tasks</h5>
+
+<ol>
+    <li>
+        In the rhymes package, write a new class named AnswerListener that implements the MouseListener interface.
+        This class will connect the rest of our code together and instances of it will be attached to the choice buttons on
+        the gui so they can react to the user. In this class implement:
+        <ol type="i">
+            <li>
+                A public constructor that takes a JButton, a GameModel, and a GUI as parameters in that order and
+                stores these in instance variables. These instances will give this controller access to both the model
+                and the gui, as well as a reference to the button to which this instance is attached
+            </li>
+            <li>
+                Change the foreground color of the button to BLUE when the mouse enters the button, BLACK when the mouse
+                exits the button, WHITE when the mouse is pressed on the button, and BLUE when the mouse
+                is released on the button. This color changing will make our game more responsive to the user
+            </li>
+            <li>
+                When the mouse is released on the button, make a guess using the text on that button then update
+                the gui
+            </li>
+        </ol>
+    </li>
+    <li>
+        Attach a new instance of AnswerListener to each of the buttons on the gui. Run Main and verify that your game
+        is fully functional
+    </li>
+</ol>
+
+
+<br/>
+<hr/>
+<h4>
+    Debriefing
+</h4>
+
+<p>
+    You just wrote a whole game with quite a few pieces. More than that, you have a good amount of code that be
+    easily reused in other coding projects for other ideas that you may have. For example, if you want to write a
+    program where
+    knowing how to pronounce words is important you can reuse your RhymingDictionary class and save a lot of time. You may
+    want to add more methods to this class, but you won't be rewriting all the code to parse the dictionary file and
+    find the sounds for a given word. Or if you want to write a program to help you write lyrics that rhyme you
+    can use this class to generate a list of all words that rhyme with a given word and list of every possible
+    word that you can choose from. In this case you should download the full dictionary from the reference link.
+</p>
+
+<p>
+    Whether you reuse this code or not, as you progress through your career in software development you should always
+    keep in mind that by separating the functionality in your program you can save a lot of time later by reusing that
+    code. This also has the benefit that your code will be easier to test and maintain. For example, if we want to
+    change the definition of a rhyme to require all syllables to rhyme or to require that the stress on the last vowel
+    has to match we only have to make that change in the isRhyme method. One change in the code and the entire game will
+    be different. We could even implement multiple definitions and let the user choose which one to use through the gui.
+    Or maybe we want this game to use alliterations instead of rhyme. No problem. Just change a few lines in one
+    method, and maybe rename it to isAlliteration instead of isRhyme for clarity. Maybe we want to give the user 6
+    options instead of 4. Add 2 more buttons and have getChoices return 2
+    more wrong answers and we're done updating (as long as you used loops whenever working with these components).
+    Not only are these changes easy to make, it's also easy to find the code where these changes should be made (Compared
+    to writing the entire project in one file. Or much worse, one method). By
+    thinking through the design of our software we can save a significant amount of time later.
+</p>
+<p>Or as Dr. Hertz
+    puts it: <b>"hours of coding makes up for minutes of planning"</b></p>
+</p>
+
+
+<!--Objective 5: AnswerListener-->
+<!-- -Glue it all together and make the game work-->
+<!-- -Add the listener to the buttons (this in the constructor! Mind blown)-->
+<!-- -This one will be easy if they did everything else right-->
 
 
 <!--== Flight Tracker-->
