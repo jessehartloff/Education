@@ -665,7 +665,7 @@ previous_content_short: lab
         will be the only one with a main method or a JFrame. Do not add a JFrame anywhere else in your project. In this
         class you can test and play your game by setting up a JFrame in the same way we've been using in the class
         and adding the three GUI panels to the locations given above. You will need to create new GameModel and GUI
-        instances to setup this JFrame
+        instances to setup this JFrame. JFrame in images has size 500x140
     </li>
 </ol>
 
@@ -928,90 +928,247 @@ previous_content_short: lab
 </p>
 
 
-<!--== Maps-->
+== Maps
+
+<div class="alert alert-info">
+    Project description in progress. There may be minor edits and rewrites until this notice is removed
+</div>
+
+<h4>
+    Background
+</h4>
+
+<p>
+    Whether it's a location-based phone app, an embedded GPS device, or a web service with geographically specific
+    offerings, as a software developer it's likely that you will be working with
+    geolocation at some point in your career. This project will provide an introduction to this world (pun intended.
+    Come at me bro).
+</p>
+
+<img src="/static/maps.png" class="img-fluid"/>
+<br/><br/>
+
+<p>
+    This image shows the final software that you will create. This will have functionality such a user can type into
+    the search bar which will populate the dropdown box with every city matching the search, sorted by population.
+    Clicking the button will take the user to that city. The user can also click on the map to navigate the area
+    surrounding the city.
+</p>
+
+<p>
+    Before we start implementing this functionality, let's explore 2 data sources that we will use to realize this
+    project.
+</p>
+
+<br/>
+<hr/>
+<h4>
+    City Data
+</h4>
+
+<p>
+    Download: <a href="/static/data/cities.csv">cities.csv</a><br/>
+    This project includes GeoLite data created by MaxMind, available from <a href="http://www.maxmind.com">http://www.maxmind.com</a>
+</p>
+<p>
+    In this project we will be taking advantage of city location and population data from MaxMind. This file provides
+    location and population data for thousands of cities from hundreds of countries. The cities.csv file
+    that can be downloaded above is the exact file that will used while testing your project in AutoLab. This file
+    contains a subset of the data set that has been modified to be suitable for this
+    project (Contains only cities with population data; accent names removed; header line removed) in the csv format
+    "Country,City,Region,Population,Latitude,Longitude". Please visit the source
+    website for more information about this data as well as a download of the unmodified data set.
+</p>
 
 
-<!--<h4>-->
-    <!--Background-->
-<!--</h4>-->
+<br/>
+<hr/>
+<h4>
+    Map Tile API
+</h4>
+
+<p>
+    Documentation: <a href="http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames">http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames</a><br/>
+    API root: "http://a.tile.openstreetmap.org/"
+    Sample usage: <a href="http://a.tile.openstreetmap.org/6/17/23.png">https://a.tile.openstreetmap.org/6/17/23.png</a>
+</p>
+
+<p>
+    To get map images in our program we will use the freely available open street map tile server. This API will serve
+    us partial images of the world map which we call tiles. A specific tile is requested by specifying the x and y
+    locations as well as the zoom level of the desired tile where x and y is computed using a Mercator projection.
+    Review the documentation for more details about requesting tiles and computing the projection. Note that the site
+    provides example code that you cannot use. Since you did not write this code, and it's not provided
+    by the course, using it is not allowed. You can however use these examples as a reference and implement them in
+    your own way with your own code.
+</p>
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 1: GUI Setup
+</h4>
+
+<p>
+    As with the rhymes project, we will begin by setting up the layout for the project. In fact, the structure of the
+    project is similar to the rhymes project throughout the 5 objectives.
+</p>
+
+
+<h5>Tasks</h5>
+
+<ol>
+    <li>Create a new project in Eclipse</li>
+    <li>Create a new package in the src folder named "maps"</li>
+    <li>In the maps package, create a new package named "cities"</li>
+    <li>
+        In the cities package, create a new class named "Cities" with a public constructor that takes a String as a
+        parameter. The body of the constructor can be empty for now. We will add methods and instance variables to
+        this class in later objectives
+    </li>
+    <li>
+        In the maps package, create a new class named "MapGUI" with a public constructor that takes an instance of the
+        Cities class as a parameter. In this class write the following two methods that return JPanels (Hint: Many of
+        the components on this gui will need to be accessed in other methods later. Initializing them in the constructor
+        and storing them in instance variables now can save time later)
+        <ol type="i">
+            <li>
+                A public method named "getSearchPanel" that takes no parameters and returns a JPanel. This JPanel will
+                contain a single JLabel. In later objectives this label will contain the word given to the player.
+                (In the example image this is the NORTH panel on the JFrame)
+            </li>
+            <li>
+                A public method named "getMapPanel" that takes no parameters and returns a JPanel. This method will
+                contain 9 JLabels in 3x3 grid where each JLabel will eventually contain a map tile image. For now, do
+                not add anything to these JLabels. To get the JLabels to
+                line be organized properly we will use a different layout manager for this panel. We will use the
+                GridLayout with 3 rows and 3 columns which can be achieved with the code
+                "panel.setLayout(new GridLayout(3, 3));" assuming your panel is stored in a variable named panel. With
+                this layout components will be added to the panel in a 3x3 grid in row major order starting with the
+                upper left (same order as reading a page). For example, the first 3 elements added to this panel will be
+                placed in the first row, then the next 3 elements will be added to the second row. (In the example
+                images this is the CENTER panel on the JFrame)
+            </li>
+        </ol>
+    </li>
+    <li>
+        In the maps package, create a new class named "Main" and write a main method in this class. This class
+        will be the only one with a main method or a JFrame. Do not add a JFrame anywhere else in your project. In this
+        class you can test and play your game by setting up a JFrame in the same way we've been using in the class
+        and adding the two GUI panels to the locations given above. You will need to create new Cities and MapGUI
+        instances to setup this JFrame. JFrame was sized by calling frame.pack();
+    </li>
+</ol>
+
+<!--Objective 1: Project Setup-->
+<!-- -Create Main, MapGUI, Cities-->
+<!-- -Implement MapGUI with-->
+<!-- -—Constructor that initializes everything (you will add to this throughout the project)-->
+<!-- -—getSearchPanel with a textField, comboBox, and button-->
+<!-- -—getMapPanel with 9 labels in a 3x3 grid layout (hint: store these as an ArrayList of JLabel. You cannot add different labels later. You will call setIcon on these labels with the appropriate map tiles)-->
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 2: Cities
+</h4>
+
+<p>
+    For this objective we will read the cities data and store it in a data structure. We will also write several methods
+    that will be called to add city functionality to the program.
+</p>
+
+
+<h5>Tasks</h5>
+"279557 - buffalo, NY, us"
+
+<ol>
+    <li>
+        In the cities package, create a new class named "City" and implement the following:
+        <ol type="i">
+            <li>
+                Override the toString method to return the data of the city in the format
+                "[population] - [name], [region], [country]". For example, Buffalo, NY would be printed as
+                "279557 - buffalo, NY, us"
+            </li>
+            <li>
+                Implement anything else in this class that you will need to complete the project. You will want to
+                include a constructor and getter methods, though you are free to design these methods however you would
+                like
+            </li>
+        </ol>
+    </li>
+    <li>
+        In the cities package, implement the existing "Cities" class to store all the cities data by writing:
+        <ol type="i">
+            <li>
+                A public constructor that takes a String as a parameter. This String will be the filename of the
+                cities.csv file (including the directory path) and the constructor will parse this file and store
+                the data in an instance variable(s) (hint: An ArrayList of type City can store all this data)
+            </li>
+            <li>
+                A public method named "getDefaultCity" that takes no parameters and returns an instance of a City. The
+                returned City will represent Buffalo, NY which will be used to initialize the map on our GUI. For this
+                method, find Buffalo, NY in the stored cities and return it
+            </li>
+            <li>
+                A public method named "searchByName" that takes a String as a parameter and returns an ArrayList of
+                type City. The input String should be interpreted as the search criteria provided by the user. This
+                method will return an ArrayList of every City with a name that contains the input String, sorted by
+                decreasing population. For example, if the input is "baby" this method will return
+                ["8107916 - new york, NY, us", "144202 - york, Q5, gb", "46010 - west new york, NJ, us", "39587 - york, PA, us", "15172 - yorkton, 11, ca", "3101 - hevizgyork, 16, hu", "2020 - vamosgyork, 11, hu"]
+                in this order
+            </li>
+        </ol>
+
+    </li>
+</ol>
+
+
+<!--Objective 2: Cities-->
+<!-- -(everything in the cities package)-->
+<!-- -Create City class with constructor and all the getters (toString standardized. The rest can be different)-->
+<!-- -read the cities file-->
+<!-- -getDefaultCity to return buffalo, NY-->
+<!-- -search by substring and sort results by population-->
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 3: Map Tiles
+</h4>
 
 <!--<p>-->
-    <!--This product includes GeoLite data created by MaxMind, available from-->
-    <!--<a href="http://www.maxmind.com">http://www.maxmind.com</a>.-->
-<!--</p>-->
-
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-    <!--Objective 1:-->
-<!--</h4>-->
-<!--<br/>-->
-<!--<p>-->
-
-<!--</p>-->
-
-<!--<h5>Background</h5>-->
-<!--<p>-->
-
-<!--</p>-->
-
-<!--<h5>Tasks</h5>-->
-
-<!--<p>-->
-    <!--Setup the structure for this project and write a method to...-->
-<!--</p>-->
-
-<!--<ol>-->
-    <!--<li>Create a new project in Eclipse</li>-->
-    <!--<li>Create a new package in the src folder named "flights"</li>-->
-    <!--<li>In the flights package, create a new class named "Main" and write a main method in this class. This class-->
-        <!--will be the entry point for the project and will be the only class with a main method. You should use this class-->
-        <!--to test your project-->
-    <!--</li>-->
-<!--</ol>-->
-
-
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-    <!--Objective 2:-->
-<!--</h4>-->
-
-<!--<p>-->
-
-<!--</p>-->
-
-
-<!--<h5>Tasks</h5>-->
-
-<!--<ol>-->
-    <!--<li>-->
-    <!--</li>-->
-
-<!--</ol>-->
-
-
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-    <!--Objective 3:-->
-<!--</h4>-->
-
-<!--<p>-->
-
+    <!--Connect to the Tile server-->
 <!--</p>-->
 
 <!--<h5>Tasks</h5>-->
 <!--<ul>-->
-    <!--<li></li>-->
+    <!--<li>-->
+        <!---->
+    <!--</li>-->
 <!--</ul>-->
 
 
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-    <!--Objective 4:-->
-<!--</h4>-->
+<!--Objective 3: Tiles-->
+<!-- -(everything in the tiles package)-->
+<!-- -Tile-->
+<!--—getTileURL-->
+<!--—getImageIcon-->
+<!-- -TileUtils-->
+<!--—getTile(City city, int zoom)-->
+<!--—ArrayList<Tile> getTileMap(Tile tile) in row major order-->
+<!-- Note that you do not have to handle wrapping, but think about it-->
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 4: Search Feature
+</h4>
 <!--<p>-->
 
 <!--</p>-->
@@ -1023,11 +1180,25 @@ previous_content_short: lab
     <!--<li></li>-->
 <!--</ol>-->
 
-<!--<br/>-->
-<!--<hr/>-->
-<!--<h4>-->
-    <!--Objective 5:-->
-<!--</h4>-->
+<!--Objective 4: Search Feature-->
+<!-- -setReferenceTile-->
+<!-- -—sets up the map tiles and adds them to the gui-->
+<!-- -—Default to adding tiles for Buffalo at startup (you can do this by calling this from init with getDefaultCity -->
+<!-- -SearchListener implements KeyListener-->
+<!--—takes gui and cities-->
+<!--—on release of any key, updates the dropdown with searchByName of the search term (hint: might want helper methods in gui to get and pass the info needed. We aren’t doing individual components in these listeners anymore)-->
+<!--—add instance to the text field-->
+<!-- -CitySelectListener implements ActionListener-->
+<!--—Takes a gui-->
+<!--—sets the reference tile to the selected tile-->
+<!--—add instance to the go button-->
+
+
+<br/>
+<hr/>
+<h4>
+    Objective 5: Movement with Mouse
+</h4>
 
 <!--<p>-->
 
@@ -1038,3 +1209,28 @@ previous_content_short: lab
 <!--<ol>-->
     <!--<li></li>-->
 <!--</ol>-->
+
+<!--Objective 5: Movement with Mouse-->
+<!-- -TranslateListener implements MouseListener-->
+<!--—TranslateListener(MapGUI gui, int dx, int dy)-->
+<!--—on mouse press, move the reference tile-->
+<!--—Add instance to each JLabel with the appropriate dx, dy-->
+
+<br/>
+<hr/>
+<h4>
+    Debriefing
+</h4>
+
+<!--<p>-->
+    <!--This works, but some functionality is very slow. Stay tuned for CSE116 and beyond where you will learn how to write-->
+    <!--efficient programs that will fix these issues.-->
+
+    <!--We have 9 calls to the Internet. This takes just as long as clicking refresh on a page 9 times and waiting for it-->
+    <!--to fully load after each click. This is slow, but it can be a lot faster by making all 9 calls at the same time.-->
+    <!--For this we will need more tools than we have now.-->
+
+    <!--We can make the search for cities faster as well. We get away with that because we don't have very many cities. If-->
+    <!--we had a data set with 100's of millions of items we would need to be more concerned with the efficiency of our-->
+    <!--data structure.-->
+<!--</p>-->
