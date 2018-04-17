@@ -1082,7 +1082,6 @@ previous_content_short: lab
 
 
 <h5>Tasks</h5>
-"279557 - buffalo, NY, us"
 
 <ol>
     <li>
@@ -1117,8 +1116,9 @@ previous_content_short: lab
                 A public method named "searchByName" that takes a String as a parameter and returns an ArrayList of
                 type City. The input String should be interpreted as the search criteria provided by the user. This
                 method will return an ArrayList of every City with a name that contains the input String, sorted by
-                decreasing population. For example, if the input is "baby" this method will return
-                ["8107916 - new york, NY, us", "144202 - york, Q5, gb", "46010 - west new york, NJ, us", "39587 - york, PA, us", "15172 - yorkton, 11, ca", "3101 - hevizgyork, 16, hu", "2020 - vamosgyork, 11, hu"]
+                decreasing population. For example, if the input is "york" this method will return
+                ["8107916 - new york, NY, us", "144202 - york, Q5, gb", "46010 - west new york, NJ, us", "39587 - york,
+                PA, us", "15172 - yorkton, 11, ca", "3101 - hevizgyork, 16, hu", "2020 - vamosgyork, 11, hu"]
                 in this order
             </li>
         </ol>
@@ -1141,57 +1141,160 @@ previous_content_short: lab
     Objective 3: Map Tiles
 </h4>
 
-<!--<p>-->
-    <!--Connect to the Tile server-->
-<!--</p>-->
+<p>
+    In this objective you will write the code that will connect to the tile server API and retrieve the correct tiles
+    for a given city so we can display the map for that city.
+</p>
 
-<!--<h5>Tasks</h5>-->
-<!--<ul>-->
-    <!--<li>-->
-        <!---->
-    <!--</li>-->
-<!--</ul>-->
+<p>
+    Note: For all tiles in this project we will use a zoom level of 6 and the user will not be able to change the zoom
+    level.
+    Since you will need this value throughout the project, and you may want to change it during testing or after you
+    complete all 5 objective and want change your software, you should store the zoom level in a variable in a single
+    class. This can be done by creating a static variable so it can be accessed in every class without instantiating the
+    class where it is defined (Example: This is how constants like Math.PI, Math.E, and Integer.MAX_VALUE are defined)
+
+</p>
+
+<h5>Tasks</h5>
+<ul>
+    <li>In the maps package, create a new package named "tiles"</li>
+    <li>
+        In the tiles package, create a new class named "Tile" which will represent a single map tile that can be
+        requested from the API. You may implement whatever methods, constructors, and instance variables you need to
+        represent a map tile through instances of this class as long the following methods are implemented:
+        <ol type="i">
+            <li>
+                A public method named "getTileURL" that takes no parameters and returns a String. This String will be
+                url for the API that will retrieve the map tile represented by this instance of the TIle class at a zoom
+                level of 6. Be sure to use the API at the server "http://a.tile.openstreetmap.org/" (note the "http",
+                not
+                "https", since this String must match exactly as expected in AutoLab you cannot be off by a single
+                character)
+            </li>
+            <li>
+                A public method named "getImageIcon" that takes no parameters and returns an ImageIcon. This method will
+                return a new ImageIcon for the url returned by the getTileURL method. Review the JLabel lecture notes
+                for an example (you will add these ImageIcons to JLabels in a later objective)
+            </li>
+        </ol>
+    </li>
+    <li>
+        In the tiles package, create a new class named "TileUtils" which will contain several static methods that will
+        create the appropriate tiles for our maps. You will use this class as a library of static methods in the rest of
+        your project. Since this class does not rely on any state that is stored in instance variables we will make the
+        methods static and call them through the class instead of instantiating the class, similar to how we use the
+        methods in the Math class. In this class, implement the following:
+        <ol type="i">
+            <li>
+                A public static method named "getTile" that takes a City as a parameter and returns a Tile. This method
+                will return a new Tile representing the map tile containing the input City at zoom level 6 (Hint: This
+                will involve projecting latitude/longitude onto x/y values in the Mercator projection)
+            </li>
+            <li>
+                A public static method named "getTileMap" that takes a Tile as a parameter and returns an ArrayList of
+                Tiles. The returned ArrayList will contain the 9 map tiles for a 3x3 map with the input tile at the
+                center. The tiles in the ArrayList should be in row-major order as described in objective 1. This
+                implies that the input tile will be index 4 in the returned ArrayList (In this project you will not have
+                to address tile wrapping and will not be tested with inputs where this would be required, though you
+                should think about what would happen if the input tile is adjacent to the prime meridian or either of
+                the
+                poles. In these cases your x or y value would need to wrap around the tile set to get the geographically
+                adjacent tiles. For example, if the reference tile has a x value of 0 you could not simply subtract 1 to
+                get the tile directly to the west)
+            </li>
+        </ol>
+    </li>
+</ul>
 
 
 <!--Objective 3: Tiles-->
 <!-- -(everything in the tiles package)-->
 <!-- -Tile-->
-<!--—getTileURL-->
-<!--—getImageIcon-->
+<!-- -—getTileURL-->
+<!-- -—getImageIcon-->
 <!-- -TileUtils-->
-<!--—getTile(City city, int zoom)-->
-<!--—ArrayList<Tile> getTileMap(Tile tile) in row major order-->
-<!-- Note that you do not have to handle wrapping, but think about it-->
+<!-- -—getTile(City city)-->
+<!-- -—ArrayList<Tile> getTileMap(Tile tile) in row major order-->
+<!-- -Note that you do not have to handle wrapping, but think about it-->
 
 
 <br/>
 <hr/>
 <h4>
-    Objective 4: Search Feature
+    Objective 4: Search Cities
 </h4>
-<!--<p>-->
 
-<!--</p>-->
+<p>
+    Now that you written code that can utilize both the cities data and the map tiles API we are ready to combine these
+    into a user feature on the GUI. By the end of this object a user will be able to search for a city by name, be given
+    a list of results, and select one to be shown on the map.
+</p>
 
-<!--<h5>Tasks</h5>-->
+<h5>Tasks</h5>
 
-<!--<ol>-->
-    <!--<li></li>-->
-    <!--<li></li>-->
-<!--</ol>-->
+<ol>
+    <li>
+        In the MapGUI class write a public method named "setReferenceTile" that takes a Tile as a parameter and has
+        return type void. Calling this method will update the GUI to display a map with the input reference tile as
+        the center tile. By calling the tile methods you've written in the previous objective you can write this method
+        with only a few lines of code. Recall that you will add the ImageIcons of each tile to it's corresponding JLabel
+        by calling setIcon from each JLabel. Do not add new JLabels to the GUI, but add new Icons to the existing
+        JLabels (Hint: It is recommended that you add a println each time you get an image icon. Since this method will
+        require 9 API calls it will run rather slow. The print statements will provide a way for you to see whether or
+        not your program is still making API calls)
+    </li>
+    <li>
+        When a new instance of MapGUI is created, initialize the map to show Buffalo, NY. This can be accomplished by
+        calling getDefaultCity, getTile, and setReferenceTile without adding any additional code. After this task you
+        should be able to run your Main method and see a map of Western New York
+    </li>
+    <li>
+        You may also need to add other methods, including getter methods for some components, to your MapGUI class to
+        achieve the rest of the functionality in this project. You can add any other methods you would like to this and
+        other classes
+    </li>
+    <li>
+        In the maps package, create a new package named "control". This package will contain all the Listeners that will
+        control the interactions between the GUI and the cities/tile functionality. This is commonly referred to as glue
+        code and follows the same MVC approach as the rhymes project
+    </li>
+    <!--<li>-->
+        <!--In the tiles package, create a new class named "Tile" which will represent a single map tile that can be-->
+        <!--requested from the API. You may implement whatever methods, constructors, and instance variables you need to-->
+        <!--represent a map tile through instances of this class as long the following methods are implemented:-->
+        <!--<ol type="i">-->
+            <!--<li>-->
+                <!--A public method named "getTileURL" that takes no parameters and returns a String. This String will be-->
+                <!--url for the API that will retrieve the map tile represented by this instance of the TIle class at a zoom-->
+                <!--level of 6. Be sure to use the API at the server "http://a.tile.openstreetmap.org/" (note the "http",-->
+                <!--not-->
+                <!--"https", since this String must match exactly as expected in AutoLab you cannot be off by a single-->
+                <!--character)-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--A public method named "getImageIcon" that takes no parameters and returns an ImageIcon. This method will-->
+                <!--return a new ImageIcon for the url returned by the getTileURL method. Review the JLabel lecture notes-->
+                <!--for an example (you will add these ImageIcons to JLabels in a later objective)-->
+            <!--</li>-->
+        <!--</ol>-->
+    <!--</li>-->
+</ol>
 
 <!--Objective 4: Search Feature-->
 <!-- -setReferenceTile-->
 <!-- -—sets up the map tiles and adds them to the gui-->
 <!-- -—Default to adding tiles for Buffalo at startup (you can do this by calling this from init with getDefaultCity -->
+
 <!-- -SearchListener implements KeyListener-->
-<!--—takes gui and cities-->
-<!--—on release of any key, updates the dropdown with searchByName of the search term (hint: might want helper methods in gui to get and pass the info needed. We aren’t doing individual components in these listeners anymore)-->
-<!--—add instance to the text field-->
+<!-- -—takes gui and cities-->
+<!-- -—on release of any key, updates the dropdown with searchByName of the search term (hint: might want helper methods in gui to get and pass the info needed. We arn’t doing individual components in these listeners anymore)-->
+<!-- -—add instance to the text field-->
+
 <!-- -CitySelectListener implements ActionListener-->
-<!--—Takes a gui-->
-<!--—sets the reference tile to the selected tile-->
-<!--—add instance to the go button-->
+<!-- -—Takes a gui-->
+<!-- -—sets the reference tile to the selected tile-->
+<!-- -—add instance to the go button-->
 
 
 <br/>
@@ -1207,14 +1310,14 @@ previous_content_short: lab
 <!--<h5>Tasks</h5>-->
 
 <!--<ol>-->
-    <!--<li></li>-->
+<!--<li></li>-->
 <!--</ol>-->
 
 <!--Objective 5: Movement with Mouse-->
 <!-- -TranslateListener implements MouseListener-->
-<!--—TranslateListener(MapGUI gui, int dx, int dy)-->
-<!--—on mouse press, move the reference tile-->
-<!--—Add instance to each JLabel with the appropriate dx, dy-->
+<!-- -—TranslateListener(MapGUI gui, int dx, int dy)-->
+<!-- -—on mouse press, move the reference tile-->
+<!-- -—Add instance to each JLabel with the appropriate dx, dy-->
 
 <br/>
 <hr/>
@@ -1223,14 +1326,14 @@ previous_content_short: lab
 </h4>
 
 <!--<p>-->
-    <!--This works, but some functionality is very slow. Stay tuned for CSE116 and beyond where you will learn how to write-->
-    <!--efficient programs that will fix these issues.-->
+<!--This works, but some functionality is very slow. Stay tuned for CSE116 and beyond where you will learn how to write-->
+<!--efficient programs that will fix these issues.-->
 
-    <!--We have 9 calls to the Internet. This takes just as long as clicking refresh on a page 9 times and waiting for it-->
-    <!--to fully load after each click. This is slow, but it can be a lot faster by making all 9 calls at the same time.-->
-    <!--For this we will need more tools than we have now.-->
+<!--We have 9 calls to the Internet. This takes just as long as clicking refresh on a page 9 times and waiting for it-->
+<!--to fully load after each click. This is slow, but it can be a lot faster by making all 9 calls at the same time.-->
+<!--For this we will need more tools than we have now.-->
 
-    <!--We can make the search for cities faster as well. We get away with that because we don't have very many cities. If-->
-    <!--we had a data set with 100's of millions of items we would need to be more concerned with the efficiency of our-->
-    <!--data structure.-->
+<!--We can make the search for cities faster as well. We get away with that because we don't have very many cities. If-->
+<!--we had a data set with 100's of millions of items we would need to be more concerned with the efficiency of our-->
+<!--data structure.-->
 <!--</p>-->
