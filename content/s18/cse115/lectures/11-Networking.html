@@ -237,6 +237,12 @@ public class WithImport{
     <a href="https://github.com/hartloff/libraries/tree/master/lib">https://github.com/hartloff/libraries/tree/master/lib</a>
 </p>
 
+<p>
+    Download these jar files into you project folder, then right click them in Eclipse, choose "Build Path", then
+    "Add to Build Path" to add these files to your project. You will now be able to import all the classes contained in
+    these jar files into your classes.
+</p>
+
 == HTTP GET
 
 <p>
@@ -247,6 +253,10 @@ public class WithImport{
 
 
 <pre><code class="java">
+import org.apache.http.client.fluent.Request;
+
+import java.io.IOException;
+
 public static String getRequest(String url){
     String response = "";
 
@@ -263,7 +273,8 @@ public static String getRequest(String url){
 <p>
     This method will use the library to connect to a url (link). The Request class from the library is used to send a
     GET
-    request to the url and return the response as a String. As with files, connecting to a website can go wrong (ex. if
+    request to the url and return the response as a String. Note that import this class from the library with the line
+    <code>import org.apache.http.client.fluent.Request;</code>  As with files, connecting to a website can go wrong (ex. if
     an invalid link is used), so the method calls are wrapped in a try/catch block.
 </p>
 
@@ -287,6 +298,11 @@ public static String getRequest(String url){
 </p>
 
 <pre><code class="java">
+import org.apache.http.client.fluent.Request;
+import org.apache.http.entity.ContentType;
+
+import java.io.IOException;
+
 public static String postRequest(String url, String body, boolean json){
     String response = "";
     try{
