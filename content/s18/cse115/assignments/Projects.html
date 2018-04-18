@@ -1035,8 +1035,9 @@ previous_content_short: lab
         <ol type="i">
             <li>
                 A public method named "getSearchPanel" that takes no parameters and returns a JPanel. This JPanel will
-                contain a single JLabel. In later objectives this label will contain the word given to the player.
-                (In the example image this is the NORTH panel on the JFrame)
+                contain a JTextField that will be a search bar, a JComboBox of type City that will contain the current
+                search results, and JButton that will set the map to the currently selected City. For now, add these
+                three without any functionality. (In the example image this is the NORTH panel on the JFrame)
             </li>
             <li>
                 A public method named "getMapPanel" that takes no parameters and returns a JPanel. This method will
@@ -1259,26 +1260,45 @@ previous_content_short: lab
         control the interactions between the GUI and the cities/tile functionality. This is commonly referred to as glue
         code and follows the same MVC approach as the rhymes project
     </li>
-    <!--<li>-->
-        <!--In the tiles package, create a new class named "Tile" which will represent a single map tile that can be-->
-        <!--requested from the API. You may implement whatever methods, constructors, and instance variables you need to-->
-        <!--represent a map tile through instances of this class as long the following methods are implemented:-->
-        <!--<ol type="i">-->
-            <!--<li>-->
-                <!--A public method named "getTileURL" that takes no parameters and returns a String. This String will be-->
-                <!--url for the API that will retrieve the map tile represented by this instance of the TIle class at a zoom-->
-                <!--level of 6. Be sure to use the API at the server "http://a.tile.openstreetmap.org/" (note the "http",-->
-                <!--not-->
-                <!--"https", since this String must match exactly as expected in AutoLab you cannot be off by a single-->
-                <!--character)-->
-            <!--</li>-->
-            <!--<li>-->
-                <!--A public method named "getImageIcon" that takes no parameters and returns an ImageIcon. This method will-->
-                <!--return a new ImageIcon for the url returned by the getTileURL method. Review the JLabel lecture notes-->
-                <!--for an example (you will add these ImageIcons to JLabels in a later objective)-->
-            <!--</li>-->
-        <!--</ol>-->
-    <!--</li>-->
+    <li>
+        In the control package, create a new class named "SearchListener" that implements the KeyListener interface.
+        This class will be attached to the text area and will update the combo box with search results each time the
+        user types a character. In this class implement:
+        <ol type="i">
+            <li>
+                A public constructor that takes an instance of the MapGUI and Cities classes as parameters in this
+                order and stores these in instance variables
+            </li>
+            <li>
+                Override the keyReleased method to set the values to the JComboBox to the results of searching for
+                cities that contain the text in the JTextField. Remember to remove all the elements from the combo box
+                before adding the new search results. Note that you are not checking which key was released so this
+                method wil be called every time the user releases a key in the search box which gives us a very
+                responsive search feature
+            </li>
+            <li>
+                Add an instance of this class to your JTextField
+            </li>
+        </ol>
+    </li>
+    <li>
+        In the control package, create a new class named "CitySelectListener" that implements the ActionListener
+        interface. This class will be attached to the button and will update the map to the currently selected City.
+        In this class implement:
+        <ol type="i">
+            <li>
+                A public constructor that takes an instance of the MapGUI class as a parameter and stores this in an
+                instance variable
+            </li>
+            <li>
+                Override the actionPerformed method to update the map (3x3 tile grid) on the GUI to a map centered
+                around the currently selected City in the JComboBox
+            </li>
+            <li>
+                Add an instance of this class to your JButton
+            </li>
+        </ol>
+    </li>
 </ol>
 
 <!--Objective 4: Search Feature-->
@@ -1303,15 +1323,42 @@ previous_content_short: lab
     Objective 5: Movement with Mouse
 </h4>
 
-<!--<p>-->
+<p>
+    The last feature we will add to this software is the ability for the user to move the map by clicking on the map
+    near the direction in which they want it to move. We will accomplish this by adding a MouseListener to each of the
+    map tiles that will listen for mouse presses and move in a direction appropriate for the tile that was clicked. For
+    example, if the bottom tile was pressed (index 7 in the ArrayList) the map should move 1 position to the south.
+    If the upper left tile was pressed the map should move 1 position to the north and 1 position to the west.
+</p>
 
-<!--</p>-->
+<h5>Tasks</h5>
 
-<!--<h5>Tasks</h5>-->
+<ol>
+    <li>
+        In the control package, create a new class named "TranslateListener" that implements the MouseListener
+        interface. This class will be attached to each JLabel containing a map tile and will control moving the map with
+        the mouse. In this class implement:
+        <ol type="i">
+            <li>
+                A public constructor that takes an instance of the MapGUI class and 2 ints as parameters and stores
+                these in instance variables. The 2 ints should be interpreted as the change in x and y respectively.
+                This will allow you to use this same class for all 8 directions of movement by using different ints
+                in the constructor calls
+            </li>
+            <li>
+                Override the mousePressed method to move the map in the appropriate direction based on the 2 ints
+                provided in the constructor call. For example, the ints 1 and -1 the map should add 1 to the current
+                x value and subtract 1 from the current y value and reset the reference tile to these have these new
+                values
+            </li>
+            <li>
+                Add an instance of this class to each of your JLabels that contain the map tiles with the appropriate
+                ints in each constructor call to achieve the desired behavior of the map
+            </li>
+        </ol>
+    </li>
+</ol>
 
-<!--<ol>-->
-<!--<li></li>-->
-<!--</ol>-->
 
 <!--Objective 5: Movement with Mouse-->
 <!-- -TranslateListener implements MouseListener-->
@@ -1325,15 +1372,34 @@ previous_content_short: lab
     Debriefing
 </h4>
 
-<!--<p>-->
-<!--This works, but some functionality is very slow. Stay tuned for CSE116 and beyond where you will learn how to write-->
-<!--efficient programs that will fix these issues.-->
+<p>
+    You now have a functional map that be used to find most major cities on the planet, or all cities if you downloaded
+    the full data set. This map has a convenient search feature that makes it easy to find the cities you want to find.
+    It not only searches by substring as the user types, but also gives the largest cities at the top of the list which
+    are likely the cities most users will want to find. The user can then easily navigate the area surrounding the
+    selected city. However, there is one major issue with this software. It's slow.
+</p>
+<p>
+    In CSE115, we have been concerned with creating software that solves problems but we have not been concerned with
+    the efficiency or performance of these programs. Now that you know how to write code to solve problem, the focus of
+    later CSE courses will shift to writing efficient programs. In this project we had one major performance issue in
+    that we needed to make 9 web API calls every time the map needed to update. This takes just as long as clicking
+    refresh on a web page 9 times and waiting for it to fully load after each click. Slow. However, we don't have to
+    wait for the server to respond to each of these requests before making the next call as we have done in this
+    project. Instead, we could make all 9 HTTP requests in parallel and proceed with the program once we get all 9
+    responses. In this way we will only have to wait for the equivalent of 1 page load to refresh the map giving a 9x
+    boost in performance.
+</p>
+<p>
+    In addition to updating the map faster, we could also write more efficient code to search through the cities as
+    well. To get the search results you likely iterated through every single city, add it to an ArrayList if it's name
+    contains the search term, then sort the ArrayList by population. This works, but can be made much more efficient
+    with a clever use of data structures and algorithms. In this program we could use inefficient code since we didn't
+    have very many cities to search though, but what if we had to search through a hundred million elements? What if we
+    were searching through the entire Internet like Google does every time we make a web search?
+</p>
 
-<!--We have 9 calls to the Internet. This takes just as long as clicking refresh on a page 9 times and waiting for it-->
-<!--to fully load after each click. This is slow, but it can be a lot faster by making all 9 calls at the same time.-->
-<!--For this we will need more tools than we have now.-->
-
-<!--We can make the search for cities faster as well. We get away with that because we don't have very many cities. If-->
-<!--we had a data set with 100's of millions of items we would need to be more concerned with the efficiency of our-->
-<!--data structure.-->
-<!--</p>-->
+<p>
+    The answers to these questions, and more, as you continue through your computer science education. Good luck and
+    enjoy!
+</p>
