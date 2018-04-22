@@ -924,15 +924,11 @@ previous_content_short: lab
     thinking through the design of our software we can save a significant amount of time later.
 </p>
 <p>Or as Dr. Hertz
-    puts it: <b>"hours of coding makes up for minutes of planning"</b></p>
+    puts it: <b>"hours of coding makes up for minutes of planning"</b>
 </p>
 
 
 == Maps
-
-<div class="alert alert-info">
-    Project description in progress. There may be minor edits and rewrites until this notice is removed
-</div>
 
 <h4>
     Background
@@ -951,7 +947,7 @@ previous_content_short: lab
 <p>
     This image shows the final software that you will create. This will have functionality such a user can type into
     the search bar which will populate the dropdown box with every city matching the search, sorted by population.
-    Clicking the button will take the user to that city. The user can also click on the map to navigate the area
+    Clicking the button will take the user to the selected city. The user can also click on the map to navigate the area
     surrounding the city.
 </p>
 
@@ -971,12 +967,12 @@ previous_content_short: lab
     This project includes GeoLite data created by MaxMind, available from <a href="http://www.maxmind.com">http://www.maxmind.com</a>
 </p>
 <p>
-    In this project we will be taking advantage of city location and population data from MaxMind. This file provides
+    In this project we will be taking advantage of city location and population data from MaxMind which provides
     location and population data for thousands of cities from hundreds of countries. The cities.csv file
-    that can be downloaded above is the exact file that will used while testing your project in AutoLab. This file
     contains a subset of the data set that has been modified to be suitable for this
     project (Contains only cities with population data; accent names removed; header line removed) in the csv format
-    "Country,City,Region,Population,Latitude,Longitude". Please visit the source
+    "Country,City,Region,Population,Latitude,Longitude". This is the exact file that will used while testing your
+    project in AutoLab. Please visit the source
     website for more information about this data as well as a download of the unmodified data set.
 </p>
 
@@ -989,17 +985,17 @@ previous_content_short: lab
 
 <p>
     Documentation: <a href="http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames">http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames</a><br/>
-    API root: "http://a.tile.openstreetmap.org/"
+    API root: "http://a.tile.openstreetmap.org/"<br/>
     Sample usage: <a href="http://a.tile.openstreetmap.org/6/17/23.png">https://a.tile.openstreetmap.org/6/17/23.png</a>
 </p>
 
 <p>
-    To get map images in our program we will use the freely available open street map tile server. This API will serve
-    us partial images of the world map which we call tiles. A specific tile is requested by specifying the x and y
-    locations as well as the zoom level of the desired tile where x and y is computed using a Mercator projection.
+    To get map images in our program we will use the freely available open street map tile server. This API serves
+    partial images of the world map called tiles. A specific tile is requested by specifying the x and y
+    locations as well as the zoom level of the desired tile where x and y are computed using a Mercator projection.
     Review the documentation for more details about requesting tiles and computing the projection. Note that the site
-    provides example code that you cannot use. Since you did not write this code, and it's not provided
-    by the course, using it is not allowed. You can however use these examples as a reference and implement them in
+    provides example code that you cannot use since you did not write it and it's not provided
+    by the course. You can however use these examples as a reference and implement them in
     your own way with your own code.
 </p>
 
@@ -1011,7 +1007,7 @@ previous_content_short: lab
 </h4>
 
 <p>
-    As with the rhymes project, we will begin by setting up the layout for the project. In fact, the structure of the
+    As with the rhymes project, we will begin by setting up the layout for the project. In fact, the structure of this
     project is similar to the rhymes project throughout the 5 objectives.
 </p>
 
@@ -1036,12 +1032,12 @@ previous_content_short: lab
             <li>
                 A public method named "getSearchPanel" that takes no parameters and returns a JPanel. This JPanel will
                 contain a JTextField that will be a search bar, a JComboBox of type City that will contain the current
-                search results, and JButton that will set the map to the currently selected City. For now, add these
+                search results, and a JButton that will set the map to the currently selected City. For now, add these
                 three without any functionality. (In the example image this is the NORTH panel on the JFrame)
             </li>
             <li>
                 A public method named "getMapPanel" that takes no parameters and returns a JPanel. This method will
-                contain 9 JLabels in 3x3 grid where each JLabel will eventually contain a map tile image. For now, do
+                contain 9 JLabels in a 3x3 grid where each JLabel will eventually contain a map tile image. For now, do
                 not add anything to these JLabels. To get the JLabels to
                 line be organized properly we will use a different layout manager for this panel. We will use the
                 GridLayout with 3 rows and 3 columns which can be achieved with the code
@@ -1058,7 +1054,7 @@ previous_content_short: lab
         will be the only one with a main method or a JFrame. Do not add a JFrame anywhere else in your project. In this
         class you can test and play your game by setting up a JFrame in the same way we've been using in the class
         and adding the two GUI panels to the locations given above. You will need to create new Cities and MapGUI
-        instances to setup this JFrame. JFrame was sized by calling frame.pack();
+        instances to setup this JFrame. The JFrame in the image was sized by calling frame.pack();
     </li>
 </ol>
 
@@ -1086,7 +1082,8 @@ previous_content_short: lab
 
 <ol>
     <li>
-        In the cities package, create a new class named "City" and implement the following:
+        In the cities package, create a new class named "City" that will store the information for a city. In this class
+        implement the following:
         <ol type="i">
             <li>
                 Override the toString method to return the data of the city in the format
@@ -1094,9 +1091,10 @@ previous_content_short: lab
                 "279557 - buffalo, NY, us"
             </li>
             <li>
-                Implement anything else in this class that you will need to complete the project. You will want to
+                Implement anything else in this class that you will need to complete the project. You may want to
                 include a constructor and getter methods, though you are free to design these methods however you would
-                like
+                like in order to achieve the toString functionality (ex. population, name, region, and country will need
+                to be stored in instance variables)
             </li>
         </ol>
     </li>
@@ -1106,17 +1104,19 @@ previous_content_short: lab
             <li>
                 A public constructor that takes a String as a parameter. This String will be the filename of the
                 cities.csv file (including the directory path) and the constructor will parse this file and store
-                the data in an instance variable(s) (hint: An ArrayList of type City can store all this data)
+                the data in an instance variable(s) (Hint: An ArrayList of type City can store all this data)
             </li>
             <li>
                 A public method named "getDefaultCity" that takes no parameters and returns an instance of a City. The
                 returned City will represent Buffalo, NY which will be used to initialize the map on our GUI. For this
-                method, find Buffalo, NY in the stored cities and return it
+                method, find Buffalo, NY in the stored cities and return it (Note: This method will be used to to test
+                your City class. Calling toString on whatever is returned by this method should return
+                "279557 - buffalo, NY, us")
             </li>
             <li>
                 A public method named "searchByName" that takes a String as a parameter and returns an ArrayList of
-                type City. The input String should be interpreted as the search criteria provided by the user. This
-                method will return an ArrayList of every City with a name that contains the input String, sorted by
+                type City. The input String should be interpreted as the search criteria provided by the user and the
+                returned ArrayList will contain every City with a name that contains the input String, sorted by
                 decreasing population. For example, if the input is "york" this method will return
                 ["8107916 - new york, NY, us", "144202 - york, Q5, gb", "46010 - west new york, NJ, us", "39587 - york,
                 PA, us", "15172 - yorkton, 11, ca", "3101 - hevizgyork, 16, hu", "2020 - vamosgyork, 11, hu"]
@@ -1151,7 +1151,7 @@ previous_content_short: lab
     Note: For all tiles in this project we will use a zoom level of 6 and the user will not be able to change the zoom
     level.
     Since you will need this value throughout the project, and you may want to change it during testing or after you
-    complete all 5 objective and want change your software, you should store the zoom level in a variable in a single
+    complete all 5 objectives, you should store the zoom level in a variable in a single
     class. This can be done by creating a static variable so it can be accessed in every class without instantiating the
     class where it is defined (Example: This is how constants like Math.PI, Math.E, and Integer.MAX_VALUE are defined)
 
@@ -1184,8 +1184,8 @@ previous_content_short: lab
         In the tiles package, create a new class named "TileUtils" which will contain several static methods that will
         create the appropriate tiles for our maps. You will use this class as a library of static methods in the rest of
         your project. Since this class does not rely on any state that is stored in instance variables we will make the
-        methods static and call them through the class instead of instantiating the class, similar to how we use the
-        methods in the Math class. In this class, implement the following:
+        methods static and call them through the class instead of instantiating the class similar to how we use the
+        methods in the Math class. In this class implement the following:
         <ol type="i">
             <li>
                 A public static method named "getTile" that takes a City as a parameter and returns a Tile. This method
@@ -1196,9 +1196,9 @@ previous_content_short: lab
                 A public static method named "getTileMap" that takes a Tile as a parameter and returns an ArrayList of
                 Tiles. The returned ArrayList will contain the 9 map tiles for a 3x3 map with the input tile at the
                 center. The tiles in the ArrayList should be in row-major order as described in objective 1. This
-                implies that the input tile will be index 4 in the returned ArrayList (In this project you will not have
+                implies that the input tile will be at index 4 in the returned ArrayList (In this project you will not have
                 to address tile wrapping and will not be tested with inputs where this would be required, though you
-                should think about what would happen if the input tile is adjacent to the prime meridian or either of
+                should think about what would happen if the input tile is adjacent to the Anti-Meridian or either of
                 the
                 poles. In these cases your x or y value would need to wrap around the tile set to get the geographically
                 adjacent tiles. For example, if the reference tile has a x value of 0 you could not simply subtract 1 to
@@ -1227,8 +1227,8 @@ previous_content_short: lab
 </h4>
 
 <p>
-    Now that you written code that can utilize both the cities data and the map tiles API we are ready to combine these
-    into a user feature on the GUI. By the end of this object a user will be able to search for a city by name, be given
+    Now that you've written code that can utilize both the cities data and the map tiles API we are ready to combine these
+    into a user feature on the GUI. By the end of this objective a user will be able to search for a city by name, be given
     a list of results, and select one to be shown on the map.
 </p>
 
@@ -1271,9 +1271,10 @@ previous_content_short: lab
             </li>
             <li>
                 Override the keyReleased method to set the values to the JComboBox to the results of searching for
-                cities that contain the text in the JTextField. Remember to remove all the elements from the combo box
+                cities that contain the text in the JTextField sorted by decreasing population. Remember to remove
+                all the elements from the combo box
                 before adding the new search results. Note that you are not checking which key was released so this
-                method wil be called every time the user releases a key in the search box which gives us a very
+                method will be called every time the user releases any key in the search box which gives us a very
                 responsive search feature
             </li>
             <li>
@@ -1373,7 +1374,7 @@ previous_content_short: lab
 </h4>
 
 <p>
-    You now have a functional map that be used to find most major cities on the planet, or all cities if you downloaded
+    You now have a functional map that can be used to find most major cities on the planet, or all cities if you downloaded
     the full data set. This map has a convenient search feature that makes it easy to find the cities you want to find.
     It not only searches by substring as the user types, but also gives the largest cities at the top of the list which
     are likely the cities most users will want to find. The user can then easily navigate the area surrounding the
@@ -1381,7 +1382,7 @@ previous_content_short: lab
 </p>
 <p>
     In CSE115, we have been concerned with creating software that solves problems but we have not been concerned with
-    the efficiency or performance of these programs. Now that you know how to write code to solve problem, the focus of
+    the efficiency or performance of these programs. Now that you know how to write code to solve problems, the focus of
     later CSE courses will shift to writing efficient programs. In this project we had one major performance issue in
     that we needed to make 9 web API calls every time the map needed to update. This takes just as long as clicking
     refresh on a web page 9 times and waiting for it to fully load after each click. Slow. However, we don't have to
@@ -1400,6 +1401,6 @@ previous_content_short: lab
 </p>
 
 <p>
-    The answers to these questions, and more, as you continue through your computer science education. Good luck and
+    You will learn the answers to these questions, and much more, as you continue through your computer science education. Good luck and
     enjoy!
 </p>
