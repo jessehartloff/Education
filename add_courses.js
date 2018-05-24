@@ -8,7 +8,7 @@ var collection = db.get('course_content');
 var collection_list = db.get('course_list');
 
 
-var current_semester = 's18';
+var current_semester = 'u18';
 var content_directory = path.join(__dirname, 'content/');
 var media_destination = path.join(__dirname, 'public/static/');
 fs.copySync(content_directory + "common_media/", media_destination);
@@ -20,6 +20,12 @@ var to_process = [
 //		'number': 'cse312',
 //		'title': 'Web Applications'
 //	},
+	{
+		'directory': content_directory + 'u18/cse331',
+		'semester': 'u18',
+		'number': 'cse331',
+		'title': 'Introduction to Algorithms'
+	},
 	{
 		'directory': content_directory + 's18/cse115',
 		'semester': 's18',
