@@ -5,3 +5,169 @@ next_content_short: hw2
 previous_content_short: none
 ---
 
+== Part 1 (30 point)
+
+<ol type="a">
+    <li>
+        [15 points] (Textbook Exercise 1 in Chapter 1) Decide whether the following statement is true or false:
+        <blockquote>
+            <br/>In every instance of the Stable Matching Problem, there is a stable matching containing a pair (m, w)
+            such that
+            m is ranked first on the preference list of w and w is ranked first on the preference list of m.
+        </blockquote>
+        If you state true then you will have to formally prove why the statement is correct. If you state false, then
+        you must provide a counter-example.<br/><br/><br/>
+    </li>
+    <li>
+        [15 points] Decide whether the following statement is true or false:
+        <blockquote><br/>For any instance of the Stable Matching Problem, if there exists a perfect matching that is not
+            stable due to
+            m and w wanting to be together, then (m, w) will be in every stable matching of that instance. In other
+            words,
+            if (m, w') and (m',w) are both in a perfect matching and m prefers w over w' and w prefers m over m', then
+            (m,w)
+            will be in every stable matching.
+        </blockquote>
+        If you state true then you will have to formally prove why the statement is correct. If you state false, then
+        you must provide a counter-example.
+    </li>
+</ol>
+
+<p>
+    <b>Submission: </b>Submit part 1 as a pdf file to homework 1 part 1 on AutoLab
+</p>
+
+
+== Part 2 (55 points)
+
+<p>
+    <b>Problem Statement: </b>Given two integers a and b, compute a^b in O(log b) time. You can assume that b > 0
+</p>
+<p>
+    Your task is to go through the entire process of algorithm design shown in class. This includes, developing an
+    efficient algorithm, proving the correctness of the algorithm, analyzing the runtime of the algorithm, and
+    implementing the algorithm in a working program.
+</p>
+<p>
+    Note that log b is linear in the number of bits used to represent b so the algorithm will be linear in the size of
+    b. For example, if b=1024 then the size of b in bits is 10.
+</p>
+
+<p>
+    <b>Part 3 grading:</b>
+</p>
+<ul>
+    <li>
+        [10 points] Your algorithm generally has a correct idea and has a runtime of O(log b)
+    </li>
+    <li>
+        [20 points] Your algorithm is correct on all inputs, has a runtime of O(log b), and your proof of correctness is
+        logically sound and complete
+    </li>
+    <li>
+        [5 points] Your algorithm has a runtime of O(log b) and you correctly analyzed the runtime of your algorithm
+    </li>
+    <li>
+        [20 points] You correctly implemented your algorithm in code and the implementation is correct on all inputs
+    </li>
+</ul>
+
+
+<p>
+    <b>Submission (algorithm): </b>Submit your algorithm, proof of correctness, and runtime analysis for part 2 as a pdf
+    file
+    to homework 1 part 2 - algorithm on AutoLab
+</p>
+<p>
+    <b>Submission (implementation): </b>Submit your coded implementation of your algorithm as a zip file to homework 1
+    part 2 - implementation on AutoLab. The details of this zip file with be described soon and covered in Thursday's
+    lecture
+</p>
+
+
+== Part 3 (15 points)
+
+<p>
+    The Big G company in the bay area decides it has not been doing enough to hire CSE grads from UB so it decides to do
+    an exclusive recruitment drive for UB students. The Big G decides to fly over n CSE majors from UB to the bay area
+    during December for on-site interview on a single day. The company sets up m slots in the day and arranges for n Big
+    G engineers to interview the n UB CSE majors. (You can and should assume that m > n.) The fabulous scheduling
+    algorithms at Big G’s offices draws up a schedule for each of the n majors so that the following conditions are
+    satisfied:
+</p>
+<ul>
+    <li>
+        Each CSE major talks with every Big G engineer exactly once
+    </li>
+    <li>
+        No two CSE majors meet the same Big G engineer in the same time slot
+    </li>
+    <li>
+        No two Big G engineers meet the same CSE major in the same time slot
+    </li>
+</ul>
+
+<p>
+    In between the schedule being fixed and the CSE majors being flown over, the Big G engineers were very impressed
+    with the CVs of the CSE majors (including, ahem, their performance in CSE 331) and decide that Big G should hire all
+    of the n UB CSE majors. They decide as a group that it would make sense to assign each CSE major C to a Big G
+    engineer E in such a way that after C meets E during her/his scheduled slot, all of C ’s and E ’s subsequent
+    meetings are canceled. Given that this is December, the Big G engineers figure that taking the CSE majors out to the
+    nice farmer market at the ferry building in San Francisco during a sunny December day would be a good way to entice
+    the CSE majors to the bay area.
+</p>
+<p>
+    In other words, the goal for each engineer E and the major C who gets assigned to her/him, is to truncate both of
+    their schedules after their meeting and cancel all subsequent meeting, so that no major gets stood-up. A major C is
+    stood-up if when C arrives to meet with E on her/his truncated schedule and E has already left for the day with some
+    other major C'.
+</p>
+<p>
+    Design an <em>efficient</em> algorithm that always finds a valid truncation of the original schedules so that no CSE
+    major
+    gets stood-up. Prove the correctness and runtime of this algorithm.
+</p>
+<p>
+    To help you get a grasp of the problem, consider the following example for n = 2 and m = 4. Let the majors be C1 and
+    C2 and the Big G engineers be E1 and E2. Suppose C1’s original schedule is
+</p>
+<blockquote>
+    E1; lunch; E2; dinner
+</blockquote>
+<p>
+    and C2's original schedule is
+</p>
+
+<blockquote>
+    Breakfast; E1; coffee break; E2
+</blockquote>
+<p>
+    In this case the (only) valid truncation is for C1 to get assigned to E2 in the third slot and for C2 to get
+    assigned to E1 in the second slot. (And as a bonus all four get to have dinner!)
+</p>
+<p>
+    (Note/Hint: In real life, you will almost never come across a problem whose description will match exactly with one
+    you will see in this course. More often, you will come across problems that you have seen earlier but are stated in
+    a way that don’t look like the version you have seen earlier. One way to solve this problem would be to to simulate
+    that situation. In algorithms-speak, you can to reduce the problem here to one that you have seen already.)
+</p>
+
+<p>
+    <b>Part 3 grading:</b>
+</p>
+<ul>
+    <li>
+        [2 points] Your algorithm generally has a correct idea and will have an optimal runtime
+    </li>
+    <li>
+        [10 points] Your algorithm is correct on all inputs, has an optimal runtime, and your proof of correctness is
+        logically sound and complete
+    </li>
+    <li>
+        [3 points] Your algorithm has an optimal runtime and you correctly analyzed the runtime of your algorithm
+    </li>
+</ul>
+
+<p>
+    <b>Submission: </b>Submit part 3 as a pdf file to homework 1 part 3 on AutoLab
+</p>
