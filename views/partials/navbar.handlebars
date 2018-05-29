@@ -77,6 +77,11 @@
                                target="_blank">
                                 Questions</a>
                         {{/unless}}
+                        {{#if course.course_options.reddit_test}}
+                            <a class="dropdown-item" href="https://www.reddit.com/r/cse331/"
+                               target="_blank">
+                                Subreddit</a>
+                        {{/if}}
                         {{#each course.lectures}}
                             <a class="dropdown-item"
                                href="/courses/{{../course.course}}/lectures/{{this.short_title}}">{{this.title}}</a>

@@ -43,6 +43,13 @@
                          target="_blank">-Questions</a>
                 <br/>
             {{/unless}}
+            {{#if course.course_options.reddit_test}}
+                &nbsp;<a class="menu_link" href="https://www.reddit.com/r/cse331/"
+                         target="_blank">-Subreddit</a>
+                <br/>
+            {{/if}}
+
+
 
             {{#each course.lectures}}
                 &nbsp;<a class="menu_link" href="/courses/{{../course.course}}/lectures/{{this.short_title}}">
