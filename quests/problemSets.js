@@ -492,7 +492,7 @@ function api_send_ps_results(req, res, course) {
 						xp[question.concept][question.type] = 0;
 					}
 					var xp_added = 1;
-					if(question.concept==="challenge"){
+					if (question.concept === "challenge") {
 						xp_added = 5; // effectively 1-time questions
 					}
 					xp[question.concept][question.type] += xp_added;
@@ -607,3 +607,41 @@ function add_ps_user(username, lab_section, number_id, section_id, next) {
 //add_ps_user("sophie", "A1", "11111111", "1234567890", function(){console.log("user added");});
 
 
+function generate_comprehensive_ps() {
+
+	var ps =
+	{
+		'assigned_username': "hertz",
+		'ps_number': 1,
+		'point_value': 100,
+		"multipliers": [],
+		'time_generated': Date.now(),
+		'time_completed': 0
+	};
+
+	ps['class_name'] = java_class_name(ps);
+
+
+
+	var concepts = ["variables", "methods", "data_structures", "control_flow", "algorithms", "files", "classes",
+		"gui", "inheritance", "polymorphism", "networking", "json"];
+	var types = ["1", "2", "3", "4", "5"];
+
+	var questions = [];
+	var promises = [];
+	for (var j = 0; j < concepts.length; j++) {
+		for (var k = 0; k < types.length; k++) {
+			promises.push(get_random_question(concepts[j], types[k], questions));
+		}
+	}
+
+	Promise.all(promises).then(function () {
+
+		ps['questions'] = questions;
+
+		console.log(build_ps_text(ps));
+
+
+	});
+
+}
