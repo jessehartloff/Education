@@ -58,17 +58,17 @@ previous_content_short: none
 </p>
 <ul>
     <li>
-        [10 points] Your algorithm generally has a correct idea and has a runtime of O(log b)
+        [10 points] Algorithm: Your algorithm generally has a correct idea and has a runtime of O(log b)
     </li>
     <li>
-        [20 points] Your algorithm is correct on all inputs, has a runtime of O(log b), and your proof of correctness is
+        [20 points] Correctness Proof: Your algorithm is correct on all inputs, has a runtime of O(log b), and your proof of correctness is
         logically sound and complete
     </li>
     <li>
-        [5 points] Your algorithm has a runtime of O(log b) and you correctly analyzed the runtime of your algorithm
+        [5 points] Runtime Analysis: Your algorithm has a runtime of O(log b) and you correctly analyzed the runtime of your algorithm
     </li>
     <li>
-        [20 points] You correctly implemented your algorithm in code and the implementation is correct on all inputs
+        [20 points] Implementation: You correctly implemented your algorithm in code and the implementation is correct on all inputs
     </li>
 </ul>
 
@@ -78,21 +78,54 @@ previous_content_short: none
     file
     to homework 1 part 2 - algorithm on AutoLab
 </p>
+
+<hr/>
+
 <p>
     <b>Submission (implementation): </b>Submit your coded implementation of your algorithm as a zip file to homework 1
-    part 2 - implementation on AutoLab. The details of this zip file with be described soon and covered in Thursday's
-    lecture
+    part 2 - implementation on AutoLab. This zip file must contain the following:
+</p>
+<ul>
+    <li>
+        A Makefile. This makefile will be called exactly once during grading
+    </li>
+    <li>
+        A bash script named "run.sh" that takes 2 command line parameters [inputFilename] and [outputFilename]. Where
+        the input file contains 2 lines with a on the first line and b on the second, both as well-formed integers
+        and the output file will be created by your program and will contain your answer on a single line. This
+        script will be called with each of the testing inputs during grading. You can assume that make was called
+        before any run.sh calls
+    </li>
+</ul>
+<p>
+    By following this interface you can use any language that is installed on the server for your submission.
+    Officially, the course will support Java, Python, and C++ though if you can make another language work you are
+    welcome to use whatever you would like. If you would like to use an unsupported language and that language is not
+    installed on the grading server you can still use that language and it will be graded manually after the deadline.
 </p>
 
+<p>
+    Assumptions: You may assume that both a and b are both >1 and the solution will always be < 2^31 (ie. it won't
+    overflow an int)
+</p>
+
+<p>
+    Templates:
+    </p>
+<ul>
+    <li><a href="/static/templates/JavaTemplate.zip">Java</a></li>
+    <li><a href="/static/templates/PythonTemplate.zip">Python</a></li>
+    <li><a href="/static/templates/CPPTemplate.zip">C++</a></li>
+</ul>
 
 == Part 3 (15 points)
 
 <p>
-    The Big G company in the bay area decides it has not been doing enough to hire CSE grads from UB so it decides to do
+    The Big G company in the bay area realizes it has not been doing enough to hire CSE grads from UB so it decides to do
     an exclusive recruitment drive for UB students. The Big G decides to fly over n CSE majors from UB to the bay area
-    during December for on-site interview on a single day. The company sets up m slots in the day and arranges for n Big
+    during December for on-site interviews on a single day. The company sets up m slots in the day and arranges for n Big
     G engineers to interview the n UB CSE majors. (You can and should assume that m > n.) The fabulous scheduling
-    algorithms at Big G’s offices draws up a schedule for each of the n majors so that the following conditions are
+    algorithms at Big G’s office draws up a schedule for each of the n majors so that the following conditions are
     satisfied:
 </p>
 <ul>
@@ -109,7 +142,7 @@ previous_content_short: none
 
 <p>
     In between the schedule being fixed and the CSE majors being flown over, the Big G engineers were very impressed
-    with the CVs of the CSE majors (including, ahem, their performance in CSE 331) and decide that Big G should hire all
+    with the CVs of the CSE majors (including, ahem, their performance in CSE 331) and decided that Big G should hire all
     of the n UB CSE majors. They decide as a group that it would make sense to assign each CSE major C to a Big G
     engineer E in such a way that after C meets E during her/his scheduled slot, all of C ’s and E ’s subsequent
     meetings are canceled. Given that this is December, the Big G engineers figure that taking the CSE majors out to the
@@ -148,7 +181,7 @@ previous_content_short: none
 <p>
     (Note/Hint: In real life, you will almost never come across a problem whose description will match exactly with one
     you will see in this course. More often, you will come across problems that you have seen earlier but are stated in
-    a way that don’t look like the version you have seen earlier. One way to solve this problem would be to to simulate
+    a way that don’t look like the version you have seen. One way to solve this problem would be to to simulate
     that situation. In algorithms-speak, you can to reduce the problem here to one that you have seen already.)
 </p>
 
@@ -157,14 +190,14 @@ previous_content_short: none
 </p>
 <ul>
     <li>
-        [2 points] Your algorithm generally has a correct idea and will have an optimal runtime
+        [2 points] Algorithm: Your algorithm generally has a correct idea and will have an optimal runtime
     </li>
     <li>
-        [10 points] Your algorithm is correct on all inputs, has an optimal runtime, and your proof of correctness is
+        [10 points] Correctness Proof: Your algorithm is correct on all inputs, has an optimal runtime, and your proof of correctness is
         logically sound and complete
     </li>
     <li>
-        [3 points] Your algorithm has an optimal runtime and you correctly analyzed the runtime of your algorithm
+        [3 points] Runtime Analysis: Your algorithm has an optimal runtime and you correctly analyzed the runtime of your algorithm
     </li>
 </ul>
 
