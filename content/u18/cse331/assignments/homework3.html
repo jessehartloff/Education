@@ -5,41 +5,125 @@ next_content_short: hw4
 previous_content_short: hw2
 ---
 
-<!--2015 hw4 q1-->
-
-<!--1. (40 points) Chapter 6, Exercise 1:-->
-<!--Let G = (V,E) be an undirected graph with n nodes. A subset of the nodes in a graph is called an independent set if no two of them are joined by an edge. Finding large independent sets is difficult in general, but here we’ll see that it can be done efficiently if the graph is “simple” enough.-->
-<!--Call a graph G = (V,E) a path if its nodes can be written as v1,v2,...,vn, with an edge between vi and vj if and only if the numbers i and j differ by exactly 1. With each node vi, we associate a positive integer weight wi.-->
-<!--The goal in this question is to solve the following problem:-->
-<!--Find an independent set in a path G whose total weight is as large as possible.-->
-<!--(a) Give an example to show that the following algorithm does not always find an indepen- -->
-<!--dent set of maximum total weight. The “heaviest-first” greedy algorithm-->
-<!--Start with S equal to the empty set while some node remains in G do-->
-<!--Pick a node vi of maximum weight Add vi to S-->
-<!--Delete vi and its neighbors from G-->
-<!--end while-->
-<!--Return S-->
-<!--(b) Give an example to show that the following algorithm also does not always find an-->
-<!--independent set of maximum total weight.-->
-<!--Let S1 be the set of all vi where i is an odd number Let S2 be the set of all vi where i is an even number (Note that S1 and S2 are both independent sets) Between S1 and S2, return the one with larger weight-->
-<!--1-->
-
-<!--(c) Give an algorithm that takes an n-node path G with weights and returns an independent set of maximum total weight. The running time should be polynomial in n, independent of the values of the weights.-->
 
 
+<!--== Part 1 (30 point)-->
 
+<!--<p>-->
+    <!--(Textbook Exercise 1 in Chapter 6)-->
+    <!--Let G = (V,E) be an undirected graph with n nodes. A subset of the nodes in a graph is called an independent set if-->
+    <!--no two of them are joined by an edge. Finding large independent sets is difficult in general, but here we’ll see-->
+    <!--that it can be done efficiently if the graph is “simple” enough.-->
+<!--</p>-->
+<!--<p>-->
+    <!--Call a graph G = (V,E) a <b>path</b> if its nodes can be written as v<sub>1</sub>,v<sub>2</sub>,...,v<sub>n</sub>,-->
+    <!--with an-->
+    <!--edge between v<sub>i</sub> and v<sub>j</sub> if and-->
+    <!--only if the numbers i and j differ by exactly 1. With each node v<sub>i</sub>, we associate a positive integer-->
+    <!--weight w<sub>i</sub>. Note that the nodes have weights in this problem, not the edges.-->
+    <!--The goal in this question is to solve the following problem:-->
+<!--</p>-->
+<!--<p>-->
+    <!--Find an independent set in a <b>path</b> G whose total weight is as large as possible.-->
+<!--</p>-->
+
+<!--<ol type="a">-->
+    <!--<li>-->
+        <!--Provide a counter-example to show that the following greedy algorithm does not always find an independent set of-->
+        <!--maximum total weight. The “heaviest-first” greedy algorithm-->
+        <!--<br/><br/>-->
+        <!--<pre>-->
+<!--1. Start with S equal to the empty set-->
+<!--2. while some node remains in G do-->
+    <!--a. Pick a node v<sub>i</sub> of maximum weight Add v<sub>i</sub> to S-->
+    <!--b. Delete v<sub>i</sub> and its neighbors from G-->
+<!--3. Return S-->
+        <!--</pre>-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--Give an example to show that the following algorithm also does not always find an-->
+        <!--independent set of maximum total weight.-->
+        <!--<br/><br/>-->
+        <!--<pre>-->
+<!--1. Let S<sub>1</sub> be the set of all v<sub>i</sub> where i is an odd number-->
+<!--2. Let S<sub>2</sub> be the set of all v<sub>i</sub> where i is an even number-->
+<!--(Note that S<sub>1</sub> and S<sub>2</sub> are both independent sets)-->
+<!--3. Between S<sub>1</sub> and S<sub>2</sub>, return the one with larger weight-->
+        <!--</pre>-->
+    <!--</li>-->
+<!--</ol>-->
+
+<!--<p>-->
+    <!--Now that we've explored 2 incorrect solutions, write your own algorithm that takes an n-node path G with weights and-->
+    <!--returns an independent set of maximum total weight. The running time should be polynomial in n, independent of the-->
+    <!--values of the weights. Prove the correctness and analyze the runtime of your algorithm.-->
+<!--</p>-->
+
+
+<!--<p>-->
+    <!--<b>Part 1 grading:</b>-->
+<!--</p>-->
+<!--<ul>-->
+    <!--<li>-->
+        <!--[5 points] part a: Your counter-example proves that the algorithm is not optimal-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[5 points] part b: Your counter-example proves that the algorithm is not optimal-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[10 points] Algorithm: Your algorithm generally has a correct idea and has a polynomial runtime-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[5 points] Correctness Proof: Your algorithm is correct on all inputs, has a polynomial runtime, and your-->
+        <!--proof of correctness is logically sound and complete-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[5 points] Runtime Analysis: Your algorithm has a polynomial runtime and you correctly analyzed the runtime of-->
+        <!--your algorithm-->
+    <!--</li>-->
+<!--</ul>-->
+
+
+<!--<p>-->
+    <!--<b>Submission: </b>Submit part 1 as a pdf file to homework 3 part 1 on AutoLab-->
+<!--</p>-->
+
+
+<!--== Part 2 (55 points)-->
 
 <!--Collector-->
 
 
+<!--== Part 3 (15 points)-->
 
-<!--2015 hw4 q3-->
-
-<!--(15 points) Interview Question-->
+<!--<p>-->
 <!--Given a number n and 3 different operations that you can perform:-->
-<!--n = n/2-->
-<!--n = n/3-->
-<!--n = n−1-->
+<!--</p>-->
+
+<!--n = n/2<br/>-->
+<!--n = n/3<br/>-->
+<!--n = n−1<br/>-->
+<!--<br/>-->
+<!--<p>-->
 <!--Give an algorithm that reaches n == 1 in the minimum number of operations for any given starting n.-->
+<!--</p>-->
+<!--<p>-->
+    <!--<b>Part 3 grading:</b>-->
+<!--</p>-->
+<!--<ul>-->
+    <!--<li>-->
+        <!--[8 points] Algorithm: Your algorithm generally has a correct idea and has a polynomial runtime-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[5 points] Correctness Proof: Your algorithm is correct on all inputs, has a polynomial runtime, and your-->
+        <!--proof of correctness is logically sound and complete-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[2 points] Runtime Analysis: Your algorithm has a polynomial runtime and you correctly analyzed the runtime of-->
+        <!--your algorithm-->
+    <!--</li>-->
+<!--</ul>-->
 
-
+<!--<p>-->
+    <!--<b>Submission: </b>Submit part 3 as a pdf file to homework 3 part 3 on AutoLab-->
+<!--</p>-->

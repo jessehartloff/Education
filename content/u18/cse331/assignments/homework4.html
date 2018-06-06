@@ -5,9 +5,99 @@ next_content_short: none
 previous_content_short: hw3
 ---
 
+<!--== Part 1 (30 points)-->
+<!--<p>-->
+    <!--You are given an array A with n entries, with each entry holding a distinct number. You are told that the sequence-->
+    <!--of values A[1], A[2], . . . , A[n] has only one positive number at index p (you are not given p). Furthermore, you-->
+    <!--know the array is unimodal: The values in the array entries increase from index 1 to index p and decrease from index-->
+    <!--p to index n.-->
+<!--</p>-->
+<!--<p>-->
+    <!--Give an algorithm to find p by reading at most O(log n) entries of A.-->
+<!--</p>-->
 
-<!--Unimodal-->
+<!--<p>-->
+    <!--<b>Part 1 grading:</b>-->
+<!--</p>-->
+<!--<ul>-->
+    <!--<li>-->
+        <!--[10 points] Algorithm: Your algorithm generally has a correct idea and will have O(log n) runtime-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[10 points] Correctness Proof: Your algorithm is correct on all inputs, has O(log n) runtime, and your proof of-->
+        <!--correctness is-->
+        <!--logically sound and complete-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[10 points] Runtime Analysis: Your algorithm has O(log n) runtime and you correctly analyzed the runtime of your-->
+        <!--algorithm-->
+    <!--</li>-->
+<!--</ul>-->
 
-<!--Hidden Lines-->
+<!--<p>-->
+    <!--<b>Submission: </b>Submit part 1 as a pdf file to homework 4 part 1 on AutoLab-->
+<!--</p>-->
 
-<!--Website Hacking-->
+
+<!--== Part 2 (55 points)-->
+
+<!--<p>-->
+    <!--Visible Lines-->
+<!--</p>-->
+
+
+<!--== Part 3 (15 points)-->
+
+<!--<p>-->
+    <!--You are about to go live with a new website that will be home to a database with sensitive information that poses a-->
+    <!--critical security risk. With this, it is likely that some talented hackers will attack the site and-->
+    <!--compromise the data. The launch of the site seems somewhat hopeless until a well meaning, yet vague, white hat-->
+    <!--hacker informs you that k of the n users of the site are attackers each of whom know a different vulnerability in-->
+    <!--your site. You would like to use this information to ensure that the launch of the site goes well.-->
+<!--</p>-->
+<!--<p>-->
+    <!--The soon to be users and attackers are constantly pinging your site waiting for it to go live. You don’t want to go-->
+    <!--live with any security holes, but you can activate a fake site to any subset of the n users by IP address to check-->
+    <!--if-->
+    <!--any of them are attackers. These fake launches will not expose any sensitive data, but will appear to be a-->
+    <!--legitimate launch to the attackers. Each time you launch a fake site, you can tell if there are any attackers in the-->
+    <!--chosen subset of users by observing the site after launch. If exactly one hacker attackers the site, you will be-->
+    <!--able to analyze the behavior and patch the security hole used to compromise the fake site. However, if more than one-->
+    <!--hackers attacking the site on a fake launch they will alter enough of the site that you will be unable to learn-->
+    <!--about-->
+    <!--the vulnerabilities they exploited. Launching fake sites to different subsets of the user base can be used to-->
+    <!--identify attackers and identify security holes, but each launch is expensive and can irritate the legitimate users-->
+    <!--of the site.-->
+<!--</p>-->
+<!--<p>-->
+    <!--Your goal is to identify all of the attackers by launching fake sites that only go live to one attacker at a time-->
+    <!--while minimizing the total number of fake launches. You must prove the correctness and analyze the runtime of your algorithm.-->
+<!--</p>-->
+
+<!--<p>-->
+    <!--Note that an algorithm with O(n) number of launches is trivial: Launch a fake site to each of the n users where they-->
+    <!--are the only user of the site. We also know that a lower bound is O(k) since even if we know who the hackers are we-->
+    <!--still have to launch k fake sites so we can patch the k vulnerabilities. Your task is to launch with O(k log(n/k))-->
+    <!--fake launches.-->
+<!--</p>-->
+
+<!--<p>-->
+    <!--<b>Part 3 grading:</b>-->
+<!--</p>-->
+<!--<ul>-->
+    <!--<li>-->
+        <!--[5 points] Algorithm: Your algorithm generally has a correct idea and uses O(k log(n/k)) fake launches-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[5 points] Correctness Proof: Your algorithm is correct on all inputs, uses O(k log(n/k)) fake launches, and-->
+        <!--your proof of correctness is logically sound and complete-->
+    <!--</li>-->
+    <!--<li>-->
+        <!--[5 points] Runtime Analysis: Your algorithm uses O(k log(n/k)) fake launches and you correctly analyzed this-->
+        <!--number of launches for your algorithm-->
+    <!--</li>-->
+<!--</ul>-->
+
+<!--<p>-->
+    <!--<b>Submission: </b>Submit part 3 as a pdf file to homework 4 part 3 on AutoLab-->
+<!--</p>-->

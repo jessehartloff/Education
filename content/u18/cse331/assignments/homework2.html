@@ -116,8 +116,40 @@ previous_content_short: hw1
     file to homework 2 part 2 - algorithm on AutoLab
 </p>
 
+<hr/>
 
-<h4>Implementation details coming soon</h4>
+<p>
+    <b>Submission (implementation): </b>Submit your coded implementation of your algorithm as a zip file to homework 2
+    part 2 - implementation on AutoLab. This zip file must contain the following:
+</p>
+<ul>
+    <li>
+        A Makefile. This makefile will be called exactly once during grading
+    </li>
+    <li>
+        A bash script named "run.sh" that takes 2 command line parameters [inputFilename] and [outputFilename]. This
+        script will be called with each of the testing inputs during grading. You can assume that make was called
+        before any run.sh calls
+    </li>
+</ul>
+
+<p>
+    Data Format:
+</p>
+<ul>
+    <li>The input file will be a csv file with n lines where each line represents one speed runner in the format
+        "id,marioTime,doomTime"
+    </li>
+    <ul>
+        <li><a href="/static/templates/input.csv">sample input.csv</a> (you may have to right click and save-as)</li>
+    </ul>
+    <li>
+        Your output file wile be a text/csv file where each line contains only the id of each speed runner in the order
+        in which they will complete (ie. the id of the first runner in your schedule is on the first line of the file)
+    </li>
+</ul>
+
+
 
 == Part 3
 
