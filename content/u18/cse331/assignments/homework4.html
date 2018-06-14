@@ -5,99 +5,190 @@ next_content_short: none
 previous_content_short: hw3
 ---
 
-<!--== Part 1 (30 points)-->
-<!--<p>-->
-    <!--You are given an array A with n entries, with each entry holding a distinct number. You are told that the sequence-->
-    <!--of values A[1], A[2], . . . , A[n] has only one positive number at index p (you are not given p). Furthermore, you-->
-    <!--know the array is unimodal: The values in the array entries increase from index 1 to index p and decrease from index-->
-    <!--p to index n.-->
-<!--</p>-->
-<!--<p>-->
-    <!--Give an algorithm to find p by reading at most O(log n) entries of A.-->
-<!--</p>-->
+== Part 1 (30 points)
+<p>
+    You are given an array A with n entries, with each entry holding a distinct number. You are told that the sequence
+    of values A[1], A[2], . . . , A[n] has only one positive number at index p (you are not given p). Furthermore, you
+    know the array is unimodal: The values in the array entries increase from index 1 to index p and decrease from index
+    p to index n.
+</p>
+<p>
+    Give an algorithm to find p by reading at most O(log n) entries of A.
+</p>
 
-<!--<p>-->
-    <!--<b>Part 1 grading:</b>-->
-<!--</p>-->
-<!--<ul>-->
-    <!--<li>-->
-        <!--[10 points] Algorithm: Your algorithm generally has a correct idea and will have O(log n) runtime-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[10 points] Correctness Proof: Your algorithm is correct on all inputs, has O(log n) runtime, and your proof of-->
-        <!--correctness is-->
-        <!--logically sound and complete-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[10 points] Runtime Analysis: Your algorithm has O(log n) runtime and you correctly analyzed the runtime of your-->
-        <!--algorithm-->
-    <!--</li>-->
-<!--</ul>-->
+<p>
+    <b>Part 1 grading:</b>
+</p>
+<ul>
+    <li>
+        [10 points] Algorithm: Your algorithm generally has a correct idea and will have O(log n) runtime
+    </li>
+    <li>
+        [10 points] Correctness Proof: Your algorithm is correct on all inputs, has O(log n) runtime, and your proof of
+        correctness is
+        logically sound and complete
+    </li>
+    <li>
+        [10 points] Runtime Analysis: Your algorithm has O(log n) runtime and you correctly analyzed the runtime of your
+        algorithm
+    </li>
+</ul>
 
-<!--<p>-->
-    <!--<b>Submission: </b>Submit part 1 as a pdf file to homework 4 part 1 on AutoLab-->
-<!--</p>-->
-
-
-<!--== Part 2 (55 points)-->
-
-<!--<p>-->
-    <!--Visible Lines-->
-<!--</p>-->
+<p>
+    <b>Submission: </b>Submit part 1 as a pdf file to homework 4 part 1 on AutoLab
+</p>
 
 
-<!--== Part 3 (15 points)-->
+== Part 2 (55 points)
 
-<!--<p>-->
-    <!--You are about to go live with a new website that will be home to a database with sensitive information that poses a-->
-    <!--critical security risk. With this, it is likely that some talented hackers will attack the site and-->
-    <!--compromise the data. The launch of the site seems somewhat hopeless until a well meaning, yet vague, white hat-->
-    <!--hacker informs you that k of the n users of the site are attackers each of whom know a different vulnerability in-->
-    <!--your site. You would like to use this information to ensure that the launch of the site goes well.-->
-<!--</p>-->
-<!--<p>-->
-    <!--The soon to be users and attackers are constantly pinging your site waiting for it to go live. You don’t want to go-->
-    <!--live with any security holes, but you can activate a fake site to any subset of the n users by IP address to check-->
-    <!--if-->
-    <!--any of them are attackers. These fake launches will not expose any sensitive data, but will appear to be a-->
-    <!--legitimate launch to the attackers. Each time you launch a fake site, you can tell if there are any attackers in the-->
-    <!--chosen subset of users by observing the site after launch. If exactly one hacker attackers the site, you will be-->
-    <!--able to analyze the behavior and patch the security hole used to compromise the fake site. However, if more than one-->
-    <!--hackers attacking the site on a fake launch they will alter enough of the site that you will be unable to learn-->
-    <!--about-->
-    <!--the vulnerabilities they exploited. Launching fake sites to different subsets of the user base can be used to-->
-    <!--identify attackers and identify security holes, but each launch is expensive and can irritate the legitimate users-->
-    <!--of the site.-->
-<!--</p>-->
-<!--<p>-->
-    <!--Your goal is to identify all of the attackers by launching fake sites that only go live to one attacker at a time-->
-    <!--while minimizing the total number of fake launches. You must prove the correctness and analyze the runtime of your algorithm.-->
-<!--</p>-->
+<p>
+    For this question we will explore the world of video game graphics. To achieve the highest fidelity graphics
+    possible it is important that the graphics are computed as efficiently as possible. In part, this means not
+    wasting any
+    time rendering models that cannot be seen from the player's current position and orientation. It helps to be able to
+    quickly determine which models can be seen and which cannot so you don't use any processing power rendering the
+    unseen models.
+</p>
 
-<!--<p>-->
-    <!--Note that an algorithm with O(n) number of launches is trivial: Launch a fake site to each of the n users where they-->
-    <!--are the only user of the site. We also know that a lower bound is O(k) since even if we know who the hackers are we-->
-    <!--still have to launch k fake sites so we can patch the k vulnerabilities. Your task is to launch with O(k log(n/k))-->
-    <!--fake launches.-->
-<!--</p>-->
+<p>
+    This general problem with 3d polygon-based models is very difficult, but we can work with a simplified version of
+    this
+    problem. For this homework we will make several simplifying assumption. First, instead of 3d models we will assume
+    each model is represented as a single line on a 2d plane represented by <em>y = mx + b</em>. We will also assume the
+    player is at a position such that <em>y = &infin;</em> and looking in the negative y direction (ie. The player is
+    looking down from a very high vantage point). Your task is to determine which lines can be seen by the
+    player and therefore should be rendered, at least in part.
+</p>
 
-<!--<p>-->
-    <!--<b>Part 3 grading:</b>-->
-<!--</p>-->
-<!--<ul>-->
-    <!--<li>-->
-        <!--[5 points] Algorithm: Your algorithm generally has a correct idea and uses O(k log(n/k)) fake launches-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[5 points] Correctness Proof: Your algorithm is correct on all inputs, uses O(k log(n/k)) fake launches, and-->
-        <!--your proof of correctness is logically sound and complete-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[5 points] Runtime Analysis: Your algorithm uses O(k log(n/k)) fake launches and you correctly analyzed this-->
-        <!--number of launches for your algorithm-->
-    <!--</li>-->
-<!--</ul>-->
+<p>
+    More formally, you are given a set of <em>n</em> lines <em>L</em> where each <em>l<sub>i</sub> &isin; L</em> is
+    represented by
+    it's slope and y-intercept as <em>m<sub>i</sub></em> and <em>b<sub>i</sub></em> respectively. Return all
+    <em>i</em> such that <em>&exist;<sub>x</sub> &forall;<sub>j&ne;i</sub> m<sub>i</sub>x + b<sub>i</sub> > m<sub>j</sub>x + b<sub>j</sub></em>
+</p>
 
-<!--<p>-->
-    <!--<b>Submission: </b>Submit part 3 as a pdf file to homework 4 part 3 on AutoLab-->
-<!--</p>-->
+
+<p>
+    Give an O(nlog(n)) runtime algorithm that finds the set of visible lines, prove the correctness of your
+    algorithm, and analyze its runtime.
+</p>
+
+
+<p>
+    <b>Part 2 grading:</b>
+</p>
+<ul>
+    <li>
+        [10 points] Algorithm: Your algorithm generally has a correct idea and has a runtime of O(nlog(n))
+    </li>
+    <li>
+        [20 points] Correctness Proof: Your algorithm is correct on all inputs, has a runtime of O(nlog(n)), and your
+        proof of correctness is logically sound and complete
+    </li>
+    <li>
+        [5 points] Runtime Analysis: Your algorithm has a runtime of O(nlog(n)) and you correctly analyzed the runtime
+        of your algorithm
+    </li>
+    <li>
+        [20 points] Implementation: You correctly implemented your algorithm in code and the implementation is correct
+        on all inputs with runtime O(nlog(n))
+    </li>
+</ul>
+
+
+<p>
+    <b>Submission (algorithm): </b>Submit your algorithm, proof of correctness, and runtime analysis for part 2 as a pdf
+    file to homework 4 part 2 - algorithm on AutoLab
+</p>
+
+<hr/>
+
+<p>
+    <b>Submission (implementation): </b>Submit your coded implementation of your algorithm as a zip file to homework 4
+    part 2 - implementation on AutoLab. This zip file must contain the following:
+</p>
+<ul>
+    <li>
+        A Makefile. This makefile will be called exactly once during grading
+    </li>
+    <li>
+        A bash script named "run.sh" that takes 2 command line parameters [inputFilename] and [outputFilename]. This
+        script will be called with each of the testing inputs during grading. You can assume that make was called
+        before any run.sh calls
+    </li>
+</ul>
+
+<p>
+    Data Format:
+</p>
+<ul>
+    <li>The input file will be a csv file with n lines where each line represents one graphical line in the format
+        "id,m,y"
+    </li>
+    <ul>
+        <li>Sample <a href="/static/templates/lines.csv">lines.csv</a> (you may have to right click and
+            save-as)
+        </li>
+    </ul>
+    <li>
+        Your output file wile be a text/csv file where each line contains the id of a line that can be seen by the
+        player
+    </li>
+</ul>
+
+== Part 3 (15 points)
+
+<p>
+    You are about to go live with a new website that will be home to a database with sensitive information that poses a
+    critical security risk. With this, it is likely that some talented hackers will attack the site and
+    compromise the data. The launch of the site seems somewhat hopeless until a well meaning, yet vague, white hat
+    hacker informs you that k of the n users of the site are attackers each of whom know a different vulnerability in
+    your site. You would like to use this information to ensure that the launch of the site goes well.
+</p>
+<p>
+    The soon to be users and attackers are constantly pinging your site waiting for it to go live. You don’t want to go
+    live with any security holes, but you can activate a fake site to any subset of the n users by IP address to check
+    if
+    any of them are attackers. These fake launches will not expose any sensitive data, but will appear to be a
+    legitimate launch to the attackers. Each time you launch a fake site, you can tell if there are any attackers in the
+    chosen subset of users by observing the site after launch. If exactly one hacker attackers the site, you will be
+    able to analyze the behavior and patch the security hole used to compromise the fake site. However, if more than one
+    hackers attacking the site on a fake launch they will alter enough of the site that you will be unable to learn
+    about
+    the vulnerabilities they exploited. Launching fake sites to different subsets of the user base can be used to
+    identify attackers and identify security holes, but each launch is expensive and can irritate the legitimate users
+    of the site.
+</p>
+<p>
+    Your goal is to identify all of the attackers by launching fake sites that only go live to one attacker at a time
+    while minimizing the total number of fake launches. You must prove the correctness and analyze the runtime of your
+    algorithm.
+</p>
+
+<p>
+    Note that an algorithm with O(n) number of launches is trivial: Launch a fake site to each of the n users where they
+    are the only user of the site. We also know that a lower bound is O(k) since even if we know who the hackers are we
+    still have to launch k fake sites so we can patch the k vulnerabilities. Your task is to launch with O(k log(n/k))
+    fake launches.
+</p>
+
+<p>
+    <b>Part 3 grading:</b>
+</p>
+<ul>
+    <li>
+        [5 points] Algorithm: Your algorithm generally has a correct idea and uses O(k log(n/k)) fake launches
+    </li>
+    <li>
+        [5 points] Correctness Proof: Your algorithm is correct on all inputs, uses O(k log(n/k)) fake launches, and
+        your proof of correctness is logically sound and complete
+    </li>
+    <li>
+        [5 points] Runtime Analysis: Your algorithm uses O(k log(n/k)) fake launches and you correctly analyzed this
+        number of launches for your algorithm
+    </li>
+</ul>
+
+<p>
+    <b>Submission: </b>Submit part 3 as a pdf file to homework 4 part 3 on AutoLab
+</p>
