@@ -6,124 +6,210 @@ previous_content_short: hw2
 ---
 
 
+== Part 1 (30 point)
 
-<!--== Part 1 (30 point)-->
+<p>
+    (Textbook Exercise 1 in Chapter 6)
+    Let G = (V,E) be an undirected graph with n nodes. A subset of the nodes in a graph is called an independent set if
+    no two of them are joined by an edge. Finding large independent sets is difficult in general, but here we’ll see
+    that it can be done efficiently if the graph is “simple” enough.
+</p>
+<p>
+    Call a graph G = (V,E) a <b>path</b> if its nodes can be written as v<sub>1</sub>,v<sub>2</sub>,...,v<sub>n</sub>,
+    with an
+    edge between v<sub>i</sub> and v<sub>j</sub> if and
+    only if the numbers i and j differ by exactly 1. With each node v<sub>i</sub>, we associate a positive integer
+    weight w<sub>i</sub>. Note that the nodes have weights in this problem, not the edges.
+    The goal in this question is to solve the following problem:
+</p>
+<p>
+    Find an independent set in a <b>path</b> G whose total weight is as large as possible.
+</p>
 
-<!--<p>-->
-    <!--(Textbook Exercise 1 in Chapter 6)-->
-    <!--Let G = (V,E) be an undirected graph with n nodes. A subset of the nodes in a graph is called an independent set if-->
-    <!--no two of them are joined by an edge. Finding large independent sets is difficult in general, but here we’ll see-->
-    <!--that it can be done efficiently if the graph is “simple” enough.-->
-<!--</p>-->
-<!--<p>-->
-    <!--Call a graph G = (V,E) a <b>path</b> if its nodes can be written as v<sub>1</sub>,v<sub>2</sub>,...,v<sub>n</sub>,-->
-    <!--with an-->
-    <!--edge between v<sub>i</sub> and v<sub>j</sub> if and-->
-    <!--only if the numbers i and j differ by exactly 1. With each node v<sub>i</sub>, we associate a positive integer-->
-    <!--weight w<sub>i</sub>. Note that the nodes have weights in this problem, not the edges.-->
-    <!--The goal in this question is to solve the following problem:-->
-<!--</p>-->
-<!--<p>-->
-    <!--Find an independent set in a <b>path</b> G whose total weight is as large as possible.-->
-<!--</p>-->
+<ol type="a">
+    <li>
+        Provide a counter-example to show that the following greedy algorithm does not always find an independent set of
+        maximum total weight. The “heaviest-first” greedy algorithm
+        <br/><br/>
+        <pre>
+1. Start with S equal to the empty set
+2. while some node remains in G do
+    a. Pick a node v<sub>i</sub> of maximum weight Add v<sub>i</sub> to S
+    b. Delete v<sub>i</sub> and its neighbors from G
+3. Return S
+        </pre>
+    </li>
+    <li>
+        Give an example to show that the following algorithm also does not always find an
+        independent set of maximum total weight.
+        <br/><br/>
+        <pre>
+1. Let S<sub>1</sub> be the set of all v<sub>i</sub> where i is an odd number
+2. Let S<sub>2</sub> be the set of all v<sub>i</sub> where i is an even number
+(Note that S<sub>1</sub> and S<sub>2</sub> are both independent sets)
+3. Between S<sub>1</sub> and S<sub>2</sub>, return the one with larger weight
+        </pre>
+    </li>
+</ol>
 
-<!--<ol type="a">-->
-    <!--<li>-->
-        <!--Provide a counter-example to show that the following greedy algorithm does not always find an independent set of-->
-        <!--maximum total weight. The “heaviest-first” greedy algorithm-->
-        <!--<br/><br/>-->
-        <!--<pre>-->
-<!--1. Start with S equal to the empty set-->
-<!--2. while some node remains in G do-->
-    <!--a. Pick a node v<sub>i</sub> of maximum weight Add v<sub>i</sub> to S-->
-    <!--b. Delete v<sub>i</sub> and its neighbors from G-->
-<!--3. Return S-->
-        <!--</pre>-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--Give an example to show that the following algorithm also does not always find an-->
-        <!--independent set of maximum total weight.-->
-        <!--<br/><br/>-->
-        <!--<pre>-->
-<!--1. Let S<sub>1</sub> be the set of all v<sub>i</sub> where i is an odd number-->
-<!--2. Let S<sub>2</sub> be the set of all v<sub>i</sub> where i is an even number-->
-<!--(Note that S<sub>1</sub> and S<sub>2</sub> are both independent sets)-->
-<!--3. Between S<sub>1</sub> and S<sub>2</sub>, return the one with larger weight-->
-        <!--</pre>-->
-    <!--</li>-->
-<!--</ol>-->
-
-<!--<p>-->
-    <!--Now that we've explored 2 incorrect solutions, write your own algorithm that takes an n-node path G with weights and-->
-    <!--returns an independent set of maximum total weight. The running time should be polynomial in n, independent of the-->
-    <!--values of the weights. Prove the correctness and analyze the runtime of your algorithm.-->
-<!--</p>-->
-
-
-<!--<p>-->
-    <!--<b>Part 1 grading:</b>-->
-<!--</p>-->
-<!--<ul>-->
-    <!--<li>-->
-        <!--[5 points] part a: Your counter-example proves that the algorithm is not optimal-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[5 points] part b: Your counter-example proves that the algorithm is not optimal-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[10 points] Algorithm: Your algorithm generally has a correct idea and has a polynomial runtime-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[5 points] Correctness Proof: Your algorithm is correct on all inputs, has a polynomial runtime, and your-->
-        <!--proof of correctness is logically sound and complete-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[5 points] Runtime Analysis: Your algorithm has a polynomial runtime and you correctly analyzed the runtime of-->
-        <!--your algorithm-->
-    <!--</li>-->
-<!--</ul>-->
+<p>
+    Now that we've explored 2 incorrect solutions, write your own algorithm that takes an n-node path G with weights and
+    returns an independent set of maximum total weight. The running time should be polynomial in n, independent of the
+    values of the weights. Prove the correctness and analyze the runtime of your algorithm.
+</p>
 
 
-<!--<p>-->
-    <!--<b>Submission: </b>Submit part 1 as a pdf file to homework 3 part 1 on AutoLab-->
-<!--</p>-->
+<p>
+    <b>Part 1 grading:</b>
+</p>
+<ul>
+    <li>
+        [5 points] part a: Your counter-example proves that the algorithm is not optimal
+    </li>
+    <li>
+        [5 points] part b: Your counter-example proves that the algorithm is not optimal
+    </li>
+    <li>
+        [10 points] Algorithm: Your algorithm generally has a correct idea and has a polynomial runtime
+    </li>
+    <li>
+        [5 points] Correctness Proof: Your algorithm is correct on all inputs, has a polynomial runtime, and your
+        proof of correctness is logically sound and complete
+    </li>
+    <li>
+        [5 points] Runtime Analysis: Your algorithm has a polynomial runtime and you correctly analyzed the runtime of
+        your algorithm
+    </li>
+</ul>
 
 
-<!--== Part 2 (55 points)-->
+<p>
+    <b>Submission: </b>Submit part 1 as a pdf file to homework 3 part 1 on AutoLab
+</p>
 
-<!--Collector-->
+
+== Part 2 (55 points)
+
+<p>
+    You are working as an assistant for a billionaire who is an avid collector of Marvel action figures. There is
+    a large auction for rare figures coming up that the billionaire would like to attend, but she will be busy in
+    meetings to discuss an upcoming merger so she decides to send you to the auction to make purchases on her behalf.
+    She gives you a list of all n items that will appear in the auction along with values quantifying how much each one
+    is worth to her along with enough money to outbid anyone else in attendance (i.e. you don’t have to worry about how
+    much the items will cost, only their values).
+</p>
+<p>
+    When you get to the auction, you learn a few things about the format. First, you learn the order in which the
+    action figures will be presented. You also realize that each time you buy an item, you will have to fill out some
+    paperwork to finalize your purchase. You will be so busy with this paperwork, that you will not be able to purchase
+    either of the next two items in the auction. Since you have plenty of money, your job is to determine how to
+    maximize the total value of the figures you purchase under this format.
+</p>
+<p>
+    More formally, you are given a sequence of <em>n</em> items such that each item <em>i</em> has value
+    <em>v<sub>i</sub></em> and if you buy item <em>j</em> you can
+    not buy items <em>j + 1</em> or <em>j + 2</em>. Your goal is to maximize the sum of the values of all the items
+    purchased.
+</p>
+<p>
+    Give an O(n) runtime algorithm to find a set of items fitting these criteria, prove the correctness of you
+    algorithm, and analyze its runtime.
+</p>
 
 
-<!--== Part 3 (15 points)-->
+<p>
+    <b>Part 2 grading:</b>
+</p>
+<ul>
+    <li>
+        [10 points] Algorithm: Your algorithm generally has a correct idea and has a runtime of O(n)
+    </li>
+    <li>
+        [20 points] Correctness Proof: Your algorithm is correct on all inputs, has a runtime of O(n), and your
+        proof of correctness is logically sound and complete
+    </li>
+    <li>
+        [5 points] Runtime Analysis: Your algorithm has a runtime of O(n) and you correctly analyzed the runtime
+        of your algorithm
+    </li>
+    <li>
+        [20 points] Implementation: You correctly implemented your algorithm in code and the implementation is correct
+        on all inputs with runtime O(n)
+    </li>
+</ul>
 
-<!--<p>-->
-<!--Given a number n and 3 different operations that you can perform:-->
-<!--</p>-->
 
-<!--n = n/2<br/>-->
-<!--n = n/3<br/>-->
-<!--n = n−1<br/>-->
-<!--<br/>-->
-<!--<p>-->
-<!--Give an algorithm that reaches n == 1 in the minimum number of operations for any given starting n.-->
-<!--</p>-->
-<!--<p>-->
-    <!--<b>Part 3 grading:</b>-->
-<!--</p>-->
-<!--<ul>-->
-    <!--<li>-->
-        <!--[8 points] Algorithm: Your algorithm generally has a correct idea and has a polynomial runtime-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[5 points] Correctness Proof: Your algorithm is correct on all inputs, has a polynomial runtime, and your-->
-        <!--proof of correctness is logically sound and complete-->
-    <!--</li>-->
-    <!--<li>-->
-        <!--[2 points] Runtime Analysis: Your algorithm has a polynomial runtime and you correctly analyzed the runtime of-->
-        <!--your algorithm-->
-    <!--</li>-->
-<!--</ul>-->
+<p>
+    <b>Submission (algorithm): </b>Submit your algorithm, proof of correctness, and runtime analysis for part 2 as a pdf
+    file to homework 3 part 2 - algorithm on AutoLab
+</p>
 
-<!--<p>-->
-    <!--<b>Submission: </b>Submit part 3 as a pdf file to homework 3 part 3 on AutoLab-->
-<!--</p>-->
+<hr/>
+
+<p>
+    <b>Submission (implementation): </b>Submit your coded implementation of your algorithm as a zip file to homework 3
+    part 2 - implementation on AutoLab. This zip file must contain the following:
+</p>
+<ul>
+    <li>
+        A Makefile. This makefile will be called exactly once during grading
+    </li>
+    <li>
+        A bash script named "run.sh" that takes 2 command line parameters [inputFilename] and [outputFilename]. This
+        script will be called with each of the testing inputs during grading. You can assume that make was called
+        before any run.sh calls
+    </li>
+</ul>
+
+<p>
+    Data Format:
+</p>
+<ul>
+    <li>The input file will be a csv file with n lines where each line represents one speed runner in the format
+        "index,value" where index is indicates the order of the items same as the order of lines) and value is is a
+        well-formed float
+    </li>
+    <ul>
+        <li>Sample <a href="/static/templates/auctionList.csv">auctionList.csv</a> (you may have to right click and
+            save-as)
+        </li>
+    </ul>
+    <li>
+        Your output file wile be a text/csv file where each line contains the index of each item that you will
+        purchase
+    </li>
+</ul>
+
+== Part 3 (15 points)
+
+<p>
+    Given a number n and 3 different operations that you can perform:
+</p>
+
+n = n/2<br/>
+n = n/3<br/>
+n = n−1<br/>
+<br/>
+<p>
+    Give an algorithm that reaches n == 1 in the minimum number of operations for any given starting n.
+</p>
+<p>
+    <b>Part 3 grading:</b>
+</p>
+<ul>
+    <li>
+        [8 points] Algorithm: Your algorithm generally has a correct idea and has a polynomial runtime
+    </li>
+    <li>
+        [5 points] Correctness Proof: Your algorithm is correct on all inputs, has a polynomial runtime, and your
+        proof of correctness is logically sound and complete
+    </li>
+    <li>
+        [2 points] Runtime Analysis: Your algorithm has a polynomial runtime and you correctly analyzed the runtime of
+        your algorithm
+    </li>
+</ul>
+
+<p>
+    <b>Submission: </b>Submit part 3 as a pdf file to homework 3 part 3 on AutoLab
+</p>
