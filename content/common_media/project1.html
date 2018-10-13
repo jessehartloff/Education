@@ -8,12 +8,17 @@
 
 <img src="http://textfiles.com/underconstruction/HeHeartlandValley1469underconstruction2.gif">
 
-Project details
-Introduction: Let’s build a web app! In the process of building this app we will see how all the different concepts we have been learning can work together to make something greater. This will feel like a tutorial. For part 2 of the project you will build a similar web app, except you will choose what to build and work on it on your own without a tutorial. For this app we will connect to an API containing location-based data using python, then serve this data to our web site where we’ll write javascript code to display the data on a map on an HTML web page.. So there’s a bit to unpack here and we’ll go through this step-by-step, but first, let’s look at the data we will be displaying.
+<h1>Project - Part 1</h1>
 
-The Data: Here’s a link to some parking ticket data (https://dev.socrata.com/foundry/data.buffalony.gov/ux3f-ypyc) which is part of the city of Buffalo’s Open Data Portal. On the parking ticket page you will find information about the data we’ll be using for this project. Among this data you will find the API endpoint to access the data as a JSON string. We will use all the default options for this endpoint which will give us 1000 recent tickets issues in the city of Buffalo. There are millions of records in this dataset so feel to explore more than this.
 
-Tutorial:
+<h5>Introduction</h5> 
+<p>
+    Let’s build a web app! In the process of building this app we will see how all the different concepts we have been learning can work together to make something greater. This will feel like a tutorial. For part 2 of the project you will build a similar web app, except you will choose what to build and work on it on your own without a tutorial. For this app we will connect to an API containing location-based data using python, then serve this data to our web site where we’ll write javascript code to display the data on a map on an HTML web page.. So there’s a bit to unpack here and we’ll go through this step-by-step, but first, let’s look at the data we will be displaying.
+</p>
+
+The Data: Here’s a link to some parking ticket data (https://dev.socrata.com/foundry/data.buffalony.gov/ux3f-ypyc) which is part of the city of Buffalo’s Open Data Portal. On the parking ticket page you will find information about the data we’ll be using for this project. Among this data you will find the API endpoint to access the data as a JSON string. We will use all the default options for this endpoint which will give us 1000 recent tickets issues in the city of Buffalo. There are millions of records in this dataset so feel to explore more than this. You may also need to obtain an API key for this dataset. The data is open to the public, but if you make too many requests they may block your IP address from making more queries. With an API key you will have a higher limit on the number of requests that can be made.
+
+Tutorial
 
 HTML: We’ll start with the front-end display of our web app. Since this is not a course in HTML/CSS, we will provide the HTML for you here.
 
@@ -36,6 +41,7 @@ HTML: We’ll start with the front-end display of our web app. Since this is not
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
+
 Start a new project in Codenvy and save this text in a file named “index.html”. You can open this page in your browser by right clicking the file and choosing preview, however at this point nothing will be displayed yet. If you are familiar with HTML you can edit this file and see your creations in the preview tab. As always to goto site to learn about HTML, and many other web technologies, is W3Schools. Your HTML file will not be graded so feel free to add anything you’d like to this page.
 
 80 points total
@@ -46,7 +52,7 @@ JavaScript: Create a file named “maps.js” and add this code to that file.
 
 function loadMap(){
 Plotly.setPlotConfig({
-mapboxAccessToken: 'your_mapbox_API_key'
+mapboxAccessToken: '&lt;your_mapbox_API_key&gt;'
     });
 
     // for testing:
@@ -107,7 +113,7 @@ mapboxAccessToken: 'your_mapbox_API_key'
     Check Point: Now that these functions are setup you can replace your loadMap function with the following code. This will display a few points on the map. If you see the map and some marked points go ahead and submit in AutoLab to secure these points and ensure that everything is correct as the grader expects.
 
     Plotly.setPlotConfig({
-    mapboxAccessToken: 'your_mapbox_API_key'
+    mapboxAccessToken: '&lt;your_mapbox_API_key&gt;'
         });
 
         var  mapParams = getMapParams(JSON.stringify([[20.3,-56.8, "test point 1"],[26.3,-59.8, "test point 2"],[21.3,-50.8, "test point 3"]]));
@@ -139,11 +145,11 @@ mapboxAccessToken: 'your_mapbox_API_key'
             To start setting up the server you will have to follow these steps:
 
             Install bottle - “pip install --user bottle”
-            As our web framework of choice we will bottle. This is a simple and light-weight framework that can accomplish everything we need for this project. To install bottle in Codenvy click on the “Terminal” tab on the pane near the bottom of the window, type “pip install --user bottle” and hit enter. This will install the library
+            As our web framework of choice we will use bottle. This is a simple and light-weight framework that can accomplish everything we need for this project. To install bottle in Codenvy click on the “Terminal” tab on the pane near the bottom of the window, type “pip install --user bottle” and hit enter. This will install the library
             In the run command that you will use to run python programs for this project scroll to the bottom of the page and enter “http://${server.port.8080}” in the “preview URL” text area. This will display the URL of your server when you run the server
             Now that the logistics are out of the way we are ready to write a web server. Create a new file in the same directory as your HTML and JavaScript and call it “server.py”. To write you server you can use the bottle documentation though there a few things we’ll have to do specifically to make this work in Codenvy. First, in the call to run use “0.0.0.0” instead of “localhost” and second, when hosting static files the root should be “/projects/<your_project_name>”. Note that if you see an import error when you import bottle your install of bottle did not work and you should go back to the steps above. It is also recommended that you add a third argument to the call of run of “debug=True” (without the quotes). This will display error reports in your browser if something goes wrong on the server which will help you fix your bugs.
 
-                Now, in server.py setup your server to do the following
+                Now, in server.py setup your server to do the following. Note that you may name your functions whatever you’d like in this file. For grading only your server paths will be tested.
 
                 Host “index.html” as a static file on the root path “/”
                 Host “maps.js” as a static file on the path “/maps.js”
@@ -151,26 +157,12 @@ mapboxAccessToken: 'your_mapbox_API_key'
 
                 Now that your server is setup you can run your code and verify that it works. Go ahead and run server.py. If there are no errors you should see a url in the console. Click that url. If everything is setup properly you should see your map from the first part of the project. You now have a web app that is running, hosted on a server, and available to everyone with an Internet connection. You can send this url to your family back home and they can see your project (As long as they click it while your Codenvy machine is running).
 
+                Connecting JavaScript and Python: You are now hosting the front end of your website through a python server, but the server is only hosting the files statically and there is no meaningful interaction between the front end and the server. Let’s change that and add more power to the web app.
 
-                Create a new file named “server.py”
-                We will add to this file later
-
-
-
-                Server must serve index.html, map.js, and /tickets
-                -install bottle “pip install --user bottle”
-                -setup preview
-                --note: this is live! Everyone on the planet can see your stuff
-                -include your model file
-
-                # connect to the API and filter out the unneeded data
-                # Handle missing lat/long
-                def getit(url)
-
-                Once your server is setup, replace your loadMap function with this code. This code uses some topics that we won’t cover in this class (instantiating classes, callbacks, the ‘this’ keyword) so in the spirit of fairness you are provided this code.
+                Replace your loadMap function with the following code. This code uses some topics that we won’t cover in this class (instantiating classes, callbacks, the ‘this’ keyword) so in the spirit of fairness you are provided this code.
 
                 Plotly.setPlotConfig({
-                mapboxAccessToken: 'your_mapbox_API_key'
+                mapboxAccessToken: '&lt;your_mapbox_API_key&gt;'
                     });
 
                     var xhttp = new XMLHttpRequest();
@@ -183,6 +175,30 @@ mapboxAccessToken: 'your_mapbox_API_key'
                     xhttp.open("GET", "/tickets");
                     xhttp.send();
 
-                    
+                    Once this is your loadMap function, after your page loads your JavaScript code will make a second request to the server with the path “/tickets” to obtain whatever data that path returns. To test this functionality you can have this path return a JSON string in the proper format and check if the entered points are displayed on the map when loaded through the server. For example:
+
+                    @bottle.route('/tickets')
+                    def get_tickets():
+                    return json.dumps([[20.3,-56.8, "test point 1"],[26.3,-59.8, "test point 2"]])
+
+                    Ticket API: You have a front end that displays a map and adds markers to it, you have a server hosting the files for the front end, and you have made a connection between the front end and the server to send data to be marked on the map. The only thing left to do is to get data from the API and return it from the “/tickets” path on the server.
+
+                    Create another python file named “tickets.py” that will contain all the code that works with the thicket data. This file will only contain one function:
+
+                    In “tickets.py” write a function named “get_ticket_data” that takes a single string representing the url for an API endpoint that is hosting ticket data (you will call this function with “https://data.buffalony.gov/resource/ux3f-ypyc.json” as the input). This function will return a JSON string containing all the data from the endpoint in the format we have been using throughout the project (An array of arrays where the inner arrays contain [latitude, longitude, description]) where the description is the value at the “viodesc” key (violation description). Be sure that your function accomplishes all the following.
+                    Filter out any violations that don’t have a lat/long location
+                    Convert the lat/long to floating point numbers (notice that they are strings in the API)
+
+                    Your last task for this project is to edit your server to have the “/tickets” path return the result of a call to get_ticket_data(“https://data.buffalony.gov/resource/ux3f-ypyc.json”). The call is simple enough, however that function needs to be called from different file from where it’s defined so the function call will cause a function not found error. To fix this you will import your file just like we’ve been importing python libraries. Since these files are in the same directory, and it’s the root directory of the project, this can be done with “import tickets” in your server.py file. Now you can call you function just like any other imported code: “tickets.get_ticket_data(url)”.
+
+                    If everything is setup correctly you should be able to restart your server, click your preview link, and see markers on your map with ticket data.
+
+
+                    Want more? Here are some ideas:
+                    -What day of the week are more tickets issued?
+                    -What time of day are the most tickets issued for each area?
+                    --Can you use this data to compute a typical route of a ticket issuer?
+
+
 </body>
 </html>

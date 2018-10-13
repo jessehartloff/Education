@@ -12,7 +12,7 @@ exports.user_enrolled = function user_enrolled(req){
 	return req.user && req.params.course && req.user.courses_enrolled && req.user.courses_enrolled[req.params.course];
 };
 
-exports.enroll = function enroll_in_course(username, course) {
+exports.enroll = enroll = function enroll_in_course(username, course) {
 	course_collection.findOne({'course': course}, {}, function (err, record) {
 		if (err) {
 			console.log(err);
@@ -65,7 +65,8 @@ exports.enroll = function enroll_in_course(username, course) {
 	});
 };
 
-
+// enroll('hartloff', 'cse331-u18');
 //var username = 'sophie';
 //user_collection.update({'username':username}, {$unset:{'courses_enrolled':"", 'options':""}});
 //exports.enroll(username, 'cse442-f17');
+
