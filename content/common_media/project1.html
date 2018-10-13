@@ -544,7 +544,8 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                     <p>
                         <b>Whenever you change your python code you must restart the code to see the changes</b>
                     </p>
-                    <p> <b>Connecting JavaScript and Python</b>: You are now hosting the front end of your website through a
+                    <p><b>Connecting JavaScript and Python</b>: You are now hosting the front end of your website
+                        through a
                         python
                         server, but the server is only hosting the files statically and there is no meaningful
                         interaction
@@ -593,21 +594,33 @@ def get_tickets():
                     <p> Create another python file named “tickets.py” that will contain all the code that works with the
                         thicket data. This file will only contain one function: </p>
 
-                    <ul><li>In “tickets.py” write a function
-                    named
-                    “get_ticket_data” that takes a single string representing the url for an API endpoint that is
-                    hosting
-                    ticket data (you will call this function with “https://data.buffalony.gov/resource/ux3f-ypyc.json”
-                    as
-                    the input). This function will return a JSON string containing all the data from the endpoint in the
-                    format we have been using throughout the project (An array of arrays where the inner arrays contain
-                    [latitude, longitude, description]) where the description is the value at the “viodesc” key
-                    (violation
-                    description). Be sure that your function accomplishes all the following.
-                    </li><ul><li>Filter out any violations
-                    that
-                        don’t have a lat/long location</li><li>Convert the lat/long to floating point numbers (notice that they are
-                        strings in the API)</li></ul></ul>
+                    <ul>
+                        <li>In “tickets.py” write a function
+                            named
+                            “get_ticket_data” that takes a single string representing the url for an API endpoint that
+                            is
+                            hosting
+                            ticket data (you will call this function with
+                            “https://data.buffalony.gov/resource/ux3f-ypyc.json”
+                            as
+                            the input). This function will return a JSON string containing all the data from the
+                            endpoint in the
+                            format we have been using throughout the project (An array of arrays where the inner arrays
+                            contain
+                            [latitude, longitude, description]) where the description is the value at the “viodesc” key
+                            (violation
+                            description). Be sure that your function accomplishes all the following.
+                        </li>
+                        <ul>
+                            <li>Filter out any violations
+                                that
+                                don’t have a lat/long location
+                            </li>
+                            <li>Convert the lat/long to floating point numbers (notice that they are
+                                strings in the API)
+                            </li>
+                        </ul>
+                    </ul>
                     <p> Your last task for this project is to edit your server to have the “/tickets”
                         path return the result of a call to
                         get_ticket_data(“https://data.buffalony.gov/resource/ux3f-ypyc.json”). The call is simple
@@ -631,14 +644,21 @@ def get_tickets():
                 <h3>Submission</h3>
                 <p> Submissions will be made on AutoLab when the grader is ready </p></div>
 
-        </div><hr/>
+            <hr/>
             <p> Want more? Here are some ways that you could expand on this project:</p>
-            <ul><li>What day of the week are more tickets issued?</li><li>What time of day
-                are
-                the most tickets issued for each area?</li><li>Can you use this data to compute a typical route of a
-                ticket issuer?</li></ul>
+            <ul>
+                <li>What day of the week are more tickets issued?</li>
+                <li>What time of day
+                    are
+                    the most tickets issued for each area?
+                </li>
+                <li>Can you use this data to compute a typical route of a
+                    ticket issuer?
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
