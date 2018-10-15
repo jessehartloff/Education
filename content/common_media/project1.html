@@ -157,7 +157,7 @@
                         free
                         views. Once you have your access token, enter into the JavaScript code replacing the placeholder
                         value. </p>
-                    <p> Create a file named “maps.js” in the same directory as index.html and in it write a
+                    <p> Create a file named “map.js” in the same directory as index.html and in it write a
                         function named loadMap() that will set up a
                         map based to be displayed on your page. Note that loadMap is called
                         from the HTML file once the page is loaded. Also notice that the empty div in the HTML that will
@@ -175,7 +175,7 @@
                         code
                         that will enable you to read a JSON string of locations with descriptions and place a marker on
                         the
-                        map for each of them. Write the following functions in maps.js: </p>
+                        map for each of them. Write the following functions in map.js: </p>
 
 
                     <p><b>setupMapData</b>: Write a function named “setupMapData” that takes an array as a parameter and
@@ -523,7 +523,7 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
 
                     <ol>
                         <li>Host “index.html” as a static file on the root path “/”</li>
-                        <li>Host “maps.js” as a static file on the path “/maps.js”</li>
+                        <li>Host “map.js” as a static file on the path “/map.js”</li>
                         <li>Host the data for the map (JSON string representing an array of arrays with [lat, lon,
                             description]) on the path “/tickets”. We’ll add data to this path in the next step
                         </li>
@@ -621,9 +621,11 @@ def get_tickets():
                             </li>
                         </ul>
                     </ul>
-                    <p> Your last task for this project is to edit your server to have the “/tickets”
+                    <p>
+                        Your last task for this project is to edit your server to have the “/tickets”
                         path return the result of a call to
-                        get_ticket_data(“https://data.buffalony.gov/resource/ux3f-ypyc.json”). The call is simple
+                        get_ticket_data("https://data.buffalony.gov/resource/ux3f-ypyc.json"). The function call is
+                        simple
                         enough,
                         however that function needs to be called from different file from where it’s defined so the
                         function
@@ -632,10 +634,25 @@ def get_tickets():
                         been importing python libraries. Since these files are in the same directory, and it’s the root
                         directory of the project, this can be done with “import tickets” in your server.py file. Now you
                         can
-                        call you function just like any other imported code: “tickets.get_ticket_data(url)”. </p>
-                    <p> If everything is setup correctly you should be able to restart your server, click your preview
+                        call you function just like any other imported code: “tickets.get_ticket_data(url)”.
+                    </p>
+
+                    <!--<p>-->
+                    <!--Lastly, the app will need a convenient way to set the url for the API that will-->
+                    <!--be used. This could be hard-coded into your "/tickets" endpoint, but since this endpoint-->
+                    <!--can change based on the API and keys used to access the API it is best to store the value-->
+                    <!--in a separate file. To this end, create new file named "config.json" that will contain-->
+                    <!--a JSON string representing an object with one key named "url" mapping to a string that is-->
+                    <!--the url of the API. For submission this value should be-->
+                    <!--“https://data.buffalony.gov/resource/ux3f-ypyc.json”. You may submit with or without a query-->
+                    <!--string. Finally, in your "/tickets" endpoint read this file and use this url in your call-->
+                    <!--to get_ticket_data. <b>Note that for grading </b>-->
+                    <!--</p>-->
+                    <p>
+                        If everything is setup correctly you should be able to restart your server, click your preview
                         link,
-                        and see markers on your map with ticket data. </p>
+                        and see markers on your map with ticket data.
+                    </p>
 
                 </div>
             </div>
