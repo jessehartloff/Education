@@ -451,6 +451,11 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                                 but
                                 it’s worth it to avoid such attacks.
                             </li>
+                            <li>
+                                <b>Edit</b>: As it turns out the API we are accessing sets the
+                                "access-control-allow-origin" HTTP header to "*" which overrides this security measure
+                                and allows any origin to access and read the data from a browser
+                            </li>
                         </ul>
                     </ul>
                     <p> OK, so now that we’ve seen that the simpler approaches
