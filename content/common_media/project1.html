@@ -185,7 +185,7 @@
                         the format [latitude, longitude, description] where latitude and longitude are floating point
                         numbers and description is a string describing the event at this location. An example input
                         would be
-                        [[20.3,-56.8, "test point 1"],[26.3,-59.8, "test point 2"],[21.3,-50.8, "test point 3"]]. </p>
+                        [[35.6763257, 139.6993177, "Meiji Shrine"],[35.7101456, 139.8105814, "Skytree"],[35.6950532, 139.7017945, "Godzilla Head"]]. </p>
                     <p> This function will return an array containing only 1 element which is an object containing the
                         data
                         for a map that will be used in the same way as the “data” variable from the <a
@@ -351,7 +351,7 @@
                         correct as the grader expects. </p>
                     <pre>
 Plotly.setPlotConfig({ mapboxAccessToken: '&lt;your_mapbox_API_key&gt;' });
-var mapParams = getMapParams(JSON.stringify([[20.3,-56.8, "test point 1"],[26.3,-59.8, "test point 2"],[21.3,-50.8, "test point 3"]]));
+var mapParams = getMapParams(JSON.stringify([[35.6763257, 139.6993177, "Meiji Shrine"],[35.7101456, 139.8105814, "Skytree"],[35.6950532, 139.7017945, "Godzilla Head"]]));
 Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                 </div>
             </div>
@@ -559,19 +559,19 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         cover in this class (instantiating classes, callbacks, the ‘this’ keyword) so in the spirit of
                         fairness you are provided this code. This will be the final version of loadMap.</p>
                     <pre>
-Plotly.setPlotConfig({
-    mapboxAccessToken: '&lt;your_mapbox_API_key&gt;'
-});
+    Plotly.setPlotConfig({
+        mapboxAccessToken: '<your_mapbox_API_key>'
+    });
 
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function(){
-    if (this.readyState === 4 && this.status === 200){
-        mapParams = getMapParams(response);
-        Plotly.plot('map', mapParams.data, mapParams.layout);
-    }
-};
-xhttp.open("GET", "/tickets");
-xhttp.send();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState === 4 && this.status === 200){
+            var mapParams = getMapParams(this.response);
+            Plotly.plot('map', mapParams.data, mapParams.layout);
+        }
+    };
+    xhttp.open("GET", "/tickets");
+    xhttp.send();
                     </pre>
                     <p> Once this is your loadMap function, after your page loads your JavaScript code will make a
                         second
@@ -583,7 +583,7 @@ xhttp.send();
                     <pre>
 @bottle.route('/tickets')
 def get_tickets():
-    return json.dumps([[20.3,-56.8, "test point 1"],[26.3,-59.8, "test point 2"]])
+    return json.dumps([[35.6763257, 139.6993177, "Meiji Shrine"],[35.7101456, 139.8105814, "Skytree"],[35.6950532, 139.7017945, "Godzilla Head"]])
                     </pre>
 
                 </div>

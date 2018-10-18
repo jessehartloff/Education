@@ -1,0 +1,710 @@
+[
+  {
+    ":@computed_region_eziv_p4ck": "27",
+    ":@computed_region_fk4y_hpmh": "5",
+    ":@computed_region_kwzn_pe6v": "2",
+    ":@computed_region_tmcg_v66k": "1",
+    "census_block": "5002",
+    "census_block_group": "5",
+    "census_tract": "171",
+    "city": "Buffalo",
+    "council_district": "NORTH",
+    "latitude": "42.93181121003959",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.888968681778,
+        42.93181121004
+      ]
+    },
+    "longitude": "-78.88896868177791",
+    "origfine": "60",
+    "police_district": "District D",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42140845",
+    "viodesc": "VEHICLE PARKED ON UNPAVED PORTION OR",
+    "violation_address_number": "656",
+    "violation_full_address": "656 GRANT",
+    "violation_street": "GRANT",
+    "viotime": "0641A"
+  },
+  {
+    "city": "Buffalo",
+    "origfine": "40",
+    "state": "NY",
+    "summdt": "2018-08-09T00:00:00.000",
+    "summno": "M2141709",
+    "viodesc": "METER OVERTIME",
+    "violation_address_number": "0",
+    "violation_full_address": "MAI52MAIN",
+    "violation_street": "MAI52MAIN",
+    "viotime": "1050A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "33",
+    ":@computed_region_fk4y_hpmh": "2",
+    ":@computed_region_kwzn_pe6v": "18",
+    ":@computed_region_tmcg_v66k": "9",
+    "census_block": "2000",
+    "census_block_group": "2",
+    "census_tract": "52.02",
+    "city": "Buffalo",
+    "council_district": "MASTEN",
+    "latitude": "42.92600937548557",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.84515887666,
+        42.926009375486
+      ]
+    },
+    "longitude": "-78.84515887665987",
+    "origfine": "40",
+    "police_district": "District E",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42140846",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "247",
+    "violation_full_address": "247 LORING",
+    "violation_street": "LORING",
+    "viotime": "0711A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "36",
+    ":@computed_region_fk4y_hpmh": "5",
+    ":@computed_region_kwzn_pe6v": "5",
+    ":@computed_region_tmcg_v66k": "7",
+    "census_block": "4000",
+    "census_block_group": "4",
+    "census_tract": "54",
+    "city": "Buffalo",
+    "council_district": "DELAWARE",
+    "latitude": "42.944465657569836",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.854971061225,
+        42.94446565757
+      ]
+    },
+    "longitude": "-78.85497106122483",
+    "origfine": "40",
+    "police_district": "District D",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42140847",
+    "viodesc": "EXPIRED REGISTRATION STICKER",
+    "violation_address_number": "326",
+    "violation_full_address": "326 LINDEN AVE",
+    "violation_street": "LINDEN AVE",
+    "viotime": "0721A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2007",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.91243452925984",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.881970827601,
+        42.91243452926
+      ]
+    },
+    "longitude": "-78.88197082760104",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141468",
+    "viodesc": "BLOCKED DRIVEWAY (ALL)",
+    "violation_address_number": "369",
+    "violation_full_address": "369 RICHMOND",
+    "violation_street": "RICHMOND",
+    "viotime": "0802A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2012",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.912217808370656",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.88038023443,
+        42.912217808371
+      ]
+    },
+    "longitude": "-78.88038023442968",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141469",
+    "viodesc": "NO STANDING",
+    "violation_address_number": "272",
+    "violation_full_address": "272 NORWOOD",
+    "violation_street": "NORWOOD",
+    "viotime": "0807A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2011",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.9120487073862",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.878762655527,
+        42.912048707386
+      ]
+    },
+    "longitude": "-78.87876265552678",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141470",
+    "viodesc": "LESS THAN 20 FT FROM CROSSWALK",
+    "violation_address_number": "266",
+    "violation_full_address": "266 ASHLAND",
+    "violation_street": "ASHLAND",
+    "viotime": "0809A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "58",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "3003",
+    "census_block_group": "3",
+    "census_tract": "67.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.90943705692075",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.878640087335,
+        42.909437056921
+      ]
+    },
+    "longitude": "-78.87864008733507",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141471",
+    "viodesc": "NO PARKING",
+    "violation_address_number": "167",
+    "violation_full_address": "167 ASHLAND",
+    "violation_street": "ASHLAND",
+    "viotime": "0812A"
+  },
+  {
+    "city": "Buffalo",
+    "origfine": "40",
+    "state": "NY",
+    "summdt": "2018-03-12T00:00:00.000",
+    "summno": "E2065246",
+    "viodesc": "METER OVERTIME",
+    "violation_address_number": "795",
+    "violation_full_address": "795 875",
+    "violation_street": "875",
+    "viotime": "1119A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "58",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "3003",
+    "census_block_group": "3",
+    "census_tract": "67.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.90943705692075",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.878640087335,
+        42.909437056921
+      ]
+    },
+    "longitude": "-78.87864008733507",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141472",
+    "viodesc": "NO PARKING",
+    "violation_address_number": "167",
+    "violation_full_address": "167 ASHLAND",
+    "violation_street": "ASHLAND",
+    "viotime": "0812A"
+  },
+  {
+    "city": "Buffalo",
+    "origfine": "30",
+    "state": "NY",
+    "summdt": "2009-08-10T00:00:00.000",
+    "summno": "E8884469",
+    "viodesc": "METER OVERTIME",
+    "violation_address_number": "0",
+    "violation_full_address": "E9   SENECA",
+    "violation_street": "E9   SENECA",
+    "viotime": "0418P"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "50",
+    ":@computed_region_fk4y_hpmh": "5",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "7",
+    "census_block": "1002",
+    "census_block_group": "1",
+    "census_tract": "169",
+    "city": "Buffalo",
+    "council_district": "DELAWARE",
+    "latitude": "42.918867979253726",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.870778570501,
+        42.918867979254
+      ]
+    },
+    "longitude": "-78.87077857050058",
+    "origfine": "40",
+    "police_district": "District D",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141473",
+    "viodesc": "EXPIRED REGISTRATION STICKER",
+    "violation_address_number": "28",
+    "violation_full_address": "28 MELBOURNE",
+    "violation_street": "MELBOURNE",
+    "viotime": "0817A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "50",
+    ":@computed_region_fk4y_hpmh": "5",
+    ":@computed_region_kwzn_pe6v": "21",
+    ":@computed_region_tmcg_v66k": "4",
+    "census_block": "4000",
+    "census_block_group": "4",
+    "census_tract": "169",
+    "city": "Buffalo",
+    "council_district": "ELLICOTT",
+    "latitude": "42.92075231075094",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.861158128633,
+        42.920752310751
+      ]
+    },
+    "longitude": "-78.86115812863345",
+    "origfine": "40",
+    "police_district": "District D",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141474",
+    "viodesc": "EXPIRED INSPECTION STICKER (ALL)",
+    "violation_address_number": "1010",
+    "violation_full_address": "1010 LAFAYETTE",
+    "violation_street": "LAFAYETTE",
+    "viotime": "0822A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "15",
+    ":@computed_region_fk4y_hpmh": "2",
+    ":@computed_region_kwzn_pe6v": "11",
+    ":@computed_region_tmcg_v66k": "2",
+    "census_block": "1000",
+    "census_block_group": "1",
+    "census_tract": "37",
+    "city": "Buffalo",
+    "council_district": "LOVEJOY",
+    "latitude": "42.922095403617746",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.805963434343,
+        42.922095403618
+      ]
+    },
+    "longitude": "-78.80596343434327",
+    "origfine": "40",
+    "police_district": "District E",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141475",
+    "viodesc": "NO INSPECTIONS STICKER (ALL)",
+    "violation_address_number": "112",
+    "violation_full_address": "112 HAZELWOOD",
+    "violation_street": "HAZELWOOD",
+    "viotime": "0835A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "75",
+    ":@computed_region_fk4y_hpmh": "2",
+    ":@computed_region_kwzn_pe6v": "11",
+    ":@computed_region_tmcg_v66k": "8",
+    "census_block": "2005",
+    "census_block_group": "2",
+    "census_tract": "41",
+    "city": "Buffalo",
+    "council_district": "UNIVERSITY",
+    "latitude": "42.923269061000155",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.805830686225,
+        42.923269061
+      ]
+    },
+    "longitude": "-78.80583068622504",
+    "origfine": "40",
+    "police_district": "District E",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141476",
+    "viodesc": "EXPIRED REGISTRATION STICKER",
+    "violation_address_number": "148",
+    "violation_full_address": "148 HAZELWOOD",
+    "violation_street": "HAZELWOOD",
+    "viotime": "0837A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "75",
+    ":@computed_region_fk4y_hpmh": "2",
+    ":@computed_region_kwzn_pe6v": "11",
+    ":@computed_region_tmcg_v66k": "8",
+    "census_block": "2005",
+    "census_block_group": "2",
+    "census_tract": "41",
+    "city": "Buffalo",
+    "council_district": "UNIVERSITY",
+    "latitude": "42.92349066915461",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.805829449278,
+        42.923490669155
+      ]
+    },
+    "longitude": "-78.8058294492783",
+    "origfine": "40",
+    "police_district": "District E",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141477",
+    "viodesc": "EXPIRED INSPECTION STICKER (ALL)",
+    "violation_address_number": "156",
+    "violation_full_address": "156 HAZELWOOD",
+    "violation_street": "HAZELWOOD",
+    "viotime": "0839A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "15",
+    ":@computed_region_fk4y_hpmh": "2",
+    ":@computed_region_kwzn_pe6v": "11",
+    ":@computed_region_tmcg_v66k": "2",
+    "census_block": "1000",
+    "census_block_group": "1",
+    "census_tract": "37",
+    "city": "Buffalo",
+    "council_district": "LOVEJOY",
+    "latitude": "42.92018942138661",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.805959000004,
+        42.920189421387
+      ]
+    },
+    "longitude": "-78.80595900000446",
+    "origfine": "40",
+    "police_district": "District E",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141479",
+    "viodesc": "BLOCKED DRIVEWAY (ALL)",
+    "violation_address_number": "40",
+    "violation_full_address": "40 HAZELWOOD",
+    "violation_street": "HAZELWOOD",
+    "viotime": "0845A"
+  },
+  {
+    "city": "Buffalo",
+    "origfine": "40",
+    "state": "NY",
+    "summdt": "2018-08-09T00:00:00.000",
+    "summno": "M2141714",
+    "viodesc": "METER OVERTIME",
+    "violation_address_number": "0",
+    "violation_full_address": "MAI52MAIN",
+    "violation_street": "MAI52MAIN",
+    "viotime": "1059A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "15",
+    ":@computed_region_fk4y_hpmh": "2",
+    ":@computed_region_kwzn_pe6v": "11",
+    ":@computed_region_tmcg_v66k": "2",
+    "census_block": "1001",
+    "census_block_group": "1",
+    "census_tract": "37",
+    "city": "Buffalo",
+    "council_district": "LOVEJOY",
+    "latitude": "42.92126116347358",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.806888769442,
+        42.921261163474
+      ]
+    },
+    "longitude": "-78.80688876944193",
+    "origfine": "60",
+    "police_district": "District E",
+    "state": "NY",
+    "summdt": "2018-08-04T00:00:00.000",
+    "summno": "42141480",
+    "viodesc": "VEHICLE PARKED ON UNPAVED PORTION OR",
+    "violation_address_number": "60",
+    "violation_full_address": "60 COURTLAND",
+    "violation_street": "COURTLAND",
+    "viotime": "0848A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "13",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "15",
+    ":@computed_region_tmcg_v66k": "4",
+    "census_block": "3003",
+    "census_block_group": "3",
+    "census_tract": "68",
+    "city": "Buffalo",
+    "council_district": "ELLICOTT",
+    "latitude": "42.900797141104256",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.8813401267,
+        42.900797141104
+      ]
+    },
+    "longitude": "-78.88134012670032",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42156390",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "18",
+    "violation_full_address": "18 ST JOHNS PL",
+    "violation_street": "ST JOHNS PL",
+    "viotime": "0927A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "13",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "15",
+    ":@computed_region_tmcg_v66k": "5",
+    "census_block": "1001",
+    "census_block_group": "1",
+    "census_tract": "68",
+    "city": "Buffalo",
+    "council_district": "FILLMORE",
+    "latitude": "42.900164534843015",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.878045607594,
+        42.900164534843
+      ]
+    },
+    "longitude": "-78.87804560759433",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42156391",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "121",
+    "violation_full_address": "121 MARINER",
+    "violation_street": "MARINER",
+    "viotime": "0930A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2012",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.91219337817071",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.881388171409,
+        42.912193378171
+      ]
+    },
+    "longitude": "-78.88138817140891",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42157122",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "15",
+    "violation_full_address": "15 ANDERSON",
+    "violation_street": "ANDERSON",
+    "viotime": "0935A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2010",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.91217460001172",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.877878567157,
+        42.912174600012
+      ]
+    },
+    "longitude": "-78.87787856715714",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42157123",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "107",
+    "violation_full_address": "107 ANDERSON",
+    "violation_street": "ANDERSON",
+    "viotime": "0936A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2010",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.91217375300638",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.87772665265,
+        42.912173753006
+      ]
+    },
+    "longitude": "-78.87772665265007",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42157124",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "111",
+    "violation_full_address": "111 ANDERSON",
+    "violation_street": "ANDERSON",
+    "viotime": "0936A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "40",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "12",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2002",
+    "census_block_group": "2",
+    "census_tract": "66.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.914180411889554",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.880550138746,
+        42.91418041189
+      ]
+    },
+    "longitude": "-78.88055013874617",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42157125",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "297",
+    "violation_full_address": "297 HIGHLAND",
+    "violation_street": "HIGHLAND",
+    "viotime": "0939A"
+  },
+  {
+    ":@computed_region_eziv_p4ck": "58",
+    ":@computed_region_fk4y_hpmh": "1",
+    ":@computed_region_kwzn_pe6v": "2",
+    ":@computed_region_tmcg_v66k": "3",
+    "census_block": "2003",
+    "census_block_group": "2",
+    "census_tract": "67.01",
+    "city": "Buffalo",
+    "council_district": "NIAGARA",
+    "latitude": "42.91029461234652",
+    "location_2": {
+      "type": "Point",
+      "coordinates": [
+        -78.883393943558,
+        42.910294612347
+      ]
+    },
+    "longitude": "-78.88339394355783",
+    "origfine": "40",
+    "police_district": "District B",
+    "state": "NY",
+    "summdt": "2018-09-07T00:00:00.000",
+    "summno": "42157126",
+    "viodesc": "ALTERNATE PARKING",
+    "violation_address_number": "445",
+    "violation_full_address": "445 VERMONT",
+    "violation_street": "VERMONT",
+    "viotime": "0941A"
+  }
+]
