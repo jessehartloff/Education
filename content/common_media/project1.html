@@ -518,16 +518,16 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         instead of
                         “localhost” and second, when <a
                                 href="https://bottlepy.org/docs/dev/tutorial.html#routing-static-files">hosting
-                            static files</a> the root should be “/projects/&lt;your_project_name&gt;”. Note that if you
+                            static files</a> the root should be “/projects/&lt;your_project_name&gt;” (edit: setting
+                        root to
+                        the empty string also works since your server is running in /projects/&lt;your_project_name&gt;).
+                        Note that if you
                         see an
                         import error when you import bottle your install of bottle did not work and you should go back
-                        to
-                        the
-                        steps above. It is also recommended that you add a third argument to the call of run of
+                        to the steps above. It is also recommended that you add a third argument to the call of run of
                         “debug=True”
                         (without the quotes). This will display error reports in your browser if something goes wrong on
-                        the
-                        server which will help you fix your bugs.</p>
+                        the server which will help you fix your bugs.</p>
 
                     <p>
                         Now, in server.py setup your server to do the
