@@ -187,7 +187,7 @@
                         map for each of them. Write the following functions in map.js: </p>
 
 
-                    <p><b>setupMapData</b>: Write a function named “setupMapData” that takes an array as a parameter and
+                    <p><b>setupMapData (10 points)</b>: Write a function named “setupMapData” that takes an array as a parameter and
                         returns
                         an array containing the data for a map. Each element in the input array will itself be an array
                         in
@@ -267,7 +267,7 @@
                         location
                         based data that you want to display on a map (ie. you can reuse this function in part 2 of the
                         project) </p>
-                    <p><b>findCenter</b>: Write a function named “findCenter” that takes an array as a parameter in the
+                    <p><b>findCenter (10 points)</b>: Write a function named “findCenter” that takes an array as a parameter in the
                         same
                         format as the previous function and returns an array with two elements representing the latitude
                         and
@@ -276,7 +276,7 @@
                         compute the center latitude take the average of the minimum and maximum latitudes from the
                         input.
                         Repeat for longitude. </p>
-                    <p><b>setupMapLayout</b>: Write a function named “setupMapLayout” that takes an array as a parameter
+                    <p><b>setupMapLayout (10 points)</b>: Write a function named “setupMapLayout” that takes an array as a parameter
                         in
                         the
                         same format as the previous function and returns an object </p>
@@ -332,7 +332,7 @@
                             </ul>
                         </ul>
                     </ul>
-                    <p><b>getMapParams</b>: Write a function named “getMapParams” that takes a JSON formatted string
+                    <p><b>getMapParams (10 points)</b>: Write a function named “getMapParams” that takes a JSON formatted string
                         as a
                         parameter and returns all the information needed to create a map in an object with “data” and
                         “layout”
@@ -537,9 +537,9 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         paths will be tested. </p>
 
                     <ol>
-                        <li>Host “index.html” as a static file on the root path “/”</li>
-                        <li>Host “map.js” as a static file on the path “/map.js”</li>
-                        <li>Host the data for the map (JSON string representing an array of arrays with [lat, lon,
+                        <li><b>(5 points)</b> Host “index.html” as a static file on the root path “/”</li>
+                        <li><b>(5 points)</b> Host “map.js” as a static file on the path “/map.js”</li>
+                        <li><b>(5 points)</b> Host the data for the map (JSON string representing an array of arrays with [lat, lon,
                             description]) on the path “/tickets”. We’ll add data to this path in the next step
                         </li>
                     </ol>
@@ -570,7 +570,7 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         fairness you are provided this code. This will be the final version of loadMap.</p>
                     <pre>
     Plotly.setPlotConfig({
-        mapboxAccessToken: '<your_mapbox_API_key>'
+        mapboxAccessToken: '&lt;your_mapbox_API_key&gt;'
     });
 
     var xhttp = new XMLHttpRequest();
@@ -610,7 +610,7 @@ def get_tickets():
                         thicket data. This file will only contain one function: </p>
 
                     <ul>
-                        <li>In “tickets.py” write a function
+                        <li><b>(25 points)</b>In “tickets.py” write a function
                             named
                             “get_ticket_data” that takes a single string representing the url for an API endpoint that
                             is
