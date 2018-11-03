@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project - Part 2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            top: 20px;
+            position: relative;
+        }
+
+        nav.navbar {
+            top: 20px;
+            position: fixed;
+        }
+
+        div.tutorial {
+            top: 0;
+        }
+
+    </style>
+</head>
+<body data-spy="scroll" data-target="#content" data-offset="1">
+<!--<body>-->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-5 col-sm-4 col-md-3 col-lg-2" id="bars">
+            <nav class="navbar navbar-light" id="content">
+                <nav class="nav nav-pills flex-column" id="inner">
+                    <a class="nav-link active" href="#section1">Introduction</a>
+                    <a class="nav-link" href="#section2">Requirements</a>
+                    <a class="nav-link" href="#section3">Grading</a>
+                    <a class="nav-link" href="#section4">Competition</a>
+                    <a class="nav-link" href="#section5">Submission</a>
+                </nav>
+            </nav>
+        </div>
+
+
+        <div class="tutorial col-7 col-sm-8 col-md-9 col-lg-10">
+            <div id="section1">
+
+                <h1>Project - Part 2</h1>
+                <hr/>
+                <h3>Introduction</h3>
+                <div class="alert alert-danger"><b>Academic Integrity Reminder</b>: This is an individual assignment.
+                    You are not allowed to share code or use code from any source for this project. This is
+                    different from the Prelab questions where sharing code is allowed. If you share code for this
+                    project all students involved will earn an <b>F</b> in CSE115.
+                </div>
+
+                <div class="alert alert-info">
+                    <b>Report Due</b>: Monday, November 26 @ 8am
+                </div>
+
+                <div class="alert alert-info">
+                    <b>Code Due</b>: Monday, December 3 @ 8am
+                </div>
+
+                <div class="alert alert-info">
+                    <b>Video Due</b>: Monday, December 3 @ 8am
+                </div>
+
+                <div class="alert alert-info">
+                    <b>Project Demo</b>: During lab the week of December 3 (the last week of classes)
+                </div>
+
+                <hr/>
+
+                <p>
+                    The first part of the project was designed as a tutorial that walked you through the process of
+                    obtaining data from the Internet, processing the data, then visualizing that data on a web site
+                    that you can share with billions people. For part 2 you will be taking this same project structure
+                    and build an app of your own design. You will choose a web API to obtain data, choose how you want
+                    to filter the data, choose how you want to display the filtered data, then build your web app to
+                    accomplish your design. You will not be guided through this part of the project, though you should
+                    study the tutorial for part 1 so you are familiar with the structure we used to build a similar app.
+                </p>
+            </div>
+
+
+            <div id="section2">
+
+                <h3>Requirements</h3>
+
+                <p>
+                    You have a significant amount of flexibility to design this project however you'd like as long as
+                    you meet the following criteria.
+                </p>
+
+                <hr/>
+                <h5>The Data</h5>
+                <p><b>Choose a data source that you access through a web API</b></p>
+
+                <p>
+                    You will choose a data source that will form the base of your app from a web API that we have not
+                    already used in this course (ie. 0 credit if you use the parking ticket API. Be creative). This
+                    data must be live and obtained with python code via an HTTP request made to the API each time a
+                    user visits your site.
+                </p>
+
+                <p>Here are some lists of APIs for you to explore. You may use any API hosted on the Internet, though
+                    these lists should give you a good place to start</p>
+
+                <ul>
+                    <li><a href="https://data.buffalony.gov/">Buffalo Open Data</a>
+                        <ul>
+                            <li>The city of Buffalo has recently released much of their data and host free APIs for
+                                developers to build apps. We used the parking ticket API from this project and their are
+                                many
+                                more APIs with a wealth of city data that is freely available
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="https://opendata.cityofnewyork.us/">NYC Open Data</a>
+                        <ul>
+                            <li>New York City also has an open data project with many freely available APIs</li>
+                        </ul>
+                    </li>
+                    <li><a href="https://www.data.gov/">US Open Data</a>
+                        <ul>
+                            <li>Open data at the federal level for the United States. If you want to analyze national
+                                trends
+                                you will find many interesting data sets here
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Other Government Data
+                        <ul>
+                            <li>Not interested in Buffalo, NYC, or US data? Check if your home city/country has an
+                                open data program. These programs have increased in popularity over the past few years
+                                and contain data that could improve policies, inform citizens, and even save lives
+                                if analyzed properly
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="https://github.com/toddmotto/public-apis">Big List of Web APIs</a>
+                        <ul>
+                            <li>With over 500 APIs you will find something that interests you in this list. Note
+                                that some of these APIs are not hosting data but instead allow you to interact
+                                with their app (ex. Google Calendar API). For this project you must analyze data
+                                which will exclude some of the APIs on this list
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Any other web API</a>
+                        <ul>
+                            <li>
+                                If you find an API that is not included anywhere in these lists, feel free to use it
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+                <hr/>
+                <h5>Process The Data</h5>
+                <p><b>On your server (in python), process the data to prepare it for visualization</b></p>
+
+                <p>
+                    For example, in part 1 we removed any parking tickets that did not contain a location and removed
+                    any fields that were not required for visualization. Recall that the API returns a lot of
+                    information
+                    about each ticket, but we only send latitude, longitude, and description to the front-end of the
+                    app.
+                </p>
+
+                <p>
+                    This processing does not have to be complex to meet this criteria, but you cannot send the
+                    results from the API unmodified to your front-end. This may be a simple filter, but your Python
+                    code has to process the data from the API before sending it to the front-end for visualization.
+                </p>
+
+                <hr/>
+                <h5>Visualize The Data</h5>
+                <p><b>On the front-end of your web app, visualize the data with at least 2 different visualizations</b>
+                </p>
+
+                <p>
+                    In part 1 we created one visual which was a map with the parking tickets placed at their locations
+                    with their descriptions. In Infinite Questions you built web pages that displayed line/scatter
+                    and pie charts. For this part of the project you will choose 2 different (you can't make 2 of
+                    the same type of visual. Two maps == 0 credit) visuals to display the processed data that you
+                    obtain from your Python server. Note that to make this interesting you may want to have Python
+                    process the data in 2 different ways.
+                </p>
+
+                <p>
+                    Recall that <a href="https://plot.ly/javascript/">Plotly</a> offers a large number of visuals
+                    to choose from.
+                </p>
+
+            </div>
+
+
+            <div id="section4">
+                <hr/>
+                <h3>Additional Criteria</h3>
+
+                <p>
+                    In addition to the requirements above you must have one additional aspect to your project. You may
+                    choose on aspect from the following list to add. Note that you only need one of these, not all of
+                    them, though we won't stop you from implementing more than one.
+                </p>
+
+                <ul>
+                    <li>Add communication between users with persistent storage (File or database) on your server (Ex. A
+                        comments section)
+                    </li>
+                    <li>Use a web framework other than bottle
+                        (Ex. <a href="http://flask.pocoo.org">Flask</a>,
+                        <a href="https://www.djangoproject.com">Django</a>,
+                        <a href="https://www.tornadoweb.org/en/stable/">Tornado</a>).
+                        If you choose this you are expected to learn one of these frameworks by studying the
+                        documentation as with other aspects of the course
+                    </li>
+                    <li>Make a game out of the data using a game framework like <a href="https://phaser.io">phaser</a>
+                    </li>
+                    <li>Use 2 different data sets instead of just one and combine them on your front-end. At least
+                        one of your visuals must contain information from both data sets (do not just create one plot
+                        for each data set). The data
+                        sets must come from 2 different APIs (ie. plotting tweets containing #x and tweets containing
+                        #y on the same graph will not count).
+                    </li>
+                    <li>Add a secure login system to your app and have at least 1 feature that utilizes this login</li>
+                    <li>Scrape data from an HTML web site instead of using an API. You must still connect to the live
+                        site from your server using Python code, but the site will host HTML and you will scrape the
+                        live data using Python to extract the data you want to process
+                    </li>
+                    <li>Other. If you have an idea that is not on this list you can message the instructors on
+                        Piazza and we will consider it for approval. If approved it will be added to this list.
+                        To be approved the proposed criteria must not be simpler/easier than everything already listed.
+                        You may be asked to provide an argument that the suggestion is at least as difficult as one
+                        of the listed criteria. To ensure that everyone in the class has an opportunity to review the
+                        full list of options any
+                        such request must be sent by November 19 (The Monday before break). Requests made after this
+                        date will not be considered.
+                    </li>
+                </ul>
+            </div>
+
+            <div id="section5">
+                <hr/>
+                <h3>Report</h3>
+
+                <p>
+                    The first submission for this project will be a brief (no more than 1 page) report about your
+                    project. This report will contain the design of your project. In this report you must describe
+                </p>
+                <ul>
+                    <li>A description of what your app accomplishes</li>
+                    <li>The data set that you chose</li>
+                    <li>How you processed the data on your server</li>
+                    <li>How you visualized the data (explain both visuals)</li>
+                    <li>The additional criteria you implemented</li>
+                </ul>
+
+                <p>
+                    Note: There are no formatting or minimum length requirements for this report, but you do have to
+                    effectively
+                    communicate these 5 criteria. Short sentence fragments and a disorganized format may result in a
+                    loss of points.
+                </p>
+                <p>
+                    This report is due 1
+                    week before your project, but you are highly encouraged to have much of your project complete
+                    before
+                    the report is due. <b>Once the report deadline passes you cannot change your project</b> and you
+                    may
+                    realize
+                    later that your report is next to impossible to complete. Avoid this by starting your project
+                    early
+                    while there's still time to change your report.
+                </p>
+            </div>
+            <div id="section6">
+                <hr/>
+                <h3>Demo</h3>
+
+                <p>
+                    In lab during the last week of classes you will give a 5 minute demonstration of your app to
+                    one of the TAs.
+                    During this demo you will run your app and show the TA all of the functionality that appears
+                    in your report and they will verify that you completed the project. This will be the
+                    primary way your project will be graded.
+                </p>
+                <p>
+                    For this presentation you must use the same code that you submitted on the
+                    code deadline
+
+                </p>
+            </div>
+            <div id="section7">
+                <hr/>
+                <h3>YouTube Video / Novelty</h3>
+
+                <p>
+                    To earn full credit on this project your app must be unique and interesting. To rate novelty
+                    you will make a short YouTube video (no longer than 1 minute) showing a demo of your app. Through
+                    this video your app will be reviewed and rated for it's originality, novelty, and usefulness. To
+                    be blunt, we will measure how much you appeared care about your project. If your project barely
+                    meets the minimum criteria or if you completed your project only for the grade, you are unlikely
+                    to earn full credit for novelty. However if you took your project seriously and built an app that
+                    people can gain a benefit from using we want to give you all these points!
+                </p>
+
+                <p>
+                    Note: To earn any novelty points from the video submission you must meet all the requirements and
+                    the additional criteria.
+                </p>
+
+            </div>
+            <div id="section8">
+                <hr/>
+                <h3>Grading</h3>
+
+                <table class="table">
+                    <thead>
+                    <tr><th colspan="2">Report - 10 points</th></tr>
+                    <tr><th>Points</th><th>Submission</th></tr>
+                    </thead>
+                    <tr><th>0</th>
+                        <th>Report not submitted before the deadline, or missing the project description, or missing one or more of the 3 required criteria explanations</th></tr>
+                    <tr><th>5</th>
+                        <th>Report contains the project description and all 3 required criteria, but the explanations are unclear or are not described well</th></tr>
+                    <tr><th>10</th>
+                        <th>Report contains the project description and all 3 required criteria and all information is clearly described</th></tr>
+                </table>
+
+
+                <table class="table">
+                    <thead>
+                    <tr><th colspan="2">Demo Requirements - 30 points</th></tr>
+                    <tr><th>Points</th><th>Submission</th></tr>
+                    </thead>
+                    <tr><th>0</th>
+                        <th>The demo did not work or was missing more than 1 of the requirements, or the demo did not match the submitted code</th></tr>
+                    <tr><th>10</th>
+                        <th>The demo worked as a live web app, but 1 of the requirements was not functional during the demo</th></tr>
+                    <tr><th>20</th>
+                        <th>The demo worked as a live web app and 1 of the requirements was not functional during the demo, but all requirements met in the code submission. To earn this score instead of a 10 the student must request a manual review of the code submission after receiving a 10 for the demo. There will be no manual review if more than 1 requirement does not work during the demo</th></tr>
+                    <tr><th>30</th>
+                        <th>All requirements are verified during the demo</th></tr>
+                </table>
+
+
+                <table class="table">
+                    <thead>
+                    <tr><th colspan="2">Demo Additional Criteria - 20 points</th></tr>
+                    <tr><th>Points</th><th>Submission</th></tr>
+                    </thead>
+                    <tr><th>0</th>
+                        <th>Additional criteria is not described in the report or the additional criteria was not shown during the demo</th></tr>
+                    <tr><th>10</th>
+                        <th>All requirements met and additional criteria described in the report, but additional criteria had issues during the demo and additional criteria is verified in the code submission. A manual review must be requested by the student</th></tr>
+                    <tr><th>20</th>
+                        <th>All requirements met and additional criteria described in the report and shown during the demo</th></tr>
+                </table>
+
+
+                <table class="table">
+                    <thead>
+                    <tr><th colspan="2">Novelty - 20 points</th></tr>
+                    <tr><th>Points</th><th>Submission</th></tr>
+                    </thead>
+                    <tr><th>0</th>
+                        <th>Did not complete all previous criteria or did not submit a YouTube video</th></tr>
+                    <tr><th>5</th>
+                        <th>The app strongly resembles part 1 of the project with an additional graph resembling the examples that were done in lecture. Nearly no expansion on what was covered by the course</th></tr>
+                    <tr><th>10</th>
+                        <th>The app resembles part 1 and examples from the course but with at least one aspect (other than the additional criteria) that is novel and shows a unique idea as well as self-study to implement the idea</th></tr>
+                    <tr><th>15</th>
+                        <th>The app displays at least one aspect that is unique and was not shown in class (other than the additional criteria) and the app reveals something interesting, and non-obvious, about the data used. This should be something that could not easily be seen by reading the raw data</th></tr>
+                    <tr><th>20</th>
+                        <th>The app is unique and has a clear purpose that it fulfills. Users can benefit from using the app. If a link is posted on social media it will earn the developer some Internet points (Note that this can be earned even if it resembles course examples)</th></tr>
+                </table>
+
+                <p>Note the following regarding novelty grading</p>
+                <ul>
+                    <li>
+                        The novelty grading is subjective and the descriptions for each point value are the guidelines
+                        that will be used during grading. The descriptions are not concrete guidelines as they are for the
+                        other parts of the grading rubric
+                    </li>
+                    <li>
+                        The novelty of each project will be rated by your peers as well as the course staff. Ratings from
+                        your peers may be consulted during grading, though they will not determine your grade
+                    </li>
+                    <li>
+                        The uniqueness of your app is considered for these points. This means if your app technically
+                        satisfies the wording for a certain number of points you still may not earn those points if
+                        many of your classmates submit very similar apps (ie. You're always allowed to share ideas
+                        in this class, but implementing someone else's idea is not novel)
+                    </li>
+                </ul>
+
+
+                Best apps get free hosting + domain name [provided by faculty] + tutorial. Submit for
+                consideration
+                __here__,
+                vote __here__? How does their app stay up for voting? Fixed time to vote? During Monday's
+                lecture?
+
+                6 winners like the NFL. Top from each section w/ 2 wild cards from any section
+
+
+            </div>
+
+
+            <div id="section9">
+                <hr/>
+                <h3>Submission</h3>
+                <!--<p> Submit on <a-->
+                        <!--href="https://autograder.cse.buffalo.edu/courses/CSE115-f18/assessments/projectpart1">-->
+                    <!--AutoLab</a> until ???-->
+                <!--</p>-->
+
+                <p>
+                    Submission details TBA
+                </p>
+
+                <!--Due-->
+                <!-- -Report, Monday before, 8am-->
+                <!-- -Code, Monday of, 8am-->
+                <!-- -Video, Monday of, 8am-->
+                <!-- -Demo, Lab last week (5 minute demo)-->
+
+
+            </div>
+
+
+            <div id="section10">
+                <hr/>
+                <h3>Competition</h3>
+
+                <p>
+                    We want to the best project to have an opportunity to thrive! You are building a web app that
+                    goes live for the whole world to see, but only while it's running in Codenvy. To make your app
+                    generally available on the Internet you'll need a hosting service that does not shut down, ever.
+                    For the most novel projects we will offer such a service.
+                </p>
+
+                <p>
+                    The video submissions will be rated by you classmates for their novelty. The course staff will
+                    host the most highly rated app from each section for at least 1 year (longer if the site had traffic and the student is interested)
+                    on a web hosting service. The staff will also choose 2 additional projects from any section(s) at
+                    our discretion. These 6 projects/students will receive
+                </p>
+
+                <ul>
+                    <li>
+                        Web hosting for at least 1 year paid for and managed by the course staff
+                    </li>
+                    <li>
+                        A domain name for at least 1 year paid for by the course staff. Winners may choose any available domain name
+                    </li>
+                    <li>
+                        Tutorial sessions and meetings with the course staff about the deployment of their app
+                    </li>
+                    <li>
+                        [Optional] Tutorial sessions with the course staff on how to maintain their own deployment if they choose to host the app on their own
+                    </li>
+                </ul>
+
+                <div class="my-5"><br/></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
