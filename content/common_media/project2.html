@@ -20,6 +20,11 @@
             top: 0;
         }
 
+        td, th {
+            /*height: 50px;*/
+            /*vertical-align: bottom;*/
+            padding: 5px;
+        }
     </style>
 </head>
 <body data-spy="scroll" data-target="#content" data-offset="1">
@@ -33,9 +38,13 @@
                 <nav class="nav nav-pills flex-column" id="inner">
                     <a class="nav-link active" href="#section1">Introduction</a>
                     <a class="nav-link" href="#section2">Requirements</a>
-                    <a class="nav-link" href="#section3">Grading</a>
-                    <a class="nav-link" href="#section4">Competition</a>
-                    <a class="nav-link" href="#section5">Submission</a>
+                    <a class="nav-link" href="#section3">Additional Criteria</a>
+                    <a class="nav-link" href="#section4">Report</a>
+                    <a class="nav-link" href="#section5">Demo</a>
+                    <a class="nav-link" href="#section6">Novelty</a>
+                    <a class="nav-link" href="#section7">Grading</a>
+                    <a class="nav-link" href="#section8">Submission</a>
+                    <a class="nav-link" href="#section9">Competition</a>
                 </nav>
             </nav>
         </div>
@@ -69,7 +78,7 @@
                     <b>Project Demo</b>: During lab the week of December 3 (the last week of classes)
                 </div>
 
-                <hr/>
+                <br/>
 
                 <p>
                     The first part of the project was designed as a tutorial that walked you through the process of
@@ -84,7 +93,7 @@
 
 
             <div id="section2">
-
+                <hr/>
                 <h3>Requirements</h3>
 
                 <p>
@@ -92,7 +101,7 @@
                     you meet the following criteria.
                 </p>
 
-                <hr/>
+                <br/>
                 <h5>The Data</h5>
                 <p><b>Choose a data source that you access through a web API</b></p>
 
@@ -157,7 +166,7 @@
                 </ul>
 
 
-                <hr/>
+                <br/>
                 <h5>Process The Data</h5>
                 <p><b>On your server (in python), process the data to prepare it for visualization</b></p>
 
@@ -175,7 +184,7 @@
                     code has to process the data from the API before sending it to the front-end for visualization.
                 </p>
 
-                <hr/>
+                <br/>
                 <h5>Visualize The Data</h5>
                 <p><b>On the front-end of your web app, visualize the data with at least 2 different visualizations</b>
                 </p>
@@ -197,7 +206,7 @@
             </div>
 
 
-            <div id="section4">
+            <div id="section3">
                 <hr/>
                 <h3>Additional Criteria</h3>
 
@@ -243,7 +252,7 @@
                 </ul>
             </div>
 
-            <div id="section5">
+            <div id="section4">
                 <hr/>
                 <h3>Report</h3>
 
@@ -277,7 +286,7 @@
                     while there's still time to change your report.
                 </p>
             </div>
-            <div id="section6">
+            <div id="section5">
                 <hr/>
                 <h3>Demo</h3>
 
@@ -294,9 +303,9 @@
 
                 </p>
             </div>
-            <div id="section7">
+            <div id="section6">
                 <hr/>
-                <h3>YouTube Video / Novelty</h3>
+                <h3>Novelty / YouTube Video</h3>
 
                 <p>
                     To earn full credit on this project your app must be unique and interesting. To rate novelty
@@ -314,80 +323,166 @@
                 </p>
 
             </div>
-            <div id="section8">
+            <div id="section7">
                 <hr/>
                 <h3>Grading</h3>
-
-                <table class="table">
+                <br/>
+                <table border="1">
                     <thead>
-                    <tr><th colspan="2">Report - 10 points</th></tr>
-                    <tr><th>Points</th><th>Submission</th></tr>
+                    <tr>
+                        <th colspan="2">Report - 10 points</th>
+                    </tr>
+                    <tr>
+                        <th>Points</th>
+                        <th>Submission</th>
+                    </tr>
                     </thead>
-                    <tr><th>0</th>
-                        <th>Report not submitted before the deadline, or missing the project description, or missing one or more of the 3 required criteria explanations</th></tr>
-                    <tr><th>5</th>
-                        <th>Report contains the project description and all 3 required criteria, but the explanations are unclear or are not described well</th></tr>
-                    <tr><th>10</th>
-                        <th>Report contains the project description and all 3 required criteria and all information is clearly described</th></tr>
+                    <tr>
+                        <td>0</td>
+                        <td>Report not submitted before the deadline, or missing the project description, or missing one
+                            or more of the 3 required criteria explanations
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Report contains the project description and all 3 required criteria, but the explanations
+                            are unclear or are not described well
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Report contains the project description and all 3 required criteria and all information is
+                            clearly described
+                        </td>
+                    </tr>
                 </table>
 
-
-                <table class="table">
+                <br/>
+                <table border="1">
                     <thead>
-                    <tr><th colspan="2">Demo Requirements - 30 points</th></tr>
-                    <tr><th>Points</th><th>Submission</th></tr>
+                    <tr>
+                        <th colspan="2">Demo Requirements - 30 points</th>
+                    </tr>
+                    <tr>
+                        <th>Points</th>
+                        <th>Submission</th>
+                    </tr>
                     </thead>
-                    <tr><th>0</th>
-                        <th>The demo did not work or was missing more than 1 of the requirements, or the demo did not match the submitted code</th></tr>
-                    <tr><th>10</th>
-                        <th>The demo worked as a live web app, but 1 of the requirements was not functional during the demo</th></tr>
-                    <tr><th>20</th>
-                        <th>The demo worked as a live web app and 1 of the requirements was not functional during the demo, but all requirements met in the code submission. To earn this score instead of a 10 the student must request a manual review of the code submission after receiving a 10 for the demo. There will be no manual review if more than 1 requirement does not work during the demo</th></tr>
-                    <tr><th>30</th>
-                        <th>All requirements are verified during the demo</th></tr>
+                    <tr>
+                        <td>0</td>
+                        <td>The demo did not work or was missing more than 1 of the requirements, or the demo did not
+                            match the submitted code
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>The demo worked as a live web app, but 1 of the requirements was not functional during the
+                            demo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>The demo worked as a live web app and 1 of the requirements was not functional during the
+                            demo, but all requirements met in the code submission. To earn this score instead of a 10
+                            the student must request a manual review of the code submission after receiving a 10 for the
+                            demo. There will be no manual review if more than 1 requirement does not work during the
+                            demo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>All requirements are verified during the demo</td>
+                    </tr>
                 </table>
 
-
-                <table class="table">
+                <br/>
+                <table border="1">
                     <thead>
-                    <tr><th colspan="2">Demo Additional Criteria - 20 points</th></tr>
-                    <tr><th>Points</th><th>Submission</th></tr>
+                    <tr>
+                        <th colspan="2">Demo Additional Criteria - 20 points</th>
+                    </tr>
+                    <tr>
+                        <th>Points</th>
+                        <th>Submission</th>
+                    </tr>
                     </thead>
-                    <tr><th>0</th>
-                        <th>Additional criteria is not described in the report or the additional criteria was not shown during the demo</th></tr>
-                    <tr><th>10</th>
-                        <th>All requirements met and additional criteria described in the report, but additional criteria had issues during the demo and additional criteria is verified in the code submission. A manual review must be requested by the student</th></tr>
-                    <tr><th>20</th>
-                        <th>All requirements met and additional criteria described in the report and shown during the demo</th></tr>
+                    <tr>
+                        <td>0</td>
+                        <td>Additional criteria is not described in the report or the additional criteria was not shown
+                            during the demo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>All requirements met and additional criteria described in the report, but additional
+                            criteria had issues during the demo and additional criteria is verified in the code
+                            submission. A manual review must be requested by the student
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>All requirements met and additional criteria described in the report and shown during the
+                            demo
+                        </td>
+                    </tr>
                 </table>
+                <br/>
 
-
-                <table class="table">
+                <table border="1">
                     <thead>
-                    <tr><th colspan="2">Novelty - 20 points</th></tr>
-                    <tr><th>Points</th><th>Submission</th></tr>
+                    <tr>
+                        <th colspan="2">Novelty - 20 points</th>
+                    </tr>
+                    <tr>
+                        <th>Points</th>
+                        <th>Submission</th>
+                    </tr>
                     </thead>
-                    <tr><th>0</th>
-                        <th>Did not complete all previous criteria or did not submit a YouTube video</th></tr>
-                    <tr><th>5</th>
-                        <th>The app strongly resembles part 1 of the project with an additional graph resembling the examples that were done in lecture. Nearly no expansion on what was covered by the course</th></tr>
-                    <tr><th>10</th>
-                        <th>The app resembles part 1 and examples from the course but with at least one aspect (other than the additional criteria) that is novel and shows a unique idea as well as self-study to implement the idea</th></tr>
-                    <tr><th>15</th>
-                        <th>The app displays at least one aspect that is unique and was not shown in class (other than the additional criteria) and the app reveals something interesting, and non-obvious, about the data used. This should be something that could not easily be seen by reading the raw data</th></tr>
-                    <tr><th>20</th>
-                        <th>The app is unique and has a clear purpose that it fulfills. Users can benefit from using the app. If a link is posted on social media it will earn the developer some Internet points (Note that this can be earned even if it resembles course examples)</th></tr>
+                    <tr>
+                        <td>0</td>
+                        <td>Did not complete all previous criteria or did not submit a YouTube video</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>The app strongly resembles part 1 of the project with an additional graph resembling the
+                            examples that were done in lecture. Nearly no expansion on what was covered by the course
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>The app resembles part 1 and examples from the course but with at least one aspect (other
+                            than the additional criteria) that is novel and shows a unique idea as well as self-study to
+                            implement the idea
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>The app displays at least one aspect that is unique and was not shown in class (other than
+                            the additional criteria) and the app reveals something interesting, and non-obvious, about
+                            the data used. This should be something that could not easily be seen by reading the raw
+                            data
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>The app is unique and has a clear purpose that it fulfills. Users can benefit from using the
+                            app. If a link is posted on social media it will earn the developer some Internet points
+                            (Note that this can be earned even if it resembles course examples)
+                        </td>
+                    </tr>
                 </table>
-
+                <br/><br/>
                 <p>Note the following regarding novelty grading</p>
                 <ul>
                     <li>
                         The novelty grading is subjective and the descriptions for each point value are the guidelines
-                        that will be used during grading. The descriptions are not concrete guidelines as they are for the
+                        that will be used during grading. The descriptions are not concrete guidelines as they are for
+                        the
                         other parts of the grading rubric
                     </li>
                     <li>
-                        The novelty of each project will be rated by your peers as well as the course staff. Ratings from
+                        The novelty of each project will be rated by your peers as well as the course staff. Ratings
+                        from
                         your peers may be consulted during grading, though they will not determine your grade
                     </li>
                     <li>
@@ -399,41 +494,22 @@
                 </ul>
 
 
-                Best apps get free hosting + domain name [provided by faculty] + tutorial. Submit for
-                consideration
-                __here__,
-                vote __here__? How does their app stay up for voting? Fixed time to vote? During Monday's
-                lecture?
+            </div>
 
-                6 winners like the NFL. Top from each section w/ 2 wild cards from any section
+
+            <div id="section8">
+                <hr/>
+                <h3>Submission</h3>
+
+                <p>
+                    Submission details TBA
+                </p>
 
 
             </div>
 
 
             <div id="section9">
-                <hr/>
-                <h3>Submission</h3>
-                <!--<p> Submit on <a-->
-                        <!--href="https://autograder.cse.buffalo.edu/courses/CSE115-f18/assessments/projectpart1">-->
-                    <!--AutoLab</a> until ???-->
-                <!--</p>-->
-
-                <p>
-                    Submission details TBA
-                </p>
-
-                <!--Due-->
-                <!-- -Report, Monday before, 8am-->
-                <!-- -Code, Monday of, 8am-->
-                <!-- -Video, Monday of, 8am-->
-                <!-- -Demo, Lab last week (5 minute demo)-->
-
-
-            </div>
-
-
-            <div id="section10">
                 <hr/>
                 <h3>Competition</h3>
 
@@ -446,7 +522,8 @@
 
                 <p>
                     The video submissions will be rated by you classmates for their novelty. The course staff will
-                    host the most highly rated app from each section for at least 1 year (longer if the site had traffic and the student is interested)
+                    host the most highly rated app from each section for at least 1 year (longer if the site had traffic
+                    and the student is interested)
                     on a web hosting service. The staff will also choose 2 additional projects from any section(s) at
                     our discretion. These 6 projects/students will receive
                 </p>
@@ -456,16 +533,19 @@
                         Web hosting for at least 1 year paid for and managed by the course staff
                     </li>
                     <li>
-                        A domain name for at least 1 year paid for by the course staff. Winners may choose any available domain name
+                        A domain name for at least 1 year paid for by the course staff. Winners may choose any available
+                        domain name
                     </li>
                     <li>
                         Tutorial sessions and meetings with the course staff about the deployment of their app
                     </li>
                     <li>
-                        [Optional] Tutorial sessions with the course staff on how to maintain their own deployment if they choose to host the app on their own
+                        [Optional] Tutorial sessions with the course staff on how to maintain their own deployment if
+                        they choose to host the app on their own
                     </li>
                 </ul>
 
+                <div class="my-5"><br/></div>
                 <div class="my-5"><br/></div>
 
             </div>
