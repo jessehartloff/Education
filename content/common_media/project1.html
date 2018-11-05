@@ -64,7 +64,7 @@
                     <b>Due</b>: November 9 at 8<b>am</b>
                 </div>
                 <p>
-                    Let’s build a web app! In the process of building this app we will see how all the different
+                    Let's build a web app! In the process of building this app we will see how all the different
                     concepts we have been
                     learning can work together to make something greater. This will feel like a tutorial. For part 2
                     of
@@ -74,22 +74,22 @@
                     For this app we will connect to an API containing location-based data using python, then serve
                     this
                     data to our web
-                    site where we’ll write javascript code to display the data on a map on an HTML web page.. So
-                    there’s
+                    site where we'll write javascript code to display the data on a map on an HTML web page.. So
+                    there's
                     a bit to unpack
-                    here and we’ll go through this step-by-step, but first, let’s look at the data we will be
+                    here and we'll go through this step-by-step, but first, let's look at the data we will be
                     displaying.
                 </p>
 
                 <p>
-                    <b>The Data</b>: Here’s a link to some parking ticket data
+                    <b>The Data</b>: Here's a link to some parking ticket data
                     (<a href="https://dev.socrata.com/foundry/data.buffalony.gov/ux3f-ypyc">
                     https://dev.socrata.com/foundry/data.buffalony.gov/ux3f-ypyc</a>) which
-                    is part of the city of Buffalo’s <a href="https://data.buffalony.gov/">Open Data Portal</a>. On
+                    is part of the city of Buffalo's <a href="https://data.buffalony.gov/">Open Data Portal</a>. On
                     the
                     parking ticket
                     page you will find information about the data
-                    we’ll be using for this project. Among this data you will find the API endpoint to access the
+                    we'll be using for this project. Among this data you will find the API endpoint to access the
                     data
                     as a JSON string.
                     We
@@ -118,7 +118,7 @@
                 <div id="section2-1">
                     <h5>HTML</h5>
                     <p>
-                        We’ll start with the front-end display of our web app. Since this is not a course
+                        We'll start with the front-end display of our web app. Since this is not a course
                         in HTML/CSS we will provide the HTML for you here.
                     </p>
 
@@ -141,7 +141,7 @@
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
-                    <p> Start a new project in Codenvy and save this text in a file named “index.html”. You can open
+                    <p> Start a new project in Codenvy and save this text in a file named "index.html". You can open
                         this
                         page in your browser by right clicking the file and choosing preview, however at this point
                         nothing
@@ -151,11 +151,11 @@
                         is
                         <a href="https://www.w3schools.com/">W3Schools</a>. Your HTML file will not be graded so feel
                         free
-                        to add anything you’d like to this page. </p>
+                        to add anything you'd like to this page. </p>
                 </div>
                 <div id="section2-2">
                     <h5>JavaScript</h5>
-                    <p> Now that we have a web page setup, let’s use JavaScript to display a map on it. To do this we
+                    <p> Now that we have a web page setup, let's use JavaScript to display a map on it. To do this we
                         will
                         use the <a href="https://plot.ly/javascript/">plotly</a> library in conjunction with <a
                                 href="https://www.mapbox.com/maps/">mapbox</a>. To use mapbox you will need to register
@@ -166,7 +166,7 @@
                         free
                         views. Once you have your access token, enter into the JavaScript code replacing the placeholder
                         value. </p>
-                    <p> Create a file named “map.js” in the same directory as index.html and in it write a
+                    <p> Create a file named "map.js" in the same directory as index.html and in it write a
                         function named loadMap() that will set up a
                         map based to be displayed on your page. Note that loadMap is called
                         from the HTML file once the page is loaded. Also notice that the empty div in the HTML that will
@@ -174,20 +174,20 @@
                         "map". Now, follow the <a href="https://plot.ly/javascript/scattermapbox/">basic example</a>
                         from
                         the plotly documentation to get familiar
-                        with what we’re about to do and to see a map in your HTML.
+                        with what we're about to do and to see a map in your HTML.
                     </p>
 
                     <!--<p> Now in the code there is a call to getMapParams that takes a JSON string and returns an object-->
-                    <!--containing keys ‘data’ and ‘layout’, however this function does not exists. Let’s start writing-->
+                    <!--containing keys ‘data' and ‘layout', however this function does not exists. Let's start writing-->
                     <!--functions to correct this. </p>-->
-                    <p> Now that the map is being displayed and the project is setup it’s time for you to write some
+                    <p> Now that the map is being displayed and the project is setup it's time for you to write some
                         code
                         that will enable you to read a JSON string of locations with descriptions and place a marker on
                         the
                         map for each of them. Write the following functions in map.js: </p>
 
 
-                    <p><b>setupMapData (10 points)</b>: Write a function named “setupMapData” that takes an array as a parameter and
+                    <p><b>setupMapData (10 points)</b>: Write a function named "setupMapData" that takes an array as a parameter and
                         returns
                         an array containing the data for a map. Each element in the input array will itself be an array
                         in
@@ -198,12 +198,12 @@
                         139.7017945, "Godzilla Head"]]. </p>
                     <p> This function will return an array containing only 1 element which is an object containing the
                         data
-                        for a map that will be used in the same way as the “data” variable from the <a
+                        for a map that will be used in the same way as the "data" variable from the <a
                                 href="https://plot.ly/javascript/scattermapbox/">plotly documentation</a>. For our
                         application, set the following key-value pairs in the object that is in the array: </p>
                     <ul>
                         <li>
-                            A key of “type” mapping to the string “scattermapbox”
+                            A key of "type" mapping to the string "scattermapbox"
                         </li>
                         <ul>
                             <li>This is the type of plot we are creating.
@@ -213,7 +213,7 @@
                         </ul>
                         <li>
                             A key
-                            of “mode” mapping to the string “markers”
+                            of "mode" mapping to the string "markers"
                         </li>
                         <ul>
                             <li>This tells plotly that we are placing markers on the
@@ -222,11 +222,11 @@
                             </li>
                         </ul>
 
-                        <li>A key of “marker”
+                        <li>A key of "marker"
                             mapping
-                            to an object with 2 key-value pairs which are a key of “size” mapping to the integer 5 and a
+                            to an object with 2 key-value pairs which are a key of "size" mapping to the integer 5 and a
                             key
-                            “color” mapping to the string “rgb(255,0,0)”
+                            "color" mapping to the string "rgb(255,0,0)"
                         </li>
                         <ul>
                             <li>This sets the style of the markers. We are making
@@ -235,17 +235,17 @@
                             </li>
                         </ul>
                         <li>
-                            A key of “lat” containing an array of all the latitudes from the input array
+                            A key of "lat" containing an array of all the latitudes from the input array
                             in
                             the same order as they appear in the input
                         </li>
 
-                        <li>A key of “lon” containing an array of all the
+                        <li>A key of "lon" containing an array of all the
                             longitudes
                             from the input array in the same order as they appear in the input
                         </li>
 
-                        <li>A key of “text” containing an
+                        <li>A key of "text" containing an
                             array of all the descriptions from the input array in the same order as they appear in the
                             input
                         </li>
@@ -267,7 +267,7 @@
                         location
                         based data that you want to display on a map (ie. you can reuse this function in part 2 of the
                         project) </p>
-                    <p><b>findCenter (10 points)</b>: Write a function named “findCenter” that takes an array as a parameter in the
+                    <p><b>findCenter (10 points)</b>: Write a function named "findCenter" that takes an array as a parameter in the
                         same
                         format as the previous function and returns an array with two elements representing the latitude
                         and
@@ -276,38 +276,38 @@
                         compute the center latitude take the average of the minimum and maximum latitudes from the
                         input.
                         Repeat for longitude. </p>
-                    <p><b>setupMapLayout (10 points)</b>: Write a function named “setupMapLayout” that takes an array as a parameter
+                    <p><b>setupMapLayout (10 points)</b>: Write a function named "setupMapLayout" that takes an array as a parameter
                         in
                         the
                         same format as the previous function and returns an object </p>
                     <p> This function will return an object containing the layout settings for the map that will be used
                         in
-                        the same way as the “layout” variable from the <a
+                        the same way as the "layout" variable from the <a
                                 href="https://plot.ly/javascript/scattermapbox/">plotly
                             documentation</a>. For our application, set the following key-value pairs in the object:
                     </p>
 
                     <ul>
-                        <li>A key of “mapbox” mapping to an object with the mapbox settings. This will be the only
+                        <li>A key of "mapbox" mapping to an object with the mapbox settings. This will be the only
                             key-value pair in
                             the layout and it will contain the following list of pairs
                         </li>
                         <ul>
-                            <li>A key of “style” mapping to the string
-                                “satellite-streets”
+                            <li>A key of "style" mapping to the string
+                                "satellite-streets"
                             </li>
                             <ul>
                                 <li>This sets the style of our map to satellite images with streets overlayed on the
                                     images. For submission in AutoLab you must use this setting, but you are encouraged
                                     to try other
                                     styles
-                                    and see the changes to the map. Other options include “satellite”, “light”, “dark”,
-                                    “bright”,
-                                    “streets”,
-                                    and “basic”
+                                    and see the changes to the map. Other options include "satellite", "light", "dark",
+                                    "bright",
+                                    "streets",
+                                    and "basic"
                                 </li>
                             </ul>
-                            <li>A key of “zoom” mapping to the integer 11</li>
+                            <li>A key of "zoom" mapping to the integer 11</li>
                             <ul>
                                 <li>Set the zoom level of the map. You may want to
                                     adjust the zoom level while testing as the zoom of 11 is set specifically for the
@@ -319,7 +319,7 @@
                                     more details on map zoom levels
                                 </li>
                             </ul>
-                            <li>A key of “center” mapping to an object with keys “lat” and “lon”
+                            <li>A key of "center" mapping to an object with keys "lat" and "lon"
                                 with
                                 values of the latitude and longitude of the center of the input locations as floating
                                 point numbers.
@@ -332,10 +332,10 @@
                             </ul>
                         </ul>
                     </ul>
-                    <p><b>getMapParams (10 points)</b>: Write a function named “getMapParams” that takes a JSON formatted string
+                    <p><b>getMapParams (10 points)</b>: Write a function named "getMapParams" that takes a JSON formatted string
                         as a
-                        parameter and returns all the information needed to create a map in an object with “data” and
-                        “layout”
+                        parameter and returns all the information needed to create a map in an object with "data" and
+                        "layout"
                         as keys mapping to a data array and a layout object respectively. This input JSON string will be
                         in
                         the
@@ -349,7 +349,7 @@
                         string
                         to
                         array, then call your other functions after converting. </p>
-                    <p> Note: do not overthink this function. You’ll parse the JSON, call 2 of your function and add the
+                    <p> Note: do not overthink this function. You'll parse the JSON, call 2 of your function and add the
                         results into a new object to return. </p>
 
                 </div>
@@ -372,30 +372,30 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                     <h5>Background</h5>
 
                     <p> Setting up the server Background: Ok, we have a map setup and we can add markers
-                        to it. The way we’ve setup these functions all we need to do is give our JavaScript code a JSON
+                        to it. The way we've setup these functions all we need to do is give our JavaScript code a JSON
                         formatted string representing an array of arrays where each inner array is in the format
                         [latitude,
                         longitude, description] with latitude and longitude as floating point numbers and description as
                         a
-                        string. Our map doesn’t care where this data comes from or how it gets it, as long as it gets
+                        string. Our map doesn't care where this data comes from or how it gets it, as long as it gets
                         data to
                         display. So what data should we send it? How about parking tickets in Buffalo, NY! </p>
                     <p> The data, mentioned at the top of this document, is hosted at this url </p>
                     <p>
                         <a href="https://data.buffalony.gov/resource/ux3f-ypyc.json">https://data.buffalony.gov/resource/ux3f-ypyc.json</a>
                     </p>
-                    <p> You can click the link and view the JSON in your browser, though you’ll notice a few things that
+                    <p> You can click the link and view the JSON in your browser, though you'll notice a few things that
                         need to be done before we can plot these on the map. First, there is a lot more information here
-                        than our map is expecting so you’ll have to filter it down to only lat/long/description. Second,
+                        than our map is expecting so you'll have to filter it down to only lat/long/description. Second,
                         if
-                        you look closely at the data you’ll see that some of the violations do not have a location which
+                        you look closely at the data you'll see that some of the violations do not have a location which
                         will need to be addressed. And finally we have to get this data into our javascript functions.
                         The
                         first two problems can be handled with some clever code, but the last problem will take some
                         work. </p>
-                    <p> There are a few approaches that you might consider to move the data. Let’s go through some
+                    <p> There are a few approaches that you might consider to move the data. Let's go through some
                         options
-                        that won’t work well and see what issues they have. </p>
+                        that won't work well and see what issues they have. </p>
 
                     <ul>
                         <li>Save the data in a json file and read
@@ -403,7 +403,7 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                             with JavaScript code
                         </li>
                         <ul>
-                            <li>For security reasons JavaScript that’s executed in the browser cannot read
+                            <li>For security reasons JavaScript that's executed in the browser cannot read
                                 files.
                                 This prevents websites you visit from reading files from your computer
                             </li>
@@ -417,7 +417,7 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         </li>
                         <ul>
                             <li>This will work, but there are some problems. The first is a stylistic problem in that
-                                it’s
+                                it's
                                 generally considered poor form to have large amounts of hard-coded data in your code.
                                 However there
                                 is
@@ -438,12 +438,12 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                             the API directly and get the most up-to-date data
                         </li>
                         <ul>
-                            <li>This would solve all of our problems. It’s
+                            <li>This would solve all of our problems. It's
                                 automated,
-                                the data is always current, and we wouldn’t hard-code any data. It’s almost a perfect
+                                the data is always current, and we wouldn't hard-code any data. It's almost a perfect
                                 answer.
                                 However,
-                                just like reading files, JavaScript (in the browser) can’t do this either due to the <a
+                                just like reading files, JavaScript (in the browser) can't do this either due to the <a
                                         href="https://en.wikipedia.org/wiki/Same-origin_policy">same origin policy</a>.
                                 This is another
                                 security measure that prevents the sites you visit from making requests to other sites
@@ -459,7 +459,7 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                                 behalf, change your password, etc. So this policy means more work for us while
                                 developing web apps,
                                 but
-                                it’s worth it to avoid such attacks.
+                                it's worth it to avoid such attacks.
                             </li>
                             <li>
                                 <b>Edit</b>: As it turns out the API we are accessing sets the
@@ -468,8 +468,8 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                             </li>
                         </ul>
                     </ul>
-                    <p> OK, so now that we’ve seen that the simpler approaches
-                        won’t work and why they won’t work let’s see a solution that will. </p>
+                    <p> OK, so now that we've seen that the simpler approaches
+                        won't work and why they won't work let's see a solution that will. </p>
 
                 </div>
                 <div id="section3-2">
@@ -486,8 +486,8 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                     <p> To start setting up the server you will have to follow these steps: </p>
 
                     <ol>
-                        <li>Install bottle - “pip
-                            install --user bottle”
+                        <li>Install bottle - "pip
+                            install --user bottle"
                         </li>
                         <ol>
                             <li>As our web framework of choice we will use <a
@@ -495,15 +495,15 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                                 framework
                                 that can accomplish everything we need for this project. To install bottle in Codenvy
                                 click on the
-                                “Terminal” tab on the pane near the bottom of the window, type “pip install --user
-                                bottle” and hit
+                                "Terminal" tab on the pane near the bottom of the window, type "pip install --user
+                                bottle" and hit
                                 enter. This will install the library
                             </li>
                         </ol>
                         <li>In the run command (click the "Commands" tab) that you will use to run python programs for
-                            this project scroll to the bottom of the page and enter “http://${server.port.8080}” in the
-                            “preview
-                            URL” text area. This will display the URL of your server when you run the server
+                            this project scroll to the bottom of the page and enter "http://${server.port.8080}" in the
+                            "preview
+                            URL" text area. This will display the URL of your server when you run the server
                         </li>
                     </ol>
 
@@ -511,36 +511,36 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         logistics
                         are done we are ready to write a web server. Create a new file in the same directory as
                         your
-                        HTML and JavaScript files and name it “server.py”. To write your server you can use the <a
+                        HTML and JavaScript files and name it "server.py". To write your server you can use the <a
                                 href="https://bottlepy.org/docs/dev/">bottle documentation</a> though there a few things
-                        we’ll
-                        have to do specifically to make this work in Codenvy. First, in the call to run use “0.0.0.0”
+                        we'll
+                        have to do specifically to make this work in Codenvy. First, in the call to run use "0.0.0.0"
                         instead of
-                        “localhost” and second, when <a
+                        "localhost" and second, when <a
                                 href="https://bottlepy.org/docs/dev/tutorial.html#routing-static-files">hosting
-                            static files</a> the root should be “/projects/&lt;your_project_name&gt;” (edit: setting
+                            static files</a> the root should be "/projects/&lt;your_project_name&gt;" (edit: setting
                         root to
                         the empty string also works since your server is running in /projects/&lt;your_project_name&gt;).
                         Note that if you
                         see an
                         import error when you import bottle your install of bottle did not work and you should go back
                         to the steps above. It is also recommended that you add a third argument to the call of run of
-                        “debug=True”
+                        "debug=True"
                         (without the quotes). This will display error reports in your browser if something goes wrong on
                         the server which will help you fix your bugs.</p>
 
                     <p>
                         Now, in server.py setup your server to do the
                         following.
-                        Note that you may name your functions whatever you’d like in this file. For grading only your
+                        Note that you may name your functions whatever you'd like in this file. For grading only your
                         server
                         paths will be tested. </p>
 
                     <ol>
-                        <li><b>(5 points)</b> Host “index.html” as a static file on the root path “/”</li>
-                        <li><b>(5 points)</b> Host “map.js” as a static file on the path “/map.js”</li>
+                        <li><b>(5 points)</b> Host "index.html" as a static file on the root path "/"</li>
+                        <li><b>(5 points)</b> Host "map.js" as a static file on the path "/map.js"</li>
                         <li><b>(5 points)</b> Host the data for the map (JSON string representing an array of arrays with [lat, lon,
-                            description]) on the path “/tickets”. We’ll add data to this path in the next step
+                            description]) on the path "/tickets". We'll add data to this path in the next step
                         </li>
                     </ol>
 
@@ -564,9 +564,9 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                         python
                         server, but the server is only hosting the files statically and there is no meaningful
                         interaction
-                        between the front end and the server. Let’s change that and add more power to the web app. </p>
-                    <p> Replace your loadMap function with the following code. This code uses some topics that we won’t
-                        cover in this class (instantiating classes, callbacks, the ‘this’ keyword) so in the spirit of
+                        between the front end and the server. Let's change that and add more power to the web app. </p>
+                    <p> Replace your loadMap function with the following code. This code uses some topics that we won't
+                        cover in this class (instantiating classes, callbacks, the ‘this' keyword) so in the spirit of
                         fairness you are provided this code. This will be the final version of loadMap.</p>
                     <pre>
     Plotly.setPlotConfig({
@@ -585,7 +585,7 @@ Plotly.plot('map', mapParams.data, mapParams.layout); </pre>
                     </pre>
                     <p> Once this is your loadMap function, after your page loads your JavaScript code will make a
                         second
-                        request to the server with the path “/tickets” to obtain whatever data that path returns. To
+                        request to the server with the path "/tickets" to obtain whatever data that path returns. To
                         test
                         this functionality you can have this path return a JSON string in the proper format and check if
                         the
@@ -604,32 +604,32 @@ def get_tickets():
                         the
                         server to send data to be marked on the map. The only thing left to do is to get data from the
                         API
-                        and return it from the “/tickets” path on the server.
+                        and return it from the "/tickets" path on the server.
                     </p>
-                    <p> Create another python file named “tickets.py” that will contain all the code that works with the
+                    <p> Create another python file named "tickets.py" that will contain all the code that works with the
                         thicket data. This file will only contain one function: </p>
 
                     <ul>
-                        <li><b>(25 points)</b> In “tickets.py” write a function
+                        <li><b>(25 points)</b> In "tickets.py" write a function
                             named
-                            “get_ticket_data” that takes a single string representing the url for an API endpoint that
+                            "get_ticket_data" that takes a single string representing the url for an API endpoint that
                             is
                             hosting
                             ticket data (you will call this function with
-                            “https://data.buffalony.gov/resource/ux3f-ypyc.json”
+                            "https://data.buffalony.gov/resource/ux3f-ypyc.json"
                             as
                             the input). This function will return a JSON string containing all the data from the
                             endpoint in the
                             format we have been using throughout the project (An array of arrays where the inner arrays
                             contain
-                            [latitude, longitude, description]) where the description is the value at the “viodesc” key
+                            [latitude, longitude, description]) where the description is the value at the "viodesc" key
                             (violation
                             description). Be sure that your function accomplishes all the following.
                         </li>
                         <ul>
                             <li>Filter out any violations
                                 that
-                                don’t have a lat/long location
+                                don't have a lat/long location
                             </li>
                             <li>Convert the lat/long to floating point numbers (notice that they are
                                 strings in the API)
@@ -637,19 +637,19 @@ def get_tickets():
                         </ul>
                     </ul>
                     <p>
-                        Your last task for this project is to edit your server to have the “/tickets”
+                        Your last task for this project is to edit your server to have the "/tickets"
                         path return the result of a call to
                         get_ticket_data("https://data.buffalony.gov/resource/ux3f-ypyc.json"). The function call is
                         simple
                         enough,
-                        however that function needs to be called from different file from where it’s defined so the
+                        however that function needs to be called from different file from where it's defined so the
                         function
                         call will cause a function not found error. To fix this you will import your file just like
-                        we’ve
-                        been importing python libraries. Since these files are in the same directory, and it’s the root
-                        directory of the project, this can be done with “import tickets” in your server.py file. Now you
+                        we've
+                        been importing python libraries. Since these files are in the same directory, and it's the root
+                        directory of the project, this can be done with "import tickets" in your server.py file. Now you
                         can
-                        call you function just like any other imported code: “tickets.get_ticket_data(url)”.
+                        call you function just like any other imported code: "tickets.get_ticket_data(url)".
                     </p>
 
                     <!--<p>-->
@@ -659,7 +659,7 @@ def get_tickets():
                     <!--in a separate file. To this end, create new file named "config.json" that will contain-->
                     <!--a JSON string representing an object with one key named "url" mapping to a string that is-->
                     <!--the url of the API. For submission this value should be-->
-                    <!--“https://data.buffalony.gov/resource/ux3f-ypyc.json”. You may submit with or without a query-->
+                    <!--"https://data.buffalony.gov/resource/ux3f-ypyc.json". You may submit with or without a query-->
                     <!--string. Finally, in your "/tickets" endpoint read this file and use this url in your call-->
                     <!--to get_ticket_data. <b>Note that for grading </b>-->
                     <!--</p>-->
