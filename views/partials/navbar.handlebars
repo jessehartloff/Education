@@ -82,6 +82,11 @@
                                target="_blank">
                                 Subreddit</a>
                         {{/if}}
+                        {{#if course.course_options.has_piazza}}
+                            <a class="dropdown-item" href="https://piazza.com/class/jw6llkhh3m33b"
+                               target="_blank">
+                                Piazza</a>
+                        {{/if}}
                         {{#each course.lectures}}
                             <a class="dropdown-item"
                                href="/courses/{{../course.course}}/lectures/{{this.short_title}}">{{this.title}}</a>

@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{epsfig}
+\usepackage{bm}
+
+\usepackage{graphicx}
+
+\newcommand{\ignore}[1]{}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{{\mathcal C}}
+\newcommand{\D}{{\mathcal D}}
+\renewcommand{\L}{{\mathcal L}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\eps}{\epsilon}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\Maj}{\mathrm{Maj}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\bits}{\{-1,1\}}
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\Stab}{\mathrm{Stab}}
+\newcommand{\gap}{\mathrm{gap}}
+\newcommand{\F}{{\mathbb F}}
+\begin{document}
+
+
+
+\begin{center}
+{\bf CSE 331 - Summer 2015} \\
+ \medskip
+{\sc Homework 1}\\
+{\bf Due Thursday, June 18, 2015 @ 2:10pm}
+\end{center}
+
+\hrule
+\vspace*{.3cm}
+\noindent
+\textbf{IMPORTANT: The stated deadline on assignments will be strictly enforced. I will go over solutions at the deadline while the problems are still fresh in your minds and will not accept submissions after the solutions have been presented.}
+
+\bigskip
+
+Homework can be submitted at any time before the deadline as either a hard copy or electronically. If submitting electronically, use a recognizable filename (ex. ``homework1.pdf") and submit with submit\_cse331 or as an email attachment.
+
+\vspace*{.3cm}
+\hrule
+\vspace*{.3cm}
+
+\begin{enumerate}
+
+
+
+\item ($40$ {\sf points})
+\begin{enumerate}
+
+\item (20pts) Exercise $1$ in Chapter $1$:
+Decide whether the following statement is true or false:
+\begin{quote}
+In every instance of the Stable Matching Problem, there is a stable matching containing a pair $(m,w)$ such that $m$ is ranked first on the preference list of $w$ and $w$ is ranked first on the preference list of $m$.
+\end{quote}
+If you state true then you will have to formally argue why the statement is correct. If you state false, then you have give a counter-example.
+
+
+\item (20pts) Decide whether the following statement is true or false:
+\begin{quote}
+For any instance of the Stable Matching Problem, if there exists a perfect matching that is not stable due to $m$ and $w$ wanting to be together, then $(m,w)$ will be in {\em every} stable matching of that instance. In other words, if $(m,w')$ and $(m',w)$ are both in a perfect matching and $m$ prefers $w$ over $w'$ and $w$ prefers $m$ over $m'$, then $(m,w)$ will be in every stable matching.
+\end{quote}
+If you state true then you will have to formally argue why the statement is correct. If you state false, then you have give a counter-example.
+
+
+\end{enumerate}
+
+
+\item ($45$ {\sf points})
+ 
+Order the following running times in
+ascending order in terms of rates of growth so that if one (let's call it $f(n)$) comes before another (let's call it $g(n)$), then $f(n)$ is
+$O(g(n))$:
+\[2^{100n},~n^3,~\log_{10}{(n^4)},~2^{\log_4{n}},~e^{\pi^{4096}},~n!+12^{1000}\]
+Argue why your order is correct (formal proof is not needed). 
+
+(\textit{Note}: It may help to review the properties of logarithms.)
+
+Grading: This question will be graded based on how many pairs of functions are in the correct order. This means each of the 15 pairs of functions will be worth 3 points each. For each pair, the points are distributed as follows:
+
+Correct order: 1 pt
+
+Correct justification: 2 pts
+
+(\textit{Note}: You don't have to justify each of the 15 pairs seperatly if some of them are implied by transitivity, though having one function in the wrong place could cost a lot of points since it potentially makes 5 pairs incorrect, so be careful.).
+
+
+
+
+(\textit{Hint:} You can utilize a $g'(n)$ such that $g'(n)$ is $\Theta(g(n))$.)
+
+
+
+\item ($15$ {\sf points}) 
+
+You are on a battlefield where the enemy ranks have established $n$ bases. A recent wave of spies infiltrated the bases and were able to radio back some information about the enemy forces. They informed you that the enemy has either 1, 2, or 3 platoons of soldiers guarding each base. Moreover, one of the spies lets you know which base is housing the enemy flag! This flag is inexplicably important and capturing it means victory for your side.
+
+For this mission, you are given charge over a large brigade of soldiers to invade the enemy bases and capture their flag. You can choose how your brigade travels from base to base, though there are a limited number of roads connecting the bases and your soldiers can only travel on these roads. These roads are {\em one-way} in the sence that going the {\em wrong} way on any of these roads would give too much of a strategic advantage to the enemy to be a viable option (i.e. you can think of this as a directed graph).
+
+Design an algorithm that finds a path through the bases for your brigade that minimizes the number of enemy platoons encountered.  The starting point for your brigade is fixed, and the path should end at the enemy flag. You only have to capture this flag, not visit every base. Once your soldiers arrive at the flag the battle will be over, so don't worry about an extraction plan.
+
+There are $n$ bases and $m$ roads connecting the bases.
+
+You must design an algorithm to find the a path in $O(m +n)$ time that minimizes the number of enemy platoons encountered. An $O(m\log{n})$ time algorithm would be ok, but an $O(m +n)$ time algorithm is ideal. For full credit, an $O(m +n)$ runtime algorithm must be given. No need for a formal proof of correctness, but you must give an argument for the runtime.
+
+
+
+
+
+\end{enumerate}
+\end{document}

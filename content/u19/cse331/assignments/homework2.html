@@ -1,0 +1,197 @@
+---
+title: Homework 2
+short_title: hw2
+next_content_short: hw3
+previous_content_short: hw1
+---
+
+== Part 1 (30 point)
+
+<p>
+    (Textbook Exercise 3 in Chapter 4)
+    You are consulting for a trucking company that does a large amount of business shipping packages between New York
+    and Boston. The volume is high enough that they have to send a number of trucks each day between the two locations.
+    Trucks have a fixed limit <em>W</em> on the maximum amount of weight they are allowed to carry. Boxes arrive at the
+    New York
+    station one by one, and each package <em>i</em> has weight <em>w<sub>i</sub></em>. The trucking station is quite
+    small, so at most one truck can
+    be at the station at any time. Company policy requires that boxes are shipped in the order they arrive; otherwise, a
+    customer might get upset upon seeing a box that arrived after his make it to Boston faster. At the moment, the
+    company is using a simple greedy algorithm for packing: they pack boxes in the order they arrive, and whenever the
+    next box does not fit, they send the truck on its way.
+</p>
+<p>
+    They wonder if they might be using too many trucks, and they want your opinion on whether the situation can be
+    improved. Here is how they are thinking. Maybe one could decrease the number of truck needed by sometimes sending
+    off a truck that was less than full, and in this way allow the next few trucks to be better packed.
+</p>
+<p>
+    Prove that, for a given set of boxes with specified weights, the greedy algorithm currently in use actually
+    minimizes the number of trucks that are needed. Your proof should follow the type of analysis we used for the
+    Interval Scheduling Problem: it should establish the optimality of this greedy packing algorithm by identifying a
+    measure under which it “stays ahead” of all other solutions.
+</p>
+
+
+<p>
+    <b>Part 1 grading:</b>
+</p>
+<ul>
+    <li>
+        [10 points] Algorithm: Your algorithm generally has a correct idea and will have an optimal runtime. Since the
+        algorithm is provided, your task is to formalize the algorithm mathematically
+    </li>
+    <li>
+        [15 points] Correctness Proof: Your algorithm is correct on all inputs, has an optimal runtime, and your proof
+        of correctness is
+        logically sound and complete
+    </li>
+    <li>
+        [5 points] Runtime Analysis: Your algorithm has an optimal runtime and you correctly analyzed the runtime of
+        your algorithm
+    </li>
+</ul>
+
+
+<p>
+    <b>Submission: </b>Submit part 1 as a pdf file to homework 2 part 1 on AutoLab
+</p>
+
+
+== Part 2 (55 points)
+<p>
+    You been given the role of a manager for a team of video game speed runners and must prepare for upcoming
+    competition. In this competition your team will compete in Super Mario Bros. on NES (no ROM’s for this
+    competition) and Doom 2 on PC. By the nature of the competition, each team will be given as many PC’s as they need
+    to run Doom 2, but only one NES to run Mario. Furthermore, each contestant must play through Mario in its entirety
+    before they can start playing Doom 2. This means that each team member must play Mario one at a time before they can
+    start playing Doom 2, however they can all play Doom 2 at the same time. For example, while the
+    first player is playing Mario the rest of the team is standing by without playing anything. Once the first player
+    finishes Mario and moves on to Doom 2, the next player can start Mario. The next player can finish Mario and start
+    playing Doom 2 even if the first player is still playing Doom 2 since there as many PC’s as needed for the entire
+    team to play Doom 2 in parallel.
+</p>
+<p>
+    Your goal is implement an algorithm that produces a schedule for your team that minimizes the completion time of the
+    team. The completion time for the team is the time taken for all team member to finish both portions of the
+    competition. Specifically, the completion time is the time from when your first player starts Mario until your last
+    player finishes Doom 2. Keep in mind that the last player to finish Doom 2 might not be the last player in your
+    schedule. Each speed runner has a known time for the Mario portion and the Doom 2 portions of the competition and
+    you can assume that each player will exactly match this given time.
+
+    You must design and implement an algorithm that computes an optimal schedule and runs in
+    O(nlog(n)) time. The players will start playing Mario in the order given in this schedule.
+</p>
+
+<p>
+    <b>Part 2 grading:</b>
+</p>
+<ul>
+    <li>
+        [10 points] Algorithm: Your algorithm generally has a correct idea and has a runtime of O(nlog(n))
+    </li>
+    <li>
+        [20 points] Correctness Proof: Your algorithm is correct on all inputs, has a runtime of O(nlog(n)), and your
+        proof of correctness is
+        logically sound and complete
+    </li>
+    <li>
+        [5 points] Runtime Analysis: Your algorithm has a runtime of O(nlog(n)) and you correctly analyzed the runtime
+        of your algorithm
+    </li>
+    <li>
+        [20 points] Implementation: You correctly implemented your algorithm in code and the implementation is correct
+        on all inputs
+    </li>
+</ul>
+
+
+<p>
+    <b>Submission (algorithm): </b>Submit your algorithm, proof of correctness, and runtime analysis for part 2 as a pdf
+    file to homework 2 part 2 - algorithm on AutoLab
+</p>
+
+<hr/>
+
+<p>
+    <b>Submission (implementation): </b>Submit your coded implementation of your algorithm as a zip file to homework 2
+    part 2 - implementation on AutoLab. This zip file must contain the following:
+</p>
+<ul>
+    <li>
+        A Makefile. This makefile will be called exactly once during grading
+    </li>
+    <li>
+        A bash script named "run.sh" that takes 2 command line parameters [inputFilename] and [outputFilename]. This
+        script will be called with each of the testing inputs during grading. You can assume that make was called
+        before any run.sh calls
+    </li>
+</ul>
+
+<p>
+    Data Format:
+</p>
+<ul>
+    <li>The input file will be a csv file with n lines where each line represents one speed runner in the format
+        "id,marioTime,doomTime"
+    </li>
+    <ul>
+        <li>Sample <a href="/static/templates/input.csv">input.csv</a> (you may have to right click and save-as)</li>
+    </ul>
+    <li>
+        Your output file wile be a text/csv file where each line contains only the id of each speed runner in the order
+        in which they will complete (ie. the id of the first runner in your schedule is on the first line of the file)
+    </li>
+</ul>
+
+
+== Part 3 (15 points)
+
+<p>
+    You are on a battlefield where the enemy ranks have established n bases. A recent wave of spies infiltrated the
+    bases and were able to radio back some information about the enemy forces. They informed you that the enemy has
+    either 1, 2, or 3 platoons of soldiers guarding each base. Moreover, one of the spies lets you know which base is
+    housing the enemy flag! This flag is inexplicably important and capturing it means victory for your side.
+    For this mission, you are given charge over a large brigade of soldiers to invade the enemy bases and capture their
+    flag. You can choose how your brigade travels from base to base, though there are a limited number of roads
+    connecting the bases and your soldiers can only travel on these roads. These roads are one-way in the sense that
+    going the wrong way on any of these roads would give too much of a strategic advantage to the enemy to be a viable
+    option (i.e. you can think of this as a directed graph).
+</p>
+<p>
+    Design an algorithm that finds a path through the bases for your brigade that minimizes the number of enemy platoons
+    encountered. The starting point for your brigade is fixed, and the path should end at the enemy flag. You only have
+    to capture this flag, not visit every base. Once your soldiers arrive at the flag the battle will be over, so don’t
+    worry about an extraction plan.
+</p>
+<p>
+    There are n bases and m roads connecting the bases.
+</p>
+<p>
+    You must design an algorithm to find the a path in O(m+n) time that minimizes the number of enemy platoons
+    encountered. No credit will be given for an O(mlog(n)) time algorithm. For full credit, an
+    O(m+n) runtime algorithm must be given.
+</p>
+
+
+<p>
+    <b>Part 3 grading:</b>
+</p>
+<ul>
+    <li>
+        [8 points] Algorithm: Your algorithm generally has a correct idea and will have an optimal runtime
+    </li>
+    <li>
+        [5 points] Correctness Proof: Your algorithm is correct on all inputs, has an optimal runtime, and your proof of
+        correctness is
+        logically sound and complete
+    </li>
+    <li>
+        [2 points] Runtime Analysis: Your algorithm has an optimal runtime and you correctly analyzed the runtime of
+        your algorithm
+    </li>
+</ul>
+
+<p>
+    <b>Submission: </b>Submit part 3 as a pdf file to homework 2 part 3 on AutoLab
+</p>

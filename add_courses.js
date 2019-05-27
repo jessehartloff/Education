@@ -21,6 +21,12 @@ var to_process = [
 //		'title': 'Web Applications'
 //	},
 	{
+		'directory': content_directory + 'u19/cse331',
+		'semester': 'u19',
+		'number': 'cse331',
+		'title': 'Introduction to Algorithms'
+	},
+	{
 		'directory': content_directory + 'u18/cse331',
 		'semester': 'u18',
 		'number': 'cse331',
