@@ -12,7 +12,7 @@
     "debug": "~2.6.8",
     "express": "~4.15.3",
     "express-flash": "0.0.2",
-    "express-handlebars": "~3.0.0",
+    "express-handlebars": "~5.3.1",
     "express-session": "^1.15.3",
     "fs-extra": "^3.0.1",
     "handlebars": "~4.0.10",
